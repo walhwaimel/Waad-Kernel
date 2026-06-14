@@ -1,10 +1,16 @@
+<!DOCTYPE html>
 <html lang="en" vid="0"><head vid="1">
     <meta charset="UTF-8" vid="2">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3">
-    <title vid="4">Waad Kernel | Software Engineering &amp; AI</title>
+    <title vid="4">Waad Kernel | Waad Alhwaimel Software Engineering Portfolio</title>
+    <meta name="description" content="Waad Kernel is Waad Alhwaimel's cyber-inspired portfolio featuring software engineering, artificial intelligence, projects, tools, and technical knowledge.">
+    <meta name="author" content="Waad Ibrahim Alhwaimel">
+    <meta name="robots" content="index, follow">
     <link rel="preconnect" href="https://fonts.googleapis.com" vid="5">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" vid="6">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;400;700;800&amp;family=Rajdhani:wght@400;500;600;700&amp;display=swap" rel="stylesheet" vid="7">
+    <link rel="stylesheet" href="assets/css/site-features.css">
+    <script src="assets/js/site-components.js" defer></script>
     <style vid="8">
         :root {
             
@@ -214,6 +220,47 @@
             background: var(--neon-magenta);
             border-radius: 50%;
             animation: blink 1s infinite;
+        }
+
+        .logo-group {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .home-nav {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .home-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease, text-shadow 0.2s ease;
+        }
+
+        .home-nav a:hover,
+        .home-nav a:focus-visible {
+            color: var(--neon-cyan);
+            text-shadow: var(--glow-cyan);
+        }
+
+        .home-site-footer {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 0 2rem 2rem 100px;
+            padding: 1rem 2rem;
+            border-top: 1px solid var(--neon-cyan-dim);
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         @keyframes blink {
@@ -588,6 +635,8 @@
             .hero-title { font-size: 4rem; }
             .greeting-label { justify-content: center; }
             .hero-subtitle { border-left: none; border-bottom: 4px solid var(--neon-amber); background: linear-gradient(0deg, rgba(255,159,0,0.1) 0%, transparent 100%);}
+            .home-site-header { flex-wrap: wrap; gap: 1rem; }
+            .home-nav { order: 3; width: 100%; justify-content: space-between; }
         }
         
         @media (max-width: 768px) {
@@ -595,10 +644,12 @@
             .side-telemetry { display: none; }
             .typing-text { font-size: 0.9rem; }
             .kb-item { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+            .home-nav { gap: 0.5rem; font-size: 0.55rem; overflow-x: auto; }
+            .home-site-footer { margin: 0 1rem 1rem; padding: 1rem 0; flex-direction: column; }
         }
     </style>
 </head>
-<body vid="9">
+<body data-page="home" vid="9">
 
     <div class="ambient-light" vid="10"></div>
     <div class="scanline" vid="11"></div>
@@ -608,22 +659,18 @@
         
         <aside class="side-telemetry" vid="13">
             <div class="data-block" vid="14">
-                <span vid="15">SYS.MEM</span>
+                <span vid="15">SOFTWARE_ENG</span>
                 <div class="data-bar" vid="16"><div class="data-bar-fill" style="width: 76%;" vid="17"></div></div>
             </div>
             <div class="data-block" vid="18">
-                <span vid="19">CPU.LOD</span>
+                <span vid="19">AI_MINOR</span>
                 <div class="data-bar" vid="20"><div class="data-bar-fill" style="width: 42%; animation-delay: 1s;" vid="21"></div></div>
             </div>
             <div class="data-block" vid="22">
-                <span vid="23">NET.I/O</span>
+                <span vid="23">BILINGUAL</span>
                 <div class="data-bar" vid="24"><div class="data-bar-fill" style="width: 89%; animation-delay: 2s; background: var(--neon-magenta); box-shadow: var(--glow-magenta);" vid="25"></div></div>
             </div>
             
-            <div style="margin-top: 2rem; font-size: 0.5rem; color: var(--text-muted);" vid="26">
-                0xFF3A<br vid="27">0x11B2<br vid="28">0x00FC
-            </div>
-
             <div class="vertical-text" vid="29">
                 WAAD_KERNEL_OS_v2.4
             </div>
@@ -632,16 +679,24 @@
         
         <main class="main-interface" vid="30">
             
-            <header vid="31">
-                <div class="logo-group" vid="32">
-                    <div class="logo-box" vid="33">WK</div>
-                    <div class="brand-name" vid="34">Waad Kernel</div>
-                </div>
-                <div class="sys-status" vid="35">
-                    <div class="status-dot" vid="36"></div>
-                    System Online
-                </div>
-            </header>
+            <site-header>
+                <header class="home-site-header">
+                    <a class="logo-group" href="index.html" aria-label="Waad Kernel home">
+                        <span class="logo-box">WK</span>
+                        <span class="brand-name">Waad Kernel</span>
+                    </a>
+                    <nav class="home-nav" aria-label="Primary navigation">
+                        <a href="about-waad-alhwaimel.html">About</a>
+                        <a href="software-engineering-projects.html">Projects</a>
+                        <a href="software-engineering-knowledge-base.html">Knowledge</a>
+                        <a href="student-project-planning-tools.html">Tools</a>
+                    </nav>
+                    <div class="sys-status">
+                        <span class="status-dot"></span>
+                        System Online
+                    </div>
+                </header>
+            </site-header>
 
             <section class="hero" vid="37">
                 <div class="hero-content" vid="38">
@@ -824,6 +879,8 @@
 
         </main>
     </div>
+
+    <site-footer></site-footer>
 
     <script vid="147">
         

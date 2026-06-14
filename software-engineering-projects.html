@@ -1,11 +1,16 @@
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth" vid="0"><head vid="1">
     <meta charset="UTF-8" vid="2">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3">
-    <title vid="4">Waad Kernel | Projects</title>
+    <title vid="4">Software Engineering &amp; AI Projects | Waad Kernel</title>
+    <meta name="description" content="Explore Waad Alhwaimel's software engineering, artificial intelligence, database, research, and image compression projects.">
+    <meta name="author" content="Waad Ibrahim Alhwaimel">
+    <meta name="robots" content="index, follow">
     
     <link rel="preconnect" href="https://fonts.googleapis.com" vid="5">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" vid="6">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" vid="7">
+    <link rel="stylesheet" href="assets/css/site-features.css">
     
     <script src="https://unpkg.com/@phosphor-icons/web" vid="8"></script>
     <script src="https://cdn.tailwindcss.com/3.4.17" vid="9"></script>
@@ -45,6 +50,7 @@
         }
     </script>
 
+    <script src="assets/js/site-components.js" defer></script>
     <style vid="11">
         body {
             background-color: #06080d;
@@ -147,36 +153,29 @@
         }
     </style>
 </head>
-<body class="relative min-h-screen antialiased flex flex-col font-sans w-full" vid="12">
+<body class="relative min-h-screen antialiased flex flex-col font-sans w-full" data-page="projects" vid="12">
 
     <div class="bg-grid" vid="13"></div>
     <div class="ambient-blob-cyan" vid="14"></div>
     <div class="ambient-blob-amber" vid="15"></div>
 
-    <nav class="fixed top-0 w-full z-50 glass-panel border-t-0 border-l-0 border-r-0 border-b border-white/5 py-4 rounded-none" vid="16">
-        <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center" vid="17">
-            <a href="#" class="flex items-center gap-3 group" vid="18">
-                <div class="w-8 h-8 rounded bg-cyan-dim border border-cyan/30 flex items-center justify-center text-cyan group-hover:shadow-[0_0_15px_rgba(0,240,255,0.4)] group-hover:border-cyan transition-all duration-300" vid="19">
-                    <i class="ph-fill ph-hexagon" vid="20"></i>
-                </div>
-                <span class="font-display font-bold text-lg tracking-wider text-white group-hover:text-cyan transition-colors duration-300" vid="21">WAAD<span class="text-cyan font-mono font-normal opacity-80" vid="22">KERNEL</span></span>
-            </a>
-            
-            <div class="hidden md:flex items-center gap-10 font-mono text-sm uppercase tracking-widest text-slate-400" vid="23">
-                <a href="#" class="hover:text-white transition-colors duration-300" vid="24">Home</a>
-                <a href="#" class="hover:text-white transition-colors duration-300" vid="25">About</a>
-                <a href="#" class="text-cyan font-medium relative text-glow-cyan" vid="26">
-                    Projects
-                    <span class="absolute -bottom-6 left-0 w-full h-[2px] bg-cyan shadow-[0_0_10px_rgba(0,240,255,0.8)]" vid="27"></span>
+    <site-header>
+        <nav class="fixed top-0 w-full z-50 glass-panel border-t-0 border-l-0 border-r-0 border-b border-white/5 py-4 rounded-none" aria-label="Primary navigation">
+            <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+                <a href="index.html" class="flex items-center gap-3 group" aria-label="Waad Kernel home">
+                    <span class="w-8 h-8 rounded bg-cyan-dim border border-cyan/30 flex items-center justify-center text-cyan"><i class="ph-fill ph-hexagon"></i></span>
+                    <span class="font-display font-bold text-lg tracking-wider text-white">WAAD<span class="text-cyan font-mono font-normal opacity-80">KERNEL</span></span>
                 </a>
-                <a href="#" class="hover:text-white transition-colors duration-300" vid="28">Notes</a>
+                <div class="flex items-center gap-4 md:gap-7 font-mono text-xs md:text-sm uppercase tracking-widest text-slate-400 overflow-x-auto">
+                    <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                    <a href="about-waad-alhwaimel.html" class="hover:text-white transition-colors">About</a>
+                    <a href="software-engineering-projects.html" class="text-cyan font-medium" aria-current="page">Projects</a>
+                    <a href="software-engineering-knowledge-base.html" class="hover:text-white transition-colors">Knowledge</a>
+                    <a href="student-project-planning-tools.html" class="hover:text-white transition-colors">Tools</a>
+                </div>
             </div>
-
-            <button class="md:hidden text-slate-300 hover:text-cyan transition-colors" vid="29">
-                <i class="ph ph-list text-2xl" vid="30"></i>
-            </button>
-        </div>
-    </nav>
+        </nav>
+    </site-header>
 
     <main class="flex-grow w-full max-w-7xl mx-auto px-6 md:px-12 pt-40 pb-24 relative z-10 flex flex-col gap-24" vid="31">
 
@@ -566,17 +565,7 @@
 
     </main>
 
-    <footer class="border-t border-white/5 py-8 relative z-10 bg-base/80 backdrop-blur-md mt-auto" vid="250">
-        <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4" vid="251">
-            <div class="flex items-center gap-2" vid="252">
-                <i class="ph-fill ph-hexagon text-cyan text-lg" vid="253"></i>
-                <span class="font-mono font-medium text-sm tracking-widest text-slate-400" vid="254">WAAD_KERNEL © 2024</span>
-            </div>
-            <div class="font-mono text-xs text-slate-500 uppercase tracking-widest" vid="255">
-                Building practical knowledge
-            </div>
-        </div>
-    </footer>
+    <site-footer></site-footer>
 
 
 </body></html>

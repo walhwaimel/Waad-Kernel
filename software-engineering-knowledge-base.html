@@ -1,11 +1,16 @@
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth" vid="0"><head vid="1">
     <meta charset="UTF-8" vid="2">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3">
-    <title vid="4">Waad Kernel | Knowledge</title>
+    <title vid="4">Software Engineering Knowledge Base | Waad Kernel</title>
+    <meta name="description" content="Explore practical software engineering and AI guides, UML tutorials, database design lessons, tips, and curated technical resources.">
+    <meta name="author" content="Waad Ibrahim Alhwaimel">
+    <meta name="robots" content="index, follow">
     
     <link rel="preconnect" href="https://fonts.googleapis.com" vid="5">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" vid="6">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" vid="7">
+    <link rel="stylesheet" href="assets/css/site-features.css">
     
     <script src="https://unpkg.com/@phosphor-icons/web" vid="8"></script>
     <script src="https://cdn.tailwindcss.com/3.4.17" vid="9"></script>
@@ -45,6 +50,7 @@
         }
     </script>
 
+    <script src="assets/js/site-components.js" defer></script>
     <style vid="11">
         body {
             background-color: #06080d;
@@ -120,36 +126,29 @@
         ::selection { background: rgba(0, 240, 255, 0.3); color: white; }
     </style>
 </head>
-<body class="relative min-h-screen antialiased flex flex-col font-sans w-full" vid="12">
+<body class="relative min-h-screen antialiased flex flex-col font-sans w-full" data-page="knowledge" vid="12">
 
     <div class="bg-grid" vid="13"></div>
     <div class="ambient-blob-cyan" vid="14"></div>
     <div class="ambient-blob-amber" vid="15"></div>
 
-    <nav class="fixed top-0 w-full z-50 glass-panel border-t-0 border-l-0 border-r-0 border-b border-white/5 py-4 rounded-none" vid="16">
-        <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center" vid="17">
-            <a href="#" class="flex items-center gap-3 group" vid="18">
-                <div class="w-8 h-8 rounded bg-cyan-dim border border-cyan/30 flex items-center justify-center text-cyan group-hover:shadow-[0_0_15px_rgba(0,240,255,0.4)] group-hover:border-cyan transition-all duration-300" vid="19">
-                    <i class="ph-fill ph-hexagon" vid="20"></i>
-                </div>
-                <span class="font-display font-bold text-lg tracking-wider text-white group-hover:text-cyan transition-colors duration-300" vid="21">WAAD<span class="text-cyan font-mono font-normal opacity-80" vid="22">KERNEL</span></span>
-            </a>
-            
-            <div class="hidden md:flex items-center gap-10 font-mono text-sm uppercase tracking-widest text-slate-400" vid="23">
-                <a href="#" class="hover:text-white transition-colors duration-300" vid="24">Home</a>
-                <a href="#" class="hover:text-white transition-colors duration-300" vid="25">About</a>
-                <a href="#" class="hover:text-white transition-colors duration-300" vid="26">Projects</a>
-                <a href="#" class="text-cyan font-medium relative text-glow-cyan" vid="27">
-                    Knowledge
-                    <span class="absolute -bottom-6 left-0 w-full h-[2px] bg-cyan shadow-[0_0_10px_rgba(0,240,255,0.8)]" vid="28"></span>
+    <site-header>
+        <nav class="fixed top-0 w-full z-50 glass-panel border-t-0 border-l-0 border-r-0 border-b border-white/5 py-4 rounded-none" aria-label="Primary navigation">
+            <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+                <a href="index.html" class="flex items-center gap-3 group" aria-label="Waad Kernel home">
+                    <span class="w-8 h-8 rounded bg-cyan-dim border border-cyan/30 flex items-center justify-center text-cyan"><i class="ph-fill ph-hexagon"></i></span>
+                    <span class="font-display font-bold text-lg tracking-wider text-white">WAAD<span class="text-cyan font-mono font-normal opacity-80">KERNEL</span></span>
                 </a>
+                <div class="flex items-center gap-4 md:gap-7 font-mono text-xs md:text-sm uppercase tracking-widest text-slate-400 overflow-x-auto">
+                    <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                    <a href="about-waad-alhwaimel.html" class="hover:text-white transition-colors">About</a>
+                    <a href="software-engineering-projects.html" class="hover:text-white transition-colors">Projects</a>
+                    <a href="software-engineering-knowledge-base.html" class="text-cyan font-medium" aria-current="page">Knowledge</a>
+                    <a href="student-project-planning-tools.html" class="hover:text-white transition-colors">Tools</a>
+                </div>
             </div>
-
-            <button class="md:hidden text-slate-300 hover:text-cyan transition-colors" vid="29">
-                <i class="ph ph-list text-2xl" vid="30"></i>
-            </button>
-        </div>
-    </nav>
+        </nav>
+    </site-header>
 
     <main class="flex-grow w-full max-w-7xl mx-auto px-6 md:px-12 pt-40 pb-24 relative z-10 flex flex-col gap-24" vid="31">
 
@@ -176,7 +175,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto" vid="41">
                 
-                <div class="glass-panel rounded-3xl p-8 relative group hover:-translate-y-1 transition-transform duration-500 overflow-hidden border border-white/5 hover:border-cyan/30" vid="42">
+                <div class="glass-panel rounded-3xl p-8 relative group hover:-translate-y-1 transition-transform duration-500 overflow-hidden border border-white/5 hover:border-cyan/30 knowledge-domain-card" data-domain-select="software" role="button" tabindex="0" aria-pressed="true" vid="42">
                     <div class="absolute -right-20 -top-20 w-64 h-64 bg-cyan/5 rounded-full blur-[50px] pointer-events-none group-hover:bg-cyan/10 transition-colors" vid="43"></div>
                     
                     <div class="mb-8 w-16 h-16 bg-cyan-dim rounded-2xl border border-cyan/20 flex items-center justify-center text-cyan shadow-[0_0_20px_rgba(0,240,255,0.1)] group-hover:shadow-[0_0_30px_rgba(0,240,255,0.25)] group-hover:scale-110 transition-all duration-500" vid="44">
@@ -202,7 +201,7 @@
                     </div>
                 </div>
 
-                <div class="glass-panel hover-amber rounded-3xl p-8 relative group hover:-translate-y-1 transition-transform duration-500 overflow-hidden border border-white/5 hover:border-amber/30" vid="59">
+                <div class="glass-panel hover-amber rounded-3xl p-8 relative group hover:-translate-y-1 transition-transform duration-500 overflow-hidden border border-white/5 hover:border-amber/30 knowledge-domain-card" data-domain-select="ai" role="button" tabindex="0" aria-pressed="false" vid="59">
                     <div class="absolute -right-20 -top-20 w-64 h-64 bg-amber/5 rounded-full blur-[50px] pointer-events-none group-hover:bg-amber/10 transition-colors" vid="60"></div>
                     
                     <div class="mb-8 w-16 h-16 bg-amber-dim rounded-2xl border border-amber/20 flex items-center justify-center text-amber shadow-[0_0_20px_rgba(255,159,0,0.1)] group-hover:shadow-[0_0_30px_rgba(255,159,0,0.25)] group-hover:scale-110 transition-all duration-500" vid="61">
@@ -238,7 +237,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" vid="77">
                 
-                <a href="#" class="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-cyan/30 relative overflow-hidden" vid="78">
+                <a href="#" data-domain-content="software" class="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-cyan/30 relative overflow-hidden" vid="78">
                     <div class="absolute right-0 top-0 w-32 h-32 bg-cyan/5 rounded-bl-full pointer-events-none transition-colors group-hover:bg-cyan/10" vid="79"></div>
                     <div class="flex justify-between items-start mb-6" vid="80">
                         <div class="w-10 h-10 rounded-lg bg-base flex items-center justify-center border border-white/10 group-hover:border-cyan/30 transition-colors" vid="81">
@@ -257,7 +256,7 @@
                     </div>
                 </a>
 
-                <a href="#" class="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-cyan/30 relative overflow-hidden" vid="93">
+                <a href="#" data-domain-content="software" class="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-cyan/30 relative overflow-hidden" vid="93">
                     <div class="absolute right-0 top-0 w-32 h-32 bg-cyan/5 rounded-bl-full pointer-events-none transition-colors group-hover:bg-cyan/10" vid="94"></div>
                     <div class="flex justify-between items-start mb-6" vid="95">
                         <div class="w-10 h-10 rounded-lg bg-base flex items-center justify-center border border-white/10 group-hover:border-cyan/30 transition-colors" vid="96">
@@ -276,7 +275,7 @@
                     </div>
                 </a>
 
-                <a href="#" class="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-cyan/30 relative overflow-hidden" vid="108">
+                <a href="#" data-domain-content="software" class="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-cyan/30 relative overflow-hidden" vid="108">
                     <div class="absolute right-0 top-0 w-32 h-32 bg-cyan/5 rounded-bl-full pointer-events-none transition-colors group-hover:bg-cyan/10" vid="109"></div>
                     <div class="flex justify-between items-start mb-6" vid="110">
                         <div class="w-10 h-10 rounded-lg bg-base flex items-center justify-center border border-white/10 group-hover:border-cyan/30 transition-colors" vid="111">
@@ -295,7 +294,7 @@
                     </div>
                 </a>
 
-                <a href="#" class="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-cyan/30 relative overflow-hidden" vid="123">
+                <a href="#" data-domain-content="software" class="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-cyan/30 relative overflow-hidden" vid="123">
                     <div class="absolute right-0 top-0 w-32 h-32 bg-cyan/5 rounded-bl-full pointer-events-none transition-colors group-hover:bg-cyan/10" vid="124"></div>
                     <div class="flex justify-between items-start mb-6" vid="125">
                         <div class="w-10 h-10 rounded-lg bg-base flex items-center justify-center border border-white/10 group-hover:border-cyan/30 transition-colors" vid="126">
@@ -314,7 +313,7 @@
                     </div>
                 </a>
 
-                <a href="#" class="glass-panel hover-amber p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-amber/30 relative overflow-hidden" vid="138">
+                <a href="#" data-domain-content="ai" class="glass-panel hover-amber p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-amber/30 relative overflow-hidden" vid="138">
                     <div class="absolute right-0 top-0 w-32 h-32 bg-amber/5 rounded-bl-full pointer-events-none transition-colors group-hover:bg-amber/10" vid="139"></div>
                     <div class="flex justify-between items-start mb-6" vid="140">
                         <div class="w-10 h-10 rounded-lg bg-base flex items-center justify-center border border-white/10 group-hover:border-amber/30 transition-colors" vid="141">
@@ -333,7 +332,7 @@
                     </div>
                 </a>
 
-                <a href="#" class="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-cyan/30 relative overflow-hidden" vid="153">
+                <a href="#" data-domain-content="software" class="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-cyan/30 relative overflow-hidden" vid="153">
                     <div class="absolute right-0 top-0 w-32 h-32 bg-cyan/5 rounded-bl-full pointer-events-none transition-colors group-hover:bg-cyan/10" vid="154"></div>
                     <div class="flex justify-between items-start mb-6" vid="155">
                         <div class="w-10 h-10 rounded-lg bg-base flex items-center justify-center border border-white/10 group-hover:border-cyan/30 transition-colors" vid="156">
@@ -363,7 +362,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4" vid="172">
                 
-                <a href="#" class="glass-panel p-6 rounded-xl hover:border-cyan/30 transition-colors group relative overflow-hidden flex flex-col gap-4" vid="173">
+                <a href="#" data-domain-content="software" class="glass-panel p-6 rounded-xl hover:border-cyan/30 transition-colors group relative overflow-hidden flex flex-col gap-4" vid="173">
                     <div class="absolute top-0 right-0 w-20 h-20 bg-cyan/5 rounded-bl-[100%] pointer-events-none group-hover:bg-cyan/10 transition-colors" vid="174"></div>
                     <div class="bg-base w-8 h-8 rounded border border-white/10 flex items-center justify-center text-cyan" vid="175">
                         <i class="ph-bold ph-warning-circle" vid="176"></i>
@@ -371,7 +370,7 @@
                     <h4 class="font-medium text-white text-sm leading-snug group-hover:text-cyan transition-colors z-10" vid="177">Common UML Mistakes</h4>
                 </a>
 
-                <a href="#" class="glass-panel p-6 rounded-xl hover:border-cyan/30 transition-colors group relative overflow-hidden flex flex-col gap-4" vid="178">
+                <a href="#" data-domain-content="software" class="glass-panel p-6 rounded-xl hover:border-cyan/30 transition-colors group relative overflow-hidden flex flex-col gap-4" vid="178">
                     <div class="absolute top-0 right-0 w-20 h-20 bg-cyan/5 rounded-bl-[100%] pointer-events-none group-hover:bg-cyan/10 transition-colors" vid="179"></div>
                     <div class="bg-base w-8 h-8 rounded border border-white/10 flex items-center justify-center text-cyan" vid="180">
                         <i class="ph-bold ph-database" vid="181"></i>
@@ -379,7 +378,7 @@
                     <h4 class="font-medium text-white text-sm leading-snug group-hover:text-cyan transition-colors z-10" vid="182">SQL Mistakes Beginners Make</h4>
                 </a>
 
-                <a href="#" class="glass-panel p-6 rounded-xl hover:border-cyan/30 transition-colors group relative overflow-hidden flex flex-col gap-4" vid="183">
+                <a href="#" data-domain-content="software" class="glass-panel p-6 rounded-xl hover:border-cyan/30 transition-colors group relative overflow-hidden flex flex-col gap-4" vid="183">
                     <div class="absolute top-0 right-0 w-20 h-20 bg-cyan/5 rounded-bl-[100%] pointer-events-none group-hover:bg-cyan/10 transition-colors" vid="184"></div>
                     <div class="bg-base w-8 h-8 rounded border border-white/10 flex items-center justify-center text-cyan" vid="185">
                         <i class="ph-bold ph-git-branch" vid="186"></i>
@@ -387,7 +386,7 @@
                     <h4 class="font-medium text-white text-sm leading-snug group-hover:text-cyan transition-colors z-10" vid="187">Choosing the Right Design Pattern</h4>
                 </a>
 
-                <a href="#" class="glass-panel hover-amber p-6 rounded-xl hover:border-amber/30 transition-colors group relative overflow-hidden flex flex-col gap-4" vid="188">
+                <a href="#" data-domain-content="software" class="glass-panel hover-amber p-6 rounded-xl hover:border-amber/30 transition-colors group relative overflow-hidden flex flex-col gap-4" vid="188">
                     <div class="absolute top-0 right-0 w-20 h-20 bg-amber/5 rounded-bl-[100%] pointer-events-none group-hover:bg-amber/10 transition-colors" vid="189"></div>
                     <div class="bg-base w-8 h-8 rounded border border-white/10 flex items-center justify-center text-amber" vid="190">
                         <i class="ph-bold ph-presentation-chart" vid="191"></i>
@@ -395,12 +394,36 @@
                     <h4 class="font-medium text-white text-sm leading-snug group-hover:text-amber transition-colors z-10" vid="192">Project Presentation Tips</h4>
                 </a>
 
-                <a href="#" class="glass-panel p-6 rounded-xl hover:border-cyan/30 transition-colors group relative overflow-hidden flex flex-col gap-4" vid="193">
+                <a href="#" data-domain-content="software" class="glass-panel p-6 rounded-xl hover:border-cyan/30 transition-colors group relative overflow-hidden flex flex-col gap-4" vid="193">
                     <div class="absolute top-0 right-0 w-20 h-20 bg-cyan/5 rounded-bl-[100%] pointer-events-none group-hover:bg-cyan/10 transition-colors" vid="194"></div>
                     <div class="bg-base w-8 h-8 rounded border border-white/10 flex items-center justify-center text-cyan" vid="195">
                         <i class="ph-bold ph-file-text" vid="196"></i>
                     </div>
                     <h4 class="font-medium text-white text-sm leading-snug group-hover:text-cyan transition-colors z-10" vid="197">Documentation Tips</h4>
+                </a>
+
+                <a href="#" data-domain-content="ai" class="glass-panel hover-amber p-6 rounded-xl hover:border-amber/30 transition-colors group relative overflow-hidden flex flex-col gap-4">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-amber/5 rounded-bl-[100%] pointer-events-none group-hover:bg-amber/10 transition-colors"></div>
+                    <div class="bg-base w-8 h-8 rounded border border-white/10 flex items-center justify-center text-amber">
+                        <i class="ph-bold ph-database"></i>
+                    </div>
+                    <h4 class="font-medium text-white text-sm leading-snug group-hover:text-amber transition-colors z-10">Avoiding Data Leakage</h4>
+                </a>
+
+                <a href="#" data-domain-content="ai" class="glass-panel hover-amber p-6 rounded-xl hover:border-amber/30 transition-colors group relative overflow-hidden flex flex-col gap-4">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-amber/5 rounded-bl-[100%] pointer-events-none group-hover:bg-amber/10 transition-colors"></div>
+                    <div class="bg-base w-8 h-8 rounded border border-white/10 flex items-center justify-center text-amber">
+                        <i class="ph-bold ph-chart-line-up"></i>
+                    </div>
+                    <h4 class="font-medium text-white text-sm leading-snug group-hover:text-amber transition-colors z-10">Choosing Evaluation Metrics</h4>
+                </a>
+
+                <a href="#" data-domain-content="ai" class="glass-panel hover-amber p-6 rounded-xl hover:border-amber/30 transition-colors group relative overflow-hidden flex flex-col gap-4">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-amber/5 rounded-bl-[100%] pointer-events-none group-hover:bg-amber/10 transition-colors"></div>
+                    <div class="bg-base w-8 h-8 rounded border border-white/10 flex items-center justify-center text-amber">
+                        <i class="ph-bold ph-notebook"></i>
+                    </div>
+                    <h4 class="font-medium text-white text-sm leading-snug group-hover:text-amber transition-colors z-10">Documenting Model Experiments</h4>
                 </a>
 
             </div>
@@ -474,17 +497,7 @@
 
     </main>
 
-    <footer class="border-t border-white/5 py-8 relative z-10 bg-base/80 backdrop-blur-md mt-auto" vid="271">
-        <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4" vid="272">
-            <div class="flex items-center gap-2" vid="273">
-                <i class="ph-fill ph-hexagon text-cyan text-lg" vid="274"></i>
-                <span class="font-mono font-medium text-sm tracking-widest text-slate-400" vid="275">WAAD_KERNEL © 2024</span>
-            </div>
-            <div class="font-mono text-xs text-slate-500 uppercase tracking-widest" vid="276">
-                Building practical knowledge
-            </div>
-        </div>
-    </footer>
+    <site-footer></site-footer>
 
 
 </body></html>
