@@ -24,6 +24,7 @@ Waad Kernel is a static personal portfolio focused on software engineering, arti
 |-- copyright-and-usage-policy.html
 |-- academic-disclaimer.html
 |-- robots.txt
+|-- sitemap.xml
 |-- assets/
 |   `-- js/
 |       `-- site-components.js
