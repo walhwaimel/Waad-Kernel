@@ -1,0 +1,582 @@
+<html lang="en" class="scroll-smooth" vid="0"><head vid="1">
+    <meta charset="UTF-8" vid="2">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3">
+    <title vid="4">Waad Kernel | Projects</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" vid="5">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" vid="6">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" vid="7">
+    
+    <script src="https://unpkg.com/@phosphor-icons/web" vid="8"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.17" vid="9"></script>
+    
+    <script vid="10">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        base: '#06080d',
+                        surface: 'rgba(12, 16, 28, 0.65)',
+                        surfaceHover: 'rgba(20, 26, 43, 0.8)',
+                        cyan: {
+                            DEFAULT: '#00f0ff',
+                            glow: 'rgba(0, 240, 255, 0.5)',
+                            dim: 'rgba(0, 240, 255, 0.1)',
+                        },
+                        amber: {
+                            DEFAULT: '#ff9f00',
+                            glow: 'rgba(255, 159, 0, 0.5)',
+                            dim: 'rgba(255, 159, 0, 0.1)',
+                        },
+                        borderline: 'rgba(255, 255, 255, 0.08)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    backgroundImage: {
+                        'grid-pattern': 'linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)',
+                        'cyber-radial': 'radial-gradient(circle at center, rgba(0, 240, 255, 0.08) 0%, rgba(6, 8, 13, 0) 60%)',
+                        'amber-radial': 'radial-gradient(circle at center, rgba(255, 159, 0, 0.08) 0%, rgba(6, 8, 13, 0) 60%)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style vid="11">
+        body {
+            background-color: #06080d;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -2;
+            pointer-events: none;
+            mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+        }
+
+        .ambient-blob-cyan {
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.05) 0%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .ambient-blob-amber {
+            position: fixed;
+            bottom: -10%;
+            right: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(255, 159, 0, 0.03) 0%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glass-panel {
+            background: rgba(12, 16, 28, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .glass-panel:hover {
+            border-color: rgba(0, 240, 255, 0.2);
+        }
+        
+        .glass-panel.hover-amber:hover {
+            border-color: rgba(255, 159, 0, 0.2);
+        }
+
+        .glow-text-cyan {
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+        }
+        .glow-text-amber {
+            text-shadow: 0 0 15px rgba(255, 159, 0, 0.5);
+        }
+        
+        .box-glow-cyan {
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+        }
+        .box-glow-amber {
+            box-shadow: 0 0 30px rgba(255, 159, 0, 0.15);
+        }
+
+        .spin-slow { animation: spin 30s linear infinite; }
+        .spin-slow-reverse { animation: spin-reverse 25s linear infinite; }
+        
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #06080d; }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.2); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 240, 255, 0.4); }
+
+        ::selection { background: rgba(0, 240, 255, 0.3); color: white; }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-heading::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: linear-gradient(to right, rgba(0, 240, 255, 0.3), transparent);
+        }
+    </style>
+</head>
+<body class="relative min-h-screen antialiased flex flex-col font-sans w-full" vid="12">
+
+    <div class="bg-grid" vid="13"></div>
+    <div class="ambient-blob-cyan" vid="14"></div>
+    <div class="ambient-blob-amber" vid="15"></div>
+
+    <nav class="fixed top-0 w-full z-50 glass-panel border-t-0 border-l-0 border-r-0 border-b border-white/5 py-4 rounded-none" vid="16">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center" vid="17">
+            <a href="#" class="flex items-center gap-3 group" vid="18">
+                <div class="w-8 h-8 rounded bg-cyan-dim border border-cyan/30 flex items-center justify-center text-cyan group-hover:shadow-[0_0_15px_rgba(0,240,255,0.4)] group-hover:border-cyan transition-all duration-300" vid="19">
+                    <i class="ph-fill ph-hexagon" vid="20"></i>
+                </div>
+                <span class="font-display font-bold text-lg tracking-wider text-white group-hover:text-cyan transition-colors duration-300" vid="21">WAAD<span class="text-cyan font-mono font-normal opacity-80" vid="22">KERNEL</span></span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-10 font-mono text-sm uppercase tracking-widest text-slate-400" vid="23">
+                <a href="#" class="hover:text-white transition-colors duration-300" vid="24">Home</a>
+                <a href="#" class="hover:text-white transition-colors duration-300" vid="25">About</a>
+                <a href="#" class="text-cyan font-medium relative text-glow-cyan" vid="26">
+                    Projects
+                    <span class="absolute -bottom-6 left-0 w-full h-[2px] bg-cyan shadow-[0_0_10px_rgba(0,240,255,0.8)]" vid="27"></span>
+                </a>
+                <a href="#" class="hover:text-white transition-colors duration-300" vid="28">Notes</a>
+            </div>
+
+            <button class="md:hidden text-slate-300 hover:text-cyan transition-colors" vid="29">
+                <i class="ph ph-list text-2xl" vid="30"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main class="flex-grow w-full max-w-7xl mx-auto px-6 md:px-12 pt-40 pb-24 relative z-10 flex flex-col gap-24" vid="31">
+
+        
+        <header class="max-w-3xl" vid="32">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded border border-cyan/20 bg-cyan-dim font-mono text-xs text-cyan uppercase tracking-widest mb-8" vid="33">
+                <span class="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse shadow-[0_0_8px_#00f0ff]" vid="34"></span>
+                Project Archive
+            </div>
+            
+            <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tight leading-[1.1] mb-6 glow-text-cyan" vid="35">
+                Projects
+            </h1>
+            
+            <p class="text-xl text-slate-300 leading-relaxed font-light" vid="36">
+                A collection of academic, technical, and research projects built throughout my Software Engineering and Artificial Intelligence journey.
+            </p>
+        </header>
+
+        
+        <div class="flex flex-col gap-16 md:gap-24" vid="37">
+            
+            
+            <article class="glass-panel rounded-[2rem] p-8 md:p-12 overflow-hidden relative group hover:-translate-y-1 transition-transform duration-500" vid="38">
+                <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan/5 rounded-full blur-[100px] pointer-events-none transition-opacity opacity-50 group-hover:opacity-100" vid="39"></div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10" vid="40">
+                    
+                    <div class="lg:col-span-7 space-y-8 order-2 lg:order-1" vid="41">
+                        <div class="space-y-4" vid="42">
+                            <div class="flex items-center gap-4 font-mono" vid="43">
+                                <span class="text-cyan text-xl font-bold glow-text-cyan" vid="44">01</span>
+                                <span class="text-slate-600" vid="45">//</span>
+                                <span class="text-slate-400 uppercase tracking-widest text-sm" vid="46">Software Engineering</span>
+                            </div>
+                            <h2 class="font-display text-4xl md:text-5xl font-bold text-white" vid="47">My Destination</h2>
+                            <p class="text-lg text-slate-300 leading-relaxed font-light" vid="48">
+                                Accessibility-focused platform designed to help users discover accessible locations, services, and events.
+                            </p>
+                        </div>
+
+                        <div class="space-y-4" vid="49">
+                            <h3 class="font-mono text-xs text-cyan uppercase tracking-widest" vid="50">Key Highlights</h3>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3" vid="51">
+                                <li class="flex items-start gap-3" vid="52">
+                                    <i class="ph-fill ph-check-circle text-cyan mt-1" vid="53"></i>
+                                    <span class="text-slate-300 text-sm" vid="54">User-centered design</span>
+                                </li>
+                                <li class="flex items-start gap-3" vid="55">
+                                    <i class="ph-fill ph-check-circle text-cyan mt-1" vid="56"></i>
+                                    <span class="text-slate-300 text-sm" vid="57">Accessibility-focused features</span>
+                                </li>
+                                <li class="flex items-start gap-3" vid="58">
+                                    <i class="ph-fill ph-check-circle text-cyan mt-1" vid="59"></i>
+                                    <span class="text-slate-300 text-sm" vid="60">Recommendation system</span>
+                                </li>
+                                <li class="flex items-start gap-3" vid="61">
+                                    <i class="ph-fill ph-check-circle text-cyan mt-1" vid="62"></i>
+                                    <span class="text-slate-300 text-sm" vid="63">Interactive maps</span>
+                                </li>
+                                <li class="flex items-start gap-3" vid="64">
+                                    <i class="ph-fill ph-check-circle text-cyan mt-1" vid="65"></i>
+                                    <span class="text-slate-300 text-sm" vid="66">Event management</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2" vid="67">
+                            <span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 font-mono text-xs text-slate-300" vid="68">Software Engineering</span>
+                            <span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 font-mono text-xs text-slate-300" vid="69">System Design</span>
+                            <span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 font-mono text-xs text-slate-300" vid="70">Accessibility</span>
+                            <span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 font-mono text-xs text-slate-300" vid="71">UI/UX</span>
+                        </div>
+
+                        <div class="pt-4" vid="72">
+                            <button class="py-3 px-6 rounded-xl bg-cyan-dim border border-cyan/40 text-cyan font-mono font-medium hover:bg-cyan hover:text-base hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center" vid="73">
+                                View Details
+                                <i class="ph-bold ph-arrow-right" vid="74"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    
+                    <div class="lg:col-span-5 order-1 lg:order-2 flex justify-center items-center" vid="75">
+                        <div class="relative w-full aspect-square max-w-[400px] rounded-2xl border border-cyan/20 bg-gradient-to-br from-cyan/5 to-transparent flex items-center justify-center overflow-hidden group-hover:border-cyan/40 transition-colors duration-500" vid="76">
+                            
+                            <div class="absolute inset-4 border border-cyan/10 rounded-full spin-slow" vid="77"></div>
+                            <div class="absolute inset-12 border border-cyan/20 rounded-full border-dashed spin-slow-reverse" vid="78"></div>
+                            <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,240,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,240,255,0.05)_1px,transparent_1px)] bg-[size:20px_20px] mask-image-[radial-gradient(ellipse_at_center,black_40%,transparent_70%)]" vid="79"></div>
+                            
+                            
+                            <div class="relative z-10 flex flex-col items-center" vid="80">
+                                <div class="w-20 h-20 bg-cyan/10 backdrop-blur-md rounded-2xl border border-cyan/30 flex items-center justify-center shadow-[0_0_30px_rgba(0,240,255,0.2)] group-hover:shadow-[0_0_40px_rgba(0,240,255,0.4)] transition-shadow duration-500" vid="81">
+                                    <i class="ph-duotone ph-map-pin text-5xl text-cyan" vid="82"></i>
+                                </div>
+                                <div class="w-12 h-2 bg-cyan/20 blur-md mt-4 rounded-full" vid="83"></div>
+                            </div>
+                            
+                            
+                            <div class="absolute top-1/4 left-1/4 w-8 h-8 bg-cyan/10 border border-cyan/20 rounded-lg flex items-center justify-center animate-bounce delay-100" vid="84"><i class="ph-fill ph-wheelchair text-cyan/70" vid="85"></i></div>
+                            <div class="absolute bottom-1/4 right-1/4 w-8 h-8 bg-cyan/10 border border-cyan/20 rounded-lg flex items-center justify-center animate-bounce delay-300" vid="86"><i class="ph-fill ph-calendar text-cyan/70" vid="87"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            
+            <article class="glass-panel hover-amber rounded-[2rem] p-8 md:p-12 overflow-hidden relative group hover:-translate-y-1 transition-transform duration-500" vid="88">
+                <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-amber/5 rounded-full blur-[100px] pointer-events-none transition-opacity opacity-50 group-hover:opacity-100" vid="89"></div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10" vid="90">
+                    
+                    <div class="lg:col-span-5 order-1 lg:order-1 flex justify-center items-center" vid="91">
+                        <div class="relative w-full aspect-square max-w-[400px] rounded-2xl border border-amber/20 bg-gradient-to-br from-amber/5 to-transparent flex items-center justify-center overflow-hidden group-hover:border-amber/40 transition-colors duration-500" vid="92">
+                            
+                            <div class="absolute w-full h-full" vid="93">
+                                <svg width="100%" height="100%" class="opacity-20 stroke-amber" vid="94">
+                                    <line x1="20%" y1="20%" x2="50%" y2="50%" stroke-width="1" stroke-dasharray="4" class="animate-pulse" vid="95"></line>
+                                    <line x1="80%" y1="30%" x2="50%" y2="50%" stroke-width="1" stroke-dasharray="4" class="animate-pulse" style="animation-delay: 0.5s;" vid="96"></line>
+                                    <line x1="30%" y1="80%" x2="50%" y2="50%" stroke-width="1" stroke-dasharray="4" class="animate-pulse" style="animation-delay: 1s;" vid="97"></line>
+                                    <line x1="70%" y1="70%" x2="50%" y2="50%" stroke-width="1" stroke-dasharray="4" class="animate-pulse" style="animation-delay: 1.5s;" vid="98"></line>
+                                </svg>
+                            </div>
+                            
+                            
+                            <div class="absolute top-[20%] left-[20%] w-3 h-3 rounded-full bg-amber shadow-[0_0_10px_rgba(255,159,0,0.8)]" vid="99"></div>
+                            <div class="absolute top-[30%] right-[20%] w-3 h-3 rounded-full bg-amber shadow-[0_0_10px_rgba(255,159,0,0.8)]" vid="100"></div>
+                            <div class="absolute bottom-[20%] left-[30%] w-3 h-3 rounded-full bg-amber shadow-[0_0_10px_rgba(255,159,0,0.8)]" vid="101"></div>
+                            <div class="absolute bottom-[30%] right-[30%] w-3 h-3 rounded-full bg-amber shadow-[0_0_10px_rgba(255,159,0,0.8)]" vid="102"></div>
+
+                            
+                            <div class="relative z-10 w-24 h-24 bg-amber/10 backdrop-blur-md rounded-full border border-amber/30 flex items-center justify-center shadow-[0_0_30px_rgba(255,159,0,0.2)] group-hover:shadow-[0_0_50px_rgba(255,159,0,0.4)] transition-shadow duration-500" vid="103">
+                                <i class="ph-duotone ph-brain text-6xl text-amber" vid="104"></i>
+                                <div class="absolute inset-0 border-2 border-amber/20 rounded-full animate-ping opacity-20" vid="105"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="lg:col-span-7 space-y-8 order-2 lg:order-2" vid="106">
+                        <div class="space-y-4" vid="107">
+                            <div class="flex items-center gap-4 font-mono" vid="108">
+                                <span class="text-amber text-xl font-bold glow-text-amber" vid="109">02</span>
+                                <span class="text-slate-600" vid="110">//</span>
+                                <span class="text-slate-400 uppercase tracking-widest text-sm" vid="111">Artificial Intelligence</span>
+                            </div>
+                            <h2 class="font-display text-4xl md:text-5xl font-bold text-white" vid="112">Arabic Sentiment Analysis</h2>
+                            <p class="text-lg text-slate-300 leading-relaxed font-light" vid="113">
+                                Research project examining gender bias in Arabic sentiment analysis models using Explainable AI techniques.
+                            </p>
+                        </div>
+
+                        <div class="space-y-4" vid="114">
+                            <h3 class="font-mono text-xs text-amber uppercase tracking-widest" vid="115">Key Highlights</h3>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3" vid="116">
+                                <li class="flex items-start gap-3" vid="117">
+                                    <i class="ph-fill ph-check-circle text-amber mt-1" vid="118"></i>
+                                    <span class="text-slate-300 text-sm" vid="119">Arabic NLP</span>
+                                </li>
+                                <li class="flex items-start gap-3" vid="120">
+                                    <i class="ph-fill ph-check-circle text-amber mt-1" vid="121"></i>
+                                    <span class="text-slate-300 text-sm" vid="122">Explainable AI</span>
+                                </li>
+                                <li class="flex items-start gap-3" vid="123">
+                                    <i class="ph-fill ph-check-circle text-amber mt-1" vid="124"></i>
+                                    <span class="text-slate-300 text-sm" vid="125">Sentiment Analysis</span>
+                                </li>
+                                <li class="flex items-start gap-3" vid="126">
+                                    <i class="ph-fill ph-check-circle text-amber mt-1" vid="127"></i>
+                                    <span class="text-slate-300 text-sm" vid="128">Dataset generation</span>
+                                </li>
+                                <li class="flex items-start gap-3" vid="129">
+                                    <i class="ph-fill ph-check-circle text-amber mt-1" vid="130"></i>
+                                    <span class="text-slate-300 text-sm" vid="131">Research methodology</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2" vid="132">
+                            <span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 font-mono text-xs text-slate-300" vid="133">AI</span>
+                            <span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 font-mono text-xs text-slate-300" vid="134">NLP</span>
+                            <span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 font-mono text-xs text-slate-300" vid="135">Machine Learning</span>
+                            <span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 font-mono text-xs text-slate-300" vid="136">Research</span>
+                        </div>
+
+                        <div class="pt-4" vid="137">
+                            <button class="py-3 px-6 rounded-xl bg-amber-dim border border-amber/40 text-amber font-mono font-medium hover:bg-amber hover:text-base hover:shadow-[0_0_20px_rgba(255,159,0,0.4)] transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center" vid="138">
+                                View Details
+                                <i class="ph-bold ph-arrow-right" vid="139"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            
+            <article class="glass-panel rounded-[2rem] p-8 md:p-12 overflow-hidden relative group hover:-translate-y-1 transition-transform duration-500" vid="140">
+                <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan/5 rounded-full blur-[100px] pointer-events-none transition-opacity opacity-50 group-hover:opacity-100" vid="141"></div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10" vid="142">
+                    
+                    <div class="lg:col-span-7 space-y-8 order-2 lg:order-1" vid="143">
+                        <div class="space-y-4" vid="144">
+                            <div class="flex items-center gap-4 font-mono" vid="145">
+                                <span class="text-cyan text-xl font-bold glow-text-cyan" vid="146">03</span>
+                                <span class="text-slate-600" vid="147">//</span>
+                                <span class="text-slate-400 uppercase tracking-widest text-sm" vid="148">Database Systems</span>
+                            </div>
+                            <h2 class="font-display text-4xl md:text-5xl font-bold text-white" vid="149">MySchool Database</h2>
+                            <p class="text-lg text-slate-300 leading-relaxed font-light" vid="150">
+                                Database management system designed to manage students, teachers, courses, enrollments, and administration workflows.
+                            </p>
+                        </div>
+
+                        <div class="space-y-4" vid="151">
+                            <h3 class="font-mono text-xs text-cyan uppercase tracking-widest" vid="152">Key Highlights</h3>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3" vid="153">
+                                <li class="flex items-start gap-3" vid="154">
+                                    <i class="ph-fill ph-check-circle text-cyan mt-1" vid="155"></i>
+                                    <span class="text-slate-300 text-sm" vid="156">Database design</span>
+                                </li>
+                                <li class="flex items-start gap-3" vid="157">
+                                    <i class="ph-fill ph-check-circle text-cyan mt-1" vid="158"></i>
+                                    <span class="text-slate-300 text-sm" vid="159">Relational schema</span>
+                                </li>
+                                <li class="flex items-start gap-3" vid="160">
+                                    <i class="ph-fill ph-check-circle text-cyan mt-1" vid="161"></i>
+                                    <span class="text-slate-300 text-sm" vid="162">SQL implementation</span>
+                                </li>
+                                <li class="flex items-start gap-3" vid="163">
+                                    <i class="ph-fill ph-check-circle text-cyan mt-1" vid="164"></i>
+                                    <span class="text-slate-300 text-sm" vid="165">Full-stack integration</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2" vid="166">
+                            <span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 font-mono text-xs text-slate-300" vid="167">SQL</span>
+                            <span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 font-mono text-xs text-slate-300" vid="168">Database Design</span>
+                            <span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 font-mono text-xs text-slate-300" vid="169">ERD</span>
+                            <span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 font-mono text-xs text-slate-300" vid="170">System Analysis</span>
+                        </div>
+
+                        <div class="pt-4" vid="171">
+                            <button class="py-3 px-6 rounded-xl bg-cyan-dim border border-cyan/40 text-cyan font-mono font-medium hover:bg-cyan hover:text-base hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center" vid="172">
+                                View Details
+                                <i class="ph-bold ph-arrow-right" vid="173"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    
+                    <div class="lg:col-span-5 order-1 lg:order-2 flex justify-center items-center" vid="174">
+                        <div class="relative w-full aspect-square max-w-[400px] rounded-2xl border border-cyan/20 bg-gradient-to-br from-cyan/5 to-transparent flex flex-col items-center justify-center overflow-hidden group-hover:border-cyan/40 transition-colors duration-500 gap-4" vid="175">
+                            
+                            
+                            <div class="w-48 h-16 border border-cyan/30 rounded-[50%] bg-cyan-dim relative shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-30 group-hover:-translate-y-2 transition-transform duration-500" vid="176">
+                                <div class="absolute inset-x-0 top-0 h-4 border-b border-cyan/20 rounded-[50%]" vid="177"></div>
+                                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-1" vid="178">
+                                    <div class="w-1.5 h-1.5 bg-cyan rounded-full animate-pulse" vid="179"></div>
+                                    <div class="w-1.5 h-1.5 bg-cyan/30 rounded-full" vid="180"></div>
+                                    <div class="w-1.5 h-1.5 bg-cyan/30 rounded-full" vid="181"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="w-48 h-16 border border-cyan/20 rounded-[50%] bg-base relative -mt-10 shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-20 group-hover:-translate-y-1 transition-transform duration-500" vid="182">
+                                <div class="absolute inset-x-0 top-0 h-4 border-b border-cyan/10 rounded-[50%]" vid="183"></div>
+                            </div>
+                            
+                            <div class="w-48 h-16 border border-cyan/20 rounded-[50%] bg-base relative -mt-10 shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-10" vid="184">
+                                <div class="absolute inset-x-0 top-0 h-4 border-b border-cyan/10 rounded-[50%]" vid="185"></div>
+                            </div>
+
+                            
+                            <div class="absolute inset-0 flex justify-center items-center pointer-events-none opacity-30" vid="186">
+                                <i class="ph-duotone ph-arrows-left-right text-8xl text-cyan absolute rotate-90 scale-150" vid="187"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            
+            <article class="glass-panel hover-amber rounded-[2rem] p-8 md:p-12 overflow-hidden relative group hover:-translate-y-1 transition-transform duration-500" vid="188">
+                <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-amber/5 rounded-full blur-[100px] pointer-events-none transition-opacity opacity-50 group-hover:opacity-100" vid="189"></div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10" vid="190">
+                    
+                    <div class="lg:col-span-5 order-1 lg:order-1 flex justify-center items-center" vid="191">
+                        <div class="relative w-full aspect-square max-w-[400px] rounded-2xl border border-amber/20 bg-gradient-to-br from-amber/5 to-transparent flex items-center justify-center overflow-hidden group-hover:border-amber/40 transition-colors duration-500" vid="192">
+                            
+                            
+                            <div class="flex items-center gap-6 z-10" vid="193">
+                                
+                                <div class="relative flex border-l-2 border-r-2 border-amber/50 px-2 py-4 h-32 w-24" vid="194">
+                                    <div class="grid grid-cols-3 gap-1 w-full h-full p-1 opacity-80" vid="195">
+                                        <div class="bg-amber/40 rounded-sm" vid="196"></div><div class="bg-amber/80 rounded-sm" vid="197"></div><div class="bg-amber/20 rounded-sm" vid="198"></div>
+                                        <div class="bg-amber/60 rounded-sm" vid="199"></div><div class="bg-amber/30 rounded-sm" vid="200"></div><div class="bg-amber/90 rounded-sm" vid="201"></div>
+                                        <div class="bg-amber/20 rounded-sm" vid="202"></div><div class="bg-amber/70 rounded-sm" vid="203"></div><div class="bg-amber/50 rounded-sm" vid="204"></div>
+                                    </div>
+                                </div>
+
+                                
+                                <div class="flex flex-col items-center text-amber gap-2" vid="205">
+                                    <span class="font-mono text-xs font-bold" vid="206">SVD</span>
+                                    <i class="ph-bold ph-arrow-right text-xl animate-pulse" vid="207"></i>
+                                </div>
+
+                                
+                                <div class="relative flex border-l-2 border-r-2 border-amber/50 px-2 py-2 h-20 w-16" vid="208">
+                                    <div class="grid grid-cols-2 gap-1 w-full h-full p-1 opacity-100" vid="209">
+                                        <div class="bg-amber shadow-[0_0_8px_rgba(255,159,0,0.6)] rounded-sm" vid="210"></div><div class="bg-amber/60 rounded-sm" vid="211"></div>
+                                        <div class="bg-amber/80 rounded-sm" vid="212"></div><div class="bg-amber/40 rounded-sm" vid="213"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none" vid="214">
+                                <span class="font-display text-9xl font-bold tracking-tighter" vid="215">A=UΣV*</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="lg:col-span-7 space-y-8 order-2 lg:order-2" vid="216">
+                        <div class="space-y-4" vid="217">
+                            <div class="flex items-center gap-4 font-mono" vid="218">
+                                <span class="text-amber text-xl font-bold glow-text-amber" vid="219">04</span>
+                                <span class="text-slate-600" vid="220">//</span>
+                                <span class="text-slate-400 uppercase tracking-widest text-sm" vid="221">Linear Algebra</span>
+                            </div>
+                            <h2 class="font-display text-4xl md:text-5xl font-bold text-white" vid="222">SVD Image Compression</h2>
+                            <p class="text-lg text-slate-300 leading-relaxed font-light" vid="223">
+                                Image compression project using Singular Value Decomposition to reduce image size while preserving quality.
+                            </p>
+                        </div>
+
+                        <div class="space-y-4" vid="224">
+                            <h3 class="font-mono text-xs text-amber uppercase tracking-widest" vid="225">Key Highlights</h3>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3" vid="226">
+                                <li class="flex items-start gap-3" vid="227">
+                                    <i class="ph-fill ph-check-circle text-amber mt-1" vid="228"></i>
+                                    <span class="text-slate-300 text-sm" vid="229">Matrix decomposition</span>
+                                </li>
+                                <li class="flex items-start gap-3" vid="230">
+                                    <i class="ph-fill ph-check-circle text-amber mt-1" vid="231"></i>
+                                    <span class="text-slate-300 text-sm" vid="232">Linear algebra applications</span>
+                                </li>
+                                <li class="flex items-start gap-3" vid="233">
+                                    <i class="ph-fill ph-check-circle text-amber mt-1" vid="234"></i>
+                                    <span class="text-slate-300 text-sm" vid="235">Image processing</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2" vid="236">
+                            <span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 font-mono text-xs text-slate-300" vid="237">Linear Algebra</span>
+                            <span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 font-mono text-xs text-slate-300" vid="238">SVD</span>
+                            <span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 font-mono text-xs text-slate-300" vid="239">MATLAB</span>
+                            <span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 font-mono text-xs text-slate-300" vid="240">Mathematics</span>
+                        </div>
+
+                        <div class="pt-4" vid="241">
+                            <button class="py-3 px-6 rounded-xl bg-amber-dim border border-amber/40 text-amber font-mono font-medium hover:bg-amber hover:text-base hover:shadow-[0_0_20px_rgba(255,159,0,0.4)] transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center" vid="242">
+                                View Details
+                                <i class="ph-bold ph-arrow-right" vid="243"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+        
+        <section class="max-w-4xl mx-auto text-center mt-12 py-16 px-6 glass-panel rounded-3xl border-t border-t-cyan/30 relative overflow-hidden" vid="244">
+            <div class="absolute inset-0 bg-gradient-to-b from-cyan/5 to-transparent pointer-events-none" vid="245"></div>
+            <div class="relative z-10" vid="246">
+                <i class="ph-duotone ph-rocket-launch text-4xl text-cyan mb-6 drop-shadow-[0_0_15px_rgba(0,240,255,0.4)]" vid="247"></i>
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-6 glow-text-cyan tracking-wide" vid="248">Building Through Learning</h2>
+                <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light max-w-3xl mx-auto" vid="249">
+                    Every project in Waad Kernel represents a stage in my learning journey. Together they reflect my growth across software engineering, artificial intelligence, databases, and technical problem solving.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-white/5 py-8 relative z-10 bg-base/80 backdrop-blur-md mt-auto" vid="250">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4" vid="251">
+            <div class="flex items-center gap-2" vid="252">
+                <i class="ph-fill ph-hexagon text-cyan text-lg" vid="253"></i>
+                <span class="font-mono font-medium text-sm tracking-widest text-slate-400" vid="254">WAAD_KERNEL © 2024</span>
+            </div>
+            <div class="font-mono text-xs text-slate-500 uppercase tracking-widest" vid="255">
+                Building practical knowledge
+            </div>
+        </div>
+    </footer>
+
+
+</body></html>

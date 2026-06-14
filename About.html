@@ -1,0 +1,492 @@
+<html lang="en" class="scroll-smooth" vid="0"><head vid="1">
+    <meta charset="UTF-8" vid="2">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3">
+    <title vid="4">Waad Kernel | About</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" vid="5">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" vid="6">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" vid="7">
+    
+    <script src="https://unpkg.com/@phosphor-icons/web" vid="8"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.17" vid="9"></script>
+    
+    <script vid="10">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        base: '#06080d',
+                        surface: 'rgba(12, 16, 28, 0.65)',
+                        surfaceHover: 'rgba(20, 26, 43, 0.8)',
+                        cyan: {
+                            DEFAULT: '#00f0ff',
+                            glow: 'rgba(0, 240, 255, 0.5)',
+                            dim: 'rgba(0, 240, 255, 0.1)',
+                        },
+                        amber: {
+                            DEFAULT: '#ff9f00',
+                            glow: 'rgba(255, 159, 0, 0.5)',
+                            dim: 'rgba(255, 159, 0, 0.1)',
+                        },
+                        borderline: 'rgba(255, 255, 255, 0.08)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    backgroundImage: {
+                        'grid-pattern': 'linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)',
+                        'cyber-radial': 'radial-gradient(circle at center, rgba(0, 240, 255, 0.08) 0%, rgba(6, 8, 13, 0) 60%)',
+                        'amber-radial': 'radial-gradient(circle at center, rgba(255, 159, 0, 0.08) 0%, rgba(6, 8, 13, 0) 60%)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style vid="11">
+        body {
+            background-color: #06080d;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -2;
+            pointer-events: none;
+            mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+        }
+
+        .ambient-blob-cyan {
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.05) 0%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .ambient-blob-amber {
+            position: fixed;
+            bottom: -10%;
+            right: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(255, 159, 0, 0.03) 0%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glass-panel {
+            background: rgba(12, 16, 28, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .glass-panel:hover {
+            border-color: rgba(0, 240, 255, 0.2);
+        }
+
+        .glow-text-cyan {
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+        }
+        .glow-text-amber {
+            text-shadow: 0 0 15px rgba(255, 159, 0, 0.5);
+        }
+        
+        .box-glow-cyan {
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+        }
+        .box-glow-amber {
+            box-shadow: 0 0 30px rgba(255, 159, 0, 0.15);
+        }
+
+        .spin-slow { animation: spin 30s linear infinite; }
+        .spin-slow-reverse { animation: spin-reverse 25s linear infinite; }
+        
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #06080d; }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.2); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 240, 255, 0.4); }
+
+        ::selection { background: rgba(0, 240, 255, 0.3); color: white; }
+
+        .timeline-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, rgba(0, 240, 255, 0.5), rgba(0, 240, 255, 0.05));
+        }
+
+        .timeline-dot {
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+
+        .timeline-item:hover .timeline-dot {
+            background-color: #00f0ff;
+            box-shadow: 0 0 15px #00f0ff;
+            transform: scale(1.3);
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-heading::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: linear-gradient(to right, rgba(0, 240, 255, 0.3), transparent);
+        }
+    </style>
+</head>
+<body class="relative min-h-screen antialiased flex flex-col font-sans w-full" vid="12">
+
+    <div class="bg-grid" vid="13"></div>
+    <div class="ambient-blob-cyan" vid="14"></div>
+    <div class="ambient-blob-amber" vid="15"></div>
+
+    <nav class="fixed top-0 w-full z-50 glass-panel border-t-0 border-l-0 border-r-0 border-b border-white/5 py-4 rounded-none" vid="16">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center" vid="17">
+            <a href="#" class="flex items-center gap-3 group" vid="18">
+                <div class="w-8 h-8 rounded bg-cyan-dim border border-cyan/30 flex items-center justify-center text-cyan group-hover:shadow-[0_0_15px_rgba(0,240,255,0.4)] group-hover:border-cyan transition-all duration-300" vid="19">
+                    <i class="ph-fill ph-hexagon" vid="20"></i>
+                </div>
+                <span class="font-display font-bold text-lg tracking-wider text-white group-hover:text-cyan transition-colors duration-300" vid="21">WAAD<span class="text-cyan font-mono font-normal opacity-80" vid="22">KERNEL</span></span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-10 font-mono text-sm uppercase tracking-widest text-slate-400" vid="23">
+                <a href="#" class="hover:text-white transition-colors duration-300" vid="24">Home</a>
+                <a href="#" class="text-cyan font-medium relative text-glow-cyan" vid="25">
+                    About
+                    <span class="absolute -bottom-6 left-0 w-full h-[2px] bg-cyan shadow-[0_0_10px_rgba(0,240,255,0.8)]" vid="26"></span>
+                </a>
+                <a href="#" class="hover:text-white transition-colors duration-300" vid="27">Projects</a>
+                <a href="#" class="hover:text-white transition-colors duration-300" vid="28">Notes</a>
+            </div>
+
+            <button class="md:hidden text-slate-300 hover:text-cyan transition-colors" vid="29">
+                <i class="ph ph-list text-2xl" vid="30"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main class="flex-grow w-full max-w-7xl mx-auto px-6 md:px-12 pt-36 pb-24 relative z-10 flex flex-col gap-32" vid="31">
+
+        <section class="min-h-[60vh] flex flex-col lg:flex-row items-center justify-between gap-16 relative" vid="32">
+            <div class="w-full lg:w-3/5 space-y-8 z-10" vid="33">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded border border-cyan/20 bg-cyan-dim font-mono text-xs text-cyan uppercase tracking-widest" vid="34">
+                    <span class="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse shadow-[0_0_8px_#00f0ff]" vid="35"></span>
+                    Profile Data
+                </div>
+                
+                <div vid="36">
+                    <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tight leading-[1.1] mb-6" vid="37">
+                        Waad Ibrahim<br vid="38">
+                        <span class="text-cyan glow-text-cyan" vid="39">Alhwaimel</span>
+                    </h1>
+                    
+                    <h2 class="font-mono text-lg md:text-xl text-amber flex items-center gap-3" vid="40">
+                        <i class="ph-bold ph-terminal-window" vid="41"></i>
+                        Software Engineering Student <span class="text-slate-600" vid="42">·</span> AI Minor
+                    </h2>
+                </div>
+
+                <div class="space-y-6 max-w-2xl" vid="43">
+                    <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light" vid="44">
+                        I'm a Software Engineering student at Prince Sultan University with a minor in Artificial Intelligence. I enjoy building systems, exploring AI applications, and documenting what I learn in both Arabic and English.
+                    </p>
+
+                    <div class="glass-panel p-6 border-l-2 border-l-cyan rounded-r-xl bg-gradient-to-r from-cyan-dim to-transparent relative group" vid="45">
+                        <p class="text-base text-slate-300 leading-relaxed italic font-light" vid="46">
+                            "I build software systems, study artificial intelligence, and transform what I learn into practical knowledge that others can use. Waad Kernel is my digital space for documenting ideas, sharing technical knowledge, and showcasing my academic and personal growth."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full lg:w-2/5 flex justify-center relative h-96 opacity-60 pointer-events-none hidden lg:flex" vid="47">
+                <div class="relative w-[400px] h-[400px] flex items-center justify-center" vid="48">
+                    <div class="absolute inset-0 border border-cyan/20 rounded-full border-dashed spin-slow" vid="49"></div>
+                    <div class="absolute inset-8 border border-white/5 rounded-full spin-slow-reverse" vid="50"></div>
+                    <div class="absolute inset-16 border border-cyan/10 rounded-full" vid="51"></div>
+                    <div class="absolute w-2 h-2 bg-amber rounded-full top-1/4 right-1/4 shadow-[0_0_10px_#ff9f00] animate-pulse" vid="52"></div>
+                    <i class="ph-duotone ph-fingerprint text-8xl text-cyan/30 drop-shadow-[0_0_15px_rgba(0,240,255,0.4)]" vid="53"></i>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-4xl" vid="54">
+            <div class="section-heading" vid="55">
+                <i class="ph-fill ph-git-merge text-3xl text-cyan drop-shadow-[0_0_10px_rgba(0,240,255,0.5)]" vid="56"></i>
+                <h3 class="font-display text-3xl font-bold text-white tracking-wide uppercase" vid="57">My Journey</h3>
+            </div>
+
+            <div class="relative pl-6 md:pl-10" vid="58">
+                <div class="timeline-line left-6 md:left-10" vid="59"></div>
+
+                <div class="space-y-12" vid="60">
+                    <div class="relative pl-10 md:pl-14 timeline-item group" vid="61">
+                        <div class="absolute left-[-5px] top-4 w-3 h-3 rounded-full bg-base border-2 border-cyan timeline-dot z-10" vid="62"></div>
+                        <div class="glass-panel p-6 rounded-xl group-hover:border-cyan/30 group-hover:bg-surfaceHover transition-all duration-300 cursor-default" vid="63">
+                            <p class="text-lg text-slate-200" vid="64">Started Software Engineering at Prince Sultan University</p>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-10 md:pl-14 timeline-item group" vid="65">
+                        <div class="absolute left-[-5px] top-4 w-3 h-3 rounded-full bg-base border-2 border-cyan timeline-dot z-10" vid="66"></div>
+                        <div class="glass-panel p-6 rounded-xl group-hover:border-cyan/30 group-hover:bg-surfaceHover transition-all duration-300 cursor-default" vid="67">
+                            <p class="text-lg text-slate-200" vid="68">Developed a strong interest in Artificial Intelligence</p>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-10 md:pl-14 timeline-item group" vid="69">
+                        <div class="absolute left-[-5px] top-4 w-3 h-3 rounded-full bg-base border-2 border-cyan timeline-dot z-10" vid="70"></div>
+                        <div class="glass-panel p-6 rounded-xl group-hover:border-cyan/30 group-hover:bg-surfaceHover transition-all duration-300 cursor-default" vid="71">
+                            <p class="text-lg text-slate-200" vid="72">Began building academic and technical projects</p>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-10 md:pl-14 timeline-item group" vid="73">
+                        <div class="absolute left-[-5px] top-4 w-3 h-3 rounded-full bg-base border-2 border-cyan timeline-dot z-10" vid="74"></div>
+                        <div class="glass-panel p-6 rounded-xl group-hover:border-cyan/30 group-hover:bg-surfaceHover transition-all duration-300 cursor-default" vid="75">
+                            <p class="text-lg text-slate-200" vid="76">Started documenting technical knowledge systematically</p>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-10 md:pl-14 timeline-item group" vid="77">
+                        <div class="absolute left-[-7px] top-4 w-4 h-4 rounded-full bg-cyan border-2 border-cyan shadow-[0_0_15px_rgba(0,240,255,0.8)] z-10 group-hover:scale-125 transition-transform duration-300 flex items-center justify-center" vid="78">
+                            <div class="w-1.5 h-1.5 bg-white rounded-full" vid="79"></div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border-cyan/40 bg-cyan/5 box-glow-cyan group-hover:bg-cyan/10 transition-all duration-300 cursor-default" vid="80">
+                            <h4 class="text-xl font-bold text-cyan glow-text-cyan flex items-center gap-2" vid="81">
+                                Created Waad Kernel
+                                <i class="ph-fill ph-sparkle text-amber" vid="82"></i>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section vid="83">
+            <div class="section-heading" vid="84">
+                <i class="ph-fill ph-crosshair text-3xl text-cyan drop-shadow-[0_0_10px_rgba(0,240,255,0.5)]" vid="85"></i>
+                <h3 class="font-display text-3xl font-bold text-white tracking-wide uppercase" vid="86">What I Focus On</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" vid="87">
+                <div class="glass-panel p-8 rounded-2xl flex flex-col group border-t-2 border-t-transparent hover:border-t-cyan transition-all duration-300 hover:-translate-y-1 overflow-hidden relative" vid="88">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-cyan/5 rounded-bl-full group-hover:bg-cyan/10 transition-colors pointer-events-none" vid="89"></div>
+                    <div class="w-14 h-14 rounded-xl bg-cyan-dim border border-cyan/20 flex items-center justify-center text-cyan mb-6 group-hover:shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all" vid="90">
+                        <i class="ph-duotone ph-brackets-curly text-3xl" vid="91"></i>
+                    </div>
+                    <h4 class="font-display text-xl font-bold text-white mb-4" vid="92">Software Engineering</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed flex-grow" vid="93">
+                        Focused on software design, system thinking, architecture, and building practical solutions.
+                    </p>
+                </div>
+
+                <div class="glass-panel p-8 rounded-2xl flex flex-col group border-t-2 border-t-transparent hover:border-t-amber transition-all duration-300 hover:-translate-y-1 overflow-hidden relative" vid="94">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-amber/5 rounded-bl-full group-hover:bg-amber/10 transition-colors pointer-events-none" vid="95"></div>
+                    <div class="w-14 h-14 rounded-xl bg-amber-dim border border-amber/20 flex items-center justify-center text-amber mb-6 group-hover:shadow-[0_0_15px_rgba(255,159,0,0.4)] transition-all" vid="96">
+                        <i class="ph-duotone ph-brain text-3xl" vid="97"></i>
+                    </div>
+                    <h4 class="font-display text-xl font-bold text-white mb-4" vid="98">Artificial Intelligence</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed flex-grow" vid="99">
+                        Interested in machine learning, natural language processing, explainable AI, and real-world AI applications.
+                    </p>
+                </div>
+
+                <div class="glass-panel p-8 rounded-2xl flex flex-col group border-t-2 border-t-transparent hover:border-t-cyan transition-all duration-300 hover:-translate-y-1 overflow-hidden relative" vid="100">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-cyan/5 rounded-bl-full group-hover:bg-cyan/10 transition-colors pointer-events-none" vid="101"></div>
+                    <div class="w-14 h-14 rounded-xl bg-cyan-dim border border-cyan/20 flex items-center justify-center text-cyan mb-6 group-hover:shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all" vid="102">
+                        <i class="ph-duotone ph-database text-3xl" vid="103"></i>
+                    </div>
+                    <h4 class="font-display text-xl font-bold text-white mb-4" vid="104">Databases</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed flex-grow" vid="105">
+                        Interested in database design, SQL development, and organizing information effectively.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-4xl" vid="106">
+            <div class="section-heading" vid="107">
+                <i class="ph-fill ph-translate text-3xl text-cyan drop-shadow-[0_0_10px_rgba(0,240,255,0.5)]" vid="108"></i>
+                <h3 class="font-display text-3xl font-bold text-white tracking-wide uppercase" vid="109">Languages</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 glass-panel p-8 md:p-10 rounded-2xl" vid="110">
+                <div vid="111">
+                    <div class="flex justify-between items-end mb-4" vid="112">
+                        <h4 class="text-2xl font-bold text-white" vid="113">Arabic</h4>
+                        <span class="font-mono text-xs uppercase tracking-widest text-cyan bg-cyan-dim px-2 py-1 rounded border border-cyan/20" vid="114">Native</span>
+                    </div>
+                    <div class="flex gap-1.5 h-2 w-full" vid="115">
+                        <div class="h-full flex-1 bg-cyan shadow-[0_0_10px_rgba(0,240,255,0.6)] rounded-sm" vid="116"></div>
+                        <div class="h-full flex-1 bg-cyan shadow-[0_0_10px_rgba(0,240,255,0.6)] rounded-sm" vid="117"></div>
+                        <div class="h-full flex-1 bg-cyan shadow-[0_0_10px_rgba(0,240,255,0.6)] rounded-sm" vid="118"></div>
+                        <div class="h-full flex-1 bg-cyan shadow-[0_0_10px_rgba(0,240,255,0.6)] rounded-sm" vid="119"></div>
+                        <div class="h-full flex-1 bg-cyan shadow-[0_0_10px_rgba(0,240,255,0.6)] rounded-sm" vid="120"></div>
+                    </div>
+                </div>
+
+                <div vid="121">
+                    <div class="flex justify-between items-end mb-4" vid="122">
+                        <h4 class="text-2xl font-bold text-white" vid="123">English</h4>
+                        <span class="font-mono text-xs uppercase tracking-widest text-amber bg-amber-dim px-2 py-1 rounded border border-amber/20" vid="124">Professional</span>
+                    </div>
+                    <div class="flex gap-1.5 h-2 w-full" vid="125">
+                        <div class="h-full flex-1 bg-amber shadow-[0_0_10px_rgba(255,159,0,0.6)] rounded-sm" vid="126"></div>
+                        <div class="h-full flex-1 bg-amber shadow-[0_0_10px_rgba(255,159,0,0.6)] rounded-sm" vid="127"></div>
+                        <div class="h-full flex-1 bg-amber shadow-[0_0_10px_rgba(255,159,0,0.6)] rounded-sm" vid="128"></div>
+                        <div class="h-full flex-1 bg-amber shadow-[0_0_10px_rgba(255,159,0,0.6)] rounded-sm" vid="129"></div>
+                        <div class="h-full flex-1 bg-white/10 border border-white/5 rounded-sm" vid="130"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="relative" vid="131">
+            <div class="absolute inset-0 bg-gradient-to-r from-amber-dim via-transparent to-amber-dim blur-3xl opacity-50 rounded-[2rem] pointer-events-none" vid="132"></div>
+            
+            <div class="relative glass-panel p-10 md:p-16 rounded-[2rem] border border-amber/30 box-glow-amber overflow-hidden" vid="133">
+                <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-amber/5 rounded-full blur-[80px] pointer-events-none" vid="134"></div>
+                <div class="absolute -bottom-20 -left-20 text-[200px] text-amber/5 pointer-events-none" vid="135">
+                    <i class="ph-fill ph-quotes" vid="136"></i>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10" vid="137">
+                    <div class="space-y-6" vid="138">
+                        <div class="inline-flex items-center gap-2 font-mono text-amber text-xs uppercase tracking-widest" vid="139">
+                            <i class="ph-fill ph-target" vid="140"></i> Core Objective
+                        </div>
+                        <h2 class="font-display text-4xl md:text-5xl font-bold text-white leading-tight glow-text-amber" vid="141">
+                            Why Waad Kernel Exists
+                        </h2>
+                        <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light" vid="142">
+                            Waad Kernel exists because knowledge becomes more valuable when it is organized and shared. Through projects, coursework, and independent learning, I aim to transform what I learn into practical knowledge that other students can benefit from, especially within the Arabic technical community.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" vid="143">
+                        <div class="glass-panel p-5 rounded-xl border-white/5 hover:border-amber/40 transition-colors flex items-start gap-3 group" vid="144">
+                            <div class="mt-0.5 text-amber group-hover:drop-shadow-[0_0_8px_rgba(255,159,0,0.6)] transition-all" vid="145">
+                                <i class="ph-fill ph-check-circle text-xl" vid="146"></i>
+                            </div>
+                            <span class="text-slate-200 font-medium text-lg" vid="147">Share knowledge clearly</span>
+                        </div>
+                        
+                        <div class="glass-panel p-5 rounded-xl border-white/5 hover:border-amber/40 transition-colors flex items-start gap-3 group" vid="148">
+                            <div class="mt-0.5 text-amber group-hover:drop-shadow-[0_0_8px_rgba(255,159,0,0.6)] transition-all" vid="149">
+                                <i class="ph-fill ph-check-circle text-xl" vid="150"></i>
+                            </div>
+                            <span class="text-slate-200 font-medium text-lg" vid="151">Document learning deeply</span>
+                        </div>
+                        
+                        <div class="glass-panel p-5 rounded-xl border-white/5 hover:border-amber/40 transition-colors flex items-start gap-3 group" vid="152">
+                            <div class="mt-0.5 text-amber group-hover:drop-shadow-[0_0_8px_rgba(255,159,0,0.6)] transition-all" vid="153">
+                                <i class="ph-fill ph-check-circle text-xl" vid="154"></i>
+                            </div>
+                            <span class="text-slate-200 font-medium text-lg" vid="155">Build useful technical resources</span>
+                        </div>
+                        
+                        <div class="glass-panel p-5 rounded-xl border-white/5 hover:border-amber/40 transition-colors flex items-start gap-3 group" vid="156">
+                            <div class="mt-0.5 text-amber group-hover:drop-shadow-[0_0_8px_rgba(255,159,0,0.6)] transition-all" vid="157">
+                                <i class="ph-fill ph-check-circle text-xl" vid="158"></i>
+                            </div>
+                            <span class="text-slate-200 font-medium text-lg" vid="159">Contribute to Arabic technical content</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-white/5 pt-16" vid="160">
+            <section class="glass-panel p-10 rounded-3xl flex flex-col justify-between border-l-4 border-l-cyan hover:border-white/10 transition-colors group relative overflow-hidden" vid="161">
+                <div class="absolute -right-10 -bottom-10 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity" vid="162">
+                    <i class="ph-fill ph-file-text text-[200px] text-cyan" vid="163"></i>
+                </div>
+                <div class="relative z-10 mb-10" vid="164">
+                    <h3 class="font-display text-3xl font-bold text-white mb-2 flex items-center gap-3" vid="165">
+                        Resume
+                    </h3>
+                    <p class="text-slate-400 text-lg" vid="166">Available for viewing and download.</p>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 relative z-10" vid="167">
+                    <button class="flex-1 py-4 px-6 rounded-xl bg-cyan-dim border border-cyan/40 text-cyan font-mono font-medium hover:bg-cyan hover:text-base hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all duration-300 flex items-center justify-center gap-2" vid="168">
+                        <i class="ph-bold ph-eye text-lg" vid="169"></i>
+                        View Resume
+                    </button>
+                    <button class="flex-1 py-4 px-6 rounded-xl bg-white/5 border border-white/10 text-white font-mono font-medium hover:bg-white/10 hover:border-white/30 transition-all duration-300 flex items-center justify-center gap-2" vid="170">
+                        <i class="ph-bold ph-download-simple text-lg" vid="171"></i>
+                        Download CV
+                    </button>
+                </div>
+            </section>
+
+            <section class="glass-panel p-10 rounded-3xl flex flex-col justify-between hover:border-white/10 transition-colors relative overflow-hidden group" vid="172">
+                <div class="absolute -right-10 -bottom-10 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity" vid="173">
+                    <i class="ph-fill ph-users-three text-[200px] text-cyan" vid="174"></i>
+                </div>
+                <div class="relative z-10 mb-10" vid="175">
+                    <h3 class="font-display text-3xl font-bold text-white mb-2 flex items-center gap-3" vid="176">
+                        Let's Connect
+                    </h3>
+                    <p class="text-slate-400 text-lg" vid="177">Open to discussions, questions, and collaborations.</p>
+                </div>
+
+                <div class="flex gap-4 relative z-10" vid="178">
+                    <a href="#" class="w-16 h-16 rounded-xl bg-base/50 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:border-white/40 hover:bg-white/5 hover:-translate-y-1 transition-all duration-300 group/icon" vid="179">
+                        <i class="ph-fill ph-github-logo text-3xl group-hover/icon:scale-110 transition-transform" vid="180"></i>
+                    </a>
+                    <a href="#" class="w-16 h-16 rounded-xl bg-base/50 border border-white/10 flex items-center justify-center text-slate-300 hover:text-[#0a66c2] hover:border-[#0a66c2]/50 hover:bg-[#0a66c2]/10 hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(10,102,194,0.3)] transition-all duration-300 group/icon" vid="181">
+                        <i class="ph-fill ph-linkedin-logo text-3xl group-hover/icon:scale-110 transition-transform" vid="182"></i>
+                    </a>
+                    <a href="#" class="w-16 h-16 rounded-xl bg-base/50 border border-white/10 flex items-center justify-center text-slate-300 hover:text-cyan hover:border-cyan/50 hover:bg-cyan-dim hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(0,240,255,0.3)] transition-all duration-300 group/icon" vid="183">
+                        <i class="ph-fill ph-envelope-simple text-3xl group-hover/icon:scale-110 transition-transform" vid="184"></i>
+                    </a>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <footer class="border-t border-white/5 py-8 relative z-10 bg-base/80 backdrop-blur-md mt-auto" vid="185">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4" vid="186">
+            <div class="flex items-center gap-2" vid="187">
+                <i class="ph-fill ph-hexagon text-cyan text-lg" vid="188"></i>
+                <span class="font-mono font-medium text-sm tracking-widest text-slate-400" vid="189">WAAD_KERNEL © 2024</span>
+            </div>
+            <div class="font-mono text-xs text-slate-500 uppercase tracking-widest" vid="190">
+                Building practical knowledge
+            </div>
+        </div>
+    </footer>
+
+
+</body></html>
