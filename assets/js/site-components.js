@@ -1,6 +1,6 @@
 const pages = [
     { id: 'home', label: 'Home', ar: 'الرئيسية', href: 'index.html', description: 'Waad Kernel portfolio home' },
-    { id: 'about', label: 'About', ar: 'عن وعد', href: 'about-waad-alhwaimel.html', description: 'About Waad Alhwaimel, her journey, focus, and resume' },
+    { id: 'about', label: 'About', ar: 'نبذة', href: 'about-waad-alhwaimel.html', description: 'About Waad Alhwaimel, her journey, focus, and resume' },
     { id: 'projects', label: 'Projects', ar: 'المشاريع', href: 'software-engineering-projects.html', description: 'Software engineering, AI, database, and research projects' },
     { id: 'knowledge', label: 'Knowledge', ar: 'المعرفة', href: 'software-engineering-knowledge-base.html', description: 'Software engineering and AI guides, tips, and resources' },
     { id: 'tools', label: 'Tools', ar: 'الأدوات', href: 'student-project-planning-tools.html', description: 'Student project planning, UML, SRS, and database tools' }
@@ -26,19 +26,20 @@ const searchItems = [
 ];
 
 const arabicTitles = {
-    home: 'وعد كيرنل | ملف وعد الهويميل في هندسة البرمجيات',
+    home: 'Waad Kernel | ملف وعد الهويميل في هندسة البرمجيات',
     about: 'عن وعد الهويميل | هندسة البرمجيات والذكاء الاصطناعي',
-    projects: 'مشاريع هندسة البرمجيات والذكاء الاصطناعي | وعد كيرنل',
-    knowledge: 'قاعدة معرفة هندسة البرمجيات | وعد كيرنل',
-    tools: 'أدوات تخطيط مشاريع الطلاب | وعد كيرنل'
-    ,copyright: 'سياسة حقوق النشر والاستخدام | وعد كيرنل'
-    ,academic: 'إخلاء المسؤولية الأكاديمية | وعد كيرنل'
+    projects: 'مشاريع هندسة البرمجيات والذكاء الاصطناعي | Waad Kernel',
+    knowledge: 'قاعدة معرفة هندسة البرمجيات | Waad Kernel',
+    tools: 'أدوات تخطيط مشاريع الطلاب | Waad Kernel'
+    ,copyright: 'سياسة حقوق النشر والاستخدام | Waad Kernel'
+    ,academic: 'إخلاء المسؤولية الأكاديمية | Waad Kernel'
 };
 
 const ar = {
-    'Home': 'الرئيسية', 'About': 'عن وعد', 'Projects': 'المشاريع', 'Knowledge': 'المعرفة', 'Tools': 'الأدوات',
-    'Search': 'بحث', 'Search Waad Kernel': 'ابحثي في وعد كيرنل', 'Type to search pages, projects, guides, and tools...': 'اكتبي للبحث في الصفحات والمشاريع والأدلة والأدوات...',
-    'No results found.': 'ما لقينا نتائج.', 'Close': 'إغلاق', 'Dark': 'داكن', 'Light': 'فاتح',
+    'Home': 'الرئيسية', 'About': 'نبذة', 'Projects': 'المشاريع', 'Knowledge': 'المعرفة', 'Tools': 'الأدوات',
+    'Search': 'بحث', 'Arabic': 'العربية', 'English': 'English', 'Dark Mode': 'الوضع الداكن', 'Light Mode': 'الوضع الفاتح',
+    'Search Waad Kernel': 'ابحثي في Waad Kernel', 'Type to search pages, projects, guides, and tools...': 'اكتبي للبحث في الصفحات والمشاريع والأدلة والأدوات...',
+    'No results found.': 'ما لقينا نتائج.', 'Close': 'إغلاق',
     '10 min': '١٠ دقائق', '12 min': '١٢ دقيقة', '14 min': '١٤ دقيقة', '15 min': '١٥ دقيقة', '18 min': '١٨ دقيقة', '20 min': '٢٠ دقيقة',
     'System Online': 'النظام شغّال', 'Building practical knowledge': 'نبني معرفة عملية',
     'Explore': 'استكشف', 'Resources': 'المصادر', 'Legal': 'السياسات', 'Contact': 'التواصل',
@@ -61,7 +62,7 @@ const ar = {
     'Specific projects may include their own separate licenses. In the event of any conflict between a project-level license and this policy, the project-level license takes precedence.': 'بعض المشاريع ممكن يكون لها تراخيص مستقلة. إذا صار تعارض بين ترخيص مشروع وهذه السياسة، تكون الأولوية لترخيص المشروع.',
     'For permissions or licensing inquiries, please reach out directly.': 'لطلب الإذن أو الاستفسار عن التراخيص، تواصلوا معي مباشرة.',
     'Last updated: 2026': 'آخر تحديث: 2026',
-    'Waad Kernel is a personal academic documentation and portfolio platform. Materials published here are created as part of my learning process, knowledge organization, and project development, and are intended for educational and reference purposes only.': 'وعد كيرنل منصة شخصية للتوثيق الأكاديمي وعرض الأعمال. المحتوى المنشور هنا ناتج عن رحلة تعلمي وتنظيم المعرفة وتطوير المشاريع، ومخصص للأغراض التعليمية والمرجعية فقط.',
+    'Waad Kernel is a personal academic documentation and portfolio platform. Materials published here are created as part of my learning process, knowledge organization, and project development, and are intended for educational and reference purposes only.': 'Waad Kernel منصة شخصية للتوثيق الأكاديمي وعرض الأعمال. المحتوى المنشور هنا ناتج عن رحلة تعلمي وتنظيم المعرفة وتطوير المشاريع، ومخصص للأغراض التعليمية والمرجعية فقط.',
     'Purpose of This Website': 'هدف الموقع',
     'The academic content on this website, including notes, summaries, diagrams, guides, project documentation, and reflections, represents my personal understanding and interpretation of the subjects discussed. Content may simplify, reorganize, or rephrase official material for clarity and should not replace lectures, textbooks, professional advice, or official course documentation.': 'المحتوى الأكاديمي في هذا الموقع، بما فيه الملاحظات والملخصات والمخططات والأدلة وتوثيق المشاريع والتأملات، يمثل فهمي وتفسيري الشخصي للمواضيع. ممكن يكون المحتوى مبسط أو معاد ترتيبه أو صياغته للتوضيح، وما يعتبر بديلًا للمحاضرات أو الكتب أو المشورة المهنية أو التوثيق الرسمي للمقررات.',
     'While care is taken to support accuracy, errors or omissions may exist.': 'مع الحرص على الدقة، ممكن توجد أخطاء أو معلومات ناقصة.',
@@ -78,10 +79,15 @@ const ar = {
     'No Academic Liability': 'لا مسؤولية أكاديمية',
     'This website does not guarantee academic outcomes, grades, examination performance, or the suitability of content for a particular course or assessment. Visitors are responsible for verifying information against official academic sources.': 'هذا الموقع ما يضمن نتائج أكاديمية أو درجات أو أداء في الاختبارات أو مناسبة المحتوى لمقرر أو تقييم معين. الزوار مسؤولون عن التحقق من المعلومات من المصادر الأكاديمية الرسمية.',
     'If you believe any content requires correction, clarification, attribution adjustment, or removal, please reach out directly.': 'إذا تشوفون أن أي محتوى يحتاج تصحيح أو توضيح أو تعديل في نسب المصدر أو إزالة، تواصلوا معي مباشرة.',
-    'Waad Kernel': 'وعد كيرنل', 'Software Engineering Student': 'طالبة هندسة برمجيات', 'AI Minor': 'تخصص فرعي ذكاء اصطناعي',
-    'SOFTWARE_ENG': 'هندسة_برمجيات', 'AI_MINOR': 'ذكاء_اصطناعي', 'BILINGUAL': 'ثنائي_اللغة',
-    'Building systems. Documenting knowledge. In Arabic and English.': 'أبني أنظمة، وأوثّق المعرفة، بالعربي والإنجليزي.',
+    'Waad Kernel': 'Waad Kernel', 'Software Engineering Student': 'هندسة البرمجيات', 'AI Minor': 'تخصص فرعي في الذكاء الاصطناعي',
+    'SOFTWARE_ENG': 'هندسة برمجيات', 'AI_MINOR': 'ذكاء اصطناعي', 'BILINGUAL': 'ثنائي اللغة',
+    'Building systems. Documenting knowledge. In Arabic and English.': 'مساحة تجمع بين هندسة البرمجيات والذكاء الاصطناعي وتوثيق المعرفة التقنية.',
     'Selected Works': 'أعمال مختارة', 'Knowledge Base': 'قاعدة المعرفة',
+    'Explore Waad Kernel': 'استكشف محتوى Waad Kernel',
+    'Explore My Work': 'استعرض مشاريعي',
+    'Explore Projects': 'استعرض مشاريعي',
+    'Explore Knowledge': 'استعرض المعرفة',
+    'Guides': 'أدلة', 'Tips': 'نصائح', 'Resources': 'مصادر',
     'Neural Task Scheduler': 'مجدول مهام عصبي', 'Kernel Diagnostics UI': 'واجهة تشخيص كيرنل', 'Bilingual Data Parser': 'محلل بيانات ثنائي اللغة',
     'Distributed computing architecture optimized by deep reinforcement learning for load balancing across cluster nodes.': 'معمارية حوسبة موزعة محسّنة بالتعلم المعزز العميق لموازنة الأحمال بين عُقد المجموعة.',
     'Real-time hardware monitoring interface utilizing WebGL for rendering high-density telemetry data from native OS APIs.': 'واجهة تراقب العتاد لحظيًا وتستخدم WebGL لعرض بيانات قياس كثيفة من واجهات نظام التشغيل.',
@@ -89,17 +95,17 @@ const ar = {
     'Understanding Memory Management in Rust': 'فهم إدارة الذاكرة في Rust', 'Building Scalable APIs with Graph QL': 'بناء واجهات API قابلة للتوسع باستخدام GraphQL',
     'Profile Data': 'بيانات الملف', 'Waad Ibrahim': 'وعد إبراهيم', 'Alhwaimel': 'الهويميل',
     "I'm a Software Engineering student at Prince Sultan University with a minor in Artificial Intelligence. I enjoy building systems, exploring AI applications, and documenting what I learn in both Arabic and English.": 'أنا طالبة هندسة برمجيات في جامعة الأمير سلطان، وعندي تخصص فرعي في الذكاء الاصطناعي. أحب أبني الأنظمة، وأستكشف تطبيقات الذكاء الاصطناعي، وأوثّق اللي أتعلمه بالعربي والإنجليزي.',
-    '"I build software systems, study artificial intelligence, and transform what I learn into practical knowledge that others can use. Waad Kernel is my digital space for documenting ideas, sharing technical knowledge, and showcasing my academic and personal growth."': '"أبني أنظمة برمجية، وأدرس الذكاء الاصطناعي، وأحوّل اللي أتعلمه لمعرفة عملية يقدر غيري يستفيد منها. وعد كيرنل هي مساحتي الرقمية لتوثيق الأفكار، ومشاركة المعرفة التقنية، وعرض تطوري الأكاديمي والشخصي."',
+    '"I build software systems, study artificial intelligence, and transform what I learn into practical knowledge that others can use. Waad Kernel is my digital space for documenting ideas, sharing technical knowledge, and showcasing my academic and personal growth."': '"أبني أنظمة برمجية، وأدرس الذكاء الاصطناعي، وأحوّل اللي أتعلمه لمعرفة عملية يقدر غيري يستفيد منها. Waad Kernel هي مساحتي الرقمية لتوثيق الأفكار، ومشاركة المعرفة التقنية، وعرض تطوري الأكاديمي والشخصي."',
     'My Journey': 'رحلتي', 'Started Software Engineering at Prince Sultan University': 'بدأت دراسة هندسة البرمجيات في جامعة الأمير سلطان',
     'Developed a strong interest in Artificial Intelligence': 'صار عندي اهتمام كبير بالذكاء الاصطناعي', 'Began building academic and technical projects': 'بدأت أبني مشاريع أكاديمية وتقنية',
-    'Started documenting technical knowledge systematically': 'بدأت أوثّق المعرفة التقنية بشكل منظّم', 'Created Waad Kernel': 'أنشأت وعد كيرنل',
+    'Started documenting technical knowledge systematically': 'بدأت أوثّق المعرفة التقنية بشكل منظّم', 'Created Waad Kernel': 'أنشأت Waad Kernel',
     'What I Focus On': 'وش أركز عليه', 'Software Engineering': 'هندسة البرمجيات', 'Artificial Intelligence': 'الذكاء الاصطناعي', 'Databases': 'قواعد البيانات',
     'Focused on software design, system thinking, architecture, and building practical solutions.': 'أركز على تصميم البرمجيات، والتفكير بالأنظمة، والمعمارية، وبناء حلول عملية.',
     'Interested in machine learning, natural language processing, explainable AI, and real-world AI applications.': 'مهتمة بتعلم الآلة، ومعالجة اللغة الطبيعية، والذكاء الاصطناعي القابل للتفسير، وتطبيقاته الواقعية.',
     'Interested in database design, SQL development, and organizing information effectively.': 'مهتمة بتصميم قواعد البيانات، وتطوير SQL، وتنظيم المعلومات بفعالية.',
     'Languages': 'اللغات', 'Arabic': 'العربية', 'English': 'الإنجليزية', 'Native': 'اللغة الأم', 'Professional': 'احترافي',
-    'Why Waad Kernel Exists': 'ليش وعد كيرنل موجودة', 'Core Objective': 'الهدف الأساسي',
-    'Waad Kernel exists because knowledge becomes more valuable when it is organized and shared. Through projects, coursework, and independent learning, I aim to transform what I learn into practical knowledge that other students can benefit from, especially within the Arabic technical community.': 'وعد كيرنل موجودة لأن المعرفة تصير أقيم لما تكون مرتبة ومشتركة. من خلال المشاريع والدراسة والتعلم الذاتي، هدفي أحوّل اللي أتعلمه لمعرفة عملية يستفيد منها الطلاب والطالبات، خصوصًا في المجتمع التقني العربي.',
+    'Why Waad Kernel Exists': 'ليش Waad Kernel موجودة', 'Core Objective': 'الهدف الأساسي',
+    'Waad Kernel exists because knowledge becomes more valuable when it is organized and shared. Through projects, coursework, and independent learning, I aim to transform what I learn into practical knowledge that other students can benefit from, especially within the Arabic technical community.': 'Waad Kernel موجودة لأن المعرفة تصير أقيم لما تكون مرتبة ومشتركة. من خلال المشاريع والدراسة والتعلم الذاتي، هدفي أحوّل اللي أتعلمه لمعرفة عملية يستفيد منها الطلاب والطالبات، خصوصًا في المجتمع التقني العربي.',
     'Share knowledge clearly': 'مشاركة المعرفة بوضوح', 'Document learning deeply': 'توثيق التعلم بعمق', 'Build useful technical resources': 'بناء موارد تقنية مفيدة', 'Contribute to Arabic technical content': 'الإسهام في المحتوى التقني العربي',
     'Resume': 'السيرة الذاتية', 'Available for viewing and download.': 'متاحة للعرض والتحميل.', 'View Resume': 'عرض السيرة', 'Download CV': 'تحميل السيرة',
     "Let's Connect": 'خلّنا نتواصل', 'Open to discussions, questions, and collaborations.': 'متاحة للنقاشات والأسئلة وفرص التعاون.',
@@ -110,7 +116,7 @@ const ar = {
     'Research project examining gender bias in Arabic sentiment analysis models using Explainable AI techniques.': 'مشروع بحثي يدرس التحيّز الجندري في نماذج تحليل المشاعر العربية باستخدام تقنيات الذكاء الاصطناعي القابل للتفسير.',
     'Database management system designed to manage students, teachers, courses, enrollments, and administration workflows.': 'نظام إدارة قواعد بيانات لتنظيم الطلاب والمعلمين والمقررات والتسجيل وسير العمل الإداري.',
     'Image compression project using Singular Value Decomposition to reduce image size while preserving quality.': 'مشروع ضغط صور يستخدم تحليل القيم المفردة لتقليل حجم الصورة مع الحفاظ على الجودة.',
-    'Every project in Waad Kernel represents a stage in my learning journey. Together they reflect my growth across software engineering, artificial intelligence, databases, and technical problem solving.': 'كل مشروع في وعد كيرنل يمثل مرحلة من رحلة تعلمي، وكلها تعكس تطوري في هندسة البرمجيات والذكاء الاصطناعي وقواعد البيانات وحل المشكلات التقنية.',
+    'Every project in Waad Kernel represents a stage in my learning journey. Together they reflect my growth across software engineering, artificial intelligence, databases, and technical problem solving.': 'كل مشروع في Waad Kernel يمثل مرحلة من رحلة تعلمي، وكلها تعكس تطوري في هندسة البرمجيات والذكاء الاصطناعي وقواعد البيانات وحل المشكلات التقنية.',
     'Accessibility': 'سهولة الوصول', 'User-centered design': 'تصميم متمحور حول المستخدم', 'Interactive maps': 'خرائط تفاعلية', 'Event management': 'إدارة الفعاليات',
     'Accessibility-focused features': 'خصائص تركّز على سهولة الوصول', 'Recommendation system': 'نظام توصيات',
     'Full-stack integration': 'تكامل الواجهة والخلفية', 'Research methodology': 'منهجية البحث', 'Dataset generation': 'إنشاء مجموعة البيانات', 'Evaluation': 'التقييم',
@@ -172,12 +178,10 @@ function applyLanguage(language) {
     document.body.dataset.language = language;
     if (!document.documentElement.dataset.englishTitle) document.documentElement.dataset.englishTitle = document.title;
     document.title = language === 'ar' ? arabicTitles[currentPage()] : document.documentElement.dataset.englishTitle;
-    document.querySelectorAll('[data-language]').forEach((button) => {
-        button.setAttribute('aria-pressed', String(button.dataset.language === language));
-    });
+    updateControlLabels();
 
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
-        acceptNode: (node) => /[A-Za-z]/.test(node.nodeValue) && !node.parentElement.closest('script, style')
+        acceptNode: (node) => node.nodeValue.trim() && !node.parentElement.closest('script, style')
             ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT
     });
     const nodes = [];
@@ -195,6 +199,7 @@ function applyLanguage(language) {
             element.setAttribute(attribute, language === 'ar' ? (ar[value] || value) : value);
         });
     });
+    updateControlLabels();
 }
 
 function setLanguage(language) {
@@ -208,25 +213,29 @@ function setLanguage(language) {
 function setTheme(theme) {
     localStorage.setItem('waad-theme', theme);
     document.documentElement.dataset.theme = theme;
-    document.querySelectorAll('[data-theme-choice]').forEach((button) => {
-        button.setAttribute('aria-pressed', String(button.dataset.themeChoice === theme));
+    updateControlLabels();
+}
+
+function updateControlLabels() {
+    const language = getLanguage();
+    const theme = getTheme();
+    document.querySelectorAll('[data-language-toggle]').forEach((button) => {
+        button.textContent = language === 'en' ? 'Arabic' : 'English';
+        button.setAttribute('aria-label', language === 'en' ? 'Switch to Arabic' : 'Switch to English');
+    });
+    document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+        const nextThemeLabel = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
+        button.textContent = language === 'ar' ? (ar[nextThemeLabel] || nextThemeLabel) : nextThemeLabel;
+        button.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
     });
 }
 
 function controls() {
-    const language = getLanguage();
-    const theme = getTheme();
     return `
         <div class="kernel-controls" aria-label="Site controls">
             <button type="button" class="kernel-control search-trigger" data-search-open aria-label="Search">Search</button>
-            <div class="kernel-switch" aria-label="Language">
-                <button type="button" data-language="en" aria-pressed="${language === 'en'}">EN</button>
-                <button type="button" data-language="ar" aria-pressed="${language === 'ar'}">AR</button>
-            </div>
-            <div class="kernel-switch theme-switch" aria-label="Theme">
-                <button type="button" data-theme-choice="dark" aria-pressed="${theme === 'dark'}">Dark</button>
-                <button type="button" data-theme-choice="light" aria-pressed="${theme === 'light'}">Light</button>
-            </div>
+            <button type="button" class="kernel-control" data-language-toggle>Arabic</button>
+            <button type="button" class="kernel-control" data-theme-toggle>Light Mode</button>
         </div>`;
 }
 
@@ -245,8 +254,12 @@ function searchDialog() {
 }
 
 function initializeControls(root) {
-    root.querySelectorAll('[data-language]').forEach((button) => button.addEventListener('click', () => setLanguage(button.dataset.language)));
-    root.querySelectorAll('[data-theme-choice]').forEach((button) => button.addEventListener('click', () => setTheme(button.dataset.themeChoice)));
+    root.querySelectorAll('[data-language-toggle]').forEach((button) => button.addEventListener('click', () => {
+        setLanguage(getLanguage() === 'en' ? 'ar' : 'en');
+    }));
+    root.querySelectorAll('[data-theme-toggle]').forEach((button) => button.addEventListener('click', () => {
+        setTheme(getTheme() === 'dark' ? 'light' : 'dark');
+    }));
     root.querySelector('[data-search-open]')?.addEventListener('click', () => {
         const dialog = document.querySelector('[data-search-dialog]');
         dialog.showModal();
@@ -324,7 +337,7 @@ class SiteHeader extends HTMLElement {
                     <span class="w-8 h-8 rounded bg-cyan-dim border border-cyan/30 flex items-center justify-center text-cyan"><i class="ph-fill ph-hexagon"></i></span>
                     <span class="font-display font-bold text-lg tracking-wider text-white">WAAD<span class="text-cyan font-mono font-normal opacity-80">KERNEL</span></span>
                 </a>
-                <div class="hidden lg:flex items-center gap-5 font-mono text-xs uppercase tracking-widest text-slate-400">${desktopLinks}</div>
+                <div class="kernel-desktop-links hidden lg:flex items-center gap-5 font-mono text-xs uppercase tracking-widest text-slate-400">${desktopLinks}</div>
                 <div class="hidden md:block">${controls()}</div>
                 <button type="button" class="lg:hidden text-slate-300 hover:text-cyan transition-colors" data-menu-button aria-expanded="false" aria-controls="mobile-navigation" aria-label="Open navigation menu"><i class="ph ph-list text-2xl"></i></button>
             </div>

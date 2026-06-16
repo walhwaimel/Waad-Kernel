@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@800&display=swap');
+
 :root {
     color-scheme: dark;
 }
@@ -12,11 +15,9 @@ html[data-theme="light"] {
     --text-muted: #687b91;
 }
 
-.kernel-controls,
-.kernel-switch {
+.kernel-controls {
     display: flex;
     align-items: center;
-    gap: 0.3rem;
 }
 
 .kernel-controls {
@@ -28,7 +29,6 @@ html[data-theme="light"] {
 }
 
 .kernel-control,
-.kernel-switch button,
 .kernel-search-head button {
     appearance: none;
     border: 1px solid rgba(0, 240, 255, 0.28);
@@ -41,18 +41,21 @@ html[data-theme="light"] {
 }
 
 .kernel-control:hover,
-.kernel-switch button:hover,
-.kernel-switch button[aria-pressed="true"] {
+.kernel-control:focus-visible {
     border-color: #00f0ff;
     color: #00f0ff;
     background: rgba(0, 240, 255, 0.12);
     box-shadow: 0 0 12px rgba(0, 240, 255, 0.18);
 }
 
-.theme-switch button[aria-pressed="true"] {
-    border-color: #ff9f00;
-    color: #ff9f00;
-    background: rgba(255, 159, 0, 0.1);
+body[data-language="ar"] .kernel-control,
+body[data-language="ar"] .kernel-search-head,
+body[data-language="ar"] .kernel-search-head button,
+body[data-language="ar"] .kernel-search-panel input,
+body[data-language="ar"] .kernel-search-results a {
+    font-family: "IBM Plex Sans Arabic", "Rajdhani", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.02em;
 }
 
 .kernel-search-dialog {
@@ -124,6 +127,21 @@ html[data-theme="light"] {
 .kernel-search-results span {
     color: #94a3b8;
     font-size: 0.78rem;
+}
+
+.kernel-desktop-links a:not(:last-child)::after {
+    content: '\00B7';
+    color: #94a3b8;
+    opacity: 0.65;
+    margin-inline-start: 0.85rem;
+    text-shadow: none;
+}
+
+body[data-language="ar"] .kernel-desktop-links a,
+body[data-language="ar"] #mobile-navigation a {
+    font-family: "IBM Plex Sans Arabic", "Rajdhani", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.02em;
 }
 
 .knowledge-domain-card {
@@ -225,6 +243,16 @@ html[data-theme="light"] {
 
 .footer-column a:hover {
     color: #e2e8f0;
+}
+
+body[data-language="ar"] .footer-brand p,
+body[data-language="ar"] .footer-column h2,
+body[data-language="ar"] .footer-column a,
+body[data-language="ar"] .footer-column span,
+body[data-language="ar"] .professional-footer-bottom {
+    font-family: "IBM Plex Sans Arabic", "Rajdhani", sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.02em;
 }
 
 .professional-footer-bottom {
@@ -348,13 +376,13 @@ html[data-theme="light"] {
 }
 
 html[data-theme="light"] body {
-    background-color: #eef4f8 !important;
-    color: #172033 !important;
+    background-color: #eef1f6 !important;
+    color: #0d1829 !important;
 }
 
 html[data-theme="light"] body::before,
 html[data-theme="light"] .bg-grid {
-    opacity: 0.32;
+    opacity: 0.08;
 }
 
 html[data-theme="light"] .glass-panel,
@@ -363,8 +391,9 @@ html[data-theme="light"] .policy-hero,
 html[data-theme="light"] .policy-section,
 html[data-theme="light"] .policy-use-card,
 html[data-theme="light"] .professional-footer {
-    background: rgba(255, 255, 255, 0.82) !important;
-    border-color: rgba(6, 100, 130, 0.18) !important;
+    background: #ffffff !important;
+    border-color: #c8d0dc !important;
+    box-shadow: 0 18px 45px rgba(13, 24, 41, 0.06) !important;
 }
 
 html[data-theme="light"] .text-white,
@@ -372,35 +401,113 @@ html[data-theme="light"] .text-slate-200,
 html[data-theme="light"] .text-slate-300,
 html[data-theme="light"] .kernel-search-results a,
 html[data-theme="light"] .brand-name {
-    color: #172033 !important;
+    color: #0d1829 !important;
 }
 
 html[data-theme="light"] .footer-logo,
 html[data-theme="light"] .policy-hero h1,
 html[data-theme="light"] .policy-section h2,
 html[data-theme="light"] .policy-use-card h3 {
-    color: #172033 !important;
+    color: #0d1829 !important;
 }
 
 html[data-theme="light"] .text-slate-400,
 html[data-theme="light"] .text-slate-500,
 html[data-theme="light"] .kernel-search-results span {
-    color: #52647a !important;
+    color: #4a6080 !important;
 }
 
 html[data-theme="light"] .bg-base,
 html[data-theme="light"] .bg-base\/50,
 html[data-theme="light"] .bg-base\/80 {
-    background-color: rgba(239, 246, 250, 0.9) !important;
+    background-color: rgba(238, 241, 246, 0.92) !important;
 }
 
 html[data-theme="light"] .main-interface {
-    --bg-base: #eef4f8;
-    --bg-panel: rgba(255, 255, 255, 0.75);
+    --bg-base: #eef1f6;
+    --bg-panel: #ffffff;
     --bg-panel-solid: #ffffff;
-    --text-primary: #172033;
-    --text-secondary: #52647a;
-    --text-muted: #687b91;
+    --text-primary: #0d1829;
+    --text-secondary: #4a6080;
+    --text-muted: #4a6080;
+}
+
+html[data-theme="light"] .kernel-control,
+html[data-theme="light"] .kernel-search-head button {
+    background: rgba(238, 241, 246, 0.06);
+    border-color: rgba(238, 241, 246, 0.22);
+    color: #eef1f6;
+    box-shadow: none;
+}
+
+html[data-theme="light"] .kernel-control:hover,
+html[data-theme="light"] .kernel-control:focus-visible,
+html[data-theme="light"] .kernel-search-head button:hover,
+html[data-theme="light"] .kernel-search-head button:focus-visible {
+    border-color: rgba(0, 201, 177, 0.42);
+    color: #00c9b1;
+    background: rgba(0, 201, 177, 0.08);
+    box-shadow: none;
+}
+
+html[data-theme="light"] .kernel-search-dialog {
+    color: #0d1829;
+    box-shadow: 0 26px 70px rgba(13, 24, 41, 0.12) !important;
+}
+
+html[data-theme="light"] .kernel-search-panel .kernel-search-head button {
+    background: #f1f5f9;
+    border-color: #c8d0dc;
+    color: #0d1829;
+}
+
+html[data-theme="light"] .kernel-search-panel .kernel-search-head button:hover,
+html[data-theme="light"] .kernel-search-panel .kernel-search-head button:focus-visible {
+    border-color: rgba(0, 201, 177, 0.42);
+    color: #002e28;
+    background: rgba(0, 201, 177, 0.10);
+}
+
+html[data-theme="light"] .kernel-search-dialog::backdrop {
+    background: rgba(241, 245, 249, 0.72);
+}
+
+html[data-theme="light"] .kernel-search-panel input {
+    background: #f1f5f9;
+    border-color: #c8d0dc;
+    color: #0d1829;
+}
+
+html[data-theme="light"] .kernel-search-panel input:focus {
+    border-color: rgba(0, 201, 177, 0.48);
+}
+
+html[data-theme="light"] .kernel-search-results a {
+    background: #ffffff;
+    border-color: #c8d0dc;
+}
+
+html[data-theme="light"] .kernel-search-results a:hover {
+    border-color: rgba(0, 201, 177, 0.42);
+    background: #f8fbfc;
+}
+
+html[data-theme="light"] .professional-footer {
+    background: #ffffff !important;
+    border-top-color: #c8d0dc;
+}
+
+html[data-theme="light"] .footer-logo span {
+    border-color: rgba(0, 201, 177, 0.42);
+    color: #002e28;
+    background: #00c9b1;
+    box-shadow: none;
+}
+
+html[data-theme="light"] .footer-column h2,
+html[data-theme="light"] .policy-kicker,
+html[data-theme="light"] .policy-section a {
+    color: #008f7f;
 }
 
 @media (max-width: 1100px) {
@@ -420,9 +527,6 @@ html[data-theme="light"] .main-interface {
         flex-wrap: wrap;
     }
 
-    .theme-switch button {
-        font-size: 0.58rem;
-    }
 }
 
 @media (max-width: 850px) {
