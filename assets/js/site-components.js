@@ -715,27 +715,24 @@ const injectSharedStyles = () => {
         }
 
         .wk-logo-box {
-            width: 72px;
-            height: 72px;
-            border: 2px solid var(--wk-amber);
+            width: 120px;
+            height: 120px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: var(--wk-font-mono);
-            font-weight: 800;
-            color: var(--wk-amber);
-            font-size: 24px;
-            border-radius: 4px;
             position: relative;
-            box-shadow: 0 0 14px color-mix(in srgb, var(--wk-amber) 28%, transparent);
+            flex: 0 0 auto;
+        }
+
+        .wk-logo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
         }
 
         .wk-logo-box::before {
-            content: '';
-            position: absolute;
-            inset: -5px;
-            border: 1px solid var(--wk-amber-dim);
-            border-radius: 6px;
+            content: none;
         }
 
         .wk-brand-name {
@@ -1091,7 +1088,7 @@ class SiteHeader extends HTMLElement {
         return `
             <header class="wk-site-header">
                 <a class="wk-logo-group" href="index.html" aria-label="Waad Kernel home">
-                    <span class="wk-logo-box">WK</span>
+                    <span class="wk-logo-box"><img src="assets/images/waad-kernel-favicon.png" alt="" aria-hidden="true"></span>
                     <span class="wk-brand-name">Waad <span>Kernel</span></span>
                 </a>
 
