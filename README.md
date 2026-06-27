@@ -5,12 +5,10 @@ Waad Kernel is a static personal portfolio focused on software engineering, arti
 ## Pages
 
 - `index.html` - Homepage
-- `about-waad-alhwaimel.html` - Background, interests, and contact section
+- `about-waad-alhwaimel.html` - Background, interests, certifications, and resume section
 - `software-engineering-projects.html` - Academic and technical projects
 - `software-engineering-knowledge-base.html` - Guides, learning topics, and resources
 - `student-project-planning-tools.html` - Student project planning tools
-- `copyright-and-usage-policy.html` - Copyright and usage policy
-- `academic-disclaimer.html` - Academic disclaimer
 
 ## Project Structure
 
@@ -21,10 +19,7 @@ Waad Kernel is a static personal portfolio focused on software engineering, arti
 |-- software-engineering-projects.html
 |-- software-engineering-knowledge-base.html
 |-- student-project-planning-tools.html
-|-- copyright-and-usage-policy.html
-|-- academic-disclaimer.html
 |-- robots.txt
-|-- sitemap.xml
 |-- assets/
 |   `-- js/
 |       `-- site-components.js
@@ -33,15 +28,6 @@ Waad Kernel is a static personal portfolio focused on software engineering, arti
 ```
 
 The shared header and footer are dependency-free Web Components defined in `assets/js/site-components.js`. All pages remain static HTML, CSS, and JavaScript and require no build step.
-
-## Site Features
-
-- Clear `EN` and `AR` language controls with Saudi-Arabic translations and RTL layout
-- Persistent dark and light modes
-- Header search covering pages, projects, guides, and tools
-- Shared responsive navigation and footer across every page
-
-Language and theme preferences are stored locally in the visitor's browser.
 
 ## Run Locally
 

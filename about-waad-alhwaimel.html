@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" class="scroll-smooth" vid="0"><head vid="1">
     <meta charset="UTF-8" vid="2">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3">
@@ -6,12 +6,18 @@
     <meta name="description" content="Learn about Waad Ibrahim Alhwaimel, a software engineering student and AI minor building practical systems, projects, and technical resources.">
     <meta name="author" content="Waad Ibrahim Alhwaimel">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://waad-kernel.com/about-waad-alhwaimel.html">
+    <link rel="icon" type="image/png" href="assets/images/waad-kernel-favicon.png">
+    <link rel="apple-touch-icon" href="assets/images/waad-kernel-favicon.png">
+    <meta property="og:title" content="About Waad Alhwaimel | Waad Kernel">
+    <meta property="og:description" content="Learn about Waad Ibrahim Alhwaimel, her software engineering journey, AI focus, certifications, and technical knowledge work.">
+    <meta property="og:image" content="assets/images/waad-kernel-banner.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="assets/images/waad-kernel-banner.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com" vid="5">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" vid="6">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" vid="7">
-    <link rel="stylesheet" href="assets/css/site-features.css">
     
     <script src="https://unpkg.com/@phosphor-icons/web" vid="8"></script>
     <script src="https://cdn.tailwindcss.com/3.4.17" vid="9"></script>
@@ -127,6 +133,33 @@
         
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
+        @keyframes rotate-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes pulse-width {
+            0% { width: 30%; }
+            100% { width: 85%; }
+        }
+        @keyframes pulse-core {
+            0%, 100% { filter: drop-shadow(0 0 10px #00f0ff); }
+            50% { filter: drop-shadow(0 0 30px #00f0ff); }
+        }
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        .scanline {
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.05) 50%, rgba(0,0,0,0));
+            position: fixed;
+            top: 0;
+            pointer-events: none;
+            animation: scan 8s linear infinite;
+            z-index: 9999;
+        }
 
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #06080d; }
@@ -154,6 +187,54 @@
             transform: scale(1.3);
         }
 
+        .about-timeline-final-title {
+            justify-content: flex-start;
+        }
+
+        body[data-language="ar"] .about-timeline-shell {
+            padding-left: 0 !important;
+            padding-right: 1.5rem !important;
+            direction: rtl;
+        }
+
+        body[data-language="ar"] .about-timeline-shell .timeline-line {
+            left: auto !important;
+            right: 1.5rem !important;
+        }
+
+        body[data-language="ar"] .about-timeline-shell .timeline-item {
+            padding-left: 0 !important;
+            padding-right: 2.5rem !important;
+        }
+
+        body[data-language="ar"] .about-timeline-shell .timeline-dot {
+            left: auto !important;
+            right: -5px !important;
+        }
+
+        body[data-language="ar"] .about-timeline-shell .timeline-dot-final {
+            right: -7px !important;
+        }
+
+        body[data-language="ar"] .about-timeline-final-title {
+            justify-content: flex-end;
+            text-align: right;
+        }
+
+        @media (min-width: 768px) {
+            body[data-language="ar"] .about-timeline-shell {
+                padding-right: 2.5rem !important;
+            }
+
+            body[data-language="ar"] .about-timeline-shell .timeline-line {
+                right: 2.5rem !important;
+            }
+
+            body[data-language="ar"] .about-timeline-shell .timeline-item {
+                padding-right: 3.5rem !important;
+            }
+        }
+
         .section-heading {
             display: flex;
             align-items: center;
@@ -167,123 +248,740 @@
             height: 1px;
             background: linear-gradient(to right, rgba(0, 240, 255, 0.3), transparent);
         }
+
+        .rtl-copy {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .certification-card {
+            min-height: 180px;
+            text-decoration: none;
+        }
+
+        .certification-card:focus-visible {
+            outline: 2px solid #00f0ff;
+            outline-offset: 4px;
+        }
+
+        .certification-card:hover .certificate-arrow,
+        .certification-card:focus-visible .certificate-arrow {
+            transform: translateX(-4px);
+            color: #00f0ff;
+        }
+
+        .kernel-shell {
+            max-width: 1440px;
+            display: grid !important;
+            grid-template-columns: 80px minmax(0, 1fr);
+            gap: 2rem;
+        }
+
+        .kernel-side-telemetry {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            border-right: 1px solid rgba(0, 240, 255, 0.2);
+            padding-right: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: #00f0ff;
+            opacity: 0.76;
+            min-height: calc(100vh - 10rem);
+        }
+
+        .kernel-data-block {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .kernel-data-bar {
+            height: 4px;
+            width: 100%;
+            margin-top: 4px;
+            background: #0e121a;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .kernel-data-fill {
+            display: block;
+            height: 100%;
+            background: #00f0ff;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.2);
+        }
+
+        .kernel-vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            margin-top: auto;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .kernel-main-interface {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            min-width: 0;
+        }
+
+        .about-kernel-hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 0.92fr);
+            gap: 2rem;
+            align-items: center;
+            position: relative;
+            padding: 4rem 0 3rem;
+            min-height: 620px;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .about-kernel-hero::before {
+            content: '';
+            position: absolute;
+            top: 1rem;
+            left: 0;
+            width: min(22rem, 42vw);
+            height: 2px;
+            background: linear-gradient(90deg, #00f0ff, transparent);
+            box-shadow: 0 0 18px rgba(0, 240, 255, 0.45);
+        }
+
+        .about-kernel-hero::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: 2rem;
+            width: min(16rem, 34vw);
+            height: 2px;
+            background: linear-gradient(270deg, #ff9f00, transparent);
+            box-shadow: 0 0 18px rgba(255, 159, 0, 0.35);
+        }
+
+        .about-hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .about-greeting-label {
+            font-family: 'JetBrains Mono', monospace;
+            color: #00f0ff;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0.08em;
+        }
+
+        .about-greeting-label::before {
+            content: '>';
+            color: #ff9f00;
+        }
+
+        .about-hero-title {
+            font-size: clamp(4rem, 8vw, 6.8rem);
+            line-height: 0.88;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            color: #fff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.65);
+        }
+
+        .about-hero-subtitle {
+            font-size: 1.25rem;
+            color: #8ea0b8;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-left: 4px solid #ff9f00;
+            background: linear-gradient(90deg, rgba(255, 159, 0, 0.12) 0%, transparent 100%);
+            padding: 0.5rem 1rem;
+            font-family: 'Rajdhani', 'Space Grotesk', sans-serif;
+        }
+
+        .about-subtitle-separator {
+            color: #00f0ff;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 800;
+        }
+
+        .about-statement-panel {
+            margin-top: 2rem;
+            border-left: 2px solid rgba(0, 240, 255, 0.72);
+            background: linear-gradient(90deg, rgba(0, 240, 255, 0.12) 0%, rgba(14, 18, 26, 0.38) 64%, transparent 100%);
+        }
+
+        .about-radar-panel {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .about-radar-panel::before {
+            content: '';
+            position: absolute;
+            inset: 7%;
+            background-image:
+                linear-gradient(rgba(0, 240, 255, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.08) 1px, transparent 1px);
+            background-size: 28px 28px;
+            mask-image: radial-gradient(circle, #000 0%, transparent 68%);
+            -webkit-mask-image: radial-gradient(circle, #000 0%, transparent 68%);
+            opacity: 0.45;
+        }
+
+        .about-radar-frame {
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 50%;
+        }
+
+        .about-radar-frame::before,
+        .about-radar-frame::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 22px;
+            height: 4px;
+            background: #00f0ff;
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
+        }
+
+        .about-radar-frame::before { top: -10px; }
+        .about-radar-frame::after { bottom: -10px; }
+
+        .about-radar-svg {
+            width: 84%;
+            height: 84%;
+            overflow: visible;
+        }
+
+        .about-radar-outer {
+            animation: rotate-slow 20s linear infinite;
+            transform-origin: center;
+        }
+
+        .about-radar-inner {
+            animation: spin-reverse 12s linear infinite;
+            transform-origin: center;
+        }
+
+        .about-radar-core {
+            animation: pulse-core 2.4s ease-in-out infinite;
+        }
+
+        .about-terminal-banner {
+            background: #000;
+            border: 1px solid #00f0ff;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.2);
+            padding: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            color: #00f0ff;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            min-height: 76px;
+        }
+
+        .about-terminal-banner::before {
+            content: 'WK_PROFILE_TERM //';
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #00f0ff;
+            color: #000;
+            font-size: 0.6rem;
+            padding: 2px 8px;
+            font-weight: bold;
+        }
+
+        .about-terminal-text {
+            display: block;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+        }
+
+        body[data-theme="light"] .kernel-side-telemetry {
+            color: #087f93;
+            border-right-color: rgba(8, 127, 147, 0.22);
+        }
+
+        body[data-theme="light"] .kernel-data-bar {
+            background: rgba(8, 127, 147, 0.12);
+        }
+
+        body[data-theme="light"] .kernel-data-fill {
+            background: #087f93;
+            box-shadow: none;
+        }
+
+        body[data-theme="light"] .about-hero-title {
+            color: #172033;
+            text-shadow: none;
+        }
+
+        body[data-theme="light"] .about-kernel-hero::before {
+            background: linear-gradient(90deg, #087f93, transparent);
+            box-shadow: none;
+        }
+
+        body[data-theme="light"] .about-kernel-hero::after {
+            background: linear-gradient(270deg, #a86400, transparent);
+            box-shadow: none;
+        }
+
+        body[data-theme="light"] .about-hero-subtitle {
+            color: #33465f;
+            background: linear-gradient(90deg, rgba(168, 100, 0, 0.13) 0%, transparent 100%);
+        }
+
+        body[data-theme="light"] .about-terminal-banner {
+            background: rgba(246, 251, 252, 0.88);
+            color: #075d6c;
+            border-color: rgba(8, 127, 147, 0.34);
+            box-shadow: 0 18px 45px rgba(31, 57, 80, 0.12);
+        }
+
+        body[data-theme="light"] .about-terminal-banner::before {
+            background: #087f93;
+            color: #f6fbfc;
+        }
+
+        @media (max-width: 1024px) {
+            .about-kernel-hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                min-height: auto;
+            }
+
+            .about-greeting-label {
+                justify-content: center;
+            }
+
+            .about-hero-subtitle {
+                border-left: 0;
+                border-bottom: 4px solid #ff9f00;
+                background: linear-gradient(0deg, rgba(255, 159, 0, 0.12) 0%, transparent 100%);
+            }
+
+            .about-statement-panel {
+                border-left: 0;
+                border-top: 2px solid rgba(0, 240, 255, 0.72);
+                text-align: right;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .kernel-shell {
+                display: block !important;
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+
+            .kernel-side-telemetry {
+                display: none;
+            }
+
+            .about-hero-title {
+                font-size: 3.6rem;
+            }
+        }
+
+        .about-system-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 2rem;
+            min-height: 100vh;
+        }
+
+        .about-main-interface {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            min-width: 0;
+        }
+
+        .about-system-container .side-telemetry {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            border-right: 1px solid rgba(0, 240, 255, 0.2);
+            padding-right: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: #00f0ff;
+            opacity: 0.7;
+        }
+
+        .about-system-container .data-block {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .about-system-container .data-bar {
+            height: 4px;
+            width: 100%;
+            background: #0e121a;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+
+        .about-system-container .data-bar-fill {
+            display: block;
+            height: 100%;
+            background: #00f0ff;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.2);
+            animation: pulse-width 3s infinite alternate ease-in-out;
+        }
+
+        .about-system-container .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            margin-top: auto;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .about-kernel-hero.hero {
+            grid-template-columns: 1fr 1fr;
+            padding: 4rem 0;
+            min-height: 0;
+        }
+
+        .about-kernel-hero .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .about-kernel-hero .greeting-label {
+            font-family: 'JetBrains Mono', monospace;
+            color: #00f0ff;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0;
+        }
+
+        .about-kernel-hero .greeting-label::before {
+            content: '>';
+            color: #ff9f00;
+        }
+
+        .about-kernel-hero .hero-title {
+            font-size: 5rem;
+            line-height: 0.9;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            color: #fff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+        }
+
+        .about-hero-title-ar {
+            display: none;
+            direction: rtl;
+            font-weight: 700;
+        }
+
+        body[data-language="ar"] .about-hero-title-en {
+            display: none;
+        }
+
+        body[data-language="ar"] .about-hero-title-ar {
+            display: block;
+        }
+
+        .about-kernel-hero .hero-subtitle {
+            font-size: 1.5rem;
+            color: #64748b;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-left: 4px solid #ff9f00;
+            background: linear-gradient(90deg, rgba(255, 159, 0, 0.1) 0%, transparent 100%);
+            padding: 0.5rem 1rem;
+        }
+
+        .about-kernel-hero .highlight {
+            color: #ff9f00;
+            text-shadow: 0 0 10px rgba(255, 159, 0, 0.6), 0 0 20px rgba(255, 159, 0, 0.2);
+        }
+
+        .about-kernel-hero .robot-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .about-kernel-hero .robot-frame {
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 50%;
+        }
+
+        .about-kernel-hero .robot-frame::before,
+        .about-kernel-hero .robot-frame::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 20px;
+            height: 4px;
+            background: #00f0ff;
+            transform: translateX(-50%);
+        }
+
+        .about-kernel-hero .robot-frame::before { top: -10px; }
+        .about-kernel-hero .robot-frame::after { bottom: -10px; }
+
+        .about-kernel-hero .robot-svg {
+            width: 80%;
+            height: 80%;
+            overflow: visible;
+        }
+
+        .about-terminal-banner.terminal-banner {
+            font-size: 1.1rem;
+        }
+
+        .about-terminal-banner.terminal-banner::before {
+            content: 'WK_SYS_TERM //';
+        }
+
+        body[data-theme="light"] .about-system-container .side-telemetry {
+            color: #087f93;
+            border-right-color: rgba(8, 127, 147, 0.22);
+        }
+
+        body[data-theme="light"] .about-system-container .data-bar {
+            background: rgba(8, 127, 147, 0.12);
+        }
+
+        body[data-theme="light"] .about-system-container .data-bar-fill {
+            background: #087f93;
+            box-shadow: none;
+        }
+
+        body[data-theme="light"] .about-kernel-hero .hero-title {
+            color: #172033;
+            text-shadow: none;
+        }
+
+        body[data-theme="light"] .about-kernel-hero .hero-subtitle {
+            color: #53657b;
+            background: linear-gradient(90deg, rgba(168, 100, 0, 0.12) 0%, transparent 100%);
+        }
+
+        @media (max-width: 1024px) {
+            .about-kernel-hero.hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .about-kernel-hero .greeting-label {
+                justify-content: center;
+            }
+
+            .about-kernel-hero .hero-subtitle {
+                border-left: 0;
+                border-bottom: 4px solid #ff9f00;
+                background: linear-gradient(0deg, rgba(255, 159, 0, 0.1) 0%, transparent 100%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-system-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .about-system-container .side-telemetry {
+                display: none;
+            }
+
+            .about-kernel-hero .hero-title {
+                font-size: 4rem;
+            }
+        }
     </style>
 </head>
 <body class="relative min-h-screen antialiased flex flex-col font-sans w-full" data-page="about" vid="12">
 
-    <div class="bg-grid" vid="13"></div>
-    <div class="ambient-blob-cyan" vid="14"></div>
-    <div class="ambient-blob-amber" vid="15"></div>
+    <div class="ambient-light" vid="13"></div>
+    <div class="scanline" vid="14"></div>
 
-    <site-header>
-        <nav class="fixed top-0 w-full z-50 glass-panel border-t-0 border-l-0 border-r-0 border-b border-white/5 py-4 rounded-none" aria-label="Primary navigation">
-            <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-                <a href="index.html" class="flex items-center gap-3 group" aria-label="Waad Kernel home">
-                    <span class="w-8 h-8 rounded bg-cyan-dim border border-cyan/30 flex items-center justify-center text-cyan"><i class="ph-fill ph-hexagon"></i></span>
-                    <span class="font-display font-bold text-lg tracking-wider text-white">WAAD<span class="text-cyan font-mono font-normal opacity-80">KERNEL</span></span>
-                </a>
-                <div class="flex items-center gap-4 md:gap-7 font-mono text-xs md:text-sm uppercase tracking-widest text-slate-400 overflow-x-auto">
-                    <a href="index.html" class="hover:text-white transition-colors">Home</a>
-                    <a href="about-waad-alhwaimel.html" class="text-cyan font-medium" aria-current="page">About</a>
-                    <a href="software-engineering-projects.html" class="hover:text-white transition-colors">Projects</a>
-                    <a href="software-engineering-knowledge-base.html" class="hover:text-white transition-colors">Knowledge</a>
-                    <a href="student-project-planning-tools.html" class="hover:text-white transition-colors">Tools</a>
-                </div>
+    <div class="system-container about-system-container" vid="31">
+        <aside class="side-telemetry" aria-hidden="true">
+            <div class="data-block">
+                <span><span class="i18n-en">SOFTWARE_ENG</span><span class="i18n-ar" lang="ar">هندسة البرمجيات</span></span>
+                <div class="data-bar"><span class="data-bar-fill" style="width: 88%;"></span></div>
             </div>
-        </nav>
-    </site-header>
+            <div class="data-block">
+                <span><span class="i18n-en">AI_MINOR</span><span class="i18n-ar" lang="ar">تخصص فرعي في الذكاء الاصطناعي</span></span>
+                <div class="data-bar"><span class="data-bar-fill" style="width: 74%; animation-delay: 1s;"></span></div>
+            </div>
+            <div class="data-block">
+                <span><span class="i18n-en">BILINGUAL</span><span class="i18n-ar" lang="ar">ثنائية اللغة</span></span>
+                <div class="data-bar"><span class="data-bar-fill" style="width: 92%; animation-delay: 2s; background: #ff0055; box-shadow: 0 0 10px rgba(255, 0, 85, 0.6);"></span></div>
+            </div>
 
-    <main class="flex-grow w-full max-w-7xl mx-auto px-6 md:px-12 pt-36 pb-24 relative z-10 flex flex-col gap-32" vid="31">
+            <div class="vertical-text">
+                WAAD_KERNEL_OS_v2.4
+            </div>
+        </aside>
 
-        <section class="min-h-[60vh] flex flex-col lg:flex-row items-center justify-between gap-16 relative" vid="32">
-            <div class="w-full lg:w-3/5 space-y-8 z-10" vid="33">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded border border-cyan/20 bg-cyan-dim font-mono text-xs text-cyan uppercase tracking-widest" vid="34">
-                    <span class="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse shadow-[0_0_8px_#00f0ff]" vid="35"></span>
-                    Profile Data
-                </div>
+        <main class="main-interface about-main-interface" vid="32">
+            <site-header></site-header>
+
+        <section class="hero about-kernel-hero" vid="33">
+            <div class="hero-content about-hero-content" vid="34">
+                <div class="greeting-label about-greeting-label" vid="35"><span class="i18n-en">INIT_PROFILE_SCAN</span><span class="i18n-ar" lang="ar">الملف الشخصي</span></div>
                 
                 <div vid="36">
-                    <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tight leading-[1.1] mb-6" vid="37">
-                        Waad Ibrahim<br vid="38">
+                    <h1 class="hero-title about-hero-title about-hero-title-en" vid="37">
+                        Waad<br vid="38">
                         <span class="text-cyan glow-text-cyan" vid="39">Alhwaimel</span>
                     </h1>
-                    
-                    <h2 class="font-mono text-lg md:text-xl text-amber flex items-center gap-3" vid="40">
+                    <h1 class="hero-title about-hero-title about-hero-title-ar" lang="ar">
+                        وعد إبراهيم<br>
+                        <span class="text-cyan glow-text-cyan">الهويمل</span>
+                    </h1>
+
+                    <div class="hero-subtitle about-hero-subtitle" vid="40">
                         <i class="ph-bold ph-terminal-window" vid="41"></i>
-                        Software Engineering Student <span class="text-slate-600" vid="42">·</span> AI Minor
-                    </h2>
+                        <span><span class="i18n-en">Software Engineering Student</span><span class="i18n-ar" lang="ar">طالبة هندسة برمجيات</span></span>
+                        <span class="about-subtitle-separator" vid="42">//</span>
+                        <span class="highlight"><span class="i18n-en">AI Minor</span><span class="i18n-ar" lang="ar">تخصص فرعي في الذكاء الاصطناعي</span></span>
+                    </div>
                 </div>
 
-                <div class="space-y-6 max-w-2xl" vid="43">
-                    <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light" vid="44">
-                        I'm a Software Engineering student at Prince Sultan University with a minor in Artificial Intelligence. I enjoy building systems, exploring AI applications, and documenting what I learn in both Arabic and English.
+                <div class="space-y-6 max-w-3xl" vid="43">
+                    <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light mt-8" vid="44">
+                        <span class="i18n-en">Software Engineering student at Prince Sultan University with a minor in Artificial Intelligence. I focus on developing software systems, exploring practical AI applications, and turning technical knowledge into useful, actionable content.</span>
+                        <span class="i18n-ar rtl-copy" lang="ar">طالبة هندسة برمجيات في جامعة الأمير سلطان، مع تخصص فرعي في الذكاء الاصطناعي. أركز على تطوير الأنظمة البرمجية، واستكشاف تطبيقات الذكاء الاصطناعي، وتحويل المعرفة التقنية إلى محتوى عملي يمكن الاستفادة منه.</span>
                     </p>
 
-                    <div class="glass-panel p-6 border-l-2 border-l-cyan rounded-r-xl bg-gradient-to-r from-cyan-dim to-transparent relative group" vid="45">
-                        <p class="text-base text-slate-300 leading-relaxed italic font-light" vid="46">
-                            "I build software systems, study artificial intelligence, and transform what I learn into practical knowledge that others can use. Waad Kernel is my digital space for documenting ideas, sharing technical knowledge, and showcasing my academic and personal growth."
-                        </p>
+                    <div class="about-statement-panel glass-panel p-6 relative group" vid="45">
+                        <div class="space-y-4 text-base text-slate-300 leading-relaxed italic font-light" vid="46">
+                            <p><span class="i18n-en">I build software systems, study artificial intelligence, and turn what I learn into practical knowledge others can benefit from.</span><span class="i18n-ar rtl-copy" lang="ar">أبني الأنظمة البرمجية، وأدرس الذكاء الاصطناعي، وأحوّل ما أتعلمه إلى معرفة عملية يمكن للآخرين الاستفادة منها.</span></p>
+                            <p><span class="i18n-en">Waad Kernel is my digital space for documenting projects, sharing technical knowledge, and presenting my academic and professional journey.</span><span class="i18n-ar rtl-copy" lang="ar">Waad Kernel هي مساحتي الرقمية لتوثيق المشاريع، ومشاركة المعرفة التقنية، واستعراض رحلتي الأكاديمية والمهنية.</span></p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="w-full lg:w-2/5 flex justify-center relative h-96 opacity-60 pointer-events-none hidden lg:flex" vid="47">
-                <div class="relative w-[400px] h-[400px] flex items-center justify-center" vid="48">
-                    <div class="absolute inset-0 border border-cyan/20 rounded-full border-dashed spin-slow" vid="49"></div>
-                    <div class="absolute inset-8 border border-white/5 rounded-full spin-slow-reverse" vid="50"></div>
-                    <div class="absolute inset-16 border border-cyan/10 rounded-full" vid="51"></div>
-                    <div class="absolute w-2 h-2 bg-amber rounded-full top-1/4 right-1/4 shadow-[0_0_10px_#ff9f00] animate-pulse" vid="52"></div>
-                    <i class="ph-duotone ph-fingerprint text-8xl text-cyan/30 drop-shadow-[0_0_15px_rgba(0,240,255,0.4)]" vid="53"></i>
-                </div>
+            <div class="robot-container about-radar-panel" vid="47">
+                <div class="robot-frame about-radar-frame" vid="48"></div>
+                <svg class="robot-svg about-radar-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" vid="49">
+                    <defs vid="50">
+                        <radialGradient id="aboutCoreGrad" cx="50%" cy="50%" r="50%" vid="51">
+                            <stop offset="0%" stop-color="#ffffff" vid="52"></stop>
+                            <stop offset="24%" stop-color="#00f0ff" vid="53"></stop>
+                            <stop offset="100%" stop-color="transparent" vid="54"></stop>
+                        </radialGradient>
+                    </defs>
+                    <circle cx="250" cy="250" r="190" fill="none" stroke="rgba(0, 240, 255, 0.1)" stroke-width="1" stroke-dasharray="5 5" vid="55"></circle>
+                    <line x1="250" y1="55" x2="250" y2="445" stroke="rgba(0, 240, 255, 0.1)" stroke-width="1" vid="56"></line>
+                    <line x1="55" y1="250" x2="445" y2="250" stroke="rgba(0, 240, 255, 0.1)" stroke-width="1" vid="57"></line>
+                    <g class="about-radar-outer" vid="58">
+                        <circle cx="250" cy="250" r="150" fill="none" stroke="#00f0ff" stroke-width="2" opacity="0.55" stroke-dasharray="90 18 24 18 34 12" vid="59"></circle>
+                        <circle cx="400" cy="250" r="4" fill="#00f0ff" filter="drop-shadow(0 0 5px #00f0ff)" vid="60"></circle>
+                    </g>
+                    <g class="about-radar-inner" vid="61">
+                        <circle cx="250" cy="250" r="104" fill="none" stroke="#ff9f00" stroke-width="1.5" opacity="0.85" stroke-dasharray="42 10 12 10" vid="62"></circle>
+                        <polygon points="250,136 256,154 244,154" fill="#ff9f00" vid="63"></polygon>
+                        <polygon points="250,364 256,346 244,346" fill="#ff9f00" vid="64"></polygon>
+                    </g>
+                    <circle cx="250" cy="250" r="66" fill="#0e121a" stroke="#00f0ff" stroke-width="3" filter="drop-shadow(0 0 10px rgba(0, 240, 255, 0.5))" vid="65"></circle>
+                    <circle cx="250" cy="250" r="42" fill="url(#aboutCoreGrad)" class="about-radar-core" vid="66"></circle>
+                    <path d="M213 306 L287 306 L312 354 L188 354 Z" fill="none" stroke="#00f0ff" stroke-width="2" opacity="0.45" vid="67"></path>
+                    <line x1="225" y1="320" x2="275" y2="320" stroke="#00f0ff" stroke-width="1" opacity="0.6" vid="68"></line>
+                    <line x1="210" y1="340" x2="290" y2="340" stroke="#00f0ff" stroke-width="1" opacity="0.5" vid="69"></line>
+                    <text x="250" y="236" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="18" font-weight="700" vid="70">WK</text>
+                </svg>
             </div>
         </section>
+
+        <div class="terminal-banner about-terminal-banner" vid="52">
+            <span class="about-terminal-text"><span class="i18n-en">Documenting projects, sharing technical knowledge, and building a practical bilingual learning interface.</span><span class="i18n-ar rtl-copy" lang="ar">توثيق المشاريع، مشاركة المعرفة التقنية، وبناء واجهة تعلم عملية باللغتين العربية والإنجليزية.</span></span>
+        </div>
 
         <section class="max-w-4xl" vid="54">
             <div class="section-heading" vid="55">
                 <i class="ph-fill ph-git-merge text-3xl text-cyan drop-shadow-[0_0_10px_rgba(0,240,255,0.5)]" vid="56"></i>
-                <h3 class="font-display text-3xl font-bold text-white tracking-wide uppercase" vid="57">My Journey</h3>
+                <h3 class="font-display text-3xl font-bold text-white tracking-wide uppercase" vid="57"><span class="i18n-en">My Journey</span><span class="i18n-ar" lang="ar">رحلتي</span></h3>
             </div>
 
-            <div class="relative pl-6 md:pl-10" vid="58">
+            <div class="relative pl-6 md:pl-10 about-timeline-shell" vid="58">
                 <div class="timeline-line left-6 md:left-10" vid="59"></div>
 
                 <div class="space-y-12" vid="60">
                     <div class="relative pl-10 md:pl-14 timeline-item group" vid="61">
                         <div class="absolute left-[-5px] top-4 w-3 h-3 rounded-full bg-base border-2 border-cyan timeline-dot z-10" vid="62"></div>
                         <div class="glass-panel p-6 rounded-xl group-hover:border-cyan/30 group-hover:bg-surfaceHover transition-all duration-300 cursor-default" vid="63">
-                            <p class="text-lg text-slate-200" vid="64">Started Software Engineering at Prince Sultan University</p>
+                            <p class="text-lg text-slate-200" vid="64"><span class="i18n-en">Started Software Engineering at Prince Sultan University.</span><span class="i18n-ar rtl-copy" lang="ar">بدأت دراسة هندسة البرمجيات في جامعة الأمير سلطان.</span></p>
                         </div>
                     </div>
 
                     <div class="relative pl-10 md:pl-14 timeline-item group" vid="65">
                         <div class="absolute left-[-5px] top-4 w-3 h-3 rounded-full bg-base border-2 border-cyan timeline-dot z-10" vid="66"></div>
                         <div class="glass-panel p-6 rounded-xl group-hover:border-cyan/30 group-hover:bg-surfaceHover transition-all duration-300 cursor-default" vid="67">
-                            <p class="text-lg text-slate-200" vid="68">Developed a strong interest in Artificial Intelligence</p>
+                            <p class="text-lg text-slate-200" vid="68"><span class="i18n-en">Developed a growing interest in Artificial Intelligence and its practical applications.</span><span class="i18n-ar rtl-copy" lang="ar">طوّرت اهتماماً متزايداً بمجالات الذكاء الاصطناعي وتطبيقاته العملية.</span></p>
                         </div>
                     </div>
 
                     <div class="relative pl-10 md:pl-14 timeline-item group" vid="69">
                         <div class="absolute left-[-5px] top-4 w-3 h-3 rounded-full bg-base border-2 border-cyan timeline-dot z-10" vid="70"></div>
                         <div class="glass-panel p-6 rounded-xl group-hover:border-cyan/30 group-hover:bg-surfaceHover transition-all duration-300 cursor-default" vid="71">
-                            <p class="text-lg text-slate-200" vid="72">Began building academic and technical projects</p>
+                            <p class="text-lg text-slate-200" vid="72"><span class="i18n-en">Worked on various academic and technical projects.</span><span class="i18n-ar rtl-copy" lang="ar">عملت على مشاريع أكاديمية وتقنية متنوعة.</span></p>
                         </div>
                     </div>
 
                     <div class="relative pl-10 md:pl-14 timeline-item group" vid="73">
                         <div class="absolute left-[-5px] top-4 w-3 h-3 rounded-full bg-base border-2 border-cyan timeline-dot z-10" vid="74"></div>
                         <div class="glass-panel p-6 rounded-xl group-hover:border-cyan/30 group-hover:bg-surfaceHover transition-all duration-300 cursor-default" vid="75">
-                            <p class="text-lg text-slate-200" vid="76">Started documenting technical knowledge systematically</p>
+                            <p class="text-lg text-slate-200" vid="76"><span class="i18n-en">Began documenting technical knowledge and sharing learning resources.</span><span class="i18n-ar rtl-copy" lang="ar">بدأت بتوثيق المعرفة التقنية ومشاركة ما أتعلمه بشكل منهجي.</span></p>
                         </div>
                     </div>
 
                     <div class="relative pl-10 md:pl-14 timeline-item group" vid="77">
-                        <div class="absolute left-[-7px] top-4 w-4 h-4 rounded-full bg-cyan border-2 border-cyan shadow-[0_0_15px_rgba(0,240,255,0.8)] z-10 group-hover:scale-125 transition-transform duration-300 flex items-center justify-center" vid="78">
+                        <div class="absolute left-[-7px] top-4 w-4 h-4 rounded-full bg-cyan border-2 border-cyan shadow-[0_0_15px_rgba(0,240,255,0.8)] z-10 group-hover:scale-125 transition-transform duration-300 flex items-center justify-center timeline-dot-final" vid="78">
                             <div class="w-1.5 h-1.5 bg-white rounded-full" vid="79"></div>
                         </div>
                         <div class="glass-panel p-6 rounded-xl border-cyan/40 bg-cyan/5 box-glow-cyan group-hover:bg-cyan/10 transition-all duration-300 cursor-default" vid="80">
-                            <h4 class="text-xl font-bold text-cyan glow-text-cyan flex items-center gap-2" vid="81">
-                                Created Waad Kernel
-                                <i class="ph-fill ph-sparkle text-amber" vid="82"></i>
+                            <h4 class="text-xl font-bold text-cyan glow-text-cyan flex items-center gap-2 about-timeline-final-title" vid="81">
+                                <span class="i18n-en">Created Waad Kernel as a platform for projects, learning, and knowledge sharing.</span>
+                                <span class="i18n-ar rtl-copy" lang="ar">أنشأت Waad Kernel كمنصة تجمع مشاريعي وخبراتي ومواردي التعليمية.</span>
                             </h4>
                         </div>
                     </div>
@@ -294,18 +992,19 @@
         <section vid="83">
             <div class="section-heading" vid="84">
                 <i class="ph-fill ph-crosshair text-3xl text-cyan drop-shadow-[0_0_10px_rgba(0,240,255,0.5)]" vid="85"></i>
-                <h3 class="font-display text-3xl font-bold text-white tracking-wide uppercase" vid="86">What I Focus On</h3>
+                <h3 class="font-display text-3xl font-bold text-white tracking-wide uppercase" vid="86"><span class="i18n-en">What I Focus On</span><span class="i18n-ar" lang="ar">مجالات تركيزي</span></h3>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" vid="87">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" vid="87">
                 <div class="glass-panel p-8 rounded-2xl flex flex-col group border-t-2 border-t-transparent hover:border-t-cyan transition-all duration-300 hover:-translate-y-1 overflow-hidden relative" vid="88">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-cyan/5 rounded-bl-full group-hover:bg-cyan/10 transition-colors pointer-events-none" vid="89"></div>
                     <div class="w-14 h-14 rounded-xl bg-cyan-dim border border-cyan/20 flex items-center justify-center text-cyan mb-6 group-hover:shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all" vid="90">
                         <i class="ph-duotone ph-brackets-curly text-3xl" vid="91"></i>
                     </div>
-                    <h4 class="font-display text-xl font-bold text-white mb-4" vid="92">Software Engineering</h4>
+                    <h4 class="font-display text-xl font-bold text-white mb-4" vid="92"><span class="i18n-en">Software Engineering</span><span class="i18n-ar rtl-copy" lang="ar">هندسة البرمجيات</span></h4>
                     <p class="text-slate-400 text-sm leading-relaxed flex-grow" vid="93">
-                        Focused on software design, system thinking, architecture, and building practical solutions.
+                        <span class="i18n-en">I focus on designing and building software systems, turning ideas into practical, scalable solutions. My interests include software architecture, requirements analysis, and solution design that balances quality, clarity, and usability.</span>
+                        <span class="i18n-ar rtl-copy" lang="ar">أركز على تصميم الأنظمة البرمجية وبنائها، وتحويل الأفكار إلى حلول عملية قابلة للتطوير. أهتم بالمعمارية البرمجية، وتحليل المتطلبات، وتصميم الحلول التي تجمع بين الجودة والوضوح وسهولة الاستخدام.</span>
                     </p>
                 </div>
 
@@ -314,36 +1013,91 @@
                     <div class="w-14 h-14 rounded-xl bg-amber-dim border border-amber/20 flex items-center justify-center text-amber mb-6 group-hover:shadow-[0_0_15px_rgba(255,159,0,0.4)] transition-all" vid="96">
                         <i class="ph-duotone ph-brain text-3xl" vid="97"></i>
                     </div>
-                    <h4 class="font-display text-xl font-bold text-white mb-4" vid="98">Artificial Intelligence</h4>
+                    <h4 class="font-display text-xl font-bold text-white mb-4" vid="98"><span class="i18n-en">Artificial Intelligence</span><span class="i18n-ar rtl-copy" lang="ar">الذكاء الاصطناعي</span></h4>
                     <p class="text-slate-400 text-sm leading-relaxed flex-grow" vid="99">
-                        Interested in machine learning, natural language processing, explainable AI, and real-world AI applications.
+                        <span class="i18n-en">I am interested in AI applications and data analysis, especially how data can be transformed into usable insights. I also focus on machine learning, natural language processing, explainable AI, and applying AI to real-world problems.</span>
+                        <span class="i18n-ar rtl-copy" lang="ar">أهتم بتطبيقات الذكاء الاصطناعي وتحليل البيانات، واستكشاف كيفية تحويل البيانات إلى رؤى قابلة للاستخدام. كما أركز على تعلم الآلة، ومعالجة اللغة الطبيعية، والذكاء الاصطناعي القابل للتفسير، وتطبيقاته في حل المشكلات الواقعية.</span>
                     </p>
                 </div>
+            </div>
+        </section>
 
-                <div class="glass-panel p-8 rounded-2xl flex flex-col group border-t-2 border-t-transparent hover:border-t-cyan transition-all duration-300 hover:-translate-y-1 overflow-hidden relative" vid="100">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-cyan/5 rounded-bl-full group-hover:bg-cyan/10 transition-colors pointer-events-none" vid="101"></div>
-                    <div class="w-14 h-14 rounded-xl bg-cyan-dim border border-cyan/20 flex items-center justify-center text-cyan mb-6 group-hover:shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all" vid="102">
-                        <i class="ph-duotone ph-database text-3xl" vid="103"></i>
+        <section vid="100">
+            <div class="section-heading" vid="101">
+                <i class="ph-fill ph-certificate text-3xl text-amber drop-shadow-[0_0_10px_rgba(255,159,0,0.5)]" vid="102"></i>
+                <h3 class="font-display text-3xl font-bold text-white tracking-wide uppercase" vid="103"><span class="i18n-en">Certifications</span><span class="i18n-ar rtl-copy" lang="ar">الشهادات</span></h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6" vid="104">
+                <a href="assets/certificates/introduction-to-artificial-intelligence.pdf" class="certification-card glass-panel p-6 rounded-2xl flex flex-col justify-between group border-t-2 border-t-transparent hover:border-t-amber transition-all duration-300 hover:-translate-y-1 overflow-hidden relative" target="_blank" rel="noopener" aria-label="Open Introduction to Artificial Intelligence certificate PDF" vid="105">
+                    <div class="absolute top-0 right-0 w-28 h-28 bg-amber/5 rounded-bl-full group-hover:bg-amber/10 transition-colors pointer-events-none" vid="106"></div>
+                    <div class="relative z-10 space-y-5" vid="107">
+                        <div class="w-12 h-12 rounded-xl bg-amber-dim border border-amber/20 flex items-center justify-center text-amber" vid="108">
+                            <i class="ph-duotone ph-trophy text-2xl" vid="109"></i>
+                        </div>
+                        <div vid="110">
+                            <h4 class="font-display text-xl font-bold text-white mb-2" vid="111"><span class="i18n-en">Introduction to Artificial Intelligence</span><span class="i18n-ar" lang="ar">مقدمة في الذكاء الاصطناعي</span></h4>
+                            <p class="font-mono text-xs uppercase tracking-widest text-slate-400" vid="112"><span class="i18n-en">Placeholder Provider</span><span class="i18n-ar" lang="ar">جهة الإصدار</span> &bull; 2026</p>
+                        </div>
                     </div>
-                    <h4 class="font-display text-xl font-bold text-white mb-4" vid="104">Databases</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed flex-grow" vid="105">
-                        Interested in database design, SQL development, and organizing information effectively.
-                    </p>
-                </div>
+                    <i class="certificate-arrow ph-bold ph-arrow-up-right text-xl text-slate-500 transition-all duration-300 self-end relative z-10" vid="113"></i>
+                </a>
+
+                <a href="assets/certificates/machine-learning-fundamentals.pdf" class="certification-card glass-panel p-6 rounded-2xl flex flex-col justify-between group border-t-2 border-t-transparent hover:border-t-cyan transition-all duration-300 hover:-translate-y-1 overflow-hidden relative" target="_blank" rel="noopener" aria-label="Open Machine Learning Fundamentals certificate PDF" vid="114">
+                    <div class="absolute top-0 right-0 w-28 h-28 bg-cyan/5 rounded-bl-full group-hover:bg-cyan/10 transition-colors pointer-events-none" vid="115"></div>
+                    <div class="relative z-10 space-y-5" vid="116">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-dim border border-cyan/20 flex items-center justify-center text-cyan" vid="117">
+                            <i class="ph-duotone ph-brain text-2xl" vid="118"></i>
+                        </div>
+                        <div vid="119">
+                            <h4 class="font-display text-xl font-bold text-white mb-2" vid="120"><span class="i18n-en">Machine Learning Fundamentals</span><span class="i18n-ar" lang="ar">أساسيات تعلم الآلة</span></h4>
+                            <p class="font-mono text-xs uppercase tracking-widest text-slate-400" vid="121"><span class="i18n-en">Placeholder Provider</span><span class="i18n-ar" lang="ar">جهة الإصدار</span> &bull; 2026</p>
+                        </div>
+                    </div>
+                    <i class="certificate-arrow ph-bold ph-arrow-up-right text-xl text-slate-500 transition-all duration-300 self-end relative z-10" vid="122"></i>
+                </a>
+
+                <a href="assets/certificates/data-analytics-essentials.pdf" class="certification-card glass-panel p-6 rounded-2xl flex flex-col justify-between group border-t-2 border-t-transparent hover:border-t-cyan transition-all duration-300 hover:-translate-y-1 overflow-hidden relative" target="_blank" rel="noopener" aria-label="Open Data Analytics Essentials certificate PDF" vid="123">
+                    <div class="absolute top-0 right-0 w-28 h-28 bg-cyan/5 rounded-bl-full group-hover:bg-cyan/10 transition-colors pointer-events-none" vid="124"></div>
+                    <div class="relative z-10 space-y-5" vid="125">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-dim border border-cyan/20 flex items-center justify-center text-cyan" vid="126">
+                            <i class="ph-duotone ph-chart-line-up text-2xl" vid="127"></i>
+                        </div>
+                        <div vid="128">
+                            <h4 class="font-display text-xl font-bold text-white mb-2" vid="129"><span class="i18n-en">Data Analytics Essentials</span><span class="i18n-ar" lang="ar">أساسيات تحليل البيانات</span></h4>
+                            <p class="font-mono text-xs uppercase tracking-widest text-slate-400" vid="130"><span class="i18n-en">Placeholder Provider</span><span class="i18n-ar" lang="ar">جهة الإصدار</span> &bull; 2026</p>
+                        </div>
+                    </div>
+                    <i class="certificate-arrow ph-bold ph-arrow-up-right text-xl text-slate-500 transition-all duration-300 self-end relative z-10" vid="131"></i>
+                </a>
+
+                <a href="assets/certificates/prompt-engineering.pdf" class="certification-card glass-panel p-6 rounded-2xl flex flex-col justify-between group border-t-2 border-t-transparent hover:border-t-amber transition-all duration-300 hover:-translate-y-1 overflow-hidden relative" target="_blank" rel="noopener" aria-label="Open Prompt Engineering certificate PDF" vid="132">
+                    <div class="absolute top-0 right-0 w-28 h-28 bg-amber/5 rounded-bl-full group-hover:bg-amber/10 transition-colors pointer-events-none" vid="133"></div>
+                    <div class="relative z-10 space-y-5" vid="134">
+                        <div class="w-12 h-12 rounded-xl bg-amber-dim border border-amber/20 flex items-center justify-center text-amber" vid="135">
+                            <i class="ph-duotone ph-terminal-window text-2xl" vid="136"></i>
+                        </div>
+                        <div vid="137">
+                            <h4 class="font-display text-xl font-bold text-white mb-2" vid="138"><span class="i18n-en">Prompt Engineering</span><span class="i18n-ar" lang="ar">هندسة الأوامر</span></h4>
+                            <p class="font-mono text-xs uppercase tracking-widest text-slate-400" vid="139"><span class="i18n-en">Placeholder Provider</span><span class="i18n-ar" lang="ar">جهة الإصدار</span> &bull; 2026</p>
+                        </div>
+                    </div>
+                    <i class="certificate-arrow ph-bold ph-arrow-up-right text-xl text-slate-500 transition-all duration-300 self-end relative z-10" vid="140"></i>
+                </a>
             </div>
         </section>
 
         <section class="max-w-4xl" vid="106">
             <div class="section-heading" vid="107">
                 <i class="ph-fill ph-translate text-3xl text-cyan drop-shadow-[0_0_10px_rgba(0,240,255,0.5)]" vid="108"></i>
-                <h3 class="font-display text-3xl font-bold text-white tracking-wide uppercase" vid="109">Languages</h3>
+                <h3 class="font-display text-3xl font-bold text-white tracking-wide uppercase" vid="109"><span class="i18n-en">Languages</span><span class="i18n-ar" lang="ar">اللغات</span></h3>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 glass-panel p-8 md:p-10 rounded-2xl" vid="110">
                 <div vid="111">
                     <div class="flex justify-between items-end mb-4" vid="112">
-                        <h4 class="text-2xl font-bold text-white" vid="113">Arabic</h4>
-                        <span class="font-mono text-xs uppercase tracking-widest text-cyan bg-cyan-dim px-2 py-1 rounded border border-cyan/20" vid="114">Native</span>
+                        <h4 class="text-2xl font-bold text-white" vid="113"><span class="i18n-en">Arabic</span><span class="i18n-ar" lang="ar">العربية</span></h4>
+                        <span class="font-mono text-xs uppercase tracking-widest text-cyan bg-cyan-dim px-2 py-1 rounded border border-cyan/20" vid="114"><span class="i18n-en">Native</span><span class="i18n-ar" lang="ar">اللغة الأم</span></span>
                     </div>
                     <div class="flex gap-1.5 h-2 w-full" vid="115">
                         <div class="h-full flex-1 bg-cyan shadow-[0_0_10px_rgba(0,240,255,0.6)] rounded-sm" vid="116"></div>
@@ -356,8 +1110,8 @@
 
                 <div vid="121">
                     <div class="flex justify-between items-end mb-4" vid="122">
-                        <h4 class="text-2xl font-bold text-white" vid="123">English</h4>
-                        <span class="font-mono text-xs uppercase tracking-widest text-amber bg-amber-dim px-2 py-1 rounded border border-amber/20" vid="124">Professional</span>
+                        <h4 class="text-2xl font-bold text-white" vid="123"><span class="i18n-en">English</span><span class="i18n-ar" lang="ar">الإنجليزية</span></h4>
+                        <span class="font-mono text-xs uppercase tracking-widest text-amber bg-amber-dim px-2 py-1 rounded border border-amber/20" vid="124"><span class="i18n-en">Professional</span><span class="i18n-ar" lang="ar">مستوى احترافي</span></span>
                     </div>
                     <div class="flex gap-1.5 h-2 w-full" vid="125">
                         <div class="h-full flex-1 bg-amber shadow-[0_0_10px_rgba(255,159,0,0.6)] rounded-sm" vid="126"></div>
@@ -382,101 +1136,61 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10" vid="137">
                     <div class="space-y-6" vid="138">
                         <div class="inline-flex items-center gap-2 font-mono text-amber text-xs uppercase tracking-widest" vid="139">
-                            <i class="ph-fill ph-target" vid="140"></i> Core Objective
+                            <i class="ph-fill ph-target" vid="140"></i> <span class="i18n-en">Core Objective</span><span class="i18n-ar" lang="ar">الهدف الأساسي</span>
                         </div>
                         <h2 class="font-display text-4xl md:text-5xl font-bold text-white leading-tight glow-text-amber" vid="141">
-                            Why Waad Kernel Exists
+                            <span class="i18n-en">Why Waad Kernel Exists</span><span class="i18n-ar" lang="ar">رسالة Waad Kernel</span>
                         </h2>
-                        <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light" vid="142">
-                            Waad Kernel exists because knowledge becomes more valuable when it is organized and shared. Through projects, coursework, and independent learning, I aim to transform what I learn into practical knowledge that other students can benefit from, especially within the Arabic technical community.
-                        </p>
+                        <div class="space-y-5 text-lg md:text-xl text-slate-300 leading-relaxed font-light" vid="142">
+                            <p><span class="i18n-en">Because knowledge becomes more valuable when it is organized and shared.</span><span class="i18n-ar rtl-copy" lang="ar">لأن المعرفة تصبح أكثر قيمة عندما تُنظَّم وتُشارك.</span></p>
+                            <p><span class="i18n-en">Through Waad Kernel, I document my projects, learning experiences, and the technical concepts I gain, with the goal of creating practical content that helps students and technology learners grow.</span><span class="i18n-ar rtl-copy" lang="ar">من خلال Waad Kernel أوثق مشاريعي وتجارب التعلم والمفاهيم التقنية التي أكتسبها، بهدف إنشاء محتوى عملي يساعد الطلاب والمهتمين بالتقنية على التعلم والتطور.</span></p>
+                        </div>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" vid="143">
-                        <div class="glass-panel p-5 rounded-xl border-white/5 hover:border-amber/40 transition-colors flex items-start gap-3 group" vid="144">
-                            <div class="mt-0.5 text-amber group-hover:drop-shadow-[0_0_8px_rgba(255,159,0,0.6)] transition-all" vid="145">
-                                <i class="ph-fill ph-check-circle text-xl" vid="146"></i>
-                            </div>
-                            <span class="text-slate-200 font-medium text-lg" vid="147">Share knowledge clearly</span>
-                        </div>
-                        
-                        <div class="glass-panel p-5 rounded-xl border-white/5 hover:border-amber/40 transition-colors flex items-start gap-3 group" vid="148">
-                            <div class="mt-0.5 text-amber group-hover:drop-shadow-[0_0_8px_rgba(255,159,0,0.6)] transition-all" vid="149">
-                                <i class="ph-fill ph-check-circle text-xl" vid="150"></i>
-                            </div>
-                            <span class="text-slate-200 font-medium text-lg" vid="151">Document learning deeply</span>
-                        </div>
-                        
-                        <div class="glass-panel p-5 rounded-xl border-white/5 hover:border-amber/40 transition-colors flex items-start gap-3 group" vid="152">
-                            <div class="mt-0.5 text-amber group-hover:drop-shadow-[0_0_8px_rgba(255,159,0,0.6)] transition-all" vid="153">
-                                <i class="ph-fill ph-check-circle text-xl" vid="154"></i>
-                            </div>
-                            <span class="text-slate-200 font-medium text-lg" vid="155">Build useful technical resources</span>
-                        </div>
-                        
-                        <div class="glass-panel p-5 rounded-xl border-white/5 hover:border-amber/40 transition-colors flex items-start gap-3 group" vid="156">
-                            <div class="mt-0.5 text-amber group-hover:drop-shadow-[0_0_8px_rgba(255,159,0,0.6)] transition-all" vid="157">
-                                <i class="ph-fill ph-check-circle text-xl" vid="158"></i>
-                            </div>
-                            <span class="text-slate-200 font-medium text-lg" vid="159">Contribute to Arabic technical content</span>
-                        </div>
+                    <div class="glass-panel p-8 rounded-2xl border-amber/20 relative overflow-hidden" vid="143">
+                        <div class="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-amber/5 blur-3xl pointer-events-none" vid="144"></div>
+                        <i class="ph-duotone ph-lightbulb-filament text-7xl text-amber/50 relative z-10" vid="145"></i>
+                        <p class="mt-6 text-slate-300 leading-relaxed relative z-10" vid="146">
+                            <span class="i18n-en">An organized space for projects, notes, tools, and learning resources that grow with the academic and professional journey.</span>
+                            <span class="i18n-ar rtl-copy" lang="ar">مساحة منظمة للمشاريع، والملاحظات، والأدوات، والموارد التعليمية التي تنمو مع الرحلة الأكاديمية والمهنية.</span>
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-white/5 pt-16" vid="160">
-            <section class="glass-panel p-10 rounded-3xl flex flex-col justify-between border-l-4 border-l-cyan hover:border-white/10 transition-colors group relative overflow-hidden" vid="161">
+        <div class="border-t border-white/5 pt-16" vid="160">
+            <section class="glass-panel p-10 md:p-14 rounded-3xl min-h-[280px] flex flex-col md:flex-row md:items-end md:justify-between gap-10 border-l-4 border-l-cyan hover:border-white/10 transition-colors group relative overflow-hidden" vid="161">
                 <div class="absolute -right-10 -bottom-10 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity" vid="162">
                     <i class="ph-fill ph-file-text text-[200px] text-cyan" vid="163"></i>
                 </div>
-                <div class="relative z-10 mb-10" vid="164">
-                    <h3 class="font-display text-3xl font-bold text-white mb-2 flex items-center gap-3" vid="165">
-                        Resume
+                <div class="relative z-10 max-w-2xl" vid="164">
+                    <h3 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 flex items-center gap-3" vid="165">
+                        <span class="i18n-en">Resume</span><span class="i18n-ar" lang="ar">السيرة الذاتية</span>
                     </h3>
-                    <p class="text-slate-400 text-lg" vid="166">Available for viewing and download.</p>
+                    <p class="text-slate-400 text-lg md:text-xl leading-relaxed" vid="166"><span class="i18n-en">Available for viewing and download.</span><span class="i18n-ar" lang="ar">متاحة للعرض والتنزيل.</span></p>
                 </div>
                 
-                <div class="flex flex-col sm:flex-row gap-4 relative z-10" vid="167">
+                <div class="flex flex-col sm:flex-row gap-4 relative z-10 w-full md:w-auto md:min-w-[420px]" vid="167">
                     <button class="flex-1 py-4 px-6 rounded-xl bg-cyan-dim border border-cyan/40 text-cyan font-mono font-medium hover:bg-cyan hover:text-base hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all duration-300 flex items-center justify-center gap-2" vid="168">
                         <i class="ph-bold ph-eye text-lg" vid="169"></i>
-                        View Resume
+                        <span class="i18n-en">View Resume</span><span class="i18n-ar" lang="ar">عرض السيرة الذاتية</span>
                     </button>
                     <button class="flex-1 py-4 px-6 rounded-xl bg-white/5 border border-white/10 text-white font-mono font-medium hover:bg-white/10 hover:border-white/30 transition-all duration-300 flex items-center justify-center gap-2" vid="170">
                         <i class="ph-bold ph-download-simple text-lg" vid="171"></i>
-                        Download CV
+                        <span class="i18n-en">Download CV</span><span class="i18n-ar" lang="ar">تنزيل السيرة الذاتية</span>
                     </button>
-                </div>
-            </section>
-
-            <section class="glass-panel p-10 rounded-3xl flex flex-col justify-between hover:border-white/10 transition-colors relative overflow-hidden group" vid="172">
-                <div class="absolute -right-10 -bottom-10 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity" vid="173">
-                    <i class="ph-fill ph-users-three text-[200px] text-cyan" vid="174"></i>
-                </div>
-                <div class="relative z-10 mb-10" vid="175">
-                    <h3 class="font-display text-3xl font-bold text-white mb-2 flex items-center gap-3" vid="176">
-                        Let's Connect
-                    </h3>
-                    <p class="text-slate-400 text-lg" vid="177">Open to discussions, questions, and collaborations.</p>
-                </div>
-
-                <div class="flex gap-4 relative z-10" vid="178">
-                    <a href="#" class="w-16 h-16 rounded-xl bg-base/50 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:border-white/40 hover:bg-white/5 hover:-translate-y-1 transition-all duration-300 group/icon" vid="179">
-                        <i class="ph-fill ph-github-logo text-3xl group-hover/icon:scale-110 transition-transform" vid="180"></i>
-                    </a>
-                    <a href="#" class="w-16 h-16 rounded-xl bg-base/50 border border-white/10 flex items-center justify-center text-slate-300 hover:text-[#0a66c2] hover:border-[#0a66c2]/50 hover:bg-[#0a66c2]/10 hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(10,102,194,0.3)] transition-all duration-300 group/icon" vid="181">
-                        <i class="ph-fill ph-linkedin-logo text-3xl group-hover/icon:scale-110 transition-transform" vid="182"></i>
-                    </a>
-                    <a href="#" class="w-16 h-16 rounded-xl bg-base/50 border border-white/10 flex items-center justify-center text-slate-300 hover:text-cyan hover:border-cyan/50 hover:bg-cyan-dim hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(0,240,255,0.3)] transition-all duration-300 group/icon" vid="183">
-                        <i class="ph-fill ph-envelope-simple text-3xl group-hover/icon:scale-110 transition-transform" vid="184"></i>
-                    </a>
                 </div>
             </section>
         </div>
 
-    </main>
+        </main>
+
+    </div>
 
     <site-footer></site-footer>
 
 
 </body></html>
+
+

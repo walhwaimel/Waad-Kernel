@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" class="scroll-smooth" vid="0"><head vid="1">
     <meta charset="UTF-8" vid="2">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3">
@@ -6,12 +6,18 @@
     <meta name="description" content="Explore Waad Alhwaimel's software engineering, artificial intelligence, database, research, and image compression projects.">
     <meta name="author" content="Waad Ibrahim Alhwaimel">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://waad-kernel.com/software-engineering-projects.html">
+    <link rel="icon" type="image/png" href="assets/images/waad-kernel-favicon.png">
+    <link rel="apple-touch-icon" href="assets/images/waad-kernel-favicon.png">
+    <meta property="og:title" content="Software Engineering & AI Projects | Waad Kernel">
+    <meta property="og:description" content="Explore Waad Alhwaimel's software engineering, AI, database, research, and technical projects.">
+    <meta property="og:image" content="assets/images/waad-kernel-banner.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="assets/images/waad-kernel-banner.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com" vid="5">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" vid="6">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" vid="7">
-    <link rel="stylesheet" href="assets/css/site-features.css">
     
     <script src="https://unpkg.com/@phosphor-icons/web" vid="8"></script>
     <script src="https://cdn.tailwindcss.com/3.4.17" vid="9"></script>
@@ -155,46 +161,57 @@
     </style>
 </head>
 <body class="relative min-h-screen antialiased flex flex-col font-sans w-full" data-page="projects" vid="12">
+    <div class="ambient-light" vid="13"></div>
+    <div class="scanline" vid="14"></div>
 
-    <div class="bg-grid" vid="13"></div>
-    <div class="ambient-blob-cyan" vid="14"></div>
-    <div class="ambient-blob-amber" vid="15"></div>
-
-    <site-header>
-        <nav class="fixed top-0 w-full z-50 glass-panel border-t-0 border-l-0 border-r-0 border-b border-white/5 py-4 rounded-none" aria-label="Primary navigation">
-            <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-                <a href="index.html" class="flex items-center gap-3 group" aria-label="Waad Kernel home">
-                    <span class="w-8 h-8 rounded bg-cyan-dim border border-cyan/30 flex items-center justify-center text-cyan"><i class="ph-fill ph-hexagon"></i></span>
-                    <span class="font-display font-bold text-lg tracking-wider text-white">WAAD<span class="text-cyan font-mono font-normal opacity-80">KERNEL</span></span>
-                </a>
-                <div class="flex items-center gap-4 md:gap-7 font-mono text-xs md:text-sm uppercase tracking-widest text-slate-400 overflow-x-auto">
-                    <a href="index.html" class="hover:text-white transition-colors">Home</a>
-                    <a href="about-waad-alhwaimel.html" class="hover:text-white transition-colors">About</a>
-                    <a href="software-engineering-projects.html" class="text-cyan font-medium" aria-current="page">Projects</a>
-                    <a href="software-engineering-knowledge-base.html" class="hover:text-white transition-colors">Knowledge</a>
-                    <a href="student-project-planning-tools.html" class="hover:text-white transition-colors">Tools</a>
-                </div>
+    <div class="system-container page-system-container" vid="31">
+        <aside class="side-telemetry" aria-hidden="true">
+            <div class="data-block">
+                <span><span class="i18n-en">SOFTWARE_ENG</span><span class="i18n-ar" lang="ar">هندسة البرمجيات</span></span>
+                <div class="data-bar"><span class="data-bar-fill" style="width: 86%;"></span></div>
             </div>
-        </nav>
-    </site-header>
+            <div class="data-block">
+                <span><span class="i18n-en">AI_MINOR</span><span class="i18n-ar" lang="ar">تخصص فرعي في الذكاء الاصطناعي</span></span>
+                <div class="data-bar"><span class="data-bar-fill" style="width: 74%; animation-delay: 1s;"></span></div>
+            </div>
+            <div class="data-block">
+                <span><span class="i18n-en">BILINGUAL</span><span class="i18n-ar" lang="ar">ثنائية اللغة</span></span>
+                <div class="data-bar"><span class="data-bar-fill" style="width: 92%; animation-delay: 2s; background: #ff0055; box-shadow: 0 0 10px rgba(255, 0, 85, 0.6);"></span></div>
+            </div>
 
-    <main class="flex-grow w-full max-w-7xl mx-auto px-6 md:px-12 pt-40 pb-24 relative z-10 flex flex-col gap-24" vid="31">
+            <div class="vertical-text">WAAD_KERNEL_OS_v2.4</div>
+        </aside>
+
+        <main class="main-interface page-main-interface" vid="32">
+            <site-header></site-header>
 
         
-        <header class="max-w-3xl" vid="32">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded border border-cyan/20 bg-cyan-dim font-mono text-xs text-cyan uppercase tracking-widest mb-8" vid="33">
+        <header class="hero page-hero" vid="32">
+                <div class="page-hero-content">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded border border-cyan/20 bg-cyan-dim font-mono text-xs text-cyan uppercase tracking-widest mb-8" vid="33">
                 <span class="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse shadow-[0_0_8px_#00f0ff]" vid="34"></span>
                 Project Archive
             </div>
             
-            <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tight leading-[1.1] mb-6 glow-text-cyan" vid="35">
+            <h1 class="page-hero-title font-display glow-text-cyan" vid="35">
                 Projects
             </h1>
             
-            <p class="text-xl text-slate-300 leading-relaxed font-light" vid="36">
+            <p class="page-hero-subtitle text-xl text-slate-300 leading-relaxed font-light" vid="36">
                 A collection of academic, technical, and research projects built throughout my Software Engineering and Artificial Intelligence journey.
             </p>
-        </header>
+                        </div>
+                <div class="robot-container page-visual" aria-hidden="true">
+                    <div class="robot-frame page-visual-frame"></div>
+                    <div class="page-visual-core">
+                        <div class="page-visual-node">PRJ</div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="terminal-banner">
+                <span>PROJECT_ARCHIVE // Academic builds, research systems, and implementation notes loaded into Waad Kernel.</span>
+            </div>
 
         
         <div class="flex flex-col gap-16 md:gap-24" vid="37">
@@ -558,15 +575,17 @@
             <div class="relative z-10" vid="246">
                 <i class="ph-duotone ph-rocket-launch text-4xl text-cyan mb-6 drop-shadow-[0_0_15px_rgba(0,240,255,0.4)]" vid="247"></i>
                 <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-6 glow-text-cyan tracking-wide" vid="248">Building Through Learning</h2>
-                <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light max-w-3xl mx-auto" vid="249">
+                <p class="text-lg md:page-hero-subtitle text-xl text-slate-300 leading-relaxed font-light max-w-3xl mx-auto" vid="249">
                     Every project in Waad Kernel represents a stage in my learning journey. Together they reflect my growth across software engineering, artificial intelligence, databases, and technical problem solving.
                 </p>
             </div>
         </section>
-
-    </main>
+        </main>
+    </div>
 
     <site-footer></site-footer>
 
 
 </body></html>
+
+

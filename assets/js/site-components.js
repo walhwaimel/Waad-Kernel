@@ -1,419 +1,1163 @@
-const pages = [
-    { id: 'home', label: 'Home', ar: 'الرئيسية', href: 'index.html', description: 'Waad Kernel portfolio home' },
-    { id: 'about', label: 'About', ar: 'نبذة', href: 'about-waad-alhwaimel.html', description: 'About Waad Alhwaimel, her journey, focus, and resume' },
-    { id: 'projects', label: 'Projects', ar: 'المشاريع', href: 'software-engineering-projects.html', description: 'Software engineering, AI, database, and research projects' },
-    { id: 'knowledge', label: 'Knowledge', ar: 'المعرفة', href: 'software-engineering-knowledge-base.html', description: 'Software engineering and AI guides, tips, and resources' },
-    { id: 'tools', label: 'Tools', ar: 'الأدوات', href: 'student-project-planning-tools.html', description: 'Student project planning, UML, SRS, and database tools' }
+﻿const pages = [
+    { id: 'home', label: 'Home', labelAr: 'الرئيسية', href: 'index.html' },
+    { id: 'about', label: 'About', labelAr: 'نبذة', href: 'about-waad-alhwaimel.html' },
+    { id: 'projects', label: 'Projects', labelAr: 'المشاريع', href: 'software-engineering-projects.html' },
+    { id: 'knowledge', label: 'Knowledge', labelAr: 'المعرفة', href: 'software-engineering-knowledge-base.html' },
+    { id: 'tools', label: 'Tools', labelAr: 'الأدوات', href: 'student-project-planning-tools.html' }
 ];
 
-const searchItems = [
-    ...pages,
-    { label: 'My Destination', ar: 'وجهتي', href: 'software-engineering-projects.html', description: 'Accessibility platform, maps, services, and events' },
-    { label: 'Arabic Sentiment Analysis', ar: 'تحليل المشاعر العربية', href: 'software-engineering-projects.html', description: 'Arabic NLP, Explainable AI, research, and bias evaluation' },
-    { label: 'MySchool Database', ar: 'قاعدة بيانات مدرستي', href: 'software-engineering-projects.html', description: 'SQL, relational schema, students, teachers, and courses' },
-    { label: 'SVD Image Compression', ar: 'ضغط الصور باستخدام SVD', href: 'software-engineering-projects.html', description: 'Linear algebra, MATLAB, matrices, and image processing' },
-    { label: 'How to Draw UML Diagrams', ar: 'كيف ترسم مخططات UML', href: 'software-engineering-knowledge-base.html', description: 'UML architecture and software diagrams guide' },
-    { label: 'Design a Database from Scratch', ar: 'صمّم قاعدة بيانات من الصفر', href: 'software-engineering-knowledge-base.html', description: 'Database schema, normalization, relationships, and SQL guide' },
-    { label: 'Understanding Design Patterns', ar: 'فهم أنماط التصميم', href: 'software-engineering-knowledge-base.html', description: 'Structural, creational, and behavioral software patterns' },
-    { label: 'AI Concepts Explained Simply', ar: 'مفاهيم الذكاء الاصطناعي ببساطة', href: 'software-engineering-knowledge-base.html', description: 'Beginner artificial intelligence and machine learning concepts' },
-    { label: 'UML Assistant', ar: 'مساعد UML', href: 'student-project-planning-tools.html', description: 'Use cases, classes, sequence, and activity diagrams' },
-    { label: 'SRS Builder', ar: 'منشئ SRS', href: 'student-project-planning-tools.html', description: 'Software requirements specification planning' },
-    { label: 'Database Planner', ar: 'مخطط قاعدة البيانات', href: 'student-project-planning-tools.html', description: 'Entities, relationships, tables, keys, and SQL planning' },
-    { label: 'Project Planner', ar: 'مخطط المشروع', href: 'student-project-planning-tools.html', description: 'Milestones, tasks, roadmap, and deliverables' },
-    { label: 'Presentation Planner', ar: 'مخطط العرض', href: 'student-project-planning-tools.html', description: 'Slides, demo flow, speaking points, and questions' }
-    ,{ label: 'Copyright & Usage Policy', ar: 'سياسة حقوق النشر والاستخدام', href: 'copyright-and-usage-policy.html', description: 'Copyright, permitted use, prohibited use, licensing, and permissions' }
-    ,{ label: 'Academic Disclaimer', ar: 'إخلاء المسؤولية الأكاديمية', href: 'academic-disclaimer.html', description: 'Educational purpose, academic affiliation, intellectual property, and liability' }
-];
-
-const arabicTitles = {
-    home: 'Waad Kernel | ملف وعد الهويميل في هندسة البرمجيات',
-    about: 'عن وعد الهويميل | هندسة البرمجيات والذكاء الاصطناعي',
-    projects: 'مشاريع هندسة البرمجيات والذكاء الاصطناعي | Waad Kernel',
-    knowledge: 'قاعدة معرفة هندسة البرمجيات | Waad Kernel',
-    tools: 'أدوات تخطيط مشاريع الطلاب | Waad Kernel'
-    ,copyright: 'سياسة حقوق النشر والاستخدام | Waad Kernel'
-    ,academic: 'إخلاء المسؤولية الأكاديمية | Waad Kernel'
-};
-
-const ar = {
-    'Home': 'الرئيسية', 'About': 'نبذة', 'Projects': 'المشاريع', 'Knowledge': 'المعرفة', 'Tools': 'الأدوات',
-    'Search': 'بحث', 'Arabic': 'العربية', 'English': 'English', 'Dark Mode': 'الوضع الداكن', 'Light Mode': 'الوضع الفاتح',
-    'Search Waad Kernel': 'ابحثي في Waad Kernel', 'Type to search pages, projects, guides, and tools...': 'اكتبي للبحث في الصفحات والمشاريع والأدلة والأدوات...',
-    'No results found.': 'ما لقينا نتائج.', 'Close': 'إغلاق',
-    '10 min': '١٠ دقائق', '12 min': '١٢ دقيقة', '14 min': '١٤ دقيقة', '15 min': '١٥ دقيقة', '18 min': '١٨ دقيقة', '20 min': '٢٠ دقيقة',
-    'System Online': 'النظام شغّال', 'Building practical knowledge': 'نبني معرفة عملية',
-    'Explore': 'استكشف', 'Resources': 'المصادر', 'Legal': 'السياسات', 'Contact': 'التواصل',
-    'Software engineering, artificial intelligence, and practical technical knowledge documented with clarity.': 'هندسة برمجيات وذكاء اصطناعي ومعرفة تقنية عملية موثقة بوضوح.',
-    'Copyright & Usage Policy': 'سياسة حقوق النشر والاستخدام', 'Academic Disclaimer': 'إخلاء المسؤولية الأكاديمية',
-    'All rights reserved.': 'جميع الحقوق محفوظة.', 'Designed and documented by Waad Ibrahim Alhwaimel.': 'تصميم وتوثيق وعد إبراهيم الهويميل.',
-    'Email Waad': 'مراسلة وعد', 'Back to Home': 'العودة للرئيسية',
-    'GitHub': 'GitHub',
-    'LinkedIn': 'LinkedIn',
-    'Legal / Usage': 'قانوني / استخدام', 'Academic / Educational': 'أكاديمي / تعليمي',
-    '© 2026 Waad Ibrahim Alhwaimel. All rights reserved.': '© 2026 وعد إبراهيم الهويميل. جميع الحقوق محفوظة.',
-    'All content published under this domain and its subdomains is protected by international copyright laws. This includes software projects, source code, documentation, designs, research, and written content.': 'كل المحتوى المنشور تحت هذا النطاق ونطاقاته الفرعية محمي بأنظمة حقوق النشر الدولية، ويشمل المشاريع البرمجية، والكود المصدري، والتوثيق، والتصاميم، والأبحاث، والمحتوى المكتوب.',
-    'Permitted & Prohibited Use': 'الاستخدام المسموح والممنوع', 'You May': 'مسموح لك', 'You May Not': 'غير مسموح لك',
-    'View and reference content for personal, educational, and non-commercial purposes': 'عرض المحتوى والرجوع له لأغراض شخصية وتعليمية وغير تجارية',
-    'Quote small portions with proper attribution': 'اقتباس أجزاء بسيطة مع ذكر المصدر بشكل صحيح',
-    'Reproduce or redistribute full projects': 'نسخ المشاريع كاملة أو إعادة توزيعها',
-    'Use content commercially without written permission': 'استخدام المحتوى تجاريًا بدون إذن مكتوب',
-    'Claim authorship of this work': 'نسب هذا العمل لنفسك',
-    'Licensing': 'التراخيص',
-    'Specific projects may include their own separate licenses. In the event of any conflict between a project-level license and this policy, the project-level license takes precedence.': 'بعض المشاريع ممكن يكون لها تراخيص مستقلة. إذا صار تعارض بين ترخيص مشروع وهذه السياسة، تكون الأولوية لترخيص المشروع.',
-    'For permissions or licensing inquiries, please reach out directly.': 'لطلب الإذن أو الاستفسار عن التراخيص، تواصلوا معي مباشرة.',
-    'Last updated: 2026': 'آخر تحديث: 2026',
-    'Waad Kernel is a personal academic documentation and portfolio platform. Materials published here are created as part of my learning process, knowledge organization, and project development, and are intended for educational and reference purposes only.': 'Waad Kernel منصة شخصية للتوثيق الأكاديمي وعرض الأعمال. المحتوى المنشور هنا ناتج عن رحلة تعلمي وتنظيم المعرفة وتطوير المشاريع، ومخصص للأغراض التعليمية والمرجعية فقط.',
-    'Purpose of This Website': 'هدف الموقع',
-    'The academic content on this website, including notes, summaries, diagrams, guides, project documentation, and reflections, represents my personal understanding and interpretation of the subjects discussed. Content may simplify, reorganize, or rephrase official material for clarity and should not replace lectures, textbooks, professional advice, or official course documentation.': 'المحتوى الأكاديمي في هذا الموقع، بما فيه الملاحظات والملخصات والمخططات والأدلة وتوثيق المشاريع والتأملات، يمثل فهمي وتفسيري الشخصي للمواضيع. ممكن يكون المحتوى مبسط أو معاد ترتيبه أو صياغته للتوضيح، وما يعتبر بديلًا للمحاضرات أو الكتب أو المشورة المهنية أو التوثيق الرسمي للمقررات.',
-    'While care is taken to support accuracy, errors or omissions may exist.': 'مع الحرص على الدقة، ممكن توجد أخطاء أو معلومات ناقصة.',
-    'University Affiliation': 'الارتباط بالجامعة',
-    'This website is independently maintained and is not formally affiliated with, endorsed by, or operated on behalf of Prince Sultan University or any other academic institution. Course names, concepts, and structures are referenced for documentation purposes only. Rights to official course materials remain with their respective institutions, instructors, and authors.': 'هذا الموقع يُدار بشكل مستقل، وليس تابعًا رسميًا أو معتمدًا أو مشغلًا بالنيابة عن جامعة الأمير سلطان أو أي جهة أكاديمية أخرى. أسماء المقررات والمفاهيم والهياكل تُذكر لأغراض التوثيق فقط، وتبقى حقوق المواد الرسمية للجهات والمدرسين والمؤلفين المعنيين.',
-    'Intellectual Property': 'الملكية الفكرية',
-    'Some materials may reference standard textbooks, academic frameworks, research papers, or publicly available educational resources. Where applicable, attribution is provided. All original notes, summaries, designs, source code, and structured documentation on this website are my own intellectual work unless otherwise stated.': 'بعض المواد ممكن تشير لكتب معيارية أو أطر أكاديمية أو أوراق بحثية أو مصادر تعليمية متاحة للعامة. يتم ذكر المصادر عند الحاجة. كل الملاحظات والملخصات والتصاميم والكود والتوثيق المنظم الأصلي في الموقع هو عملي الفكري ما لم يُذكر غير ذلك.',
-    'Permitted Use': 'الاستخدام المسموح',
-    'Use materials for personal study and educational reference': 'استخدام المواد للدراسة الشخصية والمرجع التعليمي',
-    'Reference concepts with proper attribution': 'الرجوع للمفاهيم مع ذكر المصدر بشكل صحيح',
-    'Reproduce content commercially': 'نسخ المحتوى لأغراض تجارية',
-    'Redistribute materials without appropriate credit or permission': 'إعادة توزيع المواد بدون ذكر المصدر أو إذن مناسب',
-    'Present the work as official institutional documentation': 'تقديم العمل كأنه توثيق رسمي لجهة أكاديمية',
-    'No Academic Liability': 'لا مسؤولية أكاديمية',
-    'This website does not guarantee academic outcomes, grades, examination performance, or the suitability of content for a particular course or assessment. Visitors are responsible for verifying information against official academic sources.': 'هذا الموقع ما يضمن نتائج أكاديمية أو درجات أو أداء في الاختبارات أو مناسبة المحتوى لمقرر أو تقييم معين. الزوار مسؤولون عن التحقق من المعلومات من المصادر الأكاديمية الرسمية.',
-    'If you believe any content requires correction, clarification, attribution adjustment, or removal, please reach out directly.': 'إذا تشوفون أن أي محتوى يحتاج تصحيح أو توضيح أو تعديل في نسب المصدر أو إزالة، تواصلوا معي مباشرة.',
-    'Waad Kernel': 'Waad Kernel', 'Software Engineering Student': 'هندسة البرمجيات', 'AI Minor': 'تخصص فرعي في الذكاء الاصطناعي',
-    'SOFTWARE_ENG': 'هندسة برمجيات', 'AI_MINOR': 'ذكاء اصطناعي', 'BILINGUAL': 'ثنائي اللغة',
-    'Building systems. Documenting knowledge. In Arabic and English.': 'مساحة تجمع بين هندسة البرمجيات والذكاء الاصطناعي وتوثيق المعرفة التقنية.',
-    'Selected Works': 'أعمال مختارة', 'Knowledge Base': 'قاعدة المعرفة',
-    'Explore Waad Kernel': 'استكشف محتوى Waad Kernel',
-    'Explore My Work': 'استعرض مشاريعي',
-    'Explore Projects': 'استعرض مشاريعي',
-    'Explore Knowledge': 'استعرض المعرفة',
-    'Guides': 'أدلة', 'Tips': 'نصائح', 'Resources': 'مصادر',
-    'Neural Task Scheduler': 'مجدول مهام عصبي', 'Kernel Diagnostics UI': 'واجهة تشخيص كيرنل', 'Bilingual Data Parser': 'محلل بيانات ثنائي اللغة',
-    'Distributed computing architecture optimized by deep reinforcement learning for load balancing across cluster nodes.': 'معمارية حوسبة موزعة محسّنة بالتعلم المعزز العميق لموازنة الأحمال بين عُقد المجموعة.',
-    'Real-time hardware monitoring interface utilizing WebGL for rendering high-density telemetry data from native OS APIs.': 'واجهة تراقب العتاد لحظيًا وتستخدم WebGL لعرض بيانات قياس كثيفة من واجهات نظام التشغيل.',
-    'A highly efficient text processing engine capable of simultaneous semantic analysis in both Arabic and English document structures.': 'محرك معالجة نصوص عالي الكفاءة يقدر يحلل المعنى في المستندات العربية والإنجليزية بنفس الوقت.',
-    'Understanding Memory Management in Rust': 'فهم إدارة الذاكرة في Rust', 'Building Scalable APIs with Graph QL': 'بناء واجهات API قابلة للتوسع باستخدام GraphQL',
-    'Profile Data': 'بيانات الملف', 'Waad Ibrahim': 'وعد إبراهيم', 'Alhwaimel': 'الهويميل',
-    "I'm a Software Engineering student at Prince Sultan University with a minor in Artificial Intelligence. I enjoy building systems, exploring AI applications, and documenting what I learn in both Arabic and English.": 'أنا طالبة هندسة برمجيات في جامعة الأمير سلطان، وعندي تخصص فرعي في الذكاء الاصطناعي. أحب أبني الأنظمة، وأستكشف تطبيقات الذكاء الاصطناعي، وأوثّق اللي أتعلمه بالعربي والإنجليزي.',
-    '"I build software systems, study artificial intelligence, and transform what I learn into practical knowledge that others can use. Waad Kernel is my digital space for documenting ideas, sharing technical knowledge, and showcasing my academic and personal growth."': '"أبني أنظمة برمجية، وأدرس الذكاء الاصطناعي، وأحوّل اللي أتعلمه لمعرفة عملية يقدر غيري يستفيد منها. Waad Kernel هي مساحتي الرقمية لتوثيق الأفكار، ومشاركة المعرفة التقنية، وعرض تطوري الأكاديمي والشخصي."',
-    'My Journey': 'رحلتي', 'Started Software Engineering at Prince Sultan University': 'بدأت دراسة هندسة البرمجيات في جامعة الأمير سلطان',
-    'Developed a strong interest in Artificial Intelligence': 'صار عندي اهتمام كبير بالذكاء الاصطناعي', 'Began building academic and technical projects': 'بدأت أبني مشاريع أكاديمية وتقنية',
-    'Started documenting technical knowledge systematically': 'بدأت أوثّق المعرفة التقنية بشكل منظّم', 'Created Waad Kernel': 'أنشأت Waad Kernel',
-    'What I Focus On': 'وش أركز عليه', 'Software Engineering': 'هندسة البرمجيات', 'Artificial Intelligence': 'الذكاء الاصطناعي', 'Databases': 'قواعد البيانات',
-    'Focused on software design, system thinking, architecture, and building practical solutions.': 'أركز على تصميم البرمجيات، والتفكير بالأنظمة، والمعمارية، وبناء حلول عملية.',
-    'Interested in machine learning, natural language processing, explainable AI, and real-world AI applications.': 'مهتمة بتعلم الآلة، ومعالجة اللغة الطبيعية، والذكاء الاصطناعي القابل للتفسير، وتطبيقاته الواقعية.',
-    'Interested in database design, SQL development, and organizing information effectively.': 'مهتمة بتصميم قواعد البيانات، وتطوير SQL، وتنظيم المعلومات بفعالية.',
-    'Languages': 'اللغات', 'Arabic': 'العربية', 'English': 'الإنجليزية', 'Native': 'اللغة الأم', 'Professional': 'احترافي',
-    'Why Waad Kernel Exists': 'ليش Waad Kernel موجودة', 'Core Objective': 'الهدف الأساسي',
-    'Waad Kernel exists because knowledge becomes more valuable when it is organized and shared. Through projects, coursework, and independent learning, I aim to transform what I learn into practical knowledge that other students can benefit from, especially within the Arabic technical community.': 'Waad Kernel موجودة لأن المعرفة تصير أقيم لما تكون مرتبة ومشتركة. من خلال المشاريع والدراسة والتعلم الذاتي، هدفي أحوّل اللي أتعلمه لمعرفة عملية يستفيد منها الطلاب والطالبات، خصوصًا في المجتمع التقني العربي.',
-    'Share knowledge clearly': 'مشاركة المعرفة بوضوح', 'Document learning deeply': 'توثيق التعلم بعمق', 'Build useful technical resources': 'بناء موارد تقنية مفيدة', 'Contribute to Arabic technical content': 'الإسهام في المحتوى التقني العربي',
-    'Resume': 'السيرة الذاتية', 'Available for viewing and download.': 'متاحة للعرض والتحميل.', 'View Resume': 'عرض السيرة', 'Download CV': 'تحميل السيرة',
-    "Let's Connect": 'خلّنا نتواصل', 'Open to discussions, questions, and collaborations.': 'متاحة للنقاشات والأسئلة وفرص التعاون.',
-    'Project Archive': 'أرشيف المشاريع', 'A collection of academic, technical, and research projects built throughout my Software Engineering and Artificial Intelligence journey.': 'مجموعة مشاريع أكاديمية وتقنية وبحثية بنيتها خلال رحلتي في هندسة البرمجيات والذكاء الاصطناعي.',
-    'My Destination': 'وجهتي', 'Arabic Sentiment Analysis': 'تحليل المشاعر العربية', 'MySchool Database': 'قاعدة بيانات مدرستي', 'SVD Image Compression': 'ضغط الصور باستخدام SVD',
-    'Key Highlights': 'أبرز النقاط', 'View Details': 'عرض التفاصيل', 'Building Through Learning': 'البناء من خلال التعلم',
-    'Accessibility-focused platform designed to help users discover accessible locations, services, and events.': 'منصة تركّز على سهولة الوصول وتساعد المستخدمين يكتشفون الأماكن والخدمات والفعاليات المهيأة.',
-    'Research project examining gender bias in Arabic sentiment analysis models using Explainable AI techniques.': 'مشروع بحثي يدرس التحيّز الجندري في نماذج تحليل المشاعر العربية باستخدام تقنيات الذكاء الاصطناعي القابل للتفسير.',
-    'Database management system designed to manage students, teachers, courses, enrollments, and administration workflows.': 'نظام إدارة قواعد بيانات لتنظيم الطلاب والمعلمين والمقررات والتسجيل وسير العمل الإداري.',
-    'Image compression project using Singular Value Decomposition to reduce image size while preserving quality.': 'مشروع ضغط صور يستخدم تحليل القيم المفردة لتقليل حجم الصورة مع الحفاظ على الجودة.',
-    'Every project in Waad Kernel represents a stage in my learning journey. Together they reflect my growth across software engineering, artificial intelligence, databases, and technical problem solving.': 'كل مشروع في Waad Kernel يمثل مرحلة من رحلة تعلمي، وكلها تعكس تطوري في هندسة البرمجيات والذكاء الاصطناعي وقواعد البيانات وحل المشكلات التقنية.',
-    'Accessibility': 'سهولة الوصول', 'User-centered design': 'تصميم متمحور حول المستخدم', 'Interactive maps': 'خرائط تفاعلية', 'Event management': 'إدارة الفعاليات',
-    'Accessibility-focused features': 'خصائص تركّز على سهولة الوصول', 'Recommendation system': 'نظام توصيات',
-    'Full-stack integration': 'تكامل الواجهة والخلفية', 'Research methodology': 'منهجية البحث', 'Dataset generation': 'إنشاء مجموعة البيانات', 'Evaluation': 'التقييم',
-    'Explainable AI': 'ذكاء اصطناعي قابل للتفسير', 'Arabic NLP': 'معالجة اللغة العربية', 'SQL implementation': 'تنفيذ SQL', 'Relational schema': 'المخطط العلاقي',
-    'Image processing': 'معالجة الصور', 'Matrix decomposition': 'تحليل المصفوفات', 'Linear algebra applications': 'تطبيقات الجبر الخطي',
-    'Curated Learning': 'تعلم منتقى', 'Practical technical knowledge, guides, tutorials, and learning resources in Arabic and English.': 'معرفة تقنية عملية، وأدلة، وشروحات، ومصادر تعلم بالعربي والإنجليزي.',
-    'Core Domains': 'المجالات الأساسية', 'Learning Guides': 'أدلة التعلم', 'Tips & Tricks': 'نصائح وحيل', 'Curated Resources': 'مصادر منتقاة',
-    'Topics related to software engineering, system design, software architecture, database design, UML, requirements engineering, design patterns, and software testing.': 'مواضيع عن هندسة البرمجيات، وتصميم الأنظمة، والمعمارية، وقواعد البيانات، وUML، وهندسة المتطلبات، وأنماط التصميم، واختبار البرمجيات.',
-    'Topics related to machine learning, AI concepts, explainable AI, sentiment analysis, and practical applications.': 'مواضيع عن تعلم الآلة، ومفاهيم الذكاء الاصطناعي، والذكاء القابل للتفسير، وتحليل المشاعر، والتطبيقات العملية.',
-    'How to Draw UML Diagrams': 'كيف ترسم مخططات UML', 'Design a Database from Scratch': 'صمّم قاعدة بيانات من الصفر', 'Build a Software Project': 'ابنِ مشروع برمجي',
-    'Understanding Design Patterns': 'فهم أنماط التصميم', 'AI Concepts Explained Simply': 'مفاهيم الذكاء الاصطناعي ببساطة', 'Normalization Rules in Practice': 'قواعد التطبيع عمليًا',
-    'A practical guide to visualizing software architecture using standardized UML conventions and structures.': 'دليل عملي لتصوير معمارية البرمجيات باستخدام معايير وهياكل UML.',
-    'Step-by-step tutorial on translating real-world requirements into a solid relational database schema.': 'شرح خطوة بخطوة لتحويل متطلبات واقعية إلى مخطط قاعدة بيانات علائقية متين.',
-    'Walkthrough of the full software development lifecycle from initial requirements to final deployment.': 'شرح كامل لدورة حياة تطوير البرمجيات من المتطلبات الأولى إلى النشر النهائي.',
-    'A deep dive into common structural, creational, and behavioral design patterns in software.': 'تعمّق في أنماط التصميم الهيكلية والإنشائية والسلوكية الشائعة في البرمجيات.',
-    'Breaking down complex artificial intelligence and machine learning paradigms for beginners.': 'تبسيط مفاهيم الذكاء الاصطناعي وتعلم الآلة المعقدة للمبتدئين.',
-    'Practical examples of moving data from 1NF to 3NF to eliminate anomalies.': 'أمثلة عملية لنقل البيانات من 1NF إلى 3NF لتقليل المشاكل.',
-    'Common UML Mistakes': 'أخطاء UML الشائعة', 'SQL Mistakes Beginners Make': 'أخطاء SQL عند المبتدئين', 'Choosing the Right Design Pattern': 'اختيار نمط التصميم المناسب',
-    'Project Presentation Tips': 'نصائح لعرض المشروع', 'Documentation Tips': 'نصائح للتوثيق', 'Books': 'كتب', 'Websites': 'مواقع', 'References': 'مراجع',
-    'Avoiding Data Leakage': 'تجنب تسرّب البيانات', 'Choosing Evaluation Metrics': 'اختيار مقاييس التقييم', 'Documenting Model Experiments': 'توثيق تجارب النماذج',
-    'Workspace': 'مساحة العمل', 'Practical tools designed to help students plan, structure, and build better software engineering and AI projects.': 'أدوات عملية تساعد الطلاب والطالبات يخططون وينظمون ويبنون مشاريع أفضل في هندسة البرمجيات والذكاء الاصطناعي.',
-    'UML Assistant': 'مساعد UML', 'SRS Builder': 'منشئ SRS', 'Database Planner': 'مخطط قاعدة البيانات', 'Project Planner': 'مخطط المشروع', 'Presentation Planner': 'مخطط العرض',
-    'Best For': 'مناسب لـ', 'Available': 'متاح', 'Coming Soon': 'قريبًا', 'Open Tool': 'فتح الأداة', 'Built for Student Projects': 'مصممة لمشاريع الطلاب',
-    'Helps students structure UML diagrams by identifying actors, use cases, classes, interactions, and system flows.': 'يساعد الطلاب يرتبون مخططات UML بتحديد الأطراف وحالات الاستخدام والفئات والتفاعلات وتدفقات النظام.',
-    'Helps students organize a Software Requirements Specification document by structuring the problem, scope, requirements, constraints, and system features.': 'يساعد الطلاب ينظمون وثيقة مواصفات متطلبات البرمجيات من خلال ترتيب المشكلة والنطاق والمتطلبات والقيود وخصائص النظام.',
-    'Helps students convert project requirements into database entities, relationships, tables, primary keys, foreign keys, and SQL planning.': 'يساعد الطلاب يحوّلون متطلبات المشروع لكيانات وعلاقات وجداول ومفاتيح أساسية وخارجية وخطة SQL.',
-    'Helps students break a project into phases, milestones, deliverables, tasks, and presentation-ready progress.': 'يساعد الطلاب يقسمون المشروع لمراحل ومحطات وتسليمات ومهام وتقدم جاهز للعرض.',
-    'Helps students prepare clear project presentations by organizing slides, speaking points, demo flow, and expected questions.': 'يساعد الطلاب يجهزون عروض واضحة بتنظيم الشرائح ونقاط الحديث وتسلسل العرض والأسئلة المتوقعة.',
-    'These tools are designed to support the parts of technical projects that students often struggle with: planning, documentation, diagrams, databases, and presentations.': 'هالأدوات مصممة لدعم الجوانب اللي غالبًا يتعب فيها الطلاب بالمشاريع التقنية: التخطيط، والتوثيق، والمخططات، وقواعد البيانات، والعروض.',
-    'Beginner': 'مبتدئ', 'Intermediate': 'متوسط', 'Advanced': 'متقدم', 'Guide': 'دليل', 'Tutorial': 'شرح', 'Concepts': 'مفاهيم', 'Fundamentals': 'أساسيات',
-    'System Design': 'تصميم النظام', 'Database Design': 'تصميم قاعدة البيانات', 'Machine Learning': 'تعلم الآلة', 'Sentiment Analysis': 'تحليل المشاعر',
-    'Requirements': 'المتطلبات', 'Architecture': 'المعمارية', 'Design Patterns': 'أنماط التصميم', 'Testing': 'الاختبار', 'Database Systems': 'أنظمة قواعد البيانات',
-    'Use Case Diagrams': 'مخططات حالات الاستخدام', 'Class Diagrams': 'مخططات الفئات', 'Sequence Diagrams': 'مخططات التسلسل', 'Activity Diagrams': 'مخططات الأنشطة',
-    'Problem Statement': 'وصف المشكلة', 'Scope': 'النطاق', 'Functional Requirements': 'المتطلبات الوظيفية', 'Non-Functional Requirements': 'المتطلبات غير الوظيفية',
-    'System Features': 'خصائص النظام', 'ERD Planning': 'تخطيط ERD', 'Table Design': 'تصميم الجداول', 'Relationships': 'العلاقات', 'SQL Structure': 'هيكلة SQL',
-    'Project Roadmap': 'خارطة المشروع', 'Task Breakdown': 'تقسيم المهام', 'Weekly Plan': 'الخطة الأسبوعية', 'Deliverables': 'التسليمات',
-    'Slide Structure': 'هيكلة الشرائح', 'Script Planning': 'تخطيط النص', 'Demo Flow': 'تسلسل العرض', 'Q&A Preparation': 'الاستعداد للأسئلة',
-    'Linear Algebra': 'الجبر الخطي', 'Mathematics': 'الرياضيات', 'Normalization': 'التطبيع', 'Research': 'البحث', 'UI/UX': 'تجربة وواجهة المستخدم'
-};
-
-const originalText = new WeakMap();
-const originalAttributes = new WeakMap();
-const getLanguage = () => localStorage.getItem('waad-language') || 'en';
-const getTheme = () => localStorage.getItem('waad-theme') || 'dark';
 const currentPage = () => document.body.dataset.page || 'home';
+const storedTheme = localStorage.getItem('waad-kernel-theme');
+const initialTheme = storedTheme || 'light';
+const storedLanguage = localStorage.getItem('waad-kernel-language');
+const initialLanguage = storedLanguage || 'en';
 
-function translateTextNode(node, language) {
-    if (!originalText.has(node)) originalText.set(node, node.nodeValue);
-    const source = originalText.get(node);
-    const trimmed = source.trim();
-    if (!trimmed) return;
-    const translated = language === 'ar' ? ar[trimmed] : trimmed;
-    node.nodeValue = source.replace(trimmed, translated || trimmed);
-}
+document.documentElement.dataset.theme = initialTheme;
+document.body?.setAttribute('data-theme', initialTheme);
+document.documentElement.dataset.language = initialLanguage;
+document.body?.setAttribute('data-language', initialLanguage);
 
-function applyLanguage(language) {
-    document.documentElement.lang = language;
-    document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
-    document.body.dataset.language = language;
-    if (!document.documentElement.dataset.englishTitle) document.documentElement.dataset.englishTitle = document.title;
-    document.title = language === 'ar' ? arabicTitles[currentPage()] : document.documentElement.dataset.englishTitle;
-    updateControlLabels();
-
-    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
-        acceptNode: (node) => node.nodeValue.trim() && !node.parentElement.closest('script, style')
-            ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT
-    });
-    const nodes = [];
-    while (walker.nextNode()) nodes.push(walker.currentNode);
-    nodes.forEach((node) => translateTextNode(node, language));
-
-    document.querySelectorAll('[placeholder], [aria-label], [title]').forEach((element) => {
-        if (!originalAttributes.has(element)) {
-            originalAttributes.set(element, ['placeholder', 'aria-label', 'title'].reduce((values, attribute) => {
-                if (element.hasAttribute(attribute)) values[attribute] = element.getAttribute(attribute);
-                return values;
-            }, {}));
-        }
-        Object.entries(originalAttributes.get(element)).forEach(([attribute, value]) => {
-            element.setAttribute(attribute, language === 'ar' ? (ar[value] || value) : value);
-        });
-    });
-    updateControlLabels();
-}
-
-function setLanguage(language) {
-    localStorage.setItem('waad-language', language);
-    applyLanguage(language);
-    document.querySelectorAll('site-header').forEach((header) => header.render());
-    document.querySelectorAll('site-footer').forEach((footer) => footer.render());
-    applyLanguage(language);
-}
-
-function setTheme(theme) {
-    localStorage.setItem('waad-theme', theme);
+const applyTheme = (theme) => {
     document.documentElement.dataset.theme = theme;
-    updateControlLabels();
-}
+    document.body.setAttribute('data-theme', theme);
+    localStorage.setItem('waad-kernel-theme', theme);
 
-function updateControlLabels() {
-    const language = getLanguage();
-    const theme = getTheme();
-    document.querySelectorAll('[data-language-toggle]').forEach((button) => {
-        button.textContent = language === 'en' ? 'Arabic' : 'English';
-        button.setAttribute('aria-label', language === 'en' ? 'Switch to Arabic' : 'Switch to English');
-    });
     document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
-        const nextThemeLabel = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
-        button.textContent = language === 'ar' ? (ar[nextThemeLabel] || nextThemeLabel) : nextThemeLabel;
-        button.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+        const isLight = theme === 'light';
+        const isArabic = document.body.dataset.language === 'ar';
+        button.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+        button.querySelector('[data-theme-label]').textContent = isArabic
+            ? (isLight ? 'الوضع الداكن' : 'الوضع الفاتح')
+            : (isLight ? 'Dark Mode' : 'Light Mode');
     });
-}
+};
 
-function controls() {
-    return `
-        <div class="kernel-controls" aria-label="Site controls">
-            <button type="button" class="kernel-control search-trigger" data-search-open aria-label="Search">Search</button>
-            <button type="button" class="kernel-control" data-language-toggle>Arabic</button>
-            <button type="button" class="kernel-control" data-theme-toggle>Light Mode</button>
-        </div>`;
-}
+const applyLanguage = (language) => {
+    const isArabic = language === 'ar';
+    document.documentElement.dataset.language = language;
+    document.documentElement.lang = isArabic ? 'ar' : 'en';
+    document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
+    document.body.setAttribute('data-language', language);
+    localStorage.setItem('waad-kernel-language', language);
 
-function searchDialog() {
-    return `
-        <dialog class="kernel-search-dialog" data-search-dialog>
-            <form method="dialog" class="kernel-search-panel">
-                <div class="kernel-search-head">
-                    <label for="kernel-search-input">Search Waad Kernel</label>
-                    <button value="close" aria-label="Close">Close</button>
-                </div>
-                <input id="kernel-search-input" type="search" autocomplete="off" placeholder="Type to search pages, projects, guides, and tools..." data-search-input>
-                <div class="kernel-search-results" data-search-results></div>
-            </form>
-        </dialog>`;
-}
-
-function initializeControls(root) {
-    root.querySelectorAll('[data-language-toggle]').forEach((button) => button.addEventListener('click', () => {
-        setLanguage(getLanguage() === 'en' ? 'ar' : 'en');
-    }));
-    root.querySelectorAll('[data-theme-toggle]').forEach((button) => button.addEventListener('click', () => {
-        setTheme(getTheme() === 'dark' ? 'light' : 'dark');
-    }));
-    root.querySelector('[data-search-open]')?.addEventListener('click', () => {
-        const dialog = document.querySelector('[data-search-dialog]');
-        dialog.showModal();
-        dialog.querySelector('input').focus();
+    document.querySelectorAll('[data-language-toggle]').forEach((button) => {
+        button.setAttribute('aria-pressed', String(isArabic));
+        button.setAttribute('aria-label', isArabic ? 'Switch language to English' : 'Switch language to Arabic');
+        button.textContent = isArabic ? 'الإنجليزية' : 'Arabic';
     });
-}
 
-function initializeKnowledgeModules() {
-    if (currentPage() !== 'knowledge') return;
-    const selectors = [...document.querySelectorAll('[data-domain-select]')];
-    const content = [...document.querySelectorAll('[data-domain-content]')];
-    const setDomain = (domain) => {
-        localStorage.setItem('waad-knowledge-domain', domain);
-        selectors.forEach((selector) => selector.setAttribute('aria-pressed', String(selector.dataset.domainSelect === domain)));
-        content.forEach((item) => {
-            item.hidden = item.dataset.domainContent !== domain;
-        });
-    };
+    document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+        const isLight = document.body.dataset.theme === 'light';
+        button.querySelector('[data-theme-label]').textContent = isArabic
+            ? (isLight ? 'الوضع الداكن' : 'الوضع الفاتح')
+            : (isLight ? 'Dark Mode' : 'Light Mode');
+    });
 
-    selectors.forEach((selector) => {
-        selector.addEventListener('click', () => setDomain(selector.dataset.domainSelect));
-        selector.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                setDomain(selector.dataset.domainSelect);
+    document.querySelectorAll('[data-i18n-key]').forEach((element) => {
+        const english = element.getAttribute('data-i18n-en');
+        const arabic = element.getAttribute('data-i18n-ar');
+        if (english && arabic) element.textContent = isArabic ? arabic : english;
+    });
+
+    document.querySelectorAll('[data-nav-label]').forEach((element) => {
+        const pageItem = pages.find((item) => item.id === element.getAttribute('data-nav-label'));
+        if (pageItem) element.textContent = isArabic ? pageItem.labelAr : pageItem.label;
+    });
+};
+
+const injectSharedStyles = () => {
+    if (document.getElementById('waad-shared-styles')) return;
+
+    const style = document.createElement('style');
+    style.id = 'waad-shared-styles';
+    style.textContent = `
+        :root {
+            --wk-bg-base: #06080d;
+            --wk-bg-panel: rgba(14, 18, 26, 0.72);
+            --wk-bg-panel-solid: #0e121a;
+            --wk-bg-card: rgba(12, 16, 28, 0.68);
+            --wk-text-main: #e2e8f0;
+            --wk-text-muted: #8ea0b8;
+            --wk-text-soft: #c5d1e4;
+            --wk-cyan: #00f0ff;
+            --wk-cyan-dim: rgba(0, 240, 255, 0.14);
+            --wk-amber: #ffb020;
+            --wk-amber-dim: rgba(255, 176, 32, 0.14);
+            --wk-magenta: #ff3d7f;
+            --wk-border: rgba(255, 255, 255, 0.09);
+            --wk-border-strong: rgba(0, 240, 255, 0.24);
+            --wk-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+            --wk-font-ui: 'Rajdhani', 'Space Grotesk', sans-serif;
+            --wk-font-mono: 'JetBrains Mono', monospace;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: var(--wk-bg-base);
+            color: var(--wk-text-main);
+        }
+
+        body:not([data-page="home"]) {
+            background-color: var(--wk-bg-base) !important;
+            color: var(--wk-text-main) !important;
+            background-image:
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px) !important;
+            background-size: 30px 30px !important;
+            background-position: center center !important;
+        }
+
+        body:not([data-page="home"]) main {
+            max-width: 1440px !important;
+            padding-top: 9rem !important;
+        }
+
+        body:not([data-page="home"]) main.page-main-interface,
+        body[data-page="about"] main.about-main-interface {
+            max-width: none !important;
+            padding-top: 0 !important;
+        }
+
+        site-header {
+            position: static;
+            inset: auto;
+            background: transparent;
+            border-bottom: 0;
+            box-shadow: none;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+        .wk-site-header {
+            max-width: 100%;
+            margin: 0;
+            padding: 0 0 1rem;
+            border-bottom: 2px solid var(--wk-border-strong);
+        }
+
+        .wk-site-header::after {
+            bottom: -2px;
+            left: 0;
+            width: 280px;
+        }
+
+        body:not([data-page="home"]) main > header {
+            position: relative;
+            padding: clamp(2rem, 4vw, 3.5rem);
+            border: 1px solid var(--wk-border);
+            border-left: 4px solid var(--wk-cyan);
+            border-radius: 4px;
+            background:
+                linear-gradient(90deg, color-mix(in srgb, var(--wk-cyan) 10%, transparent), transparent 58%),
+                linear-gradient(180deg, color-mix(in srgb, var(--wk-bg-panel-solid) 78%, transparent), color-mix(in srgb, var(--wk-bg-card) 84%, transparent));
+            box-shadow: var(--wk-shadow);
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        body:not([data-page="home"]) main > header::before {
+            content: 'WK_SECTION_BOOT //';
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            background: var(--wk-cyan);
+            color: var(--wk-bg-base);
+            padding: 0.2rem 0.65rem;
+            font-family: var(--wk-font-mono);
+            font-size: 0.62rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+        }
+
+        body:not([data-page="home"]) main > header::after {
+            content: '';
+            position: absolute;
+            inset: auto 1.5rem 1.25rem 1.5rem;
+            height: 1px;
+            background: linear-gradient(90deg, var(--wk-cyan), transparent 70%);
+            box-shadow: 0 0 14px color-mix(in srgb, var(--wk-cyan) 34%, transparent);
+        }
+
+        body:not([data-page="home"]) main > header h1 {
+            font-size: clamp(3.4rem, 7vw, 6.5rem) !important;
+            line-height: 0.9 !important;
+            text-shadow: 0 0 16px color-mix(in srgb, var(--wk-text-main) 32%, transparent);
+        }
+
+        body[data-theme="light"]:not([data-page="home"]) main > header h1 {
+            text-shadow: none;
+        }
+
+        body[data-theme="light"] {
+            --bg-base: #edf4f7;
+            --bg-panel: rgba(245, 251, 252, 0.78);
+            --bg-panel-solid: #f6fbfc;
+            --text-main: #172033;
+            --text-muted: #53657b;
+            --neon-cyan: #087f93;
+            --neon-cyan-dim: rgba(8, 127, 147, 0.13);
+            --neon-amber: #a86400;
+            --neon-amber-dim: rgba(168, 100, 0, 0.13);
+            --neon-magenta: #b8245e;
+            --glow-cyan: 0 0 0 rgba(8, 127, 147, 0);
+            --glow-amber: 0 0 0 rgba(168, 100, 0, 0);
+            --glow-magenta: 0 0 0 rgba(184, 36, 94, 0);
+            --wk-bg-base: #edf4f7;
+            --wk-bg-panel: rgba(245, 251, 252, 0.82);
+            --wk-bg-panel-solid: #f6fbfc;
+            --wk-bg-card: rgba(246, 251, 252, 0.84);
+            --wk-text-main: #172033;
+            --wk-text-muted: #53657b;
+            --wk-text-soft: #2d3d52;
+            --wk-cyan: #087f93;
+            --wk-cyan-dim: rgba(8, 127, 147, 0.12);
+            --wk-amber: #a86400;
+            --wk-amber-dim: rgba(168, 100, 0, 0.12);
+            --wk-magenta: #b8245e;
+            --wk-border: rgba(23, 32, 51, 0.13);
+            --wk-border-strong: rgba(8, 127, 147, 0.28);
+            --wk-shadow: 0 18px 45px rgba(31, 57, 80, 0.12);
+            background-color: #edf4f7 !important;
+            color: #172033 !important;
+            background-image:
+                linear-gradient(rgba(8, 127, 147, 0.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(8, 127, 147, 0.045) 1px, transparent 1px) !important;
+        }
+
+        body:not([data-page="home"]) .bg-grid {
+            background-image:
+                linear-gradient(to right, rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 240, 255, 0.03) 1px, transparent 1px) !important;
+            background-size: 30px 30px !important;
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        body:not([data-page="home"]) .ambient-blob-cyan {
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.055) 0%, transparent 62%) !important;
+        }
+
+        body:not([data-page="home"]) .ambient-blob-amber {
+            background: radial-gradient(circle, rgba(255, 159, 0, 0.045) 0%, transparent 62%) !important;
+        }
+
+        body[data-theme="light"] .ambient-light {
+            background: radial-gradient(circle at center, rgba(8, 127, 147, 0.09) 0%, transparent 62%);
+        }
+
+        body[data-theme="light"] .bg-grid {
+            background-image:
+                linear-gradient(to right, rgba(8, 127, 147, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(8, 127, 147, 0.05) 1px, transparent 1px);
+        }
+
+        body[data-theme="light"] .ambient-blob-cyan {
+            background: radial-gradient(circle, rgba(8, 127, 147, 0.09) 0%, transparent 60%);
+        }
+
+        body[data-theme="light"] .ambient-blob-amber {
+            background: radial-gradient(circle, rgba(168, 100, 0, 0.07) 0%, transparent 60%);
+        }
+
+        body[data-theme="light"] .glass-panel,
+        body[data-theme="light"] .project-card,
+        body[data-theme="light"] .skill-card,
+        body[data-theme="light"] .kb-preview,
+        body[data-theme="light"] .quote-box {
+            background: var(--wk-bg-card) !important;
+            border-color: rgba(23, 32, 51, 0.12) !important;
+            box-shadow: var(--wk-shadow);
+        }
+
+        body:not([data-page="home"]) .glass-panel {
+            background: var(--wk-bg-card) !important;
+            border: 1px solid var(--wk-border) !important;
+            border-radius: 4px !important;
+            box-shadow: var(--wk-shadow);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        body:not([data-page="home"]) article.glass-panel,
+        body:not([data-page="home"]) section.glass-panel,
+        body:not([data-page="home"]) .certification-card {
+            border-top: 2px solid color-mix(in srgb, var(--wk-cyan) 24%, transparent) !important;
+        }
+
+        body:not([data-page="home"]) .section-heading {
+            margin-bottom: 2.25rem !important;
+        }
+
+        body:not([data-page="home"]) .section-heading::after {
+            background: linear-gradient(to right, var(--wk-border-strong), transparent) !important;
+        }
+
+        body:not([data-page="home"]) h1,
+        body:not([data-page="home"]) h2,
+        body:not([data-page="home"]) h3,
+        body:not([data-page="home"]) h4 {
+            letter-spacing: 0 !important;
+        }
+
+        body:not([data-page="home"]) h1 {
+            text-transform: uppercase;
+        }
+
+        body:not([data-page="home"]) .rounded-2xl,
+        body:not([data-page="home"]) .rounded-3xl,
+        body:not([data-page="home"]) .rounded-\\[2rem\\],
+        body:not([data-page="home"]) .rounded-xl {
+            border-radius: 4px !important;
+        }
+
+        body:not([data-page="home"]) button,
+        body:not([data-page="home"]) a[class*="button"],
+        body:not([data-page="home"]) a.certification-card {
+            border-radius: 4px !important;
+        }
+
+        body:not([data-page="home"]) .glow-text-cyan,
+        body:not([data-page="home"]) .text-glow-cyan {
+            text-shadow: 0 0 10px color-mix(in srgb, var(--wk-cyan) 42%, transparent), 0 0 22px color-mix(in srgb, var(--wk-cyan) 16%, transparent);
+        }
+
+        body:not([data-page="home"]) .glow-text-amber {
+            text-shadow: 0 0 10px color-mix(in srgb, var(--wk-amber) 38%, transparent), 0 0 22px color-mix(in srgb, var(--wk-amber) 14%, transparent);
+        }
+
+        body[data-theme="light"] .text-white,
+        body[data-theme="light"] .text-slate-100,
+        body[data-theme="light"] .text-slate-200 {
+            color: #172033 !important;
+        }
+
+        body[data-theme="light"] .text-slate-300,
+        body[data-theme="light"] .text-slate-400 {
+            color: #33465f !important;
+        }
+
+        body[data-theme="light"] .text-slate-500,
+        body[data-theme="light"] .text-slate-600 {
+            color: #607189 !important;
+        }
+
+        body[data-theme="light"] .text-cyan {
+            color: #087f93 !important;
+        }
+
+        body[data-theme="light"] .text-amber {
+            color: #a86400 !important;
+        }
+
+        body[data-theme="light"] .bg-base,
+        body[data-theme="light"] .bg-base\\/50,
+        body[data-theme="light"] .bg-white\\/5,
+        body[data-theme="light"] .bg-cyan-dim,
+        body[data-theme="light"] .bg-cyan\\/5,
+        body[data-theme="light"] .bg-cyan\\/10,
+        body[data-theme="light"] .bg-amber-dim,
+        body[data-theme="light"] .bg-amber\\/5,
+        body[data-theme="light"] .bg-amber\\/10 {
+            background-color: rgba(239, 248, 250, 0.72) !important;
+        }
+
+        body[data-theme="light"] .border-white\\/5,
+        body[data-theme="light"] .border-white\\/10,
+        body[data-theme="light"] .border-cyan\\/20,
+        body[data-theme="light"] .border-cyan\\/30,
+        body[data-theme="light"] .border-cyan\\/40,
+        body[data-theme="light"] .border-amber\\/20,
+        body[data-theme="light"] .border-amber\\/30,
+        body[data-theme="light"] .border-amber\\/40 {
+            border-color: rgba(23, 32, 51, 0.14) !important;
+        }
+
+        body[data-theme="light"] .glow-text-cyan,
+        body[data-theme="light"] .glow-text-amber,
+        body[data-theme="light"] .text-glow-cyan {
+            text-shadow: none !important;
+        }
+
+        .i18n-ar,
+        .i18n-block-ar,
+        .i18n-flex-ar {
+            display: none !important;
+        }
+
+        body[data-language="ar"] .i18n-en,
+        body[data-language="ar"] .i18n-block-en,
+        body[data-language="ar"] .i18n-flex-en {
+            display: none !important;
+        }
+
+        body[data-language="ar"] .i18n-ar {
+            display: inline !important;
+        }
+
+        body[data-language="ar"] .i18n-block-ar {
+            display: block !important;
+        }
+
+        body[data-language="ar"] .i18n-flex-ar {
+            display: flex !important;
+        }
+
+        .page-system-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 2rem;
+            min-height: 100vh;
+        }
+
+        .page-main-interface {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            min-width: 0;
+        }
+
+        .page-system-container .side-telemetry {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            border-right: 1px solid var(--wk-border-strong);
+            padding-right: 1rem;
+            font-family: var(--wk-font-mono);
+            font-size: 0.65rem;
+            color: var(--wk-cyan);
+            opacity: 0.72;
+        }
+
+        .page-system-container .data-block {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .page-system-container .data-bar {
+            height: 4px;
+            width: 100%;
+            background: var(--wk-bg-panel-solid);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+
+        .page-system-container .data-bar-fill {
+            display: block;
+            height: 100%;
+            background: var(--wk-cyan);
+            box-shadow: 0 0 10px color-mix(in srgb, var(--wk-cyan) 60%, transparent), 0 0 20px color-mix(in srgb, var(--wk-cyan) 20%, transparent);
+            animation: wk-pulse-width 3s infinite alternate ease-in-out;
+        }
+
+        .page-system-container .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            margin-top: auto;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        @keyframes wk-pulse-width {
+            0% { width: 30%; }
+            100% { width: 85%; }
+        }
+
+        .page-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            position: relative;
+            padding: 4rem 0;
+        }
+
+        .page-main-interface > .page-hero {
+            border: 0 !important;
+            border-left: 0 !important;
+            background: transparent !important;
+            box-shadow: none !important;
+            overflow: visible !important;
+            isolation: auto !important;
+        }
+
+        .page-main-interface > .page-hero::before,
+        .page-main-interface > .page-hero::after {
+            content: none !important;
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .page-hero .greeting-label {
+            font-family: var(--wk-font-mono);
+            color: var(--wk-cyan);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0;
+        }
+
+        .page-hero .greeting-label::before {
+            content: '>';
+            color: var(--wk-amber);
+        }
+
+        .page-hero-title {
+            font-size: 5rem;
+            line-height: 0.9;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0 !important;
+            margin-bottom: 1rem;
+            color: var(--wk-text-main);
+            text-shadow: 0 0 15px color-mix(in srgb, var(--wk-text-main) 42%, transparent);
+        }
+
+        .page-hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--wk-text-muted);
+            font-weight: 500;
+            border-left: 4px solid var(--wk-amber);
+            background: linear-gradient(90deg, var(--wk-amber-dim) 0%, transparent 100%);
+            padding: 0.75rem 1rem;
+            max-width: 42rem;
+        }
+
+        .page-visual {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .page-visual-frame {
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            border: 1px solid var(--wk-border-strong);
+            border-radius: 50%;
+        }
+
+        .page-visual-frame::before,
+        .page-visual-frame::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 20px;
+            height: 4px;
+            background: var(--wk-cyan);
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px color-mix(in srgb, var(--wk-cyan) 60%, transparent);
+        }
+
+        .page-visual-frame::before { top: -10px; }
+        .page-visual-frame::after { bottom: -10px; }
+
+        .page-visual-core {
+            width: 80%;
+            height: 80%;
+            border: 1px dashed var(--wk-border-strong);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            position: relative;
+            background:
+                linear-gradient(rgba(0, 240, 255, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.06) 1px, transparent 1px);
+            background-size: 28px 28px;
+            animation: rotate-slow 20s linear infinite;
+        }
+
+        .page-visual-node {
+            width: 42%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            border: 3px solid var(--wk-cyan);
+            background: var(--wk-bg-panel-solid);
+            box-shadow: var(--wk-shadow), 0 0 18px color-mix(in srgb, var(--wk-cyan) 32%, transparent);
+            display: grid;
+            place-items: center;
+            color: var(--wk-cyan);
+            font-family: var(--wk-font-mono);
+            font-weight: 800;
+            font-size: clamp(1.4rem, 4vw, 3rem);
+            animation: pulse-core 2.4s ease-in-out infinite;
+        }
+
+        .terminal-banner {
+            background: #000;
+            border: 1px solid var(--wk-cyan);
+            box-shadow: 0 0 10px color-mix(in srgb, var(--wk-cyan) 60%, transparent), 0 0 20px color-mix(in srgb, var(--wk-cyan) 20%, transparent);
+            padding: 1.5rem;
+            font-family: var(--wk-font-mono);
+            font-size: 1.05rem;
+            color: var(--wk-cyan);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            min-height: 76px;
+        }
+
+        .terminal-banner::before {
+            content: 'WK_SYS_TERM //';
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: var(--wk-cyan);
+            color: var(--wk-bg-base);
+            font-size: 0.6rem;
+            padding: 2px 8px;
+            font-weight: 800;
+        }
+
+        .scanline {
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.05) 50%, rgba(0,0,0,0));
+            position: fixed;
+            top: 0;
+            pointer-events: none;
+            animation: wk-scan 8s linear infinite;
+            z-index: 9999;
+        }
+
+        @keyframes wk-scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        body[data-theme="light"] .page-hero-title {
+            text-shadow: none;
+        }
+
+        body[data-theme="light"] .page-system-container .data-bar-fill,
+        body[data-theme="light"] .page-visual-frame::before,
+        body[data-theme="light"] .page-visual-frame::after {
+            box-shadow: none;
+        }
+
+        .wk-site-header {
+            position: relative;
+            z-index: 50;
+            width: 100%;
+            max-width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.25rem;
+            padding: 0.95rem 0 1.05rem;
+            border-bottom: 2px solid var(--wk-border-strong);
+            color: var(--wk-text-main);
+            font-family: var(--wk-font-ui);
+        }
+
+        .wk-site-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 280px;
+            height: 2px;
+            background: var(--wk-cyan);
+            box-shadow: 0 0 14px color-mix(in srgb, var(--wk-cyan) 45%, transparent);
+        }
+
+        site-header {
+            position: static;
+            inset: auto;
+            background: transparent;
+            border-bottom: 0;
+            box-shadow: none;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+        .wk-site-header {
+            max-width: 100%;
+            margin: 0;
+            padding: 0 0 1rem;
+            border-bottom: 2px solid var(--wk-border-strong);
+        }
+
+        .wk-logo-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: inherit;
+            text-decoration: none;
+            min-width: max-content;
+        }
+
+        .wk-logo-box {
+            width: 72px;
+            height: 72px;
+            border: 2px solid var(--wk-amber);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: var(--wk-font-mono);
+            font-weight: 800;
+            color: var(--wk-amber);
+            font-size: 24px;
+            border-radius: 4px;
+            position: relative;
+            box-shadow: 0 0 14px color-mix(in srgb, var(--wk-amber) 28%, transparent);
+        }
+
+        .wk-logo-box::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border: 1px solid var(--wk-amber-dim);
+            border-radius: 6px;
+        }
+
+        .wk-brand-name {
+            font-family: var(--wk-font-ui);
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--wk-text-main);
+        }
+
+        .wk-brand-name span {
+            color: var(--wk-cyan);
+            font-family: var(--wk-font-mono);
+            font-weight: 400;
+            opacity: 0.82;
+        }
+
+        .wk-nav {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-family: var(--wk-font-mono);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .wk-nav a {
+            color: var(--wk-text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease, text-shadow 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .wk-nav a:hover,
+        .wk-nav a:focus-visible,
+        .wk-nav a[aria-current="page"] {
+            color: var(--wk-cyan);
+            text-shadow: 0 0 12px color-mix(in srgb, var(--wk-cyan) 35%, transparent);
+        }
+
+        body[data-theme="light"] .wk-nav a:hover,
+        body[data-theme="light"] .wk-nav a:focus-visible,
+        body[data-theme="light"] .wk-nav a[aria-current="page"] {
+            text-shadow: none;
+        }
+
+        .wk-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .wk-header-button {
+            width: 112px;
+            height: 46px;
+            min-height: 46px;
+            border: 1px solid color-mix(in srgb, var(--wk-text-muted) 32%, transparent);
+            border-radius: 4px;
+            background: color-mix(in srgb, var(--wk-bg-panel-solid) 56%, transparent);
+            color: var(--wk-text-soft);
+            padding: 0 12px;
+            font-family: var(--wk-font-mono);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.35rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        .wk-header-button:hover,
+        .wk-header-button:focus-visible {
+            border-color: var(--wk-border-strong);
+            color: var(--wk-cyan);
+            background: var(--wk-cyan-dim);
+            transform: translateY(-1px);
+            outline: none;
+        }
+
+        body[data-theme="light"] .wk-header-button {
+            border-color: rgba(23, 32, 51, 0.28);
+            background: rgba(246, 251, 252, 0.84);
+            color: #24344a;
+            box-shadow: 0 8px 22px rgba(31, 57, 80, 0.08);
+        }
+
+        body[data-theme="light"] .wk-header-button:hover,
+        body[data-theme="light"] .wk-header-button:focus-visible {
+            border-color: rgba(8, 127, 147, 0.42);
+            color: #075d6c;
+            background: rgba(8, 127, 147, 0.1);
+        }
+
+        .wk-menu-button {
+            display: none;
+        }
+
+        .wk-mobile-menu {
+            display: none;
+            position: absolute;
+            left: 1rem;
+            right: 1rem;
+            top: calc(100% + 0.75rem);
+            padding: 0.75rem;
+            border: 1px solid var(--wk-border);
+            border-radius: 12px;
+            background: var(--wk-bg-panel-solid);
+            box-shadow: var(--wk-shadow);
+        }
+
+        .wk-mobile-menu[hidden] {
+            display: none;
+        }
+
+        .wk-mobile-menu a {
+            display: block;
+            padding: 0.8rem 0.9rem;
+            border-radius: 8px;
+            color: var(--wk-text-soft);
+            font-family: var(--wk-font-mono);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            text-decoration: none;
+        }
+
+        .wk-mobile-menu a[aria-current="page"] {
+            color: var(--wk-cyan);
+            background: var(--wk-cyan-dim);
+        }
+
+        body[data-language="ar"] site-header,
+        body[data-language="ar"] .wk-site-header {
+            direction: rtl;
+        }
+
+        body[data-language="ar"] .wk-site-header {
+            justify-content: flex-start;
+        }
+
+        body[data-language="ar"] .wk-logo-group,
+        body[data-language="ar"] .wk-nav,
+        body[data-language="ar"] .wk-header-actions,
+        body[data-language="ar"] .wk-header-button {
+            direction: rtl;
+        }
+
+        body[data-language="ar"] .wk-logo-group {
+            order: 1;
+        }
+
+        body[data-language="ar"] .wk-nav {
+            order: 2;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        body[data-language="ar"] .wk-header-actions {
+            order: 3;
+            margin-right: 0;
+            margin-left: 0;
+        }
+
+        body[data-language="ar"] .wk-site-header::after {
+            left: auto;
+            right: 0;
+        }
+
+        body[data-language="ar"] main {
+            direction: rtl;
+        }
+
+        body[data-language="ar"] .wk-mobile-menu {
+            direction: rtl;
+            text-align: right;
+        }
+
+        body[data-language="ar"] .system-container,
+        body[data-language="ar"] .page-system-container,
+        body[data-language="ar"] .about-system-container {
+            grid-template-columns: minmax(0, 1fr) 80px;
+            direction: ltr;
+        }
+
+        body[data-language="ar"] .system-container > .side-telemetry,
+        body[data-language="ar"] .page-system-container > .side-telemetry,
+        body[data-language="ar"] .about-system-container > .side-telemetry {
+            grid-column: 2;
+            grid-row: 1;
+            border-right: 0;
+            border-left: 1px solid var(--wk-border-strong);
+            padding-right: 0;
+            padding-left: 1rem;
+            text-align: right;
+        }
+
+        body[data-language="ar"] .system-container > main,
+        body[data-language="ar"] .page-system-container > main,
+        body[data-language="ar"] .about-system-container > main {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        @media (max-width: 1120px) {
+            .wk-site-header {
+                flex-wrap: wrap;
             }
-        });
-    });
 
-    content.forEach((item) => item.addEventListener('click', (event) => {
-        if (item.getAttribute('href') === '#') event.preventDefault();
-    }));
+            .wk-nav {
+                order: 3;
+                width: 100%;
+                justify-content: space-between;
+                overflow-x: auto;
+                padding-bottom: 0.1rem;
+            }
 
-    setDomain(localStorage.getItem('waad-knowledge-domain') || 'software');
-}
+            .page-hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .page-hero .greeting-label {
+                justify-content: center;
+            }
+
+            .page-hero-subtitle {
+                border-left: 0;
+                border-bottom: 4px solid var(--wk-amber);
+                background: linear-gradient(0deg, var(--wk-amber-dim) 0%, transparent 100%);
+                margin-inline: auto;
+            }
+        }
+
+        @media (max-width: 760px) {
+            body[data-language="ar"] .system-container,
+            body[data-language="ar"] .page-system-container,
+            body[data-language="ar"] .about-system-container {
+                grid-template-columns: 1fr;
+            }
+
+            body[data-language="ar"] .system-container > main,
+            body[data-language="ar"] .page-system-container > main,
+            body[data-language="ar"] .about-system-container > main {
+                grid-column: 1;
+            }
+
+            body[data-language="ar"] .system-container > .side-telemetry,
+            body[data-language="ar"] .page-system-container > .side-telemetry,
+            body[data-language="ar"] .about-system-container > .side-telemetry {
+                display: none;
+            }
+
+            .page-system-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .page-system-container .side-telemetry {
+                display: none;
+            }
+
+            .page-hero-title {
+                font-size: 4rem;
+            }
+
+            .wk-nav {
+                display: none;
+            }
+
+            .wk-menu-button {
+                display: inline-flex;
+            }
+
+            .wk-mobile-menu:not([hidden]) {
+                display: block;
+            }
+
+            .wk-header-actions {
+                margin-left: auto;
+                gap: 10px;
+                max-width: 100%;
+                flex-wrap: wrap;
+            }
+
+            .wk-header-button {
+                width: auto;
+                min-width: 46px;
+                padding: 0 0.65rem;
+            }
+
+            .wk-header-button[data-search-button] .wk-button-text {
+                display: none;
+            }
+        }
+    `;
+    document.head.append(style);
+};
+
+injectSharedStyles();
+
+document.addEventListener('DOMContentLoaded', () => {
+    applyTheme(localStorage.getItem('waad-kernel-theme') || initialTheme);
+    applyLanguage(localStorage.getItem('waad-kernel-language') || initialLanguage);
+});
 
 class SiteHeader extends HTMLElement {
-    connectedCallback() { this.render(); }
-
-    render() {
+    connectedCallback() {
         this.style.display = 'block';
         const page = currentPage();
-        this.innerHTML = (page === 'home' ? this.homeHeader() : this.innerHeader(page)) + searchDialog();
-        initializeControls(this);
-        const dialog = this.querySelector('[data-search-dialog]');
-        const input = dialog.querySelector('[data-search-input]');
-        const results = dialog.querySelector('[data-search-results]');
-        input.addEventListener('input', () => this.runSearch(input.value, results));
-        this.runSearch('', results);
+        this.innerHTML = this.sharedHeader(page);
 
         const menuButton = this.querySelector('[data-menu-button]');
         const mobileMenu = this.querySelector('[data-mobile-menu]');
+        const themeButton = this.querySelector('[data-theme-toggle]');
+        const languageButton = this.querySelector('[data-language-toggle]');
+
         menuButton?.addEventListener('click', () => {
             const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
             menuButton.setAttribute('aria-expanded', String(!isOpen));
             mobileMenu.hidden = isOpen;
         });
+
+        themeButton?.addEventListener('click', () => {
+            const nextTheme = document.body.dataset.theme === 'light' ? 'dark' : 'light';
+            applyTheme(nextTheme);
+        });
+
+        languageButton?.addEventListener('click', () => {
+            const nextLanguage = document.body.dataset.language === 'ar' ? 'en' : 'ar';
+            applyLanguage(nextLanguage);
+        });
+
+        applyTheme(localStorage.getItem('waad-kernel-theme') || initialTheme);
+        applyLanguage(localStorage.getItem('waad-kernel-language') || initialLanguage);
     }
 
-    homeHeader() {
-        const links = pages.filter(({ id }) => id !== 'home').map(({ label, href }) => `<a href="${href}">${label}</a>`).join('');
-        return `<header class="home-site-header">
-            <a class="logo-group" href="index.html" aria-label="Waad Kernel home"><span class="logo-box">WK</span><span class="brand-name">Waad Kernel</span></a>
-            <nav class="home-nav" aria-label="Primary navigation">${links}</nav>
-            ${controls()}
-        </header>`;
-    }
-
-    innerHeader(page) {
+    sharedHeader(page) {
         const desktopLinks = pages.map((item) => this.navLink(item, page)).join('');
         const mobileLinks = pages.map((item) => this.mobileNavLink(item, page)).join('');
-        return `<nav class="fixed top-0 w-full z-50 glass-panel border-t-0 border-l-0 border-r-0 border-b border-white/5 py-3 rounded-none kernel-main-nav" aria-label="Primary navigation">
-            <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center gap-4">
-                <a href="index.html" class="flex items-center gap-3 group shrink-0" aria-label="Waad Kernel home">
-                    <span class="w-8 h-8 rounded bg-cyan-dim border border-cyan/30 flex items-center justify-center text-cyan"><i class="ph-fill ph-hexagon"></i></span>
-                    <span class="font-display font-bold text-lg tracking-wider text-white">WAAD<span class="text-cyan font-mono font-normal opacity-80">KERNEL</span></span>
+        const isArabic = (document.body.dataset.language || initialLanguage) === 'ar';
+        const themeLabel = isArabic
+            ? ((document.body.dataset.theme || initialTheme) === 'light' ? 'الوضع الداكن' : 'الوضع الفاتح')
+            : ((document.body.dataset.theme || initialTheme) === 'light' ? 'Dark Mode' : 'Light Mode');
+        const languageLabel = isArabic ? 'الإنجليزية' : 'Arabic';
+
+        return `
+            <header class="wk-site-header">
+                <a class="wk-logo-group" href="index.html" aria-label="Waad Kernel home">
+                    <span class="wk-logo-box">WK</span>
+                    <span class="wk-brand-name">Waad <span>Kernel</span></span>
                 </a>
-                <div class="kernel-desktop-links hidden lg:flex items-center gap-5 font-mono text-xs uppercase tracking-widest text-slate-400">${desktopLinks}</div>
-                <div class="hidden md:block">${controls()}</div>
-                <button type="button" class="lg:hidden text-slate-300 hover:text-cyan transition-colors" data-menu-button aria-expanded="false" aria-controls="mobile-navigation" aria-label="Open navigation menu"><i class="ph ph-list text-2xl"></i></button>
-            </div>
-            <div id="mobile-navigation" class="lg:hidden max-w-7xl mx-auto px-6 pt-4" data-mobile-menu hidden>
-                <div class="glass-panel rounded-xl p-4 flex flex-col gap-2 font-mono text-sm uppercase tracking-widest">${mobileLinks}${controls()}</div>
-            </div>
-        </nav>`;
+
+                <nav class="wk-nav" aria-label="Primary navigation">${desktopLinks}</nav>
+
+                <div class="wk-header-actions">
+                    <button type="button" class="wk-header-button" data-search-button aria-label="Search Waad Kernel">
+                        <i class="ph-bold ph-magnifying-glass" aria-hidden="true"></i>
+                        <span class="wk-button-text" data-i18n-key="search-label" data-i18n-en="Search" data-i18n-ar="بحث">Search</span>
+                    </button>
+                    <button type="button" class="wk-header-button" data-language-toggle aria-label="Switch language to Arabic" aria-pressed="false">${languageLabel}</button>
+                    <button type="button" class="wk-header-button" data-theme-toggle aria-label="Toggle color mode">
+                        <span data-theme-label>${themeLabel}</span>
+                    </button>
+                    <button type="button" class="wk-header-button wk-menu-button" data-menu-button aria-expanded="false" aria-controls="mobile-navigation" aria-label="Open navigation menu">
+                        Menu
+                    </button>
+                </div>
+
+                <div id="mobile-navigation" class="wk-mobile-menu" data-mobile-menu hidden>${mobileLinks}</div>
+            </header>
+        `;
     }
 
     navLink(item, page) {
         const active = item.id === page;
-        return `<a href="${item.href}" class="${active ? 'text-cyan font-medium relative text-glow-cyan' : 'hover:text-white transition-colors duration-300'}"${active ? ' aria-current="page"' : ''}>${item.label}</a>`;
+        return `<a href="${item.href}" data-nav-label="${item.id}"${active ? ' aria-current="page"' : ''}>${item.label}</a>`;
     }
 
     mobileNavLink(item, page) {
         const active = item.id === page;
-        return `<a href="${item.href}" class="${active ? 'text-cyan bg-cyan-dim border border-cyan/20' : 'text-slate-300 hover:text-white hover:bg-white/5'} rounded-lg px-4 py-3 transition-colors"${active ? ' aria-current="page"' : ''}>${item.label}</a>`;
-    }
-
-    runSearch(query, results) {
-        const language = getLanguage();
-        const value = query.trim().toLocaleLowerCase();
-        const matches = searchItems.filter((page) => !value || `${page.label} ${page.ar} ${page.description}`.toLocaleLowerCase().includes(value));
-        results.innerHTML = matches.length ? matches.map((page) => `
-            <a href="${page.href}">
-                <strong>${language === 'ar' ? page.ar : page.label}</strong>
-                <span>${language === 'ar' ? 'اضغطي للانتقال وعرض المحتوى' : page.description}</span>
-            </a>`).join('') : `<p>${language === 'ar' ? ar['No results found.'] : 'No results found.'}</p>`;
+        return `<a href="${item.href}" data-nav-label="${item.id}"${active ? ' aria-current="page"' : ''}>${item.label}</a>`;
     }
 }
 
 class SiteFooter extends HTMLElement {
-    connectedCallback() { this.render(); }
-    render() {
+    connectedCallback() {
         this.style.display = 'block';
+        const home = currentPage() === 'home';
         const year = new Date().getFullYear();
-        this.innerHTML = `
-            <footer class="professional-footer">
-                <div class="professional-footer-grid">
-                    <div class="footer-brand">
-                        <a href="index.html" class="footer-logo" aria-label="Waad Kernel home"><span>WK</span><strong>WAAD KERNEL</strong></a>
-                        <p>Software engineering, artificial intelligence, and practical technical knowledge documented with clarity.</p>
+
+        this.innerHTML = home
+            ? `
+                <footer class="home-site-footer">
+                    <span>WAAD_KERNEL &copy; ${year}</span>
+                    <span data-i18n-key="footer-tagline" data-i18n-en="Building practical knowledge" data-i18n-ar="بناء معرفة عملية">Building practical knowledge</span>
+                </footer>
+            `
+            : `
+                <footer class="border-t border-white/5 py-8 relative z-10 bg-base/80 backdrop-blur-md mt-auto">
+                    <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-2">
+                            <i class="ph-fill ph-hexagon text-cyan text-lg"></i>
+                            <span class="font-mono font-medium text-sm tracking-widest text-slate-400">WAAD_KERNEL &copy; ${year}</span>
+                        </div>
+                        <div class="font-mono text-xs text-slate-500 uppercase tracking-widest">
+                            <span data-i18n-key="footer-tagline" data-i18n-en="Building practical knowledge" data-i18n-ar="بناء معرفة عملية">Building practical knowledge</span>
+                        </div>
                     </div>
-                    <div class="footer-column">
-                        <h2>Explore</h2>
-                        <a href="about-waad-alhwaimel.html">About</a>
-                        <a href="software-engineering-projects.html">Projects</a>
-                        <a href="software-engineering-knowledge-base.html">Knowledge</a>
-                        <a href="student-project-planning-tools.html">Tools</a>
-                    </div>
-                    <div class="footer-column">
-                        <h2>Legal</h2>
-                        <a href="copyright-and-usage-policy.html">Copyright & Usage Policy</a>
-                        <a href="academic-disclaimer.html">Academic Disclaimer</a>
-                    </div>
-                    <div class="footer-column">
-                        <h2>Contact</h2>
-                        <a href="mailto:waad@waad-kernel.com">Email Waad</a>
-                        <a href="https://github.com/walhwaimel" target="_blank" rel="noopener noreferrer">GitHub</a>
-                        <a href="https://www.linkedin.com/in/waad-alhwaimel" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                    </div>
-                </div>
-                <div class="professional-footer-bottom">
-                    <span>WAAD_KERNEL &copy; ${year}. All rights reserved.</span>
-                    <span>Designed and documented by Waad Ibrahim Alhwaimel.</span>
-                </div>
-            </footer>`;
+                </footer>
+            `;
+
+        applyLanguage(localStorage.getItem('waad-kernel-language') || document.body.dataset.language || initialLanguage);
     }
 }
 
 customElements.define('site-header', SiteHeader);
 customElements.define('site-footer', SiteFooter);
 
-document.documentElement.dataset.theme = getTheme();
-window.addEventListener('DOMContentLoaded', () => {
-    setTheme(getTheme());
-    applyLanguage(getLanguage());
-    initializeKnowledgeModules();
-});
