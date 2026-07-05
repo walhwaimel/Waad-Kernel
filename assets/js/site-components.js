@@ -8,7 +8,7 @@
 
 const currentPage = () => document.body.dataset.page || 'home';
 const storedTheme = localStorage.getItem('waad-kernel-theme');
-const initialTheme = storedTheme || 'light';
+const initialTheme = storedTheme || 'dark';
 const storedLanguage = localStorage.getItem('waad-kernel-language');
 const initialLanguage = storedLanguage || 'en';
 
