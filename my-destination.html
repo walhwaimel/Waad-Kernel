@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Destination Project | Waad Kernel</title>
+    <meta name="description" content="Project details for My Destination, an accessibility-focused destination discovery platform.">
+    <meta name="author" content="Waad Ibrahim Alhwaimel">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/png" href="assets/images/waad-kernel-favicon.png">
+    <link rel="apple-touch-icon" href="assets/images/waad-kernel-favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        base: '#06080d',
+                        cyan: { DEFAULT: '#00f0ff', dim: 'rgba(0, 240, 255, 0.1)' },
+                        amber: { DEFAULT: '#ff9f00', dim: 'rgba(255, 159, 0, 0.1)' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="assets/js/site-components.js" defer></script>
+    <style>
+        body { background: #06080d; color: #e2e8f0; overflow-x: hidden; }
+        .glass-panel { background: rgba(12, 16, 28, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.06); }
+        .glow-text-cyan { text-shadow: 0 0 15px rgba(0, 240, 255, 0.5); }
+        .project-detail-card { background: rgba(6, 8, 13, 0.48); border: 1px solid rgba(255,255,255,0.06); border-radius: 1rem; padding: 1.25rem; }
+        .resource-link { min-height: 44px; border-radius: 0.75rem; border: 1px solid rgba(0,240,255,0.32); background: rgba(0,240,255,0.08); color: #00f0ff; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; padding: 0.72rem 0.9rem; }
+        .screenshot-frame { min-height: 14rem; border: 1px solid rgba(0,240,255,0.22); background: linear-gradient(135deg, rgba(0,240,255,0.08), rgba(255,255,255,0.02)); display: grid; place-items: center; }
+        .md-prototype { position: relative; overflow: hidden; }
+        .md-prototype::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 18% 12%, rgba(0,240,255,0.12), transparent 30%), linear-gradient(135deg, rgba(0,240,255,0.08), transparent 42%, rgba(255,159,0,0.04)); pointer-events: none; }
+        .md-prototype-shell { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(320px, 430px); justify-content: center; align-items: start; gap: 1.25rem; }
+        .md-prototype-nav { display: none; }
+        .md-prototype-tab { min-height: 44px; border: 1px solid rgba(255,255,255,0.09); background: rgba(255,255,255,0.04); color: #cbd5e1; border-radius: 0.85rem; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; font-weight: 700; display: flex; align-items: center; gap: 0.55rem; padding: 0 0.8rem; transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, transform 0.2s ease; cursor: pointer; text-align: left; }
+        .md-prototype-tab:hover { border-color: rgba(20,158,154,0.75); color: #fff; background: rgba(20,158,154,0.16); transform: translateX(2px); }
+        .md-prototype-tab.is-active { border-color: rgba(20,158,154,0.95); color: #7ff7ef; background: rgba(20,158,154,0.22); box-shadow: 0 0 18px rgba(20,158,154,0.18); }
+        .md-phone { width: min(100%, 430px); height: 820px; border: 10px solid #0b0f17; border-radius: 2rem; background: #f8fafc; box-shadow: 0 26px 70px rgba(0,0,0,0.42), 0 0 0 1px rgba(0,240,255,0.18); overflow: hidden; justify-self: center; }
+        .md-screen-wrap { position: relative; height: 100%; background: #f7f8fb; font-family: Inter, system-ui, sans-serif; color: #071225; }
+        .md-screen { position: absolute; inset: 0; opacity: 0; transform: translateY(10px); pointer-events: none; transition: opacity 0.28s ease, transform 0.28s ease; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #149e9a #eef3f7; }
+        .md-screen.is-active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .md-mobile-pad { padding: 1.35rem 1.05rem 5.9rem; }
+        .md-auth-screen { min-height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 2rem 1.45rem; background: #fbfbfc; }
+        .md-auth-top { display: grid; justify-items: center; text-align: center; margin-bottom: auto; padding-top: 3rem; }
+        .md-auth-actions { display: grid; gap: 0.75rem; margin-top: auto; padding-bottom: 0.6rem; }
+        .md-primary-btn, .md-secondary-btn, .md-choice-btn { min-height: 52px; border-radius: 1rem; font-weight: 800; transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease; }
+        .md-primary-btn { border: 0; background: #169f9b; color: #fff; box-shadow: 0 12px 24px rgba(22,159,155,0.22); }
+        .md-secondary-btn, .md-choice-btn { border: 1px solid #169f9b; background: #fff; color: #087c78; }
+        .md-primary-btn:hover, .md-secondary-btn:hover, .md-choice-btn:hover { transform: translateY(-1px); }
+        .md-auth-bar { height: 58px; display: flex; align-items: center; border-bottom: 1px solid #dce4ed; padding: 0 1rem; background: #fff; }
+        .md-form-screen { min-height: 100%; background: #fbfbfc; }
+        .md-form-pad { padding: 1.25rem 1.35rem 5rem; }
+        .md-form-field { display: grid; gap: 0.45rem; margin-top: 1rem; color: #071225; font-size: 0.83rem; }
+        .md-form-field span:first-child { font-weight: 700; }
+        .md-input-mock { min-height: 46px; border: 1px solid #dce4ed; border-radius: 1rem; color: #64748b; display: flex; align-items: center; padding: 0 0.8rem; background: #fff; }
+        .md-mobile-head { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; margin-bottom: 1.15rem; }
+        .md-user-greet { display: flex; align-items: center; gap: 0.75rem; }
+        .md-app-logo { width: 46px; height: 46px; flex: 0 0 auto; border-radius: 50%; display: grid; place-items: center; background: #169f9b; color: #fff; box-shadow: 0 10px 22px rgba(22,159,155,0.24); }
+        .md-app-logo.large { width: 92px; height: 92px; margin: 0 auto 1.85rem; font-size: 2.25rem; }
+        .md-kicker { color: #667799; font-size: 0.82rem; line-height: 1.15; }
+        .md-app-title { color: #071225; font-size: 1.22rem; line-height: 1.1; font-weight: 800; }
+        .md-h1 { color: #071225; font-size: 1.42rem; line-height: 1.18; font-weight: 800; }
+        .md-muted { color: #64748b; font-size: 0.86rem; line-height: 1.55; }
+        .md-place-card, .md-detail-card, .md-settings-card, .md-review-card, .md-event-card { background: #fff; border: 1px solid rgba(226,232,240,0.82); border-radius: 1.45rem; box-shadow: 0 12px 28px rgba(15,23,42,0.08); overflow: hidden; }
+        .md-place-card { margin-top: 0.95rem; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; text-align: left; width: 100%; }
+        .md-place-card:hover { transform: translateY(-2px); box-shadow: 0 18px 34px rgba(15,23,42,0.12); }
+        .md-place-photo { position: relative; min-height: 136px; overflow: hidden; background: linear-gradient(135deg, #1f2937, #0f766e); }
+        .md-place-photo::before { content: ''; position: absolute; inset: 0; background: linear-gradient(115deg, rgba(20,158,154,0.18), transparent 30%), repeating-linear-gradient(90deg, rgba(255,255,255,0.16) 0 3px, transparent 3px 28px), radial-gradient(circle at 58% 18%, #facc15 0 5px, transparent 6px), linear-gradient(180deg, transparent 45%, rgba(7,18,37,0.72)); }
+        .md-place-photo::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 42%; background: repeating-linear-gradient(90deg, rgba(255,159,0,0.8) 0 8px, rgba(20,158,154,0.8) 8px 15px, transparent 15px 34px); opacity: 0.64; }
+        .md-place-photo.mall { background: linear-gradient(135deg, #c27b35, #1e4d5c); }
+        .md-place-photo.park { background: linear-gradient(135deg, #167a4d, #9bc6e7); }
+        .md-discover { display: none; }
+        .md-place-body { padding: 1rem; }
+        .md-place-title-row { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+        .md-rating { color: #071225; display: inline-flex; align-items: center; gap: 0.28rem; font-size: 0.82rem; }
+        .md-rating i, .md-stars { color: #f7b718; }
+        .md-tag-row { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.65rem; }
+        .md-chip { border: 0; background: #f1f6f8; border-radius: 999px; padding: 0.34rem 0.62rem; color: #24344d; font-size: 0.72rem; display: inline-flex; align-items: center; gap: 0.3rem; }
+        .md-chip.teal { color: #087c78; background: #e4f8f6; }
+        .md-search-box { min-height: 48px; border: 0; border-radius: 1.15rem; background: #f0f3f7; color: #60708c; display: flex; align-items: center; gap: 0.65rem; padding: 0 0.95rem; margin-bottom: 0.85rem; }
+        .md-category-row { display: flex; gap: 0.62rem; overflow-x: auto; padding-bottom: 0.55rem; margin-bottom: 0.7rem; }
+        .md-category { flex: 0 0 auto; border: 0; border-radius: 999px; background: #f0f3f7; color: #60708c; padding: 0.82rem 1rem; font-weight: 700; font-size: 0.8rem; }
+        .md-category.active { background: #149e9a; color: #fff; }
+        .md-map-canvas { height: 430px; position: relative; overflow: hidden; border-radius: 1.35rem; background: linear-gradient(30deg, #ecf4f6 12%, transparent 12% 22%, #fff 22% 33%, transparent 33%), linear-gradient(125deg, #dcecf0, #f8fafc); background-size: 92px 92px, auto; border: 1px solid #dde8ee; margin-bottom: 1rem; }
+        .md-map-road { position: absolute; height: 8px; border-radius: 999px; background: #cbd5e1; transform-origin: left center; }
+        .md-map-pin { position: absolute; width: 38px; height: 38px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: #149e9a; display: grid; place-items: center; color: #fff; box-shadow: 0 9px 20px rgba(20,158,154,0.35); }
+        .md-map-pin i { transform: rotate(45deg); }
+        .md-detail-hero { min-height: 210px; position: relative; background: linear-gradient(135deg, #111827, #0f766e); }
+        .md-detail-hero::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(255,255,255,0.13) 0 4px, transparent 4px 30px), radial-gradient(circle at 58% 22%, #facc15 0 7px, transparent 8px), linear-gradient(180deg, transparent 38%, rgba(7,18,37,0.62)); }
+        .md-detail-hero.roshn { background: linear-gradient(135deg, #36506b, #c88b45); }
+        .md-detail-hero.listen { background: linear-gradient(135deg, #b88745, #1f5f67); }
+        .md-detail-hero.mall { background: linear-gradient(135deg, #c27b35, #1e4d5c); }
+        .md-detail-hero.uwalk { background: linear-gradient(135deg, #223c59, #86a8c8); }
+        .md-detail-hero.zone { background: linear-gradient(135deg, #254d42, #d8ad5d); }
+        .md-detail-hero.vox { background: linear-gradient(135deg, #101827, #149e9a); }
+        .md-close { position: absolute; z-index: 1; top: 0.85rem; left: 0.85rem; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #fff; color: #071225; display: grid; place-items: center; box-shadow: 0 8px 18px rgba(15,23,42,0.16); }
+        .md-detail-card { margin: -1.45rem 0.8rem 1rem; position: relative; padding: 1.05rem; }
+        .md-outline-button { min-height: 44px; border: 1px solid #149e9a; border-radius: 1rem; color: #087c78; background: #fff; display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; padding: 0 0.85rem; font-weight: 700; margin: 0.85rem 0; }
+        .md-review-card { padding: 1rem; margin-top: 0.8rem; display: grid; grid-template-columns: auto 1fr auto; gap: 0.75rem; }
+        .md-avatar { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; color: #087c78; background: #e6f7f5; font-weight: 800; }
+        .md-event-card { padding: 1rem; margin-top: 0.9rem; }
+        .md-event-date { width: 58px; height: 58px; border-radius: 1rem; background: #e4f8f6; color: #087c78; display: grid; place-items: center; font-weight: 900; text-align: center; line-height: 1.05; }
+        .md-bottom-nav { position: absolute; left: 0; right: 0; bottom: 0; height: 82px; background: #fff; border-top: 1px solid #dde5ee; display: grid; grid-template-columns: repeat(4, 1fr); align-items: center; z-index: 4; }
+        .md-bottom-item { color: #60708c; display: grid; justify-items: center; gap: 0.24rem; font-size: 0.68rem; font-weight: 700; background: transparent; border: 0; }
+        .md-bottom-item i { font-size: 1.35rem; }
+        .md-bottom-item.active { color: #149e9a; }
+        .md-org-stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin-top: 1rem; }
+        .md-org-stat { background: #fff; border: 1px solid #e2e8f0; border-radius: 1.15rem; padding: 1rem; box-shadow: 0 10px 22px rgba(15,23,42,0.06); }
+        .md-map-canvas.compact { height: 390px; }
+        .md-place-card:focus-visible, .md-map-pin:focus-visible, .md-bottom-item:focus-visible, .md-outline-button:focus-visible { outline: 3px solid rgba(20,158,154,0.35); outline-offset: 3px; }
+        .md-place-photo.roshn { background: linear-gradient(135deg, #36506b, #c88b45); }
+        .md-place-photo.listen { background: linear-gradient(135deg, #b88745, #1f5f67); }
+        .md-place-photo.uwalk { background: linear-gradient(135deg, #223c59, #86a8c8); }
+        .md-place-photo.zone { background: linear-gradient(135deg, #254d42, #d8ad5d); }
+        .md-place-photo.vox { background: linear-gradient(135deg, #101827, #149e9a); }
+        .md-review-compose { border: 1px dashed #9bd9d6; background: #f1fbfa; border-radius: 1.15rem; padding: 1rem; margin-top: 0.9rem; }
+        body[data-language="ar"] .md-prototype-shell, body[data-language="ar"] .md-prototype-tab, body[data-language="ar"] .md-screen { direction: rtl; text-align: right; }
+        body[data-language="ar"] .md-prototype-tab:hover { transform: translateX(-2px); }
+        body[data-language="ar"] .md-discover { right: auto; left: 0.75rem; }
+        body[data-language="ar"] .md-close { left: auto; right: 0.85rem; }
+        @media (max-width: 900px) { .md-prototype-shell { grid-template-columns: 1fr; } }
+        @media (max-width: 520px) { .md-prototype { margin-inline: -0.75rem; border-radius: 1.25rem; } .md-phone { height: 760px; border-width: 7px; border-radius: 1.55rem; } .md-mobile-pad { padding-inline: 0.85rem; } .md-h1 { font-size: 1.22rem; } }
+        body[data-language="ar"] main { direction: rtl; text-align: right; }
+        body[data-language="ar"] .ph-arrow-left, body[data-language="ar"] .ph-arrow-right { transform: scaleX(-1); }
+    </style>
+</head>
+<body class="relative min-h-screen antialiased flex flex-col font-sans w-full" data-page="projects">
+    <div class="system-container page-system-container">
+        <aside class="side-telemetry" aria-hidden="true">
+            <div class="data-block"><span><span class="i18n-en">PROJECT_FILE</span><span class="i18n-ar" lang="ar">ملف المشروع</span></span><div class="data-bar"><span class="data-bar-fill" style="width: 86%;"></span></div></div>
+            <div class="vertical-text">WAAD_KERNEL_OS_v2.4</div>
+        </aside>
+        <main class="main-interface page-main-interface">
+            <site-header></site-header>
+
+            <header class="hero page-hero">
+                <div class="page-hero-content">
+                    <a href="software-engineering-projects.html" class="inline-flex items-center gap-2 px-3 py-1 rounded border border-cyan/20 bg-cyan-dim font-mono text-xs text-cyan uppercase tracking-widest mb-8">
+                        <i class="ph-bold ph-arrow-left"></i>
+                        <span class="i18n-en">Back to Projects</span><span class="i18n-ar" lang="ar">العودة إلى المشاريع</span>
+                    </a>
+                    <h1 class="page-hero-title font-display glow-text-cyan">My Destination</h1>
+                    <p class="page-hero-subtitle text-xl text-slate-300 leading-relaxed font-light">
+                        <span class="i18n-en">An accessibility-focused platform for discovering places, services, and events before visiting.</span>
+                        <span class="i18n-ar" lang="ar">منصة تركّز على إمكانية الوصول لاكتشاف الأماكن والخدمات والفعاليات قبل الزيارة.</span>
+                    </p>
+                </div>
+                <div class="robot-container page-visual" aria-hidden="true"><div class="robot-frame page-visual-frame"></div><div class="page-visual-core"><div class="page-visual-node">01</div></div></div>
+            </header>
+
+            <section class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                <article class="project-detail-card"><h2 class="font-mono text-xs text-cyan uppercase tracking-widest mb-3"><span class="i18n-en">Project Overview</span><span class="i18n-ar" lang="ar">نظرة عامة على المشروع</span></h2><p class="text-slate-300 leading-relaxed"><span class="i18n-en">My Destination organizes accessibility information so users can compare destinations and plan visits with more confidence.</span><span class="i18n-ar" lang="ar">ينظم My Destination معلومات إمكانية الوصول حتى يستطيع المستخدم مقارنة الوجهات والتخطيط للزيارة بثقة أكبر.</span></p></article>
+                <article class="project-detail-card"><h2 class="font-mono text-xs text-cyan uppercase tracking-widest mb-3"><span class="i18n-en">Problem Statement</span><span class="i18n-ar" lang="ar">بيان المشكلة</span></h2><p class="text-slate-300 leading-relaxed"><span class="i18n-en">Accessibility details are often scattered, incomplete, or difficult to verify before a person arrives at a location.</span><span class="i18n-ar" lang="ar">غالبًا تكون معلومات إمكانية الوصول متفرقة أو ناقصة أو صعبة التحقق قبل وصول الشخص إلى الموقع.</span></p></article>
+                <article class="project-detail-card"><h2 class="font-mono text-xs text-cyan uppercase tracking-widest mb-3"><span class="i18n-en">Why It Was Built</span><span class="i18n-ar" lang="ar">لماذا بُني المشروع</span></h2><p class="text-slate-300 leading-relaxed"><span class="i18n-en">The project was built to support inclusive planning and reduce uncertainty for users who need reliable place information.</span><span class="i18n-ar" lang="ar">بُني المشروع لدعم التخطيط الشامل وتقليل عدم اليقين لدى المستخدمين الذين يحتاجون إلى معلومات موثوقة عن الأماكن.</span></p></article>
+                <article class="project-detail-card"><h2 class="font-mono text-xs text-cyan uppercase tracking-widest mb-3"><span class="i18n-en">Development Process</span><span class="i18n-ar" lang="ar">عملية التطوير</span></h2><p class="text-slate-300 leading-relaxed"><span class="i18n-en">The workflow moved from requirements analysis to user flows, UML modeling, prototype screens, and iterative validation.</span><span class="i18n-ar" lang="ar">انتقل العمل من تحليل المتطلبات إلى تدفقات المستخدم، نمذجة UML، شاشات النموذج الأولي، والتحقق التكراري.</span></p></article>
+                <article class="project-detail-card"><h2 class="font-mono text-xs text-cyan uppercase tracking-widest mb-3"><span class="i18n-en">Tools and Technologies</span><span class="i18n-ar" lang="ar">الأدوات والتقنيات</span></h2><p class="text-slate-300 leading-relaxed">UML, UI/UX, accessibility criteria, user-flow mapping, prototyping, map interaction concepts.</p></article>
+                <article class="project-detail-card"><h2 class="font-mono text-xs text-cyan uppercase tracking-widest mb-3"><span class="i18n-en">UML Diagrams / Architecture</span><span class="i18n-ar" lang="ar">مخططات UML / البنية</span></h2><p class="text-slate-300 leading-relaxed"><span class="i18n-en">Use case, activity, and interface-flow diagrams define destination search, filtering, event browsing, and accessibility review paths.</span><span class="i18n-ar" lang="ar">توضح مخططات Use Case وActivity وتدفق الواجهة مسارات البحث، التصفية، تصفح الفعاليات، ومراجعة إمكانية الوصول.</span></p></article>
+            </section>
+
+            <section class="md-prototype glass-panel rounded-[2rem] p-7 md:p-9" aria-labelledby="prototype-title">
+                <div class="relative z-10 mb-6">
+                    <h2 id="prototype-title" class="font-display text-3xl md:text-4xl font-bold text-white glow-text-cyan">
+                        <span class="i18n-en">High-Fidelity Interactive Prototype</span><span class="i18n-ar" lang="ar">النموذج التفاعلي عالي الدقة</span>
+                    </h2>
+                </div>
+
+                <div class="md-prototype-shell">
+                    <div class="md-prototype-nav" role="tablist" aria-label="My Destination prototype screens">
+                        <button type="button" class="md-prototype-tab" data-prototype-tab="home" role="tab" aria-selected="false"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button>
+                        <button type="button" class="md-prototype-tab" data-prototype-tab="search" role="tab" aria-selected="false"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button>
+                        <button type="button" class="md-prototype-tab" data-prototype-tab="map" role="tab" aria-selected="false"><i class="ph-duotone ph-map-trifold"></i><span class="i18n-en">Map</span><span class="i18n-ar" lang="ar">الخريطة</span></button>
+                        <button type="button" class="md-prototype-tab" data-prototype-tab="reviews" role="tab" aria-selected="false"><i class="ph-duotone ph-star"></i><span class="i18n-en">Reviews</span><span class="i18n-ar" lang="ar">المراجعات</span></button>
+                    </div>
+
+                    <div class="md-phone">
+                        <div class="md-screen-wrap">
+                            <div class="md-screen is-active" data-prototype-screen="login">
+                                <div class="md-auth-screen">
+                                    <div class="md-auth-top">
+                                        <div class="md-app-logo large"><i class="ph-duotone ph-wheelchair"></i></div>
+                                        <h3 class="md-h1 text-3xl">My Destination</h3>
+                                        <p class="md-muted mt-3"><span class="i18n-en">Find accessible places with ease</span><span class="i18n-ar" lang="ar">اكتشف الأماكن المهيأة بسهولة</span></p>
+                                    </div>
+                                    <div class="md-auth-actions">
+                                        <button type="button" class="md-primary-btn" data-prototype-tab="home"><span class="i18n-en">Log in</span><span class="i18n-ar" lang="ar">تسجيل الدخول</span></button>
+                                        <button type="button" class="md-secondary-btn" data-prototype-tab="signup-choice"><span class="i18n-en">Sign up</span><span class="i18n-ar" lang="ar">إنشاء حساب</span></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="md-screen" data-prototype-screen="signup-choice">
+                                <div class="md-form-screen">
+                                    <div class="md-auth-bar"><button type="button" class="text-2xl" data-prototype-tab="login" aria-label="Back"><i class="ph ph-arrow-left"></i></button></div>
+                                    <div class="md-form-pad text-center">
+                                        <h3 class="md-h1 mb-8"><span class="i18n-en">Sign up as</span><span class="i18n-ar" lang="ar">إنشاء حساب كـ</span></h3>
+                                        <div class="grid gap-3">
+                                            <button type="button" class="md-choice-btn" data-prototype-tab="user-signup"><span class="i18n-en">User</span><span class="i18n-ar" lang="ar">مستخدم</span></button>
+                                            <button type="button" class="md-choice-btn" data-prototype-tab="org-signup"><span class="i18n-en">Organization</span><span class="i18n-ar" lang="ar">منظمة</span></button>
+                                            <button type="button" class="md-primary-btn mt-4" data-prototype-tab="user-signup"><span class="i18n-en">Next</span><span class="i18n-ar" lang="ar">التالي</span></button>
+                                        </div>
+                                        <p class="md-muted mt-6"><span class="i18n-en">Already have an account?</span><span class="i18n-ar" lang="ar">لديك حساب؟</span> <button type="button" class="font-bold text-[#087c78]" data-prototype-tab="login"><span class="i18n-en">Log in</span><span class="i18n-ar" lang="ar">تسجيل الدخول</span></button></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="md-screen" data-prototype-screen="user-signup">
+                                <div class="md-form-screen">
+                                    <div class="md-auth-bar"><button type="button" class="text-2xl" data-prototype-tab="signup-choice" aria-label="Back"><i class="ph ph-arrow-left"></i></button></div>
+                                    <div class="md-form-pad">
+                                        <h3 class="md-h1 text-center mb-6"><span class="i18n-en">User Sign up</span><span class="i18n-ar" lang="ar">تسجيل مستخدم</span></h3>
+                                        <label class="md-form-field"><span><span class="i18n-en">Name</span><span class="i18n-ar" lang="ar">الاسم</span></span><span class="md-input-mock"><span class="i18n-en">Enter your name</span><span class="i18n-ar" lang="ar">أدخل اسمك</span></span></label>
+                                        <label class="md-form-field"><span><span class="i18n-en">Phone Number</span><span class="i18n-ar" lang="ar">رقم الجوال</span></span><span class="md-input-mock"><span class="i18n-en">Enter phone number</span><span class="i18n-ar" lang="ar">أدخل رقم الجوال</span></span></label>
+                                        <label class="md-form-field"><span><span class="i18n-en">Password</span><span class="i18n-ar" lang="ar">كلمة المرور</span></span><span class="md-input-mock"><span class="i18n-en">Create password</span><span class="i18n-ar" lang="ar">أنشئ كلمة مرور</span></span></label>
+                                        <label class="md-form-field"><span><span class="i18n-en">Email (optional)</span><span class="i18n-ar" lang="ar">البريد الإلكتروني (اختياري)</span></span><span class="md-input-mock"><span class="i18n-en">Enter email</span><span class="i18n-ar" lang="ar">أدخل البريد الإلكتروني</span></span></label>
+                                        <button type="button" class="md-primary-btn w-full mt-5" data-prototype-tab="home"><span class="i18n-en">Sign up</span><span class="i18n-ar" lang="ar">إنشاء حساب</span></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="md-screen" data-prototype-screen="org-signup">
+                                <div class="md-form-screen">
+                                    <div class="md-auth-bar"><button type="button" class="text-2xl" data-prototype-tab="signup-choice" aria-label="Back"><i class="ph ph-arrow-left"></i></button></div>
+                                    <div class="md-form-pad">
+                                        <h3 class="md-h1 text-center mb-5"><span class="i18n-en">Organization Sign up</span><span class="i18n-ar" lang="ar">تسجيل منظمة</span></h3>
+                                        <label class="md-form-field"><span><span class="i18n-en">Organization Name</span><span class="i18n-ar" lang="ar">اسم المنظمة</span></span><span class="md-input-mock"><span class="i18n-en">Enter organization name</span><span class="i18n-ar" lang="ar">أدخل اسم المنظمة</span></span></label>
+                                        <label class="md-form-field"><span><span class="i18n-en">Email</span><span class="i18n-ar" lang="ar">البريد الإلكتروني</span></span><span class="md-input-mock"><span class="i18n-en">Enter email</span><span class="i18n-ar" lang="ar">أدخل البريد الإلكتروني</span></span></label>
+                                        <label class="md-form-field"><span><span class="i18n-en">Phone Number</span><span class="i18n-ar" lang="ar">رقم الجوال</span></span><span class="md-input-mock"><span class="i18n-en">Enter phone number</span><span class="i18n-ar" lang="ar">أدخل رقم الجوال</span></span></label>
+                                        <label class="md-form-field"><span><span class="i18n-en">Organization Type</span><span class="i18n-ar" lang="ar">نوع المنظمة</span></span><span class="md-input-mock"><span class="i18n-en">Restaurant, mall, event organizer...</span><span class="i18n-ar" lang="ar">مطعم، مركز تسوق، منظم فعاليات...</span></span></label>
+                                        <label class="md-form-field"><span><span class="i18n-en">License Number</span><span class="i18n-ar" lang="ar">رقم الترخيص</span></span><span class="md-input-mock"><span class="i18n-en">Enter license number</span><span class="i18n-ar" lang="ar">أدخل رقم الترخيص</span></span></label>
+                                        <button type="button" class="md-primary-btn w-full mt-5" data-prototype-tab="org-home"><span class="i18n-en">Sign up</span><span class="i18n-ar" lang="ar">إنشاء حساب</span></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="md-screen" data-prototype-screen="home">
+                                <div class="md-mobile-pad">
+                                    <div class="md-mobile-head">
+                                        <div class="md-user-greet">
+                                            <div class="md-app-logo"><i class="ph-duotone ph-wheelchair"></i></div>
+                                            <div>
+                                                <p class="md-kicker"><span class="i18n-en">Welcome back</span><span class="i18n-ar" lang="ar">مرحباً بعودتك</span></p>
+                                                <h3 class="md-app-title"><span class="i18n-en">Hi Waad</span><span class="i18n-ar" lang="ar">أهلاً وعد</span></h3>
+                                            </div>
+                                        </div>
+                                        <span class="md-chip teal"><i class="ph-duotone ph-sparkle"></i> AI</span>
+                                    </div>
+                                    <h4 class="md-h1"><span class="i18n-en">Suggested Places</span><span class="i18n-ar" lang="ar">الأماكن المقترحة</span></h4>
+
+                                    <article class="md-place-card" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="Roshn Front" data-place-query="Roshn+Front+Riyadh" data-place-photo="roshn" data-place-rating="4.7" data-place-features="Wheelchair-accessible entrances|Elevator access|Accessible restrooms|Wide outdoor paths" data-place-review="Waad wrote: The outdoor paths were wide and clear, and the accessible restroom signs were easy to find." aria-label="Open Roshn Front details">
+                                        <div class="md-place-photo roshn"></div>
+                                        <div class="md-place-body">
+                                            <div class="md-place-title-row"><h5 class="md-app-title">Roshn Front</h5><span class="md-rating"><i class="ph-fill ph-star"></i> 4.7</span></div>
+                                            <p class="md-muted"><span class="i18n-en">Lifestyle destination ranked for clear outdoor movement, entrances, and restroom access.</span><span class="i18n-ar" lang="ar">وجهة حياة يومية مصنفة لمسارات خارجية واضحة ومداخل ودورات مياه مهيأة.</span></p>
+                                            <p class="md-muted mt-2"><i class="ph-duotone ph-map-pin"></i> <span class="i18n-en">Shopping and dining</span><span class="i18n-ar" lang="ar">تسوق ومطاعم</span></p>
+                                            <div class="md-tag-row"><span class="md-chip"><span class="i18n-en">Elevators</span><span class="i18n-ar" lang="ar">مصاعد</span></span><span class="md-chip"><span class="i18n-en">Wide paths</span><span class="i18n-ar" lang="ar">ممرات واسعة</span></span><span class="md-chip">+2</span></div>
+                                        </div>
+                                    </article>
+
+                                    <article class="md-place-card" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="Listen Valley" data-place-query="Listen+Valley+Riyadh" data-place-photo="listen" data-place-rating="4.5" data-place-features="Accessible parking|Elevator access|Wide corridors|Staff assistance" data-place-review="Waad visited before. Add a new review about parking, elevator access, and corridor comfort." aria-label="Open Listen Valley details">
+                                        <div class="md-place-photo listen"></div>
+                                        <div class="md-place-body">
+                                            <div class="md-place-title-row"><h5 class="md-app-title">Listen Valley</h5><span class="md-rating"><i class="ph-fill ph-star"></i> 4.5</span></div>
+                                            <p class="md-muted"><span class="i18n-en">Modern destination with accessible entrances, spacious corridors, and an option for Waad to add a review.</span><span class="i18n-ar" lang="ar">وجهة حديثة بمداخل مهيأة وممرات واسعة مع خيار لوعد لكتابة مراجعة.</span></p>
+                                            <p class="md-muted mt-2"><i class="ph-duotone ph-map-pin"></i> <span class="i18n-en">Shopping and cafes</span><span class="i18n-ar" lang="ar">تسوق ومقاهي</span></p>
+                                            <div class="md-tag-row"><span class="md-chip"><span class="i18n-en">Accessible parking</span><span class="i18n-ar" lang="ar">مواقف مهيأة</span></span><span class="md-chip"><span class="i18n-en">Elevators</span><span class="i18n-ar" lang="ar">مصاعد</span></span><span class="md-chip">+1</span></div>
+                                        </div>
+                                    </article>
+                                </div>
+                                <nav class="md-bottom-nav" aria-label="User app navigation"><button type="button" class="md-bottom-item active" data-prototype-tab="home"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item" data-prototype-tab="search"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button><button type="button" class="md-bottom-item" data-prototype-tab="map"><i class="ph-duotone ph-map-trifold"></i><span class="i18n-en">Map</span><span class="i18n-ar" lang="ar">الخريطة</span></button><button type="button" class="md-bottom-item" data-prototype-tab="reviews"><i class="ph-duotone ph-star"></i><span class="i18n-en">Reviews</span><span class="i18n-ar" lang="ar">المراجعات</span></button></nav>
+                            </div>
+
+                            <div class="md-screen" data-prototype-screen="search">
+                                <div class="md-mobile-pad">
+                                    <div class="md-search-box"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search accessible places...</span><span class="i18n-ar" lang="ar">ابحث عن أماكن مهيأة...</span></div>
+                                    <div class="md-category-row" aria-label="Search categories">
+                                        <button type="button" class="md-category active"><span class="i18n-en">All</span><span class="i18n-ar" lang="ar">الكل</span></button>
+                                        <button type="button" class="md-category"><span class="i18n-en">Entertainments</span><span class="i18n-ar" lang="ar">ترفيه</span></button>
+                                        <button type="button" class="md-category"><span class="i18n-en">Food</span><span class="i18n-ar" lang="ar">مطاعم</span></button>
+                                        <button type="button" class="md-category"><span class="i18n-en">Shopping Mall</span><span class="i18n-ar" lang="ar">تسوق</span></button>
+                                        <button type="button" class="md-category"><span class="i18n-en">Parks</span><span class="i18n-ar" lang="ar">حدائق</span></button>
+                                    </div>
+                                    <div class="md-tag-row mb-2"><span class="md-chip teal"><i class="ph-duotone ph-wheelchair"></i><span class="i18n-en">Wheelchair ramp</span><span class="i18n-ar" lang="ar">منحدر</span></span><span class="md-chip"><i class="ph-duotone ph-arrow-square-up"></i><span class="i18n-en">Elevator</span><span class="i18n-ar" lang="ar">مصعد</span></span><span class="md-chip"><i class="ph-duotone ph-person-simple"></i><span class="i18n-en">Accessible restroom</span><span class="i18n-ar" lang="ar">دورة مياه</span></span></div>
+                                    <article class="md-place-card" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="Boulevard City" data-place-query="Boulevard+City+Riyadh" data-place-photo="mall" data-place-rating="4.8" data-place-features="Wheelchair ramps|Wide pathways|Accessible restrooms|Braille signage" data-place-review="Recent visitors mention helpful staff and clear elevator routes." aria-label="Open Boulevard City details"><div class="md-place-photo mall"></div><div class="md-place-body"><div class="md-place-title-row"><h5 class="md-app-title">Boulevard City</h5><span class="md-rating"><i class="ph-fill ph-star"></i> 4.8</span></div><p class="md-muted"><span class="i18n-en">AI ranked first because wheelchair ramps and wide pathways match your needs.</span><span class="i18n-ar" lang="ar">صنفه الذكاء الاصطناعي أولاً لأن المنحدرات والممرات الواسعة تناسب احتياجك.</span></p><div class="md-tag-row"><span class="md-chip">Wheelchair ramps</span><span class="md-chip">Wide pathways</span><span class="md-chip">+2 more</span></div></div></article>
+                                    <article class="md-place-card" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="U Walk" data-place-query="U+Walk+Riyadh" data-place-photo="uwalk" data-place-rating="4.6" data-place-features="Accessible parking|Elevator access|Wide walkways|Accessible restroom" data-place-review="Good option for restaurants and cafes with accessible paths between stores." aria-label="Open U Walk details"><div class="md-place-photo uwalk"></div><div class="md-place-body"><div class="md-place-title-row"><h5 class="md-app-title">U Walk</h5><span class="md-rating"><i class="ph-fill ph-star"></i> 4.6</span></div><p class="md-muted"><span class="i18n-en">Restaurants and cafes with wide walkways and accessible parking nearby.</span><span class="i18n-ar" lang="ar">مطاعم ومقاهي مع ممرات واسعة ومواقف مهيأة قريبة.</span></p></div></article>
+                                    <article class="md-place-card" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="The Zone" data-place-query="The+Zone+Riyadh" data-place-photo="zone" data-place-rating="4.4" data-place-features="Reserved parking|Low curb access|Elevator access|Staff assistance" data-place-review="Visitors highlight convenient parking and clear entrance access." aria-label="Open The Zone details"><div class="md-place-photo zone"></div><div class="md-place-body"><div class="md-place-title-row"><h5 class="md-app-title">The Zone</h5><span class="md-rating"><i class="ph-fill ph-star"></i> 4.4</span></div><p class="md-muted"><span class="i18n-en">Dining area with reserved parking, low curb access, and staff assistance.</span><span class="i18n-ar" lang="ar">منطقة مطاعم بمواقف مخصصة ومداخل منخفضة ودعم من الفريق.</span></p></div></article>
+                                </div>
+                                <nav class="md-bottom-nav" aria-label="User app navigation"><button type="button" class="md-bottom-item" data-prototype-tab="home"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item active" data-prototype-tab="search"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button><button type="button" class="md-bottom-item" data-prototype-tab="map"><i class="ph-duotone ph-map-trifold"></i><span class="i18n-en">Map</span><span class="i18n-ar" lang="ar">الخريطة</span></button><button type="button" class="md-bottom-item" data-prototype-tab="reviews"><i class="ph-duotone ph-star"></i><span class="i18n-en">Reviews</span><span class="i18n-ar" lang="ar">المراجعات</span></button></nav>
+                            </div>
+
+                            <div class="md-screen" data-prototype-screen="map">
+                                <div class="md-mobile-pad">
+                                    <div class="md-mobile-head"><h3 class="md-h1"><span class="i18n-en">Accessible Map</span><span class="i18n-ar" lang="ar">خريطة الوصول</span></h3><span class="md-chip teal"><i class="ph-duotone ph-navigation-arrow"></i> GPS</span></div>
+                                    <div class="md-map-canvas compact" aria-label="Riyadh accessible places map mockup">
+                                        <span class="md-map-road" style="width: 90%; left: 4%; top: 22%; transform: rotate(9deg);"></span>
+                                        <span class="md-map-road" style="width: 76%; left: 11%; top: 54%; transform: rotate(-18deg);"></span>
+                                        <span class="md-map-road" style="width: 70%; left: 31%; top: 34%; transform: rotate(72deg);"></span>
+                                        <span class="md-map-road" style="width: 60%; left: 18%; top: 73%; transform: rotate(16deg);"></span>
+                                        <span class="md-map-pin" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="Roshn Front" data-place-query="Roshn+Front+Riyadh" data-place-photo="roshn" data-place-rating="4.7" data-place-features="Wheelchair-accessible entrances|Elevator access|Accessible restrooms|Wide outdoor paths" data-place-review="Waad wrote: Outdoor movement felt clear and comfortable." style="left: 22%; top: 31%;"><i class="ph-fill ph-wheelchair"></i></span>
+                                        <span class="md-map-pin" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="Listen Valley" data-place-query="Listen+Valley+Riyadh" data-place-photo="listen" data-place-rating="4.5" data-place-features="Accessible parking|Elevator access|Wide corridors|Staff assistance" data-place-review="Waad visited before and can add a review." style="left: 58%; top: 45%;"><i class="ph-fill ph-arrow-square-up"></i></span>
+                                        <span class="md-map-pin" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="VOX Cinemas Riyadh" data-place-query="VOX+Cinemas+Riyadh" data-place-photo="vox" data-place-rating="4.6" data-place-features="Wheelchair-accessible seating|Elevator access|Accessible restroom|Staff assistance" data-place-review="Organization event location with accessible movie seating." style="left: 72%; top: 19%;"><i class="ph-fill ph-film-strip"></i></span>
+                                    </div>
+                                    <article class="md-detail-card m-0">
+                                        <h4 class="md-app-title"><span class="i18n-en">Tap a pin</span><span class="i18n-ar" lang="ar">اضغط على موقع</span></h4>
+                                        <p class="md-muted mt-2"><span class="i18n-en">Pins open place details with accessibility features, review preview, and a Google Maps location button.</span><span class="i18n-ar" lang="ar">المواقع تفتح تفاصيل المكان مع مزايا الوصول ومعاينة المراجعات وزر Google Maps.</span></p>
+                                    </article>
+                                </div>
+                                <nav class="md-bottom-nav" aria-label="User app navigation"><button type="button" class="md-bottom-item" data-prototype-tab="home"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item" data-prototype-tab="search"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button><button type="button" class="md-bottom-item active" data-prototype-tab="map"><i class="ph-duotone ph-map-trifold"></i><span class="i18n-en">Map</span><span class="i18n-ar" lang="ar">الخريطة</span></button><button type="button" class="md-bottom-item" data-prototype-tab="reviews"><i class="ph-duotone ph-star"></i><span class="i18n-en">Reviews</span><span class="i18n-ar" lang="ar">المراجعات</span></button></nav>
+                            </div>
+
+                            <div class="md-screen" data-prototype-screen="place-detail">
+                                <div class="md-detail-hero"><button class="md-close" type="button" data-prototype-tab="home" aria-label="Close"><i class="ph ph-x"></i></button></div>
+                                <div class="md-detail-card">
+                                    <div class="md-place-title-row"><h3 class="md-h1" data-place-detail-name>Roshn Front</h3><span class="md-rating"><span class="md-stars">★★★★★</span> <span data-place-detail-rating>4.7</span></span></div>
+                                    <p class="md-muted mt-3" data-place-detail-review>Waad wrote: The outdoor paths were wide and clear, and the accessible restroom signs were easy to find.</p>
+                                    <a class="md-outline-button" data-place-detail-link href="https://www.google.com/maps/search/?api=1&query=Roshn+Front+Riyadh" target="_blank" rel="noopener"><span><i class="ph-duotone ph-map-pin"></i> <span class="i18n-en">Location</span><span class="i18n-ar" lang="ar">الموقع</span></span><i class="ph-duotone ph-arrow-square-out"></i></a>
+                                    <h4 class="md-app-title text-base"><span class="i18n-en">Accessibility Features</span><span class="i18n-ar" lang="ar">مزايا الوصول</span></h4>
+                                    <div class="md-tag-row" data-place-detail-features><span class="md-chip">Wheelchair-accessible entrances</span><span class="md-chip">Elevator access</span><span class="md-chip">Accessible restrooms</span></div>
+                                </div>
+                                <div class="px-3 pb-24">
+                                    <article class="md-review-compose"><h4 class="md-app-title text-base"><span class="i18n-en">Review preview</span><span class="i18n-ar" lang="ar">معاينة المراجعات</span></h4><p class="md-muted mt-2"><span class="i18n-en">This panel appears when a user taps a place card or map pin.</span><span class="i18n-ar" lang="ar">تظهر هذه البطاقة عند ضغط المستخدم على كرت مكان أو موقع في الخريطة.</span></p></article>
+                                </div>
+                                <nav class="md-bottom-nav" aria-label="User app navigation"><button type="button" class="md-bottom-item" data-prototype-tab="home"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item" data-prototype-tab="search"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button><button type="button" class="md-bottom-item" data-prototype-tab="map"><i class="ph-duotone ph-map-trifold"></i><span class="i18n-en">Map</span><span class="i18n-ar" lang="ar">الخريطة</span></button><button type="button" class="md-bottom-item" data-prototype-tab="reviews"><i class="ph-duotone ph-star"></i><span class="i18n-en">Reviews</span><span class="i18n-ar" lang="ar">المراجعات</span></button></nav>
+                            </div>
+
+                            <div class="md-screen" data-prototype-screen="reviews">
+                                <div class="md-mobile-pad">
+                                    <div class="md-mobile-head"><h3 class="md-h1"><span class="i18n-en">User Reviews</span><span class="i18n-ar" lang="ar">مراجعات المستخدمين</span></h3><span class="md-chip teal"><i class="ph-duotone ph-user"></i> Waad</span></div>
+                                    <article class="md-review-card"><div class="md-avatar">W</div><div><h5 class="font-bold">Waad</h5><p class="md-stars text-sm">★★★★★ <span class="md-muted">Roshn Front</span></p><p class="md-muted"><span class="i18n-en">The accessibility experience at Roshn Front was smooth. The outdoor paths were wide, the entrances were clear, and I could find accessible restrooms without asking twice.</span><span class="i18n-ar" lang="ar">كانت تجربة الوصول في Roshn Front سهلة؛ المسارات الخارجية واسعة، والمداخل واضحة، ودورات المياه المهيأة كان الوصول لها بسيطاً.</span></p></div><span class="md-muted text-xs"><span class="i18n-en">Today</span><span class="i18n-ar" lang="ar">اليوم</span></span></article>
+                                    <article class="md-review-compose">
+                                        <h4 class="md-app-title text-base"><span class="i18n-en">Write a review</span><span class="i18n-ar" lang="ar">اكتبي مراجعة</span></h4>
+                                        <p class="md-muted mt-2"><span class="i18n-en">Waad visited Listen Valley before. She can add a comment about parking, elevator access, corridors, and staff assistance.</span><span class="i18n-ar" lang="ar">وعد زارت Listen Valley من قبل، ويمكنها كتابة تعليق عن المواقف والمصاعد والممرات ومساعدة الموظفين.</span></p>
+                                        <button type="button" class="md-primary-btn w-full mt-4" data-prototype-tab="place-detail" data-place-name="Listen Valley" data-place-query="Listen+Valley+Riyadh" data-place-photo="listen" data-place-rating="4.5" data-place-features="Accessible parking|Elevator access|Wide corridors|Staff assistance" data-place-review="Waad visited Listen Valley before. Add a review about the accessibility experience."><span class="i18n-en">Comment on Listen Valley</span><span class="i18n-ar" lang="ar">تعليق على Listen Valley</span></button>
+                                    </article>
+                                </div>
+                                <nav class="md-bottom-nav" aria-label="User app navigation"><button type="button" class="md-bottom-item" data-prototype-tab="home"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item" data-prototype-tab="search"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button><button type="button" class="md-bottom-item" data-prototype-tab="map"><i class="ph-duotone ph-map-trifold"></i><span class="i18n-en">Map</span><span class="i18n-ar" lang="ar">الخريطة</span></button><button type="button" class="md-bottom-item active" data-prototype-tab="reviews"><i class="ph-duotone ph-star"></i><span class="i18n-en">Reviews</span><span class="i18n-ar" lang="ar">المراجعات</span></button></nav>
+                            </div>
+
+                            <div class="md-screen" data-prototype-screen="events">
+                                <div class="md-mobile-pad">
+                                    <div class="md-mobile-head"><h3 class="md-h1"><span class="i18n-en">Organization Events</span><span class="i18n-ar" lang="ar">فعاليات المنظمة</span></h3><span class="md-chip teal"><i class="ph-duotone ph-shield-check"></i><span class="i18n-en">Approved</span><span class="i18n-ar" lang="ar">معتمد</span></span></div>
+                                    <article class="md-event-card">
+                                        <div class="flex gap-3 items-start">
+                                            <div class="md-event-date"><span class="i18n-en">22<br>Feb</span><span class="i18n-ar" lang="ar">22<br>فبراير</span></div>
+                                            <div>
+                                                <p class="md-kicker">VOX Cinemas</p>
+                                                <h4 class="md-app-title"><span class="i18n-en">Accessible Movie Night</span><span class="i18n-ar" lang="ar">ليلة سينمائية مهيأة</span></h4>
+                                                <p class="md-muted"><span class="i18n-en">Organization-created event at VOX Cinemas Riyadh with accessible seating and staff assistance.</span><span class="i18n-ar" lang="ar">فعالية أنشأتها منظمة VOX Cinemas Riyadh مع مقاعد مهيأة ومساعدة من الموظفين.</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="md-tag-row"><span class="md-chip"><i class="ph-duotone ph-map-pin"></i> VOX Cinemas Riyadh</span><span class="md-chip"><i class="ph-duotone ph-wheelchair"></i><span class="i18n-en">wheelchair-accessible seating</span><span class="i18n-ar" lang="ar">مقاعد مهيأة</span></span><span class="md-chip"><span class="i18n-en">elevator access</span><span class="i18n-ar" lang="ar">مصعد</span></span><span class="md-chip"><span class="i18n-en">accessible restroom</span><span class="i18n-ar" lang="ar">دورة مياه مهيأة</span></span><span class="md-chip"><span class="i18n-en">staff assistance</span><span class="i18n-ar" lang="ar">مساعدة الموظفين</span></span></div>
+                                    </article>
+                                    <article class="md-event-card">
+                                        <div class="flex gap-3 items-start">
+                                            <div class="md-app-logo"><i class="ph-duotone ph-buildings"></i></div>
+                                            <div>
+                                                <p class="md-kicker"><span class="i18n-en">Organization information</span><span class="i18n-ar" lang="ar">معلومات الجهة المنظمة</span></p>
+                                                <h4 class="md-app-title">VOX Cinemas</h4>
+                                                <p class="md-muted"><span class="i18n-en">Verified organization profile for publishing accessible cinema events and announcements.</span><span class="i18n-ar" lang="ar">حساب منظمة موثق لنشر فعاليات السينما المهيأة والإعلانات.</span></p>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                                <nav class="md-bottom-nav" aria-label="Organization app navigation"><button type="button" class="md-bottom-item" data-prototype-tab="org-home"><i class="ph-duotone ph-squares-four"></i><span class="i18n-en">Dashboard</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item active" data-prototype-tab="events"><i class="ph-duotone ph-calendar-star"></i><span class="i18n-en">Events</span><span class="i18n-ar" lang="ar">الفعاليات</span></button><button type="button" class="md-bottom-item" data-prototype-tab="org-event"><i class="ph-duotone ph-calendar-plus"></i><span class="i18n-en">Add Event</span><span class="i18n-ar" lang="ar">إضافة</span></button><button type="button" class="md-bottom-item" data-prototype-tab="offers"><i class="ph-duotone ph-megaphone"></i><span class="i18n-en">Offers</span><span class="i18n-ar" lang="ar">العروض</span></button></nav>
+                            </div>
+
+                            <div class="md-screen" data-prototype-screen="org-home">
+                                <div class="md-mobile-pad">
+                                    <div class="md-mobile-head">
+                                        <div class="md-user-greet">
+                                            <div class="md-app-logo"><i class="ph-duotone ph-buildings"></i></div>
+                                            <div>
+                                                <p class="md-kicker"><span class="i18n-en">Organization account</span><span class="i18n-ar" lang="ar">حساب منظمة</span></p>
+                                                <h3 class="md-app-title">VOX Cinemas</h3>
+                                            </div>
+                                        </div>
+                                        <span class="md-chip teal"><i class="ph-duotone ph-shield-check"></i><span class="i18n-en">Approved</span><span class="i18n-ar" lang="ar">معتمد</span></span>
+                                    </div>
+                                    <h4 class="md-h1"><span class="i18n-en">Organization Dashboard</span><span class="i18n-ar" lang="ar">لوحة المنظمة</span></h4>
+                                    <div class="md-org-stat-grid">
+                                        <div class="md-org-stat"><p class="md-kicker"><span class="i18n-en">Published events</span><span class="i18n-ar" lang="ar">فعاليات منشورة</span></p><h5 class="md-h1 mt-2">08</h5></div>
+                                        <div class="md-org-stat"><p class="md-kicker"><span class="i18n-en">Pending approval</span><span class="i18n-ar" lang="ar">بانتظار الاعتماد</span></p><h5 class="md-h1 mt-2">02</h5></div>
+                                    </div>
+                                    <article class="md-event-card">
+                                        <p class="md-kicker"><span class="i18n-en">Next event</span><span class="i18n-ar" lang="ar">الفعالية القادمة</span></p>
+                                        <h4 class="md-app-title mt-2"><span class="i18n-en">Accessible Movie Night</span><span class="i18n-ar" lang="ar">ليلة سينمائية مهيأة</span></h4>
+                                        <p class="md-muted mt-2"><span class="i18n-en">VOX Cinemas can publish accessible movie events, seating details, and staff assistance notes.</span><span class="i18n-ar" lang="ar">تستطيع VOX Cinemas نشر فعاليات سينمائية مهيأة وتفاصيل المقاعد والمساعدة.</span></p>
+                                    </article>
+                                </div>
+                                <nav class="md-bottom-nav" aria-label="Organization app navigation"><button type="button" class="md-bottom-item active" data-prototype-tab="org-home"><i class="ph-duotone ph-squares-four"></i><span class="i18n-en">Dashboard</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item" data-prototype-tab="events"><i class="ph-duotone ph-calendar-star"></i><span class="i18n-en">Events</span><span class="i18n-ar" lang="ar">الفعاليات</span></button><button type="button" class="md-bottom-item" data-prototype-tab="org-event"><i class="ph-duotone ph-calendar-plus"></i><span class="i18n-en">Add Event</span><span class="i18n-ar" lang="ar">إضافة</span></button><button type="button" class="md-bottom-item" data-prototype-tab="offers"><i class="ph-duotone ph-megaphone"></i><span class="i18n-en">Offers</span><span class="i18n-ar" lang="ar">العروض</span></button></nav>
+                            </div>
+
+                            <div class="md-screen" data-prototype-screen="org-event">
+                                <div class="md-form-screen">
+                                    <div class="md-form-pad">
+                                        <h3 class="md-h1 text-center mb-5"><span class="i18n-en">Add Accessible Event</span><span class="i18n-ar" lang="ar">إضافة فعالية مهيأة</span></h3>
+                                        <label class="md-form-field"><span><span class="i18n-en">Event Name</span><span class="i18n-ar" lang="ar">اسم الفعالية</span></span><span class="md-input-mock"><span class="i18n-en">Accessible Movie Night</span><span class="i18n-ar" lang="ar">ليلة سينمائية مهيأة</span></span></label>
+                                        <label class="md-form-field"><span><span class="i18n-en">Location</span><span class="i18n-ar" lang="ar">الموقع</span></span><span class="md-input-mock">VOX Cinemas Riyadh</span></label>
+                                        <label class="md-form-field"><span><span class="i18n-en">Accessibility Features</span><span class="i18n-ar" lang="ar">مزايا الوصول</span></span><span class="md-input-mock"><span class="i18n-en">Wheelchair seating, elevator, restroom, staff assistance</span><span class="i18n-ar" lang="ar">مقاعد مهيأة، مصعد، دورة مياه، مساعدة الموظفين</span></span></label>
+                                        <button type="button" class="md-primary-btn w-full mt-5" data-prototype-tab="org-home"><span class="i18n-en">Publish for approval</span><span class="i18n-ar" lang="ar">إرسال للاعتماد</span></button>
+                                    </div>
+                                </div>
+                                <nav class="md-bottom-nav" aria-label="Organization app navigation"><button type="button" class="md-bottom-item" data-prototype-tab="org-home"><i class="ph-duotone ph-squares-four"></i><span class="i18n-en">Dashboard</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item" data-prototype-tab="events"><i class="ph-duotone ph-calendar-star"></i><span class="i18n-en">Events</span><span class="i18n-ar" lang="ar">الفعاليات</span></button><button type="button" class="md-bottom-item active" data-prototype-tab="org-event"><i class="ph-duotone ph-calendar-plus"></i><span class="i18n-en">Add Event</span><span class="i18n-ar" lang="ar">إضافة</span></button><button type="button" class="md-bottom-item" data-prototype-tab="offers"><i class="ph-duotone ph-megaphone"></i><span class="i18n-en">Offers</span><span class="i18n-ar" lang="ar">العروض</span></button></nav>
+                            </div>
+
+                            <div class="md-screen" data-prototype-screen="offers">
+                                <div class="md-mobile-pad">
+                                    <div class="md-mobile-head"><h3 class="md-h1"><span class="i18n-en">Offers / Announcements</span><span class="i18n-ar" lang="ar">العروض والإعلانات</span></h3><span class="md-chip teal">VOX</span></div>
+                                    <article class="md-event-card">
+                                        <p class="md-kicker"><span class="i18n-en">Announcement</span><span class="i18n-ar" lang="ar">إعلان</span></p>
+                                        <h4 class="md-app-title mt-2"><span class="i18n-en">Accessible seating reservation opens early</span><span class="i18n-ar" lang="ar">فتح حجز المقاعد المهيأة مبكراً</span></h4>
+                                        <p class="md-muted mt-2"><span class="i18n-en">VOX Cinemas can post organization announcements for accessible services, staff assistance, and event availability.</span><span class="i18n-ar" lang="ar">يمكن لـ VOX Cinemas نشر إعلانات عن خدمات الوصول ومساعدة الموظفين وتوفر الفعاليات.</span></p>
+                                    </article>
+                                </div>
+                                <nav class="md-bottom-nav" aria-label="Organization app navigation"><button type="button" class="md-bottom-item" data-prototype-tab="org-home"><i class="ph-duotone ph-squares-four"></i><span class="i18n-en">Dashboard</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item" data-prototype-tab="events"><i class="ph-duotone ph-calendar-star"></i><span class="i18n-en">Events</span><span class="i18n-ar" lang="ar">الفعاليات</span></button><button type="button" class="md-bottom-item" data-prototype-tab="org-event"><i class="ph-duotone ph-calendar-plus"></i><span class="i18n-en">Add Event</span><span class="i18n-ar" lang="ar">إضافة</span></button><button type="button" class="md-bottom-item active" data-prototype-tab="offers"><i class="ph-duotone ph-megaphone"></i><span class="i18n-en">Offers</span><span class="i18n-ar" lang="ar">العروض</span></button></nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="glass-panel rounded-[2rem] p-7 md:p-9">
+                <h2 class="font-display text-3xl font-bold text-white mb-5"><span class="i18n-en">Screenshots</span><span class="i18n-ar" lang="ar">لقطات الشاشة</span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="screenshot-frame rounded-2xl"><i class="ph-duotone ph-map-pin text-7xl text-cyan"></i></div>
+                    <div class="screenshot-frame rounded-2xl"><i class="ph-duotone ph-wheelchair text-7xl text-cyan"></i></div>
+                </div>
+            </section>
+
+            <section class="glass-panel rounded-[2rem] p-7 md:p-9">
+                <h2 class="font-display text-3xl font-bold text-white mb-5"><span class="i18n-en">Project Resources</span><span class="i18n-ar" lang="ar">روابط المشروع</span></h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                    <a href="#resources" class="resource-link"><i class="ph-duotone ph-presentation-chart"></i><span class="i18n-en">Presentation link</span><span class="i18n-ar" lang="ar">رابط العرض التقديمي</span></a>
+                    <a href="#resources" class="resource-link"><i class="ph-duotone ph-file-text"></i><span class="i18n-en">Documentation link</span><span class="i18n-ar" lang="ar">رابط التوثيق</span></a>
+                    <a href="#resources" class="resource-link"><i class="ph-duotone ph-github-logo"></i><span class="i18n-en">GitHub repository</span><span class="i18n-ar" lang="ar">مستودع GitHub</span></a>
+                    <a href="#resources" class="resource-link"><i class="ph-duotone ph-play-circle"></i><span class="i18n-en">Demo link</span><span class="i18n-ar" lang="ar">رابط التجربة</span></a>
+                </div>
+            </section>
+
+            <section class="project-detail-card">
+                <h2 class="font-mono text-xs text-cyan uppercase tracking-widest mb-3"><span class="i18n-en">Lessons Learned</span><span class="i18n-ar" lang="ar">الدروس المستفادة</span></h2>
+                <p class="text-slate-300 leading-relaxed"><span class="i18n-en">Clear requirements and accessibility criteria must be treated as core product logic, not as visual additions at the end.</span><span class="i18n-ar" lang="ar">يجب التعامل مع المتطلبات الواضحة ومعايير إمكانية الوصول كجزء أساسي من منطق المنتج، وليس كإضافات بصرية في النهاية.</span></p>
+            </section>
+        </main>
+    </div>
+    <site-footer></site-footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = Array.from(document.querySelectorAll('[data-prototype-tab]'));
+            const screens = Array.from(document.querySelectorAll('[data-prototype-screen]'));
+            const detailHero = document.querySelector('[data-prototype-screen="place-detail"] .md-detail-hero');
+            const detailName = document.querySelector('[data-place-detail-name]');
+            const detailRating = document.querySelector('[data-place-detail-rating]');
+            const detailReview = document.querySelector('[data-place-detail-review]');
+            const detailFeatures = document.querySelector('[data-place-detail-features]');
+            const detailLink = document.querySelector('[data-place-detail-link]');
+
+            const hydratePlaceDetail = (source) => {
+                if (!source.dataset.placeName) return;
+                const name = source.dataset.placeName;
+                const query = source.dataset.placeQuery || name.replace(/\s+/g, '+');
+                const photo = source.dataset.placePhoto || '';
+                const features = (source.dataset.placeFeatures || '').split('|').filter(Boolean);
+
+                if (detailHero) detailHero.className = `md-detail-hero ${photo}`.trim();
+                if (detailName) detailName.textContent = name;
+                if (detailRating) detailRating.textContent = source.dataset.placeRating || '4.6';
+                if (detailReview) detailReview.textContent = source.dataset.placeReview || 'Review preview will appear here.';
+                if (detailLink) detailLink.href = `https://www.google.com/maps/search/?api=1&query=${query}`;
+                if (detailFeatures) {
+                    detailFeatures.innerHTML = features.map((feature) => `<span class="md-chip">${feature}</span>`).join('');
+                }
+            };
+
+            tabs.forEach((tab) => {
+                const activatePrototypeScreen = () => {
+                    const target = tab.dataset.prototypeTab;
+                    if (target === 'place-detail') hydratePlaceDetail(tab);
+
+                    tabs.forEach((item) => {
+                        const active = item.dataset.prototypeTab === target;
+                        item.classList.toggle('is-active', active);
+                        if (item.hasAttribute('aria-selected')) item.setAttribute('aria-selected', String(active));
+                    });
+
+                    screens.forEach((screen) => {
+                        screen.classList.toggle('is-active', screen.dataset.prototypeScreen === target);
+                    });
+                };
+
+                tab.addEventListener('click', activatePrototypeScreen);
+                tab.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        activatePrototypeScreen();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

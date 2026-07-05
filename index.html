@@ -316,15 +316,20 @@
 
         body[data-page="home"][data-language="ar"] .terminal-banner {
             direction: rtl;
-            justify-content: flex-end;
+            justify-content: flex-start;
             text-align: right;
         }
 
         body[data-page="home"][data-language="ar"] .typing-text {
             direction: rtl;
             text-align: right;
+            display: inline-block;
+            width: 0;
+            max-width: 100%;
+            overflow: hidden;
             border-right: 0;
             border-left: 10px solid var(--neon-cyan);
+            animation: typing-ar 4s steps(48, end) infinite alternate, blink-caret .75s step-end infinite;
         }
 
         .highlight {
@@ -443,6 +448,10 @@
         @keyframes typing {
             from { width: 0 }
             to { width: 100% }
+        }
+        @keyframes typing-ar {
+            from { width: 0 }
+            to { width: 23.5em }
         }
         @keyframes blink-caret {
             from, to { border-color: transparent }

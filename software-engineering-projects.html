@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth" vid="0"><head vid="1">
     <meta charset="UTF-8" vid="2">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3">
@@ -161,6 +161,97 @@
             height: 1px;
             background: linear-gradient(to right, rgba(0, 240, 255, 0.3), transparent);
         }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-visual-panel {
+            min-height: 18rem;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.08), transparent 45%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-section {
+            background: rgba(6, 8, 13, 0.48);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 1rem;
+            padding: 1.1rem;
+        }
+
+        .resource-link {
+            min-height: 44px;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(0, 240, 255, 0.32);
+            background: rgba(0, 240, 255, 0.08);
+            color: #00f0ff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            padding: 0.72rem 0.9rem;
+            transition: border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .resource-link:not(.unavailable):hover {
+            border-color: rgba(0, 240, 255, 0.7);
+            background: rgba(0, 240, 255, 0.16);
+            box-shadow: 0 0 18px rgba(0, 240, 255, 0.18);
+        }
+
+        .resource-link.unavailable {
+            cursor: not-allowed;
+            opacity: 0.62;
+            border-color: rgba(148, 163, 184, 0.22);
+            background: rgba(148, 163, 184, 0.06);
+            color: #94a3b8;
+        }
+
+        .resource-link-amber {
+            border-color: rgba(255, 159, 0, 0.34);
+            background: rgba(255, 159, 0, 0.08);
+            color: #ff9f00;
+        }
+
+        .resource-link-amber:not(.unavailable):hover {
+            border-color: rgba(255, 159, 0, 0.7);
+            background: rgba(255, 159, 0, 0.16);
+            box-shadow: 0 0 18px rgba(255, 159, 0, 0.18);
+        }
+
+        body[data-language="ar"] .project-card,
+        body[data-language="ar"] .page-hero-content,
+        body[data-language="ar"] .terminal-banner {
+            direction: rtl;
+            text-align: right;
+        }
+
+        body[data-language="ar"] .project-card .font-mono,
+        body[data-language="ar"] .resource-link {
+            direction: rtl;
+        }
+
+        body[data-language="ar"] .project-card .ph-arrow-right {
+            transform: scaleX(-1);
+        }
+
     </style>
 </head>
 <body class="relative min-h-screen antialiased flex flex-col font-sans w-full" data-page="projects" vid="12">
@@ -193,15 +284,15 @@
                 <div class="page-hero-content">
 <div class="inline-flex items-center gap-2 px-3 py-1 rounded border border-cyan/20 bg-cyan-dim font-mono text-xs text-cyan uppercase tracking-widest mb-8" vid="33">
                 <span class="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse shadow-[0_0_8px_#00f0ff]" vid="34"></span>
-                Project Archive
+                <span class="i18n-en">Project Archive</span><span class="i18n-ar" lang="ar">أرشيف المشاريع</span>
             </div>
             
             <h1 class="page-hero-title font-display glow-text-cyan" vid="35">
-                Projects
+                <span class="i18n-en">Projects</span><span class="i18n-ar" lang="ar">المشاريع</span>
             </h1>
             
             <p class="page-hero-subtitle text-xl text-slate-300 leading-relaxed font-light" vid="36">
-                A collection of academic, technical, and research projects built throughout my Software Engineering and Artificial Intelligence journey.
+                <span class="i18n-en">A collection of academic, technical, and research projects built throughout my Software Engineering and Artificial Intelligence journey.</span><span class="i18n-ar" lang="ar">مجموعة من المشاريع الأكاديمية والتقنية والبحثية التي بنيتها خلال رحلتي في هندسة البرمجيات والذكاء الاصطناعي.</span>
             </p>
                         </div>
                 <div class="robot-container page-visual" aria-hidden="true">
@@ -213,14 +304,14 @@
             </header>
 
             <div class="terminal-banner">
-                <span>PROJECT_ARCHIVE // Academic builds, research systems, and implementation notes loaded into Waad Kernel.</span>
+                <span><span class="i18n-en">PROJECT_ARCHIVE // Academic builds, research systems, and implementation notes loaded into Waad Kernel.</span><span class="i18n-ar" lang="ar">أرشيف المشاريع // أنظمة أكاديمية وبحثية وملاحظات تنفيذية مفهرسة داخل Waad Kernel.</span></span>
             </div>
 
         
-        <div class="flex flex-col gap-16 md:gap-24" vid="37">
+        <div class="space-y-8 mb-16" aria-label="Project archive">
             
             
-            <article class="glass-panel rounded-[2rem] p-8 md:p-12 overflow-hidden relative group hover:-translate-y-1 transition-transform duration-500" vid="38">
+            <article class="project-card glass-panel rounded-[2rem] p-8 md:p-12 overflow-hidden relative group hover:-translate-y-1 transition-transform duration-500" vid="38">
                 <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan/5 rounded-full blur-[100px] pointer-events-none transition-opacity opacity-50 group-hover:opacity-100" vid="39"></div>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10" vid="40">
@@ -230,38 +321,12 @@
                             <div class="flex items-center gap-4 font-mono" vid="43">
                                 <span class="text-cyan text-xl font-bold glow-text-cyan" vid="44">01</span>
                                 <span class="text-slate-600" vid="45">//</span>
-                                <span class="text-slate-400 uppercase tracking-widest text-sm" vid="46">Software Engineering</span>
+                                <span class="text-slate-400 uppercase tracking-widest text-sm" vid="46"><span class="i18n-en">Software Engineering</span><span class="i18n-ar" lang="ar">هندسة البرمجيات</span></span>
                             </div>
                             <h2 class="font-display text-4xl md:text-5xl font-bold text-white" vid="47">My Destination</h2>
                             <p class="text-lg text-slate-300 leading-relaxed font-light" vid="48">
-                                Accessibility-focused platform designed to help users discover accessible locations, services, and events.
+                                <span class="i18n-en">Accessibility-focused platform designed to help users discover accessible locations, services, and events.</span><span class="i18n-ar" lang="ar">منصة تركّز على إمكانية الوصول لمساعدة المستخدمين على اكتشاف المواقع والخدمات والفعاليات المناسبة.</span>
                             </p>
-                        </div>
-
-                        <div class="space-y-4" vid="49">
-                            <h3 class="font-mono text-xs text-cyan uppercase tracking-widest" vid="50">Key Highlights</h3>
-                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3" vid="51">
-                                <li class="flex items-start gap-3" vid="52">
-                                    <i class="ph-fill ph-check-circle text-cyan mt-1" vid="53"></i>
-                                    <span class="text-slate-300 text-sm" vid="54">User-centered design</span>
-                                </li>
-                                <li class="flex items-start gap-3" vid="55">
-                                    <i class="ph-fill ph-check-circle text-cyan mt-1" vid="56"></i>
-                                    <span class="text-slate-300 text-sm" vid="57">Accessibility-focused features</span>
-                                </li>
-                                <li class="flex items-start gap-3" vid="58">
-                                    <i class="ph-fill ph-check-circle text-cyan mt-1" vid="59"></i>
-                                    <span class="text-slate-300 text-sm" vid="60">Recommendation system</span>
-                                </li>
-                                <li class="flex items-start gap-3" vid="61">
-                                    <i class="ph-fill ph-check-circle text-cyan mt-1" vid="62"></i>
-                                    <span class="text-slate-300 text-sm" vid="63">Interactive maps</span>
-                                </li>
-                                <li class="flex items-start gap-3" vid="64">
-                                    <i class="ph-fill ph-check-circle text-cyan mt-1" vid="65"></i>
-                                    <span class="text-slate-300 text-sm" vid="66">Event management</span>
-                                </li>
-                            </ul>
                         </div>
 
                         <div class="flex flex-wrap gap-2" vid="67">
@@ -272,10 +337,10 @@
                         </div>
 
                         <div class="pt-4" vid="72">
-                            <button class="py-3 px-6 rounded-xl bg-cyan-dim border border-cyan/40 text-cyan font-mono font-medium hover:bg-cyan hover:text-base hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center" vid="73">
-                                View Details
+                            <a href="my-destination.html" class="py-3 px-6 rounded-xl bg-cyan-dim border border-cyan/40 text-cyan font-mono font-medium hover:bg-cyan hover:text-base hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center" vid="73">
+                                <span class="i18n-en">View Details</span><span class="i18n-ar" lang="ar">عرض التفاصيل</span>
                                 <i class="ph-bold ph-arrow-right" vid="74"></i>
-                            </button>
+                            </a>
                         </div>
                     </div>
 
@@ -304,7 +369,7 @@
             </article>
 
             
-            <article class="glass-panel hover-amber rounded-[2rem] p-8 md:p-12 overflow-hidden relative group hover:-translate-y-1 transition-transform duration-500" vid="88">
+            <article class="project-card glass-panel hover-amber rounded-[2rem] p-8 md:p-12 overflow-hidden relative group hover:-translate-y-1 transition-transform duration-500" vid="88">
                 <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-amber/5 rounded-full blur-[100px] pointer-events-none transition-opacity opacity-50 group-hover:opacity-100" vid="89"></div>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10" vid="90">
@@ -341,38 +406,12 @@
                             <div class="flex items-center gap-4 font-mono" vid="108">
                                 <span class="text-amber text-xl font-bold glow-text-amber" vid="109">02</span>
                                 <span class="text-slate-600" vid="110">//</span>
-                                <span class="text-slate-400 uppercase tracking-widest text-sm" vid="111">Artificial Intelligence</span>
+                                <span class="text-slate-400 uppercase tracking-widest text-sm" vid="111"><span class="i18n-en">Artificial Intelligence</span><span class="i18n-ar" lang="ar">الذكاء الاصطناعي</span></span>
                             </div>
-                            <h2 class="font-display text-4xl md:text-5xl font-bold text-white" vid="112">Arabic Sentiment Analysis</h2>
+                            <h2 class="font-display text-4xl md:text-5xl font-bold text-white" vid="112"><span class="i18n-en">Arabic Sentiment Bias Research</span><span class="i18n-ar" lang="ar">بحث تحيز تحليل المشاعر العربية</span></h2>
                             <p class="text-lg text-slate-300 leading-relaxed font-light" vid="113">
-                                Research project examining gender bias in Arabic sentiment analysis models using Explainable AI techniques.
+                                <span class="i18n-en">Research project examining gender bias in Arabic sentiment analysis models using Explainable AI techniques.</span><span class="i18n-ar" lang="ar">مشروع بحثي يدرس تحيز النوع في نماذج تحليل المشاعر العربية باستخدام تقنيات XAI.</span>
                             </p>
-                        </div>
-
-                        <div class="space-y-4" vid="114">
-                            <h3 class="font-mono text-xs text-amber uppercase tracking-widest" vid="115">Key Highlights</h3>
-                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3" vid="116">
-                                <li class="flex items-start gap-3" vid="117">
-                                    <i class="ph-fill ph-check-circle text-amber mt-1" vid="118"></i>
-                                    <span class="text-slate-300 text-sm" vid="119">Arabic NLP</span>
-                                </li>
-                                <li class="flex items-start gap-3" vid="120">
-                                    <i class="ph-fill ph-check-circle text-amber mt-1" vid="121"></i>
-                                    <span class="text-slate-300 text-sm" vid="122">Explainable AI</span>
-                                </li>
-                                <li class="flex items-start gap-3" vid="123">
-                                    <i class="ph-fill ph-check-circle text-amber mt-1" vid="124"></i>
-                                    <span class="text-slate-300 text-sm" vid="125">Sentiment Analysis</span>
-                                </li>
-                                <li class="flex items-start gap-3" vid="126">
-                                    <i class="ph-fill ph-check-circle text-amber mt-1" vid="127"></i>
-                                    <span class="text-slate-300 text-sm" vid="128">Dataset generation</span>
-                                </li>
-                                <li class="flex items-start gap-3" vid="129">
-                                    <i class="ph-fill ph-check-circle text-amber mt-1" vid="130"></i>
-                                    <span class="text-slate-300 text-sm" vid="131">Research methodology</span>
-                                </li>
-                            </ul>
                         </div>
 
                         <div class="flex flex-wrap gap-2" vid="132">
@@ -383,17 +422,17 @@
                         </div>
 
                         <div class="pt-4" vid="137">
-                            <button class="py-3 px-6 rounded-xl bg-amber-dim border border-amber/40 text-amber font-mono font-medium hover:bg-amber hover:text-base hover:shadow-[0_0_20px_rgba(255,159,0,0.4)] transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center" vid="138">
-                                View Details
+                            <a href="arabic-sa-bias.html" class="py-3 px-6 rounded-xl bg-amber-dim border border-amber/40 text-amber font-mono font-medium hover:bg-amber hover:text-base hover:shadow-[0_0_20px_rgba(255,159,0,0.4)] transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center" vid="138">
+                                <span class="i18n-en">View Details</span><span class="i18n-ar" lang="ar">عرض التفاصيل</span>
                                 <i class="ph-bold ph-arrow-right" vid="139"></i>
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
             </article>
 
             
-            <article class="glass-panel rounded-[2rem] p-8 md:p-12 overflow-hidden relative group hover:-translate-y-1 transition-transform duration-500" vid="140">
+            <article class="project-card glass-panel rounded-[2rem] p-8 md:p-12 overflow-hidden relative group hover:-translate-y-1 transition-transform duration-500" vid="140">
                 <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan/5 rounded-full blur-[100px] pointer-events-none transition-opacity opacity-50 group-hover:opacity-100" vid="141"></div>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10" vid="142">
@@ -403,34 +442,12 @@
                             <div class="flex items-center gap-4 font-mono" vid="145">
                                 <span class="text-cyan text-xl font-bold glow-text-cyan" vid="146">03</span>
                                 <span class="text-slate-600" vid="147">//</span>
-                                <span class="text-slate-400 uppercase tracking-widest text-sm" vid="148">Database Systems</span>
+                                <span class="text-slate-400 uppercase tracking-widest text-sm" vid="148"><span class="i18n-en">Database Systems</span><span class="i18n-ar" lang="ar">أنظمة قواعد البيانات</span></span>
                             </div>
                             <h2 class="font-display text-4xl md:text-5xl font-bold text-white" vid="149">MySchool Database</h2>
                             <p class="text-lg text-slate-300 leading-relaxed font-light" vid="150">
-                                Database management system designed to manage students, teachers, courses, enrollments, and administration workflows.
+                                <span class="i18n-en">Database management system designed to manage students, teachers, courses, enrollments, and administration workflows.</span><span class="i18n-ar" lang="ar">نظام قاعدة بيانات لإدارة الطلاب والمعلمين والمقررات والتسجيل والعمليات الإدارية.</span>
                             </p>
-                        </div>
-
-                        <div class="space-y-4" vid="151">
-                            <h3 class="font-mono text-xs text-cyan uppercase tracking-widest" vid="152">Key Highlights</h3>
-                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3" vid="153">
-                                <li class="flex items-start gap-3" vid="154">
-                                    <i class="ph-fill ph-check-circle text-cyan mt-1" vid="155"></i>
-                                    <span class="text-slate-300 text-sm" vid="156">Database design</span>
-                                </li>
-                                <li class="flex items-start gap-3" vid="157">
-                                    <i class="ph-fill ph-check-circle text-cyan mt-1" vid="158"></i>
-                                    <span class="text-slate-300 text-sm" vid="159">Relational schema</span>
-                                </li>
-                                <li class="flex items-start gap-3" vid="160">
-                                    <i class="ph-fill ph-check-circle text-cyan mt-1" vid="161"></i>
-                                    <span class="text-slate-300 text-sm" vid="162">SQL implementation</span>
-                                </li>
-                                <li class="flex items-start gap-3" vid="163">
-                                    <i class="ph-fill ph-check-circle text-cyan mt-1" vid="164"></i>
-                                    <span class="text-slate-300 text-sm" vid="165">Full-stack integration</span>
-                                </li>
-                            </ul>
                         </div>
 
                         <div class="flex flex-wrap gap-2" vid="166">
@@ -441,10 +458,10 @@
                         </div>
 
                         <div class="pt-4" vid="171">
-                            <button class="py-3 px-6 rounded-xl bg-cyan-dim border border-cyan/40 text-cyan font-mono font-medium hover:bg-cyan hover:text-base hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center" vid="172">
-                                View Details
+                            <a href="myschool.html" class="py-3 px-6 rounded-xl bg-cyan-dim border border-cyan/40 text-cyan font-mono font-medium hover:bg-cyan hover:text-base hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center" vid="172">
+                                <span class="i18n-en">View Details</span><span class="i18n-ar" lang="ar">عرض التفاصيل</span>
                                 <i class="ph-bold ph-arrow-right" vid="173"></i>
-                            </button>
+                            </a>
                         </div>
                     </div>
 
@@ -480,7 +497,7 @@
             </article>
 
             
-            <article class="glass-panel hover-amber rounded-[2rem] p-8 md:p-12 overflow-hidden relative group hover:-translate-y-1 transition-transform duration-500" vid="188">
+            <article class="project-card glass-panel hover-amber rounded-[2rem] p-8 md:p-12 overflow-hidden relative group hover:-translate-y-1 transition-transform duration-500" vid="188">
                 <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-amber/5 rounded-full blur-[100px] pointer-events-none transition-opacity opacity-50 group-hover:opacity-100" vid="189"></div>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10" vid="190">
@@ -527,30 +544,12 @@
                             <div class="flex items-center gap-4 font-mono" vid="218">
                                 <span class="text-amber text-xl font-bold glow-text-amber" vid="219">04</span>
                                 <span class="text-slate-600" vid="220">//</span>
-                                <span class="text-slate-400 uppercase tracking-widest text-sm" vid="221">Linear Algebra</span>
+                                <span class="text-slate-400 uppercase tracking-widest text-sm" vid="221"><span class="i18n-en">Linear Algebra</span><span class="i18n-ar" lang="ar">الجبر الخطي</span></span>
                             </div>
                             <h2 class="font-display text-4xl md:text-5xl font-bold text-white" vid="222">SVD Image Compression</h2>
                             <p class="text-lg text-slate-300 leading-relaxed font-light" vid="223">
-                                Image compression project using Singular Value Decomposition to reduce image size while preserving quality.
+                                <span class="i18n-en">Image compression project using Singular Value Decomposition to reduce image size while preserving quality.</span><span class="i18n-ar" lang="ar">مشروع ضغط صور يستخدم Singular Value Decomposition لتقليل الحجم مع الحفاظ على الجودة.</span>
                             </p>
-                        </div>
-
-                        <div class="space-y-4" vid="224">
-                            <h3 class="font-mono text-xs text-amber uppercase tracking-widest" vid="225">Key Highlights</h3>
-                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3" vid="226">
-                                <li class="flex items-start gap-3" vid="227">
-                                    <i class="ph-fill ph-check-circle text-amber mt-1" vid="228"></i>
-                                    <span class="text-slate-300 text-sm" vid="229">Matrix decomposition</span>
-                                </li>
-                                <li class="flex items-start gap-3" vid="230">
-                                    <i class="ph-fill ph-check-circle text-amber mt-1" vid="231"></i>
-                                    <span class="text-slate-300 text-sm" vid="232">Linear algebra applications</span>
-                                </li>
-                                <li class="flex items-start gap-3" vid="233">
-                                    <i class="ph-fill ph-check-circle text-amber mt-1" vid="234"></i>
-                                    <span class="text-slate-300 text-sm" vid="235">Image processing</span>
-                                </li>
-                            </ul>
                         </div>
 
                         <div class="flex flex-wrap gap-2" vid="236">
@@ -561,10 +560,10 @@
                         </div>
 
                         <div class="pt-4" vid="241">
-                            <button class="py-3 px-6 rounded-xl bg-amber-dim border border-amber/40 text-amber font-mono font-medium hover:bg-amber hover:text-base hover:shadow-[0_0_20px_rgba(255,159,0,0.4)] transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center" vid="242">
-                                View Details
+                            <a href="svd-image-compression.html" class="py-3 px-6 rounded-xl bg-amber-dim border border-amber/40 text-amber font-mono font-medium hover:bg-amber hover:text-base hover:shadow-[0_0_20px_rgba(255,159,0,0.4)] transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center" vid="242">
+                                <span class="i18n-en">View Details</span><span class="i18n-ar" lang="ar">عرض التفاصيل</span>
                                 <i class="ph-bold ph-arrow-right" vid="243"></i>
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -572,14 +571,13 @@
 
         </div>
 
-        
         <section class="max-w-4xl mx-auto text-center mt-12 py-16 px-6 glass-panel rounded-3xl border-t border-t-cyan/30 relative overflow-hidden" vid="244">
             <div class="absolute inset-0 bg-gradient-to-b from-cyan/5 to-transparent pointer-events-none" vid="245"></div>
             <div class="relative z-10" vid="246">
                 <i class="ph-duotone ph-rocket-launch text-4xl text-cyan mb-6 drop-shadow-[0_0_15px_rgba(0,240,255,0.4)]" vid="247"></i>
-                <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-6 glow-text-cyan tracking-wide" vid="248">Building Through Learning</h2>
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-6 glow-text-cyan tracking-wide" vid="248"><span class="i18n-en">Building Through Learning</span><span class="i18n-ar" lang="ar">البناء من خلال التعلم</span></h2>
                 <p class="text-lg md:page-hero-subtitle text-xl text-slate-300 leading-relaxed font-light max-w-3xl mx-auto" vid="249">
-                    Every project in Waad Kernel represents a stage in my learning journey. Together they reflect my growth across software engineering, artificial intelligence, databases, and technical problem solving.
+                    <span class="i18n-en">Every project in Waad Kernel represents a stage in my learning journey. Together they reflect my growth across software engineering, artificial intelligence, databases, and technical problem solving.</span><span class="i18n-ar" lang="ar">كل مشروع في Waad Kernel يمثل مرحلة من رحلة التعلم. معًا تعكس هذه المشاريع تطوري في هندسة البرمجيات والذكاء الاصطناعي وقواعد البيانات وحل المشكلات التقنية.</span>
                 </p>
             </div>
         </section>

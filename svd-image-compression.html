@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVD Image Compression Project | Waad Kernel</title>
+    <meta name="description" content="Project details for SVD Image Compression using Singular Value Decomposition.">
+    <meta name="author" content="Waad Ibrahim Alhwaimel">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/png" href="assets/images/waad-kernel-favicon.png">
+    <link rel="apple-touch-icon" href="assets/images/waad-kernel-favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { base: '#06080d', amber: { DEFAULT: '#ff9f00', dim: 'rgba(255, 159, 0, 0.1)' } }, fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] } } } }
+    </script>
+    <script src="assets/js/site-components.js" defer></script>
+    <style>
+        body { background: #06080d; color: #e2e8f0; overflow-x: hidden; }
+        .glass-panel { background: rgba(12, 16, 28, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.06); }
+        .glow-text-amber { text-shadow: 0 0 15px rgba(255, 159, 0, 0.5); }
+        .project-detail-card { background: rgba(6, 8, 13, 0.48); border: 1px solid rgba(255,255,255,0.06); border-radius: 1rem; padding: 1.25rem; }
+        .resource-link { min-height: 44px; border-radius: 0.75rem; border: 1px solid rgba(255,159,0,0.34); background: rgba(255,159,0,0.08); color: #ff9f00; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; padding: 0.72rem 0.9rem; }
+        .screenshot-frame { min-height: 14rem; border: 1px solid rgba(255,159,0,0.22); background: linear-gradient(135deg, rgba(255,159,0,0.08), rgba(255,255,255,0.02)); display: grid; place-items: center; }
+        body[data-language="ar"] main { direction: rtl; text-align: right; }
+        body[data-language="ar"] .ph-arrow-left, body[data-language="ar"] .ph-arrow-right { transform: scaleX(-1); }
+    </style>
+</head>
+<body class="relative min-h-screen antialiased flex flex-col font-sans w-full" data-page="projects">
+    <div class="system-container page-system-container">
+        <aside class="side-telemetry" aria-hidden="true"><div class="data-block"><span><span class="i18n-en">MATH_FILE</span><span class="i18n-ar" lang="ar">ملف رياضي</span></span><div class="data-bar"><span class="data-bar-fill" style="width: 78%;"></span></div></div><div class="vertical-text">WAAD_KERNEL_OS_v2.4</div></aside>
+        <main class="main-interface page-main-interface">
+            <site-header></site-header>
+            <header class="hero page-hero">
+                <div class="page-hero-content">
+                    <a href="software-engineering-projects.html" class="inline-flex items-center gap-2 px-3 py-1 rounded border border-amber/20 bg-amber-dim font-mono text-xs text-amber uppercase tracking-widest mb-8"><i class="ph-bold ph-arrow-left"></i><span class="i18n-en">Back to Projects</span><span class="i18n-ar" lang="ar">العودة إلى المشاريع</span></a>
+                    <h1 class="page-hero-title font-display glow-text-amber">SVD Image Compression</h1>
+                    <p class="page-hero-subtitle text-xl text-slate-300 leading-relaxed font-light"><span class="i18n-en">A linear algebra experiment using Singular Value Decomposition to compress images.</span><span class="i18n-ar" lang="ar">تجربة في الجبر الخطي تستخدم Singular Value Decomposition لضغط الصور.</span></p>
+                </div>
+                <div class="robot-container page-visual" aria-hidden="true"><div class="robot-frame page-visual-frame"></div><div class="page-visual-core"><div class="page-visual-node">04</div></div></div>
+            </header>
+            <section class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                <article class="project-detail-card"><h2 class="font-mono text-xs text-amber uppercase tracking-widest mb-3"><span class="i18n-en">Project Overview</span><span class="i18n-ar" lang="ar">نظرة عامة على المشروع</span></h2><p class="text-slate-300 leading-relaxed"><span class="i18n-en">The project applies SVD to image matrices and compares how different ranks affect compression and visual quality.</span><span class="i18n-ar" lang="ar">يطبق المشروع SVD على مصفوفات الصور ويقارن تأثير الرتب المختلفة على الضغط والجودة البصرية.</span></p></article>
+                <article class="project-detail-card"><h2 class="font-mono text-xs text-amber uppercase tracking-widest mb-3"><span class="i18n-en">Problem Statement</span><span class="i18n-ar" lang="ar">بيان المشكلة</span></h2><p class="text-slate-300 leading-relaxed"><span class="i18n-en">Image files can be large, and reducing data while preserving recognizable quality requires a structured mathematical method.</span><span class="i18n-ar" lang="ar">قد تكون ملفات الصور كبيرة، وتقليل البيانات مع الحفاظ على جودة مفهومة يحتاج إلى طريقة رياضية منظمة.</span></p></article>
+                <article class="project-detail-card"><h2 class="font-mono text-xs text-amber uppercase tracking-widest mb-3"><span class="i18n-en">Why It Was Built</span><span class="i18n-ar" lang="ar">لماذا بُني المشروع</span></h2><p class="text-slate-300 leading-relaxed"><span class="i18n-en">It was built to connect linear algebra theory with a practical media-processing example.</span><span class="i18n-ar" lang="ar">بُني لربط نظرية الجبر الخطي بتطبيق عملي في معالجة الوسائط.</span></p></article>
+                <article class="project-detail-card"><h2 class="font-mono text-xs text-amber uppercase tracking-widest mb-3"><span class="i18n-en">Development Process</span><span class="i18n-ar" lang="ar">عملية التطوير</span></h2><p class="text-slate-300 leading-relaxed"><span class="i18n-en">The process loaded an image, decomposed color channels, reconstructed selected ranks, and compared quality and size.</span><span class="i18n-ar" lang="ar">شملت العملية تحميل الصورة، تفكيك قنوات الألوان، إعادة البناء برتب مختارة، ومقارنة الجودة والحجم.</span></p></article>
+                <article class="project-detail-card"><h2 class="font-mono text-xs text-amber uppercase tracking-widest mb-3"><span class="i18n-en">Tools and Technologies</span><span class="i18n-ar" lang="ar">الأدوات والتقنيات</span></h2><p class="text-slate-300 leading-relaxed">SVD, MATLAB-style workflow, image matrices, matrix decomposition, compression metrics.</p></article>
+                <article class="project-detail-card"><h2 class="font-mono text-xs text-amber uppercase tracking-widest mb-3"><span class="i18n-en">UML Diagrams / Architecture</span><span class="i18n-ar" lang="ar">مخططات UML / البنية</span></h2><p class="text-slate-300 leading-relaxed"><span class="i18n-en">The architecture is a processing pipeline: image input, matrix conversion, SVD decomposition, rank selection, reconstruction, and comparison.</span><span class="i18n-ar" lang="ar">البنية عبارة عن مسار معالجة: إدخال الصورة، تحويلها إلى مصفوفات، تفكيك SVD، اختيار الرتبة، إعادة البناء، والمقارنة.</span></p></article>
+            </section>
+            <section class="glass-panel rounded-[2rem] p-7 md:p-9"><h2 class="font-display text-3xl font-bold text-white mb-5"><span class="i18n-en">Screenshots</span><span class="i18n-ar" lang="ar">لقطات الشاشة</span></h2><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div class="screenshot-frame rounded-2xl"><span class="font-display text-5xl text-amber">A=UΣV*</span></div><div class="screenshot-frame rounded-2xl"><i class="ph-duotone ph-image-square text-7xl text-amber"></i></div></div></section>
+            <section id="resources" class="glass-panel rounded-[2rem] p-7 md:p-9"><h2 class="font-display text-3xl font-bold text-white mb-5"><span class="i18n-en">Project Resources</span><span class="i18n-ar" lang="ar">روابط المشروع</span></h2><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"><a href="#resources" class="resource-link"><i class="ph-duotone ph-presentation-chart"></i><span class="i18n-en">Presentation link</span><span class="i18n-ar" lang="ar">رابط العرض التقديمي</span></a><a href="#resources" class="resource-link"><i class="ph-duotone ph-file-text"></i><span class="i18n-en">Documentation link</span><span class="i18n-ar" lang="ar">رابط التوثيق</span></a><a href="#resources" class="resource-link"><i class="ph-duotone ph-github-logo"></i><span class="i18n-en">GitHub repository</span><span class="i18n-ar" lang="ar">مستودع GitHub</span></a><a href="#resources" class="resource-link"><i class="ph-duotone ph-play-circle"></i><span class="i18n-en">Demo link</span><span class="i18n-ar" lang="ar">رابط التجربة</span></a></div></section>
+            <section class="project-detail-card"><h2 class="font-mono text-xs text-amber uppercase tracking-widest mb-3"><span class="i18n-en">Lessons Learned</span><span class="i18n-ar" lang="ar">الدروس المستفادة</span></h2><p class="text-slate-300 leading-relaxed"><span class="i18n-en">Mathematical rank choices create visible tradeoffs, so compression must be evaluated with both numbers and visual inspection.</span><span class="i18n-ar" lang="ar">تنتج اختيارات الرتبة الرياضية مفاضلات مرئية، لذلك يجب تقييم الضغط بالأرقام والفحص البصري معًا.</span></p></section>
+        </main>
+    </div>
+    <site-footer></site-footer>
+</body>
+</html>

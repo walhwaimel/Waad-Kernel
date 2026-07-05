@@ -134,6 +134,72 @@
         ::-webkit-scrollbar-thumb:hover { background: rgba(0, 240, 255, 0.4); }
 
         ::selection { background: rgba(0, 240, 255, 0.3); color: white; }
+
+        .domain-card {
+            cursor: pointer;
+            min-height: 320px;
+        }
+
+        .domain-card[aria-selected="true"] {
+            border-color: rgba(0, 240, 255, 0.55);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.16);
+            transform: translateY(-4px);
+        }
+
+        .domain-card[data-domain="ai"][aria-selected="true"] {
+            border-color: rgba(255, 159, 0, 0.55);
+            box-shadow: 0 0 30px rgba(255, 159, 0, 0.16);
+        }
+
+        .domain-card:focus-visible {
+            outline: 2px solid #00f0ff;
+            outline-offset: 4px;
+        }
+
+        .domain-panel {
+            display: none;
+        }
+
+        .domain-panel.active {
+            display: block;
+        }
+
+        .project-section {
+            background: rgba(6, 8, 13, 0.48);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 1rem;
+            padding: 1.1rem;
+        }
+
+        .domain-chip {
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(6, 8, 13, 0.52);
+            padding: 0.65rem 0.9rem;
+            color: #cbd5e1;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+        }
+
+        body[data-language="ar"] .page-hero-content,
+        body[data-language="ar"] .terminal-banner,
+        body[data-language="ar"] .knowledge-localized {
+            direction: rtl;
+            text-align: right;
+        }
+
+        [data-unavailable-link]::after {
+            content: 'Unavailable';
+            margin-inline-start: 0.45rem;
+            font-size: 0.62rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        body[data-language="ar"] [data-unavailable-link]::after {
+            content: 'غير متاح';
+        }
     </style>
 </head>
 <body class="relative min-h-screen antialiased flex flex-col font-sans w-full" data-page="knowledge" vid="12">
@@ -165,15 +231,15 @@
                 <div class="page-hero-content">
 <div class="inline-flex items-center gap-2 px-3 py-1 rounded border border-cyan/20 bg-cyan-dim font-mono text-xs text-cyan uppercase tracking-widest mb-8" vid="33">
                 <span class="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse shadow-[0_0_8px_#00f0ff]" vid="34"></span>
-                Curated Learning
+                <span class="i18n-en">Curated Learning</span><span class="i18n-ar" lang="ar">تعلم منظم</span>
             </div>
             
             <h1 class="page-hero-title font-display glow-text-cyan" vid="35">
-                Knowledge
+                <span class="i18n-en">Knowledge</span><span class="i18n-ar" lang="ar">المعرفة</span>
             </h1>
             
             <p class="page-hero-subtitle text-xl text-slate-300 leading-relaxed font-light" vid="36">
-                Practical technical knowledge, guides, tutorials, and learning resources in Arabic and English.
+                <span class="i18n-en">Practical technical knowledge, guides, tutorials, and learning resources in Arabic and English.</span><span class="i18n-ar" lang="ar">معرفة تقنية عملية، وأدلة، وشروحات، وموارد تعلم بالعربية والإنجليزية.</span>
             </p>
                         </div>
                 <div class="robot-container page-visual" aria-hidden="true">
@@ -185,10 +251,77 @@
             </header>
 
             <div class="terminal-banner">
-                <span>KNOWLEDGE_BASE // Practical guides, learning paths, and bilingual technical references indexed.</span>
+                <span><span class="i18n-en">KNOWLEDGE_BASE // Practical guides, learning paths, and bilingual technical references indexed.</span><span class="i18n-ar" lang="ar">قاعدة المعرفة // أدلة عملية ومسارات تعلم ومراجع تقنية ثنائية اللغة مفهرسة.</span></span>
             </div>
 
-        <section class="space-y-10" vid="37">
+        <section class="space-y-10 knowledge-localized" aria-labelledby="core-domains-title">
+            <div class="flex items-center gap-4 border-b border-white/5 pb-4">
+                <i class="ph-duotone ph-circles-three text-2xl text-slate-400"></i>
+                <h2 id="core-domains-title" class="font-mono text-sm text-slate-400 uppercase tracking-widest"><span class="i18n-en">Core Domains</span><span class="i18n-ar" lang="ar">المجالات الأساسية</span></h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto" role="tablist" aria-label="Core knowledge domains">
+                <button type="button" class="domain-card glass-panel rounded-3xl p-8 relative group hover:-translate-y-1 transition-all duration-500 overflow-hidden border border-cyan/30 text-left" data-domain="software" role="tab" aria-selected="true" aria-controls="software-domain-panel">
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-cyan/5 rounded-full blur-[50px] pointer-events-none group-hover:bg-cyan/10 transition-colors"></div>
+                    <div class="relative z-10 space-y-6">
+                        <div class="flex items-center justify-between gap-4">
+                            <div class="w-16 h-16 bg-cyan-dim rounded-2xl border border-cyan/20 flex items-center justify-center text-cyan shadow-[0_0_20px_rgba(0,240,255,0.16)] group-hover:shadow-[0_0_30px_rgba(0,240,255,0.28)] transition-all duration-500">
+                                <i class="ph-duotone ph-brackets-curly text-3xl"></i>
+                            </div>
+                            <span class="font-mono text-xs text-cyan uppercase tracking-widest"><span class="i18n-en">Open Domain</span><span class="i18n-ar" lang="ar">فتح المجال</span></span>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-3xl font-bold text-white mb-4"><span class="i18n-en">Software Engineering</span><span class="i18n-ar" lang="ar">هندسة البرمجيات</span></h3>
+                            <p class="text-slate-400 font-light leading-relaxed"><span class="i18n-en">Guides for turning requirements into reliable systems, from UML and architecture to testing and project planning.</span><span class="i18n-ar" lang="ar">أدلة لتحويل المتطلبات إلى أنظمة موثوقة، من UML والمعمارية إلى الاختبار وتخطيط المشاريع.</span></p>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="domain-chip">UML</span><span class="domain-chip"><span class="i18n-en">Requirements</span><span class="i18n-ar" lang="ar">المتطلبات</span></span><span class="domain-chip"><span class="i18n-en">Software Architecture</span><span class="i18n-ar" lang="ar">معمارية البرمجيات</span></span><span class="domain-chip"><span class="i18n-en">Testing</span><span class="i18n-ar" lang="ar">الاختبار</span></span>
+                        </div>
+                    </div>
+                </button>
+
+                <button type="button" class="domain-card glass-panel hover-amber rounded-3xl p-8 relative group hover:-translate-y-1 transition-all duration-500 overflow-hidden border border-white/5 hover:border-amber/30 text-left" data-domain="ai" role="tab" aria-selected="false" aria-controls="ai-domain-panel">
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-amber/5 rounded-full blur-[50px] pointer-events-none group-hover:bg-amber/10 transition-colors"></div>
+                    <div class="relative z-10 space-y-6">
+                        <div class="flex items-center justify-between gap-4">
+                            <div class="w-16 h-16 bg-amber-dim rounded-2xl border border-amber/20 flex items-center justify-center text-amber shadow-[0_0_20px_rgba(255,159,0,0.16)] group-hover:shadow-[0_0_30px_rgba(255,159,0,0.28)] transition-all duration-500">
+                                <i class="ph-duotone ph-brain text-3xl"></i>
+                            </div>
+                            <span class="font-mono text-xs text-amber uppercase tracking-widest"><span class="i18n-en">Open Domain</span><span class="i18n-ar" lang="ar">فتح المجال</span></span>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-3xl font-bold text-white mb-4"><span class="i18n-en">Artificial Intelligence</span><span class="i18n-ar" lang="ar">الذكاء الاصطناعي</span></h3>
+                            <p class="text-slate-400 font-light leading-relaxed"><span class="i18n-en">Concepts and workflows for AI fundamentals, data analysis, NLP, evaluation, and explainable models.</span><span class="i18n-ar" lang="ar">مفاهيم وسير عمل لأساسيات الذكاء الاصطناعي وتحليل البيانات وNLP وتقييم النماذج وقابليتها للتفسير.</span></p>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="domain-chip"><span class="i18n-en">AI Fundamentals</span><span class="i18n-ar" lang="ar">أساسيات الذكاء الاصطناعي</span></span><span class="domain-chip">Machine Learning</span><span class="domain-chip"><span class="i18n-en">Data Analysis</span><span class="i18n-ar" lang="ar">تحليل البيانات</span></span><span class="domain-chip">NLP</span>
+                        </div>
+                    </div>
+                </button>
+            </div>
+
+            <div class="glass-panel rounded-[2rem] p-8 md:p-10 border border-cyan/20 relative overflow-hidden" role="tabpanel">
+                <div id="software-domain-panel" class="domain-panel active space-y-8">
+                    <div class="flex items-center gap-4"><i class="ph-duotone ph-code-block text-3xl text-cyan"></i><div><h3 class="font-display text-3xl font-bold text-white"><span class="i18n-en">Software Engineering Path</span><span class="i18n-ar" lang="ar">مسار هندسة البرمجيات</span></h3><p class="text-slate-400"><span class="i18n-en">Selected guides, tips, and resources for building structured software projects.</span><span class="i18n-ar" lang="ar">أدلة ونصائح وموارد مختارة لبناء مشاريع برمجية منظمة.</span></p></div></div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div class="project-section"><h4 class="font-mono text-xs text-cyan uppercase tracking-widest mb-3"><span class="i18n-en">Categories</span><span class="i18n-ar" lang="ar">التصنيفات</span></h4><div class="flex flex-wrap gap-2"><span class="domain-chip">UML</span><span class="domain-chip"><span class="i18n-en">Requirements</span><span class="i18n-ar" lang="ar">المتطلبات</span></span><span class="domain-chip"><span class="i18n-en">Software Architecture</span><span class="i18n-ar" lang="ar">معمارية البرمجيات</span></span><span class="domain-chip"><span class="i18n-en">Design Patterns</span><span class="i18n-ar" lang="ar">أنماط التصميم</span></span><span class="domain-chip"><span class="i18n-en">Testing</span><span class="i18n-ar" lang="ar">الاختبار</span></span><span class="domain-chip"><span class="i18n-en">Project Planning</span><span class="i18n-ar" lang="ar">تخطيط المشاريع</span></span></div></div>
+                        <div class="project-section"><h4 class="font-mono text-xs text-cyan uppercase tracking-widest mb-3"><span class="i18n-en">Related Guides</span><span class="i18n-ar" lang="ar">أدلة مرتبطة</span></h4><ul class="space-y-3 text-sm text-slate-300"><li><span class="i18n-en">How to Draw UML Diagrams</span><span class="i18n-ar" lang="ar">كيفية رسم مخططات UML</span></li><li><span class="i18n-en">Build a Software Project</span><span class="i18n-ar" lang="ar">بناء مشروع برمجي</span></li><li><span class="i18n-en">Understanding Design Patterns</span><span class="i18n-ar" lang="ar">فهم أنماط التصميم</span></li></ul></div>
+                        <div class="project-section"><h4 class="font-mono text-xs text-cyan uppercase tracking-widest mb-3"><span class="i18n-en">Tips & Resources</span><span class="i18n-ar" lang="ar">نصائح وموارد</span></h4><ul class="space-y-3 text-sm text-slate-300"><li><span class="i18n-en">Start with requirements before interface details.</span><span class="i18n-ar" lang="ar">ابدأ بالمتطلبات قبل تفاصيل الواجهة.</span></li><li><span class="i18n-en">Use UML only when it clarifies system behavior.</span><span class="i18n-ar" lang="ar">استخدم UML عندما يوضح سلوك النظام.</span></li><li><span class="i18n-en">Keep testing tied to expected user workflows.</span><span class="i18n-ar" lang="ar">اربط الاختبار بسير عمل المستخدم المتوقع.</span></li></ul></div>
+                    </div>
+                </div>
+
+                <div id="ai-domain-panel" class="domain-panel space-y-8">
+                    <div class="flex items-center gap-4"><i class="ph-duotone ph-graph text-3xl text-amber"></i><div><h3 class="font-display text-3xl font-bold text-white"><span class="i18n-en">Artificial Intelligence Path</span><span class="i18n-ar" lang="ar">مسار الذكاء الاصطناعي</span></h3><p class="text-slate-400"><span class="i18n-en">Selected concepts, practices, and evaluation notes for practical AI learning.</span><span class="i18n-ar" lang="ar">مفاهيم وممارسات وملاحظات تقييم مختارة لتعلم الذكاء الاصطناعي بشكل عملي.</span></p></div></div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div class="project-section"><h4 class="font-mono text-xs text-amber uppercase tracking-widest mb-3"><span class="i18n-en">Categories</span><span class="i18n-ar" lang="ar">التصنيفات</span></h4><div class="flex flex-wrap gap-2"><span class="domain-chip"><span class="i18n-en">AI Fundamentals</span><span class="i18n-ar" lang="ar">أساسيات الذكاء الاصطناعي</span></span><span class="domain-chip">Machine Learning</span><span class="domain-chip"><span class="i18n-en">Data Analysis</span><span class="i18n-ar" lang="ar">تحليل البيانات</span></span><span class="domain-chip">NLP</span><span class="domain-chip"><span class="i18n-en">Model Evaluation</span><span class="i18n-ar" lang="ar">تقييم النماذج</span></span><span class="domain-chip"><span class="i18n-en">Explainable AI</span><span class="i18n-ar" lang="ar">الذكاء الاصطناعي القابل للتفسير</span></span></div></div>
+                        <div class="project-section"><h4 class="font-mono text-xs text-amber uppercase tracking-widest mb-3"><span class="i18n-en">Related Guides</span><span class="i18n-ar" lang="ar">أدلة مرتبطة</span></h4><ul class="space-y-3 text-sm text-slate-300"><li><span class="i18n-en">AI Concepts Explained Simply</span><span class="i18n-ar" lang="ar">شرح مفاهيم الذكاء الاصطناعي ببساطة</span></li><li><span class="i18n-en">Evaluate a Model Before Trusting It</span><span class="i18n-ar" lang="ar">قيّم النموذج قبل الوثوق به</span></li><li><span class="i18n-en">Read NLP Results Critically</span><span class="i18n-ar" lang="ar">اقرأ نتائج NLP بوعي نقدي</span></li></ul></div>
+                        <div class="project-section"><h4 class="font-mono text-xs text-amber uppercase tracking-widest mb-3"><span class="i18n-en">Tips & Resources</span><span class="i18n-ar" lang="ar">نصائح وموارد</span></h4><ul class="space-y-3 text-sm text-slate-300"><li><span class="i18n-en">Track assumptions in your dataset.</span><span class="i18n-ar" lang="ar">وثّق الافتراضات الموجودة في بياناتك.</span></li><li><span class="i18n-en">Compare metrics with real examples.</span><span class="i18n-ar" lang="ar">قارن المقاييس بأمثلة واقعية.</span></li><li><span class="i18n-en">Use explainability to find model blind spots.</span><span class="i18n-ar" lang="ar">استخدم قابلية التفسير لاكتشاف نقاط ضعف النموذج.</span></li></ul></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hidden" aria-hidden="true" vid="37">
             <div class="flex items-center gap-4 border-b border-white/5 pb-4" vid="38">
                 <i class="ph-duotone ph-circles-three text-2xl text-slate-400" vid="39"></i>
                 <h2 class="font-mono text-sm text-slate-400 uppercase tracking-widest" vid="40">Core Domains</h2>
@@ -252,13 +385,13 @@
             <div class="flex items-center justify-between border-b border-white/5 pb-4" vid="73">
                 <div class="flex items-center gap-4" vid="74">
                     <i class="ph-duotone ph-book-open-text text-2xl text-slate-400" vid="75"></i>
-                    <h2 class="font-mono text-sm text-slate-400 uppercase tracking-widest" vid="76">Learning Guides</h2>
+                    <h2 class="font-mono text-sm text-slate-400 uppercase tracking-widest" vid="76"><span class="i18n-en">Learning Guides</span><span class="i18n-ar" lang="ar">أدلة التعلم</span></h2>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" vid="77">
                 
-                <a href="#" class="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-cyan/30 relative overflow-hidden" vid="78">
+                <a href="#resource-unavailable" data-unavailable-link class="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-cyan/30 relative overflow-hidden" vid="78">
                     <div class="absolute right-0 top-0 w-32 h-32 bg-cyan/5 rounded-bl-full pointer-events-none transition-colors group-hover:bg-cyan/10" vid="79"></div>
                     <div class="flex justify-between items-start mb-6" vid="80">
                         <div class="w-10 h-10 rounded-lg bg-base flex items-center justify-center border border-white/10 group-hover:border-cyan/30 transition-colors" vid="81">
@@ -266,18 +399,18 @@
                         </div>
                         <i class="ph ph-arrow-up-right text-slate-500 group-hover:text-cyan transition-colors" vid="83"></i>
                     </div>
-                    <h3 class="font-display text-xl font-bold text-white mb-3 group-hover:text-cyan transition-colors" vid="84">How to Draw UML Diagrams</h3>
-                    <p class="text-slate-400 font-light mb-8 flex-grow leading-relaxed text-sm" vid="85">A practical guide to visualizing software architecture using standardized UML conventions and structures.</p>
+                    <h3 class="font-display text-xl font-bold text-white mb-3 group-hover:text-cyan transition-colors" vid="84"><span class="i18n-en">How to Draw UML Diagrams</span><span class="i18n-ar" lang="ar">كيفية رسم مخططات UML</span></h3>
+                    <p class="text-slate-400 font-light mb-8 flex-grow leading-relaxed text-sm" vid="85"><span class="i18n-en">A practical guide to visualizing software architecture using standardized UML conventions and structures.</span><span class="i18n-ar" lang="ar">دليل عملي لتصور معمارية البرمجيات باستخدام قواعد وبنى UML القياسية.</span></p>
                     <div class="mt-auto flex items-center justify-between border-t border-white/5 pt-4" vid="86">
                         <div class="flex items-center gap-4 text-xs text-slate-500 font-mono" vid="87">
                             <span class="flex items-center gap-1.5" vid="88"><i class="ph-fill ph-clock text-cyan/70" vid="89"></i> 12 min</span>
-                            <span class="flex items-center gap-1.5" vid="90"><i class="ph-fill ph-chart-bar text-cyan/70" vid="91"></i> Beginner</span>
+                            <span class="flex items-center gap-1.5" vid="90"><i class="ph-fill ph-chart-bar text-cyan/70" vid="91"></i> <span class="i18n-en">Beginner</span><span class="i18n-ar" lang="ar">مبتدئ</span></span>
                         </div>
-                        <span class="text-[10px] uppercase tracking-widest text-cyan px-2 py-1 bg-cyan/10 rounded border border-cyan/20" vid="92">Guide</span>
+                        <span class="text-[10px] uppercase tracking-widest text-cyan px-2 py-1 bg-cyan/10 rounded border border-cyan/20" vid="92"><span class="i18n-en">Guide</span><span class="i18n-ar" lang="ar">دليل</span></span>
                     </div>
                 </a>
 
-                <a href="#" class="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-cyan/30 relative overflow-hidden" vid="93">
+                <a href="#resource-unavailable" data-unavailable-link class="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-cyan/30 relative overflow-hidden" vid="93">
                     <div class="absolute right-0 top-0 w-32 h-32 bg-cyan/5 rounded-bl-full pointer-events-none transition-colors group-hover:bg-cyan/10" vid="94"></div>
                     <div class="flex justify-between items-start mb-6" vid="95">
                         <div class="w-10 h-10 rounded-lg bg-base flex items-center justify-center border border-white/10 group-hover:border-cyan/30 transition-colors" vid="96">
@@ -285,18 +418,18 @@
                         </div>
                         <i class="ph ph-arrow-up-right text-slate-500 group-hover:text-cyan transition-colors" vid="98"></i>
                     </div>
-                    <h3 class="font-display text-xl font-bold text-white mb-3 group-hover:text-cyan transition-colors" vid="99">Design a Database from Scratch</h3>
-                    <p class="text-slate-400 font-light mb-8 flex-grow leading-relaxed text-sm" vid="100">Step-by-step tutorial on translating real-world requirements into a solid relational database schema.</p>
+                    <h3 class="font-display text-xl font-bold text-white mb-3 group-hover:text-cyan transition-colors" vid="99"><span class="i18n-en">Design a Database from Scratch</span><span class="i18n-ar" lang="ar">تصميم قاعدة بيانات من الصفر</span></h3>
+                    <p class="text-slate-400 font-light mb-8 flex-grow leading-relaxed text-sm" vid="100"><span class="i18n-en">Step-by-step tutorial on translating real-world requirements into a solid relational database schema.</span><span class="i18n-ar" lang="ar">شرح خطوة بخطوة لتحويل المتطلبات الواقعية إلى مخطط قاعدة بيانات علائقية متين.</span></p>
                     <div class="mt-auto flex items-center justify-between border-t border-white/5 pt-4" vid="101">
                         <div class="flex items-center gap-4 text-xs text-slate-500 font-mono" vid="102">
                             <span class="flex items-center gap-1.5" vid="103"><i class="ph-fill ph-clock text-cyan/70" vid="104"></i> 15 min</span>
-                            <span class="flex items-center gap-1.5" vid="105"><i class="ph-fill ph-chart-bar text-cyan/70" vid="106"></i> Intermediate</span>
+                            <span class="flex items-center gap-1.5" vid="105"><i class="ph-fill ph-chart-bar text-cyan/70" vid="106"></i> <span class="i18n-en">Intermediate</span><span class="i18n-ar" lang="ar">متوسط</span></span>
                         </div>
-                        <span class="text-[10px] uppercase tracking-widest text-cyan px-2 py-1 bg-cyan/10 rounded border border-cyan/20" vid="107">Guide</span>
+                        <span class="text-[10px] uppercase tracking-widest text-cyan px-2 py-1 bg-cyan/10 rounded border border-cyan/20" vid="107"><span class="i18n-en">Guide</span><span class="i18n-ar" lang="ar">دليل</span></span>
                     </div>
                 </a>
 
-                <a href="#" class="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-cyan/30 relative overflow-hidden" vid="108">
+                <a href="#resource-unavailable" data-unavailable-link class="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-cyan/30 relative overflow-hidden" vid="108">
                     <div class="absolute right-0 top-0 w-32 h-32 bg-cyan/5 rounded-bl-full pointer-events-none transition-colors group-hover:bg-cyan/10" vid="109"></div>
                     <div class="flex justify-between items-start mb-6" vid="110">
                         <div class="w-10 h-10 rounded-lg bg-base flex items-center justify-center border border-white/10 group-hover:border-cyan/30 transition-colors" vid="111">
@@ -304,18 +437,18 @@
                         </div>
                         <i class="ph ph-arrow-up-right text-slate-500 group-hover:text-cyan transition-colors" vid="113"></i>
                     </div>
-                    <h3 class="font-display text-xl font-bold text-white mb-3 group-hover:text-cyan transition-colors" vid="114">Build a Software Project</h3>
-                    <p class="text-slate-400 font-light mb-8 flex-grow leading-relaxed text-sm" vid="115">Walkthrough of the full software development lifecycle from initial requirements to final deployment.</p>
+                    <h3 class="font-display text-xl font-bold text-white mb-3 group-hover:text-cyan transition-colors" vid="114"><span class="i18n-en">Build a Software Project</span><span class="i18n-ar" lang="ar">بناء مشروع برمجي</span></h3>
+                    <p class="text-slate-400 font-light mb-8 flex-grow leading-relaxed text-sm" vid="115"><span class="i18n-en">Walkthrough of the full software development lifecycle from initial requirements to final deployment.</span><span class="i18n-ar" lang="ar">شرح لمسار تطوير البرمجيات كاملًا من المتطلبات الأولى إلى التسليم النهائي.</span></p>
                     <div class="mt-auto flex items-center justify-between border-t border-white/5 pt-4" vid="116">
                         <div class="flex items-center gap-4 text-xs text-slate-500 font-mono" vid="117">
                             <span class="flex items-center gap-1.5" vid="118"><i class="ph-fill ph-clock text-cyan/70" vid="119"></i> 20 min</span>
-                            <span class="flex items-center gap-1.5" vid="120"><i class="ph-fill ph-chart-bar text-cyan/70" vid="121"></i> Advanced</span>
+                            <span class="flex items-center gap-1.5" vid="120"><i class="ph-fill ph-chart-bar text-cyan/70" vid="121"></i> <span class="i18n-en">Advanced</span><span class="i18n-ar" lang="ar">متقدم</span></span>
                         </div>
-                        <span class="text-[10px] uppercase tracking-widest text-cyan px-2 py-1 bg-cyan/10 rounded border border-cyan/20" vid="122">Guide</span>
+                        <span class="text-[10px] uppercase tracking-widest text-cyan px-2 py-1 bg-cyan/10 rounded border border-cyan/20" vid="122"><span class="i18n-en">Guide</span><span class="i18n-ar" lang="ar">دليل</span></span>
                     </div>
                 </a>
 
-                <a href="#" class="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-cyan/30 relative overflow-hidden" vid="123">
+                <a href="#resource-unavailable" data-unavailable-link class="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-cyan/30 relative overflow-hidden" vid="123">
                     <div class="absolute right-0 top-0 w-32 h-32 bg-cyan/5 rounded-bl-full pointer-events-none transition-colors group-hover:bg-cyan/10" vid="124"></div>
                     <div class="flex justify-between items-start mb-6" vid="125">
                         <div class="w-10 h-10 rounded-lg bg-base flex items-center justify-center border border-white/10 group-hover:border-cyan/30 transition-colors" vid="126">
@@ -323,18 +456,18 @@
                         </div>
                         <i class="ph ph-arrow-up-right text-slate-500 group-hover:text-cyan transition-colors" vid="128"></i>
                     </div>
-                    <h3 class="font-display text-xl font-bold text-white mb-3 group-hover:text-cyan transition-colors" vid="129">Understanding Design Patterns</h3>
-                    <p class="text-slate-400 font-light mb-8 flex-grow leading-relaxed text-sm" vid="130">A deep dive into common structural, creational, and behavioral design patterns in software.</p>
+                    <h3 class="font-display text-xl font-bold text-white mb-3 group-hover:text-cyan transition-colors" vid="129"><span class="i18n-en">Understanding Design Patterns</span><span class="i18n-ar" lang="ar">فهم أنماط التصميم</span></h3>
+                    <p class="text-slate-400 font-light mb-8 flex-grow leading-relaxed text-sm" vid="130"><span class="i18n-en">A deep dive into common structural, creational, and behavioral design patterns in software.</span><span class="i18n-ar" lang="ar">شرح معمق لأنماط التصميم الشائعة في بناء البرمجيات.</span></p>
                     <div class="mt-auto flex items-center justify-between border-t border-white/5 pt-4" vid="131">
                         <div class="flex items-center gap-4 text-xs text-slate-500 font-mono" vid="132">
                             <span class="flex items-center gap-1.5" vid="133"><i class="ph-fill ph-clock text-cyan/70" vid="134"></i> 18 min</span>
-                            <span class="flex items-center gap-1.5" vid="135"><i class="ph-fill ph-chart-bar text-cyan/70" vid="136"></i> Intermediate</span>
+                            <span class="flex items-center gap-1.5" vid="135"><i class="ph-fill ph-chart-bar text-cyan/70" vid="136"></i> <span class="i18n-en">Intermediate</span><span class="i18n-ar" lang="ar">متوسط</span></span>
                         </div>
-                        <span class="text-[10px] uppercase tracking-widest text-cyan px-2 py-1 bg-cyan/10 rounded border border-cyan/20" vid="137">Guide</span>
+                        <span class="text-[10px] uppercase tracking-widest text-cyan px-2 py-1 bg-cyan/10 rounded border border-cyan/20" vid="137"><span class="i18n-en">Guide</span><span class="i18n-ar" lang="ar">دليل</span></span>
                     </div>
                 </a>
 
-                <a href="#" class="glass-panel hover-amber p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-amber/30 relative overflow-hidden" vid="138">
+                <a href="#resource-unavailable" data-unavailable-link class="glass-panel hover-amber p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-amber/30 relative overflow-hidden" vid="138">
                     <div class="absolute right-0 top-0 w-32 h-32 bg-amber/5 rounded-bl-full pointer-events-none transition-colors group-hover:bg-amber/10" vid="139"></div>
                     <div class="flex justify-between items-start mb-6" vid="140">
                         <div class="w-10 h-10 rounded-lg bg-base flex items-center justify-center border border-white/10 group-hover:border-amber/30 transition-colors" vid="141">
@@ -342,18 +475,18 @@
                         </div>
                         <i class="ph ph-arrow-up-right text-slate-500 group-hover:text-amber transition-colors" vid="143"></i>
                     </div>
-                    <h3 class="font-display text-xl font-bold text-white mb-3 group-hover:text-amber transition-colors" vid="144">AI Concepts Explained Simply</h3>
-                    <p class="text-slate-400 font-light mb-8 flex-grow leading-relaxed text-sm" vid="145">Breaking down complex artificial intelligence and machine learning paradigms for beginners.</p>
+                    <h3 class="font-display text-xl font-bold text-white mb-3 group-hover:text-amber transition-colors" vid="144"><span class="i18n-en">AI Concepts Explained Simply</span><span class="i18n-ar" lang="ar">شرح مفاهيم الذكاء الاصطناعي ببساطة</span></h3>
+                    <p class="text-slate-400 font-light mb-8 flex-grow leading-relaxed text-sm" vid="145"><span class="i18n-en">Breaking down complex artificial intelligence and machine learning paradigms for beginners.</span><span class="i18n-ar" lang="ar">تبسيط مفاهيم الذكاء الاصطناعي وMachine Learning للمبتدئين.</span></p>
                     <div class="mt-auto flex items-center justify-between border-t border-white/5 pt-4" vid="146">
                         <div class="flex items-center gap-4 text-xs text-slate-500 font-mono" vid="147">
                             <span class="flex items-center gap-1.5" vid="148"><i class="ph-fill ph-clock text-amber/70" vid="149"></i> 10 min</span>
-                            <span class="flex items-center gap-1.5" vid="150"><i class="ph-fill ph-chart-bar text-amber/70" vid="151"></i> Beginner</span>
+                            <span class="flex items-center gap-1.5" vid="150"><i class="ph-fill ph-chart-bar text-amber/70" vid="151"></i> <span class="i18n-en">Beginner</span><span class="i18n-ar" lang="ar">مبتدئ</span></span>
                         </div>
-                        <span class="text-[10px] uppercase tracking-widest text-amber px-2 py-1 bg-amber/10 rounded border border-amber/20" vid="152">Concepts</span>
+                        <span class="text-[10px] uppercase tracking-widest text-amber px-2 py-1 bg-amber/10 rounded border border-amber/20" vid="152"><span class="i18n-en">Concepts</span><span class="i18n-ar" lang="ar">مفاهيم</span></span>
                     </div>
                 </a>
 
-                <a href="#" class="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-cyan/30 relative overflow-hidden" vid="153">
+                <a href="#resource-unavailable" data-unavailable-link class="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-white/5 hover:border-cyan/30 relative overflow-hidden" vid="153">
                     <div class="absolute right-0 top-0 w-32 h-32 bg-cyan/5 rounded-bl-full pointer-events-none transition-colors group-hover:bg-cyan/10" vid="154"></div>
                     <div class="flex justify-between items-start mb-6" vid="155">
                         <div class="w-10 h-10 rounded-lg bg-base flex items-center justify-center border border-white/10 group-hover:border-cyan/30 transition-colors" vid="156">
@@ -361,14 +494,14 @@
                         </div>
                         <i class="ph ph-arrow-up-right text-slate-500 group-hover:text-cyan transition-colors" vid="158"></i>
                     </div>
-                    <h3 class="font-display text-xl font-bold text-white mb-3 group-hover:text-cyan transition-colors" vid="159">Normalization Rules in Practice</h3>
-                    <p class="text-slate-400 font-light mb-8 flex-grow leading-relaxed text-sm" vid="160">Practical examples of moving data from 1NF to 3NF to eliminate anomalies.</p>
+                    <h3 class="font-display text-xl font-bold text-white mb-3 group-hover:text-cyan transition-colors" vid="159"><span class="i18n-en">Normalization Rules in Practice</span><span class="i18n-ar" lang="ar">قواعد التطبيع عمليًا</span></h3>
+                    <p class="text-slate-400 font-light mb-8 flex-grow leading-relaxed text-sm" vid="160"><span class="i18n-en">Practical examples of moving data from 1NF to 3NF to eliminate anomalies.</span><span class="i18n-ar" lang="ar">أمثلة عملية لنقل البيانات من 1NF إلى 3NF لتقليل مشكلات البيانات.</span></p>
                     <div class="mt-auto flex items-center justify-between border-t border-white/5 pt-4" vid="161">
                         <div class="flex items-center gap-4 text-xs text-slate-500 font-mono" vid="162">
                             <span class="flex items-center gap-1.5" vid="163"><i class="ph-fill ph-clock text-cyan/70" vid="164"></i> 14 min</span>
-                            <span class="flex items-center gap-1.5" vid="165"><i class="ph-fill ph-chart-bar text-cyan/70" vid="166"></i> Intermediate</span>
+                            <span class="flex items-center gap-1.5" vid="165"><i class="ph-fill ph-chart-bar text-cyan/70" vid="166"></i> <span class="i18n-en">Intermediate</span><span class="i18n-ar" lang="ar">متوسط</span></span>
                         </div>
-                        <span class="text-[10px] uppercase tracking-widest text-cyan px-2 py-1 bg-cyan/10 rounded border border-cyan/20" vid="167">Tutorial</span>
+                        <span class="text-[10px] uppercase tracking-widest text-cyan px-2 py-1 bg-cyan/10 rounded border border-cyan/20" vid="167"><span class="i18n-en">Tutorial</span><span class="i18n-ar" lang="ar">شرح</span></span>
                     </div>
                 </a>
 
@@ -378,49 +511,49 @@
         <section class="space-y-10" vid="168">
             <div class="flex items-center gap-4 border-b border-white/5 pb-4" vid="169">
                 <i class="ph-duotone ph-sparkle text-2xl text-slate-400" vid="170"></i>
-                <h2 class="font-mono text-sm text-slate-400 uppercase tracking-widest" vid="171">Tips &amp; Tricks</h2>
+                <h2 class="font-mono text-sm text-slate-400 uppercase tracking-widest" vid="171"><span class="i18n-en">Tips &amp; Tricks</span><span class="i18n-ar" lang="ar">نصائح سريعة</span></h2>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4" vid="172">
                 
-                <a href="#" class="glass-panel p-6 rounded-xl hover:border-cyan/30 transition-colors group relative overflow-hidden flex flex-col gap-4" vid="173">
+                <a href="#resource-unavailable" data-unavailable-link class="glass-panel p-6 rounded-xl hover:border-cyan/30 transition-colors group relative overflow-hidden flex flex-col gap-4" vid="173">
                     <div class="absolute top-0 right-0 w-20 h-20 bg-cyan/5 rounded-bl-[100%] pointer-events-none group-hover:bg-cyan/10 transition-colors" vid="174"></div>
                     <div class="bg-base w-8 h-8 rounded border border-white/10 flex items-center justify-center text-cyan" vid="175">
                         <i class="ph-bold ph-warning-circle" vid="176"></i>
                     </div>
-                    <h4 class="font-medium text-white text-sm leading-snug group-hover:text-cyan transition-colors z-10" vid="177">Common UML Mistakes</h4>
+                    <h4 class="font-medium text-white text-sm leading-snug group-hover:text-cyan transition-colors z-10" vid="177"><span class="i18n-en">Common UML Mistakes</span><span class="i18n-ar" lang="ar">أخطاء شائعة في UML</span></h4>
                 </a>
 
-                <a href="#" class="glass-panel p-6 rounded-xl hover:border-cyan/30 transition-colors group relative overflow-hidden flex flex-col gap-4" vid="178">
+                <a href="#resource-unavailable" data-unavailable-link class="glass-panel p-6 rounded-xl hover:border-cyan/30 transition-colors group relative overflow-hidden flex flex-col gap-4" vid="178">
                     <div class="absolute top-0 right-0 w-20 h-20 bg-cyan/5 rounded-bl-[100%] pointer-events-none group-hover:bg-cyan/10 transition-colors" vid="179"></div>
                     <div class="bg-base w-8 h-8 rounded border border-white/10 flex items-center justify-center text-cyan" vid="180">
                         <i class="ph-bold ph-database" vid="181"></i>
                     </div>
-                    <h4 class="font-medium text-white text-sm leading-snug group-hover:text-cyan transition-colors z-10" vid="182">SQL Mistakes Beginners Make</h4>
+                    <h4 class="font-medium text-white text-sm leading-snug group-hover:text-cyan transition-colors z-10" vid="182"><span class="i18n-en">SQL Mistakes Beginners Make</span><span class="i18n-ar" lang="ar">أخطاء SQL للمبتدئين</span></h4>
                 </a>
 
-                <a href="#" class="glass-panel p-6 rounded-xl hover:border-cyan/30 transition-colors group relative overflow-hidden flex flex-col gap-4" vid="183">
+                <a href="#resource-unavailable" data-unavailable-link class="glass-panel p-6 rounded-xl hover:border-cyan/30 transition-colors group relative overflow-hidden flex flex-col gap-4" vid="183">
                     <div class="absolute top-0 right-0 w-20 h-20 bg-cyan/5 rounded-bl-[100%] pointer-events-none group-hover:bg-cyan/10 transition-colors" vid="184"></div>
                     <div class="bg-base w-8 h-8 rounded border border-white/10 flex items-center justify-center text-cyan" vid="185">
                         <i class="ph-bold ph-git-branch" vid="186"></i>
                     </div>
-                    <h4 class="font-medium text-white text-sm leading-snug group-hover:text-cyan transition-colors z-10" vid="187">Choosing the Right Design Pattern</h4>
+                    <h4 class="font-medium text-white text-sm leading-snug group-hover:text-cyan transition-colors z-10" vid="187"><span class="i18n-en">Choosing the Right Design Pattern</span><span class="i18n-ar" lang="ar">اختيار نمط التصميم المناسب</span></h4>
                 </a>
 
-                <a href="#" class="glass-panel hover-amber p-6 rounded-xl hover:border-amber/30 transition-colors group relative overflow-hidden flex flex-col gap-4" vid="188">
+                <a href="#resource-unavailable" data-unavailable-link class="glass-panel hover-amber p-6 rounded-xl hover:border-amber/30 transition-colors group relative overflow-hidden flex flex-col gap-4" vid="188">
                     <div class="absolute top-0 right-0 w-20 h-20 bg-amber/5 rounded-bl-[100%] pointer-events-none group-hover:bg-amber/10 transition-colors" vid="189"></div>
                     <div class="bg-base w-8 h-8 rounded border border-white/10 flex items-center justify-center text-amber" vid="190">
                         <i class="ph-bold ph-presentation-chart" vid="191"></i>
                     </div>
-                    <h4 class="font-medium text-white text-sm leading-snug group-hover:text-amber transition-colors z-10" vid="192">Project Presentation Tips</h4>
+                    <h4 class="font-medium text-white text-sm leading-snug group-hover:text-amber transition-colors z-10" vid="192"><span class="i18n-en">Project Presentation Tips</span><span class="i18n-ar" lang="ar">نصائح عرض المشاريع</span></h4>
                 </a>
 
-                <a href="#" class="glass-panel p-6 rounded-xl hover:border-cyan/30 transition-colors group relative overflow-hidden flex flex-col gap-4" vid="193">
+                <a href="#resource-unavailable" data-unavailable-link class="glass-panel p-6 rounded-xl hover:border-cyan/30 transition-colors group relative overflow-hidden flex flex-col gap-4" vid="193">
                     <div class="absolute top-0 right-0 w-20 h-20 bg-cyan/5 rounded-bl-[100%] pointer-events-none group-hover:bg-cyan/10 transition-colors" vid="194"></div>
                     <div class="bg-base w-8 h-8 rounded border border-white/10 flex items-center justify-center text-cyan" vid="195">
                         <i class="ph-bold ph-file-text" vid="196"></i>
                     </div>
-                    <h4 class="font-medium text-white text-sm leading-snug group-hover:text-cyan transition-colors z-10" vid="197">Documentation Tips</h4>
+                    <h4 class="font-medium text-white text-sm leading-snug group-hover:text-cyan transition-colors z-10" vid="197"><span class="i18n-en">Documentation Tips</span><span class="i18n-ar" lang="ar">نصائح التوثيق</span></h4>
                 </a>
 
             </div>
@@ -435,56 +568,56 @@
                     <div class="w-12 h-12 rounded-xl bg-cyan-dim border border-cyan/20 flex items-center justify-center shadow-[0_0_15px_rgba(0,240,255,0.2)]" vid="203">
                         <i class="ph-duotone ph-books text-2xl text-cyan" vid="204"></i>
                     </div>
-                    <h2 class="font-display text-3xl font-bold text-white glow-text-cyan" vid="205">Curated Resources</h2>
+                    <h2 class="font-display text-3xl font-bold text-white glow-text-cyan" vid="205"><span class="i18n-en">Curated Resources</span><span class="i18n-ar" lang="ar">موارد مختارة</span></h2>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12" vid="206">
                     
                     <div class="space-y-6" vid="207">
                         <h3 class="font-mono text-xs uppercase tracking-widest text-cyan/80 border-b border-white/5 pb-3 flex items-center gap-2" vid="208">
-                            <i class="ph-fill ph-book-bookmark" vid="209"></i> Books
+                            <i class="ph-fill ph-book-bookmark" vid="209"></i> <span class="i18n-en">Books</span><span class="i18n-ar" lang="ar">كتب</span>
                         </h3>
                         <ul class="space-y-4" vid="210">
-                            <li vid="211"><a href="#" class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="212"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="213"></i> Clean Architecture</a></li>
-                            <li vid="214"><a href="#" class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="215"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="216"></i> Design Patterns: Elements</a></li>
-                            <li vid="217"><a href="#" class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="218"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="219"></i> Deep Learning</a></li>
-                            <li vid="220"><a href="#" class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="221"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="222"></i> Database System Concepts</a></li>
+                            <li vid="211"><a href="#resource-unavailable" data-unavailable-link class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="212"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="213"></i> Clean Architecture</a></li>
+                            <li vid="214"><a href="#resource-unavailable" data-unavailable-link class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="215"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="216"></i> Design Patterns: Elements</a></li>
+                            <li vid="217"><a href="#resource-unavailable" data-unavailable-link class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="218"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="219"></i> Deep Learning</a></li>
+                            <li vid="220"><a href="#resource-unavailable" data-unavailable-link class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="221"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="222"></i> Database System Concepts</a></li>
                         </ul>
                     </div>
 
                     <div class="space-y-6" vid="223">
                         <h3 class="font-mono text-xs uppercase tracking-widest text-cyan/80 border-b border-white/5 pb-3 flex items-center gap-2" vid="224">
-                            <i class="ph-fill ph-globe" vid="225"></i> Websites
+                            <i class="ph-fill ph-globe" vid="225"></i> <span class="i18n-en">Websites</span><span class="i18n-ar" lang="ar">مواقع</span>
                         </h3>
                         <ul class="space-y-4" vid="226">
-                            <li vid="227"><a href="#" class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="228"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="229"></i> Refactoring.guru</a></li>
-                            <li vid="230"><a href="#" class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="231"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="232"></i> UseCase.org</a></li>
-                            <li vid="233"><a href="#" class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="234"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="235"></i> Papers With Code</a></li>
-                            <li vid="236"><a href="#" class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="237"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="238"></i> SQLBolt</a></li>
+                            <li vid="227"><a href="#resource-unavailable" data-unavailable-link class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="228"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="229"></i> Refactoring.guru</a></li>
+                            <li vid="230"><a href="#resource-unavailable" data-unavailable-link class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="231"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="232"></i> UseCase.org</a></li>
+                            <li vid="233"><a href="#resource-unavailable" data-unavailable-link class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="234"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="235"></i> Papers With Code</a></li>
+                            <li vid="236"><a href="#resource-unavailable" data-unavailable-link class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="237"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="238"></i> SQLBolt</a></li>
                         </ul>
                     </div>
 
                     <div class="space-y-6" vid="239">
                         <h3 class="font-mono text-xs uppercase tracking-widest text-cyan/80 border-b border-white/5 pb-3 flex items-center gap-2" vid="240">
-                            <i class="ph-fill ph-wrench" vid="241"></i> Tools
+                            <i class="ph-fill ph-wrench" vid="241"></i> <span class="i18n-en">Tools</span><span class="i18n-ar" lang="ar">أدوات</span>
                         </h3>
                         <ul class="space-y-4" vid="242">
-                            <li vid="243"><a href="#" class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="244"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="245"></i> Lucidchart (UML)</a></li>
-                            <li vid="246"><a href="#" class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="247"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="248"></i> Draw.io</a></li>
-                            <li vid="249"><a href="#" class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="250"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="251"></i> Jupyter Notebooks</a></li>
-                            <li vid="252"><a href="#" class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="253"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="254"></i> DBDesigner</a></li>
+                            <li vid="243"><a href="#resource-unavailable" data-unavailable-link class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="244"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="245"></i> Lucidchart (UML)</a></li>
+                            <li vid="246"><a href="#resource-unavailable" data-unavailable-link class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="247"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="248"></i> Draw.io</a></li>
+                            <li vid="249"><a href="#resource-unavailable" data-unavailable-link class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="250"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="251"></i> Jupyter Notebooks</a></li>
+                            <li vid="252"><a href="#resource-unavailable" data-unavailable-link class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="253"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="254"></i> DBDesigner</a></li>
                         </ul>
                     </div>
 
                     <div class="space-y-6" vid="255">
                         <h3 class="font-mono text-xs uppercase tracking-widest text-cyan/80 border-b border-white/5 pb-3 flex items-center gap-2" vid="256">
-                            <i class="ph-fill ph-link" vid="257"></i> References
+                            <i class="ph-fill ph-link" vid="257"></i> <span class="i18n-en">References</span><span class="i18n-ar" lang="ar">مراجع</span>
                         </h3>
                         <ul class="space-y-4" vid="258">
-                            <li vid="259"><a href="#" class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="260"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="261"></i> IEEE Standards</a></li>
-                            <li vid="262"><a href="#" class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="263"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="264"></i> ACM Digital Library</a></li>
-                            <li vid="265"><a href="#" class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="266"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="267"></i> W3C Documentation</a></li>
-                            <li vid="268"><a href="#" class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="269"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="270"></i> ISO/IEC Directives</a></li>
+                            <li vid="259"><a href="#resource-unavailable" data-unavailable-link class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="260"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="261"></i> IEEE Standards</a></li>
+                            <li vid="262"><a href="#resource-unavailable" data-unavailable-link class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="263"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="264"></i> ACM Digital Library</a></li>
+                            <li vid="265"><a href="#resource-unavailable" data-unavailable-link class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="266"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="267"></i> W3C Documentation</a></li>
+                            <li vid="268"><a href="#resource-unavailable" data-unavailable-link class="text-slate-300 hover:text-white text-sm flex items-start gap-3 group transition-colors" vid="269"><i class="ph ph-arrow-right text-cyan mt-0.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" vid="270"></i> ISO/IEC Directives</a></li>
                         </ul>
                     </div>
 
@@ -496,7 +629,27 @@
 
     <site-footer></site-footer>
 
+    <script>
+        document.querySelectorAll('[data-domain]').forEach((card) => {
+            card.addEventListener('click', () => {
+                const selectedDomain = card.getAttribute('data-domain');
+                document.querySelectorAll('[data-domain]').forEach((item) => {
+                    item.setAttribute('aria-selected', item === card ? 'true' : 'false');
+                });
+                document.querySelectorAll('.domain-panel').forEach((panel) => {
+                    panel.classList.toggle('active', panel.id === `${selectedDomain}-domain-panel`);
+                });
+            });
+        });
+
+        document.querySelectorAll('[data-unavailable-link]').forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+            });
+        });
+    </script>
 
 </body></html>
+
 
 
