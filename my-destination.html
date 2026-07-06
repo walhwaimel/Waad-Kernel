@@ -133,6 +133,15 @@
         .md-event-date { width: 58px; height: 58px; border-radius: 1rem; background: #e4f8f6; color: #087c78; display: grid; place-items: center; font-weight: 900; text-align: center; line-height: 1.05; }
         .md-settings-action { width: 100%; min-height: 50px; border: 1px solid #dce4ed; border-radius: 1rem; background: #fff; color: #071225; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0 0.9rem; font-weight: 800; margin-top: 0.65rem; }
         .md-settings-action i { color: #149e9a; font-size: 1.2rem; }
+        .md-setting-row { display: grid; gap: 0.45rem; margin-top: 0.8rem; }
+        .md-setting-label { color: #64748b; font-size: 0.78rem; font-weight: 800; }
+        .md-segment { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.35rem; padding: 0.35rem; border: 1px solid #dce4ed; border-radius: 1rem; background: #f3f6f8; }
+        .md-segment button { min-height: 38px; border: 0; border-radius: 0.75rem; background: transparent; color: #64748b; font-weight: 800; }
+        .md-segment button.is-active { background: #149e9a; color: #fff; box-shadow: 0 8px 18px rgba(20,158,154,0.18); }
+        .md-danger-action { border-color: rgba(239,68,68,0.24); color: #b91c1c; }
+        .md-star-select { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.4rem; margin-top: 0.8rem; }
+        .md-star-button { min-height: 42px; border: 1px solid #dce4ed; border-radius: 0.85rem; background: #fff; color: #94a3b8; font-size: 1.15rem; }
+        .md-star-button.is-active { color: #f7b718; border-color: rgba(247,183,24,0.55); background: #fff8df; }
         .md-textarea-mock { width: 100%; min-height: 118px; border: 1px solid #dce4ed; border-radius: 1rem; color: #071225; background: #fff; padding: 0.85rem; resize: none; outline: none; }
         .md-input-mock.blank { color: #94a3b8; }
         .md-detail-org-nav { display: none; }
@@ -144,6 +153,14 @@
         .md-screen-wrap.md-dark-mode .md-h1, .md-screen-wrap.md-dark-mode .md-app-title, .md-screen-wrap.md-dark-mode .md-rating, .md-screen-wrap.md-dark-mode .md-settings-action { color: #f8fafc; }
         .md-screen-wrap.md-dark-mode .md-muted, .md-screen-wrap.md-dark-mode .md-kicker { color: #b8c6d8; }
         .md-screen-wrap.md-dark-mode .md-bottom-nav, .md-screen-wrap.md-dark-mode .md-settings-action, .md-screen-wrap.md-dark-mode .md-input-mock, .md-screen-wrap.md-dark-mode .md-textarea-mock { background: #111827; border-color: #24344d; color: #e2e8f0; }
+        .md-screen-wrap.md-dark-mode .md-segment { background: #111827; border-color: #24344d; }
+        .md-screen-wrap.md-dark-mode .md-star-button { background: #111827; border-color: #24344d; }
+        .md-screen-wrap[data-prototype-language="en"] .i18n-ar { display: none !important; }
+        .md-screen-wrap[data-prototype-language="en"] .i18n-en { display: inline !important; }
+        .md-screen-wrap[data-prototype-language="ar"] .i18n-en { display: none !important; }
+        .md-screen-wrap[data-prototype-language="ar"] .i18n-ar { display: inline !important; }
+        .md-screen-wrap[data-prototype-language="ar"] .md-screen { direction: rtl; text-align: right; }
+        .md-screen-wrap[data-prototype-language="en"] .md-screen { direction: ltr; text-align: left; }
         .md-bottom-nav { position: absolute; left: 0; right: 0; bottom: 0; height: 82px; background: rgba(255,255,255,0.98); border-top: 1px solid #dde5ee; display: grid; grid-template-columns: repeat(4, 1fr); align-items: center; z-index: 4; box-shadow: 0 -10px 24px rgba(15,23,42,0.08); }
         .md-bottom-nav.md-detail-org-nav { display: none; }
         .md-screen.org-context .md-bottom-nav.md-detail-user-nav { display: none; }
@@ -213,12 +230,11 @@
                     <div class="md-prototype-nav" role="tablist" aria-label="My Destination prototype screens">
                         <button type="button" class="md-prototype-tab" data-prototype-tab="home" role="tab" aria-selected="false"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button>
                         <button type="button" class="md-prototype-tab" data-prototype-tab="search" role="tab" aria-selected="false"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button>
-                        <button type="button" class="md-prototype-tab" data-prototype-tab="map" role="tab" aria-selected="false"><i class="ph-duotone ph-map-trifold"></i><span class="i18n-en">Map</span><span class="i18n-ar" lang="ar">الخريطة</span></button>
                         <button type="button" class="md-prototype-tab" data-prototype-tab="reviews" role="tab" aria-selected="false"><i class="ph-duotone ph-star"></i><span class="i18n-en">Reviews</span><span class="i18n-ar" lang="ar">المراجعات</span></button>
                     </div>
 
                     <div class="md-phone">
-                        <div class="md-screen-wrap">
+                        <div class="md-screen-wrap" data-prototype-language="en">
                             <div class="md-screen is-active" data-prototype-screen="login">
                                 <div class="md-auth-screen">
                                     <div class="md-auth-top">
@@ -301,56 +317,36 @@
                                         </div>
                                     </article>
 
-                                    <article class="md-place-card" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="Listen Valley" data-place-query="Listen+Valley+Riyadh" data-place-photo="listen" data-place-rating="4.5" data-place-features="Accessible parking|Elevator access|Wide corridors|Staff assistance" data-place-review="Waad visited Listen Valley before and can add a review. The parking was close, and the corridors felt comfortable for moving between shops." aria-label="Open Listen Valley details">
+                                    <article class="md-place-card" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="Listen Valley" data-place-query="Listen+Valley+Riyadh" data-place-photo="listen" data-place-rating="4.5" data-place-features="Accessible parking|Elevator access|Wide corridors|Staff assistance" data-place-review="Haya: The parking was close, and the corridors felt comfortable for moving between shops." aria-label="Open Listen Valley details">
                                         <div class="md-place-photo listen"></div>
                                         <div class="md-place-body">
                                             <div class="md-place-title-row"><h5 class="md-app-title">Listen Valley</h5><span class="md-rating"><i class="ph-fill ph-star"></i> 4.5</span></div>
-                                            <p class="md-muted"><span class="i18n-en">Modern destination with accessible entrances, spacious corridors, and an option for Waad to add a review.</span><span class="i18n-ar" lang="ar">وجهة حديثة بمداخل مهيأة وممرات واسعة مع خيار لوعد لكتابة مراجعة.</span></p>
+                                            <p class="md-muted"><span class="i18n-en">Modern destination with accessible entrances, spacious corridors, and helpful visitor reviews.</span><span class="i18n-ar" lang="ar">وجهة حديثة بمداخل مهيأة وممرات واسعة ومراجعات مفيدة من الزوار.</span></p>
                                             <p class="md-muted mt-2"><i class="ph-duotone ph-map-pin"></i> <span class="i18n-en">Shopping and cafes</span><span class="i18n-ar" lang="ar">تسوق ومقاهي</span></p>
                                             <div class="md-tag-row"><span class="md-chip"><span class="i18n-en">Accessible parking</span><span class="i18n-ar" lang="ar">مواقف مهيأة</span></span><span class="md-chip"><span class="i18n-en">Elevators</span><span class="i18n-ar" lang="ar">مصاعد</span></span><span class="md-chip">+1</span></div>
                                         </div>
                                     </article>
                                 </div>
-                                <nav class="md-bottom-nav" aria-label="User app navigation"><button type="button" class="md-bottom-item active" data-prototype-tab="home"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item" data-prototype-tab="search"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button><button type="button" class="md-bottom-item" data-prototype-tab="map"><i class="ph-duotone ph-map-trifold"></i><span class="i18n-en">Map</span><span class="i18n-ar" lang="ar">الخريطة</span></button><button type="button" class="md-bottom-item" data-prototype-tab="reviews"><i class="ph-duotone ph-star"></i><span class="i18n-en">Reviews</span><span class="i18n-ar" lang="ar">المراجعات</span></button></nav>
+                                <nav class="md-bottom-nav" aria-label="User app navigation"><button type="button" class="md-bottom-item active" data-prototype-tab="home"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item" data-prototype-tab="search"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button><button type="button" class="md-bottom-item" data-prototype-tab="reviews"><i class="ph-duotone ph-star"></i><span class="i18n-en">Reviews</span><span class="i18n-ar" lang="ar">المراجعات</span></button><button type="button" class="md-bottom-item" data-prototype-tab="user-settings"><i class="ph-duotone ph-gear-six"></i><span class="i18n-en">Settings</span><span class="i18n-ar" lang="ar">الإعدادات</span></button></nav>
                             </div>
 
                             <div class="md-screen" data-prototype-screen="search">
                                 <div class="md-mobile-pad">
                                     <div class="md-search-box"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search accessible places...</span><span class="i18n-ar" lang="ar">ابحث عن أماكن مهيأة...</span></div>
                                     <div class="md-category-row" aria-label="Search categories">
-                                        <button type="button" class="md-category active"><span class="i18n-en">All</span><span class="i18n-ar" lang="ar">الكل</span></button>
-                                        <button type="button" class="md-category"><span class="i18n-en">Entertainments</span><span class="i18n-ar" lang="ar">ترفيه</span></button>
-                                        <button type="button" class="md-category"><span class="i18n-en">Food</span><span class="i18n-ar" lang="ar">مطاعم</span></button>
-                                        <button type="button" class="md-category"><span class="i18n-en">Shopping Mall</span><span class="i18n-ar" lang="ar">تسوق</span></button>
-                                        <button type="button" class="md-category"><span class="i18n-en">Parks</span><span class="i18n-ar" lang="ar">حدائق</span></button>
+                                        <button type="button" class="md-category active" data-filter-clear><span class="i18n-en">All</span><span class="i18n-ar" lang="ar">الكل</span></button>
+                                        <button type="button" class="md-category" data-filter="entertainment" aria-pressed="false"><span class="i18n-en">Entertainment</span><span class="i18n-ar" lang="ar">ترفيه</span></button>
+                                        <button type="button" class="md-category" data-filter="food" aria-pressed="false"><span class="i18n-en">Food</span><span class="i18n-ar" lang="ar">مطاعم</span></button>
+                                        <button type="button" class="md-category" data-filter="shopping" aria-pressed="false"><span class="i18n-en">Shopping Mall</span><span class="i18n-ar" lang="ar">تسوق</span></button>
+                                        <button type="button" class="md-category" data-filter="parks" aria-pressed="false"><span class="i18n-en">Parks</span><span class="i18n-ar" lang="ar">حدائق</span></button>
                                     </div>
-                                    <div class="md-tag-row mb-2" data-filter-group><button type="button" class="md-chip teal md-filter-btn" data-filter="wheelchair" aria-pressed="true"><i class="ph-duotone ph-wheelchair"></i><span class="i18n-en">Wheelchair ramp</span><span class="i18n-ar" lang="ar">منحدر</span></button><button type="button" class="md-chip md-filter-btn" data-filter="elevator" aria-pressed="false"><i class="ph-duotone ph-arrow-square-up"></i><span class="i18n-en">Elevator</span><span class="i18n-ar" lang="ar">مصعد</span></button><button type="button" class="md-chip md-filter-btn" data-filter="restroom" aria-pressed="false"><i class="ph-duotone ph-person-simple"></i><span class="i18n-en">Accessible restroom</span><span class="i18n-ar" lang="ar">دورة مياه</span></button><button type="button" class="md-chip md-filter-btn" data-filter="wide" aria-pressed="false"><i class="ph-duotone ph-arrows-out-line-horizontal"></i><span class="i18n-en">Wide paths</span><span class="i18n-ar" lang="ar">ممرات واسعة</span></button><button type="button" class="md-chip md-filter-btn" data-filter="staff" aria-pressed="false"><i class="ph-duotone ph-hand-heart"></i><span class="i18n-en">Staff assistance</span><span class="i18n-ar" lang="ar">مساعدة الموظفين</span></button></div>
+                                    <div class="md-tag-row mb-2" data-filter-group><button type="button" class="md-chip md-filter-btn" data-filter="wheelchair" aria-pressed="false"><i class="ph-duotone ph-wheelchair"></i><span class="i18n-en">Wheelchair access</span><span class="i18n-ar" lang="ar">وصول للكراسي</span></button><button type="button" class="md-chip md-filter-btn" data-filter="elevator" aria-pressed="false"><i class="ph-duotone ph-arrow-square-up"></i><span class="i18n-en">Elevator</span><span class="i18n-ar" lang="ar">مصعد</span></button><button type="button" class="md-chip md-filter-btn" data-filter="restroom" aria-pressed="false"><i class="ph-duotone ph-person-simple"></i><span class="i18n-en">Accessible restroom</span><span class="i18n-ar" lang="ar">دورة مياه</span></button><button type="button" class="md-chip md-filter-btn" data-filter="wide" aria-pressed="false"><i class="ph-duotone ph-arrows-out-line-horizontal"></i><span class="i18n-en">Wide paths</span><span class="i18n-ar" lang="ar">ممرات واسعة</span></button><button type="button" class="md-chip md-filter-btn" data-filter="parking" aria-pressed="false"><i class="ph-duotone ph-car"></i><span class="i18n-en">Parking</span><span class="i18n-ar" lang="ar">مواقف</span></button><button type="button" class="md-chip md-filter-btn" data-filter="staff" aria-pressed="false"><i class="ph-duotone ph-hand-heart"></i><span class="i18n-en">Staff assistance</span><span class="i18n-ar" lang="ar">مساعدة الموظفين</span></button></div>
                                     <article class="md-place-card" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="Boulevard City" data-place-query="Boulevard+City+Riyadh" data-place-photo="boulevard" data-place-rating="4.8" data-place-features="Wheelchair ramps|Wide pathways|Accessible restrooms|Braille signage" data-place-review="Deema: The main walkways were lively but wide enough to move comfortably, and staff pointed us to the closest elevator quickly." aria-label="Open Boulevard City details"><div class="md-place-photo boulevard"></div><div class="md-place-body"><div class="md-place-title-row"><h5 class="md-app-title">Boulevard City</h5><span class="md-rating"><i class="ph-fill ph-star"></i> 4.8</span></div><p class="md-muted"><span class="i18n-en">AI ranked first because wheelchair ramps and wide pathways match your needs.</span><span class="i18n-ar" lang="ar">صنفه الذكاء الاصطناعي أولاً لأن المنحدرات والممرات الواسعة تناسب احتياجك.</span></p><div class="md-tag-row"><span class="md-chip">Wheelchair ramps</span><span class="md-chip">Wide pathways</span><span class="md-chip">+2 more</span></div></div></article>
                                     <article class="md-place-card" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="U Walk" data-place-query="U+Walk+Riyadh" data-place-photo="uwalk" data-place-rating="4.6" data-place-features="Accessible parking|Elevator access|Wide walkways|Accessible restroom" data-place-review="Noura: U Walk worked well for dinner. The parking was nearby, and most cafe entrances had smooth access from the walkway." aria-label="Open U Walk details"><div class="md-place-photo uwalk"></div><div class="md-place-body"><div class="md-place-title-row"><h5 class="md-app-title">U Walk</h5><span class="md-rating"><i class="ph-fill ph-star"></i> 4.6</span></div><p class="md-muted"><span class="i18n-en">Restaurants and cafes with wide walkways and accessible parking nearby.</span><span class="i18n-ar" lang="ar">مطاعم ومقاهي مع ممرات واسعة ومواقف مهيأة قريبة.</span></p></div></article>
                                     <article class="md-place-card" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="The Zone" data-place-query="The+Zone+Riyadh" data-place-photo="zone" data-place-rating="4.4" data-place-features="Reserved parking|Low curb access|Elevator access|Staff assistance" data-place-review="Maha: The entrance was easy from the parking side, and the staff helped us choose the smoothest route between restaurants." aria-label="Open The Zone details"><div class="md-place-photo zone"></div><div class="md-place-body"><div class="md-place-title-row"><h5 class="md-app-title">The Zone</h5><span class="md-rating"><i class="ph-fill ph-star"></i> 4.4</span></div><p class="md-muted"><span class="i18n-en">Dining area with reserved parking, low curb access, and staff assistance.</span><span class="i18n-ar" lang="ar">منطقة مطاعم بمواقف مخصصة ومداخل منخفضة ودعم من الفريق.</span></p></div></article>
                                     <article class="md-place-card" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="VOX Cinemas Riyadh" data-place-query="VOX+Cinemas+Riyadh" data-place-photo="vox" data-place-rating="4.6" data-place-features="Wheelchair-accessible seating|Elevator access|Accessible restroom|Staff assistance" data-place-review="Sara: The cinema team helped with accessible seating before the movie started, and the restroom route was clear from the hall." aria-label="Open VOX Cinemas Riyadh details"><div class="md-place-photo vox"></div><div class="md-place-body"><div class="md-place-title-row"><h5 class="md-app-title">VOX Cinemas Riyadh</h5><span class="md-rating"><i class="ph-fill ph-star"></i> 4.6</span></div><p class="md-muted"><span class="i18n-en">Cinema venue with accessible seating, elevator access, and staff assistance.</span><span class="i18n-ar" lang="ar">وجهة سينما بمقاعد مهيأة ومصعد ومساعدة من الموظفين.</span></p></div></article>
                                 </div>
-                                <nav class="md-bottom-nav" aria-label="User app navigation"><button type="button" class="md-bottom-item" data-prototype-tab="home"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item active" data-prototype-tab="search"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button><button type="button" class="md-bottom-item" data-prototype-tab="map"><i class="ph-duotone ph-map-trifold"></i><span class="i18n-en">Map</span><span class="i18n-ar" lang="ar">الخريطة</span></button><button type="button" class="md-bottom-item" data-prototype-tab="reviews"><i class="ph-duotone ph-star"></i><span class="i18n-en">Reviews</span><span class="i18n-ar" lang="ar">المراجعات</span></button></nav>
-                            </div>
-
-                            <div class="md-screen" data-prototype-screen="map">
-                                <div class="md-mobile-pad">
-                                    <div class="md-mobile-head"><h3 class="md-h1"><span class="i18n-en">Accessible Map</span><span class="i18n-ar" lang="ar">خريطة الوصول</span></h3><span class="md-chip teal"><i class="ph-duotone ph-navigation-arrow"></i> GPS</span></div>
-                                    <div class="md-map-canvas compact" aria-label="Riyadh accessible places map mockup">
-                                        <span class="md-map-road" style="width: 90%; left: 4%; top: 22%; transform: rotate(9deg);"></span>
-                                        <span class="md-map-road" style="width: 76%; left: 11%; top: 54%; transform: rotate(-18deg);"></span>
-                                        <span class="md-map-road" style="width: 70%; left: 31%; top: 34%; transform: rotate(72deg);"></span>
-                                        <span class="md-map-road" style="width: 60%; left: 18%; top: 73%; transform: rotate(16deg);"></span>
-                                        <span class="md-map-pin" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="Roshn Front" data-place-query="Roshn+Front+Riyadh" data-place-photo="roshn" data-place-rating="4.7" data-place-features="Wheelchair-accessible entrances|Elevator access|Accessible restrooms|Wide outdoor paths" data-place-review="Waad: Outdoor movement felt clear and comfortable, especially around the restaurant area." style="left: 22%; top: 31%;"><i class="ph-fill ph-wheelchair"></i></span>
-                                        <span class="md-map-pin" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="Listen Valley" data-place-query="Listen+Valley+Riyadh" data-place-photo="listen" data-place-rating="4.5" data-place-features="Accessible parking|Elevator access|Wide corridors|Staff assistance" data-place-review="Waad visited before and can add a review about parking, elevators, and corridor comfort." style="left: 58%; top: 45%;"><i class="ph-fill ph-arrow-square-up"></i></span>
-                                        <span class="md-map-pin" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="VOX Cinemas Riyadh" data-place-query="VOX+Cinemas+Riyadh" data-place-photo="vox" data-place-rating="4.6" data-place-features="Wheelchair-accessible seating|Elevator access|Accessible restroom|Staff assistance" data-place-review="Sara: The cinema team helped with accessible seating before the movie started." style="left: 72%; top: 19%;"><i class="ph-fill ph-film-strip"></i></span>
-                                    </div>
-                                    <article class="md-detail-card m-0">
-                                        <h4 class="md-app-title"><span class="i18n-en">Tap a pin</span><span class="i18n-ar" lang="ar">اضغط على موقع</span></h4>
-                                        <p class="md-muted mt-2"><span class="i18n-en">Pins open place details with accessibility features, review preview, and a Google Maps location button.</span><span class="i18n-ar" lang="ar">المواقع تفتح تفاصيل المكان مع مزايا الوصول ومعاينة المراجعات وزر Google Maps.</span></p>
-                                    </article>
-                                </div>
-                                <nav class="md-bottom-nav" aria-label="User app navigation"><button type="button" class="md-bottom-item" data-prototype-tab="home"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item" data-prototype-tab="search"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button><button type="button" class="md-bottom-item active" data-prototype-tab="map"><i class="ph-duotone ph-map-trifold"></i><span class="i18n-en">Map</span><span class="i18n-ar" lang="ar">الخريطة</span></button><button type="button" class="md-bottom-item" data-prototype-tab="reviews"><i class="ph-duotone ph-star"></i><span class="i18n-en">Reviews</span><span class="i18n-ar" lang="ar">المراجعات</span></button></nav>
+                                <nav class="md-bottom-nav" aria-label="User app navigation"><button type="button" class="md-bottom-item" data-prototype-tab="home"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item active" data-prototype-tab="search"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button><button type="button" class="md-bottom-item" data-prototype-tab="reviews"><i class="ph-duotone ph-star"></i><span class="i18n-en">Reviews</span><span class="i18n-ar" lang="ar">المراجعات</span></button><button type="button" class="md-bottom-item" data-prototype-tab="user-settings"><i class="ph-duotone ph-gear-six"></i><span class="i18n-en">Settings</span><span class="i18n-ar" lang="ar">الإعدادات</span></button></nav>
                             </div>
 
                             <div class="md-screen" data-prototype-screen="place-detail">
@@ -365,18 +361,36 @@
                                     <h4 class="md-app-title text-base mt-4"><span class="i18n-en">Comments</span><span class="i18n-ar" lang="ar">التعليقات</span></h4>
                                     <div data-place-detail-comments><article class="md-review-card"><div class="md-avatar">W</div><div><h5 class="font-bold">Waad</h5><p class="md-muted">The outdoor paths were wide and clear, and the accessible restroom signs were easy to find.</p></div></article></div>
                                 </div>
-                                </div><nav class="md-bottom-nav md-detail-user-nav" aria-label="User app navigation"><button type="button" class="md-bottom-item" data-prototype-tab="home"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item" data-prototype-tab="search"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button><button type="button" class="md-bottom-item" data-prototype-tab="map"><i class="ph-duotone ph-map-trifold"></i><span class="i18n-en">Map</span><span class="i18n-ar" lang="ar">الخريطة</span></button><button type="button" class="md-bottom-item" data-prototype-tab="reviews"><i class="ph-duotone ph-star"></i><span class="i18n-en">Reviews</span><span class="i18n-ar" lang="ar">المراجعات</span></button></nav><nav class="md-bottom-nav md-detail-org-nav" aria-label="Organization app navigation"><button type="button" class="md-bottom-item" data-prototype-tab="org-home"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item" data-prototype-tab="org-search"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button><button type="button" class="md-bottom-item" data-prototype-tab="events"><i class="ph-duotone ph-calendar-star"></i><span class="i18n-en">Events</span><span class="i18n-ar" lang="ar">الفعاليات</span></button><button type="button" class="md-bottom-item" data-prototype-tab="settings"><i class="ph-duotone ph-gear-six"></i><span class="i18n-en">Settings</span><span class="i18n-ar" lang="ar">الإعدادات</span></button></nav>
+                                </div><nav class="md-bottom-nav md-detail-user-nav" aria-label="User app navigation"><button type="button" class="md-bottom-item" data-prototype-tab="home"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item" data-prototype-tab="search"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button><button type="button" class="md-bottom-item" data-prototype-tab="reviews"><i class="ph-duotone ph-star"></i><span class="i18n-en">Reviews</span><span class="i18n-ar" lang="ar">المراجعات</span></button><button type="button" class="md-bottom-item" data-prototype-tab="user-settings"><i class="ph-duotone ph-gear-six"></i><span class="i18n-en">Settings</span><span class="i18n-ar" lang="ar">الإعدادات</span></button></nav><nav class="md-bottom-nav md-detail-org-nav" aria-label="Organization app navigation"><button type="button" class="md-bottom-item" data-prototype-tab="org-home"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item" data-prototype-tab="org-search"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button><button type="button" class="md-bottom-item" data-prototype-tab="events"><i class="ph-duotone ph-calendar-star"></i><span class="i18n-en">Events</span><span class="i18n-ar" lang="ar">الفعاليات</span></button><button type="button" class="md-bottom-item" data-prototype-tab="settings"><i class="ph-duotone ph-gear-six"></i><span class="i18n-en">Settings</span><span class="i18n-ar" lang="ar">الإعدادات</span></button></nav>
                             </div>                            <div class="md-screen" data-prototype-screen="reviews">
                                 <div class="md-mobile-pad">
                                     <div class="md-mobile-head"><h3 class="md-h1"><span class="i18n-en">Your Reviews</span><span class="i18n-ar" lang="ar">مراجعاتك</span></h3><span class="md-chip teal"><i class="ph-duotone ph-user"></i> Waad</span></div>
                                     <article class="md-review-card"><div class="md-avatar">W</div><div><h5 class="font-bold">Waad</h5><p class="md-stars text-sm">★★★★★ <span class="md-muted">Roshn Front</span></p><p class="md-muted"><span class="i18n-en">The accessibility experience at Roshn Front was smooth. The outdoor paths were wide, the entrances were clear, and I could find accessible restrooms without asking twice.</span><span class="i18n-ar" lang="ar">كانت تجربة الوصول في Roshn Front سهلة؛ المسارات الخارجية واسعة، والمداخل واضحة، ودورات المياه المهيأة كان الوصول لها بسيطاً.</span></p></div><span class="md-muted text-xs"><span class="i18n-en">Today</span><span class="i18n-ar" lang="ar">اليوم</span></span></article>
                                     <div class="md-review-compose">
                                         <h4 class="font-bold text-[#071225]"><span class="i18n-en">You visited Boulevard City. Would you like to add a review?</span><span class="i18n-ar" lang="ar">زرتِ بوليفارد سيتي. هل ترغبين بإضافة تعليق؟</span></h4>
-                                        <button type="button" class="md-primary-btn w-full mt-4" data-prototype-tab="place-detail" data-place-name="Boulevard City" data-place-query="Boulevard+City+Riyadh" data-place-photo="boulevard" data-place-rating="4.8" data-place-features="Wheelchair ramps|Wide pathways|Accessible restrooms|Braille signage" data-place-review="Waad can add a new review after visiting Boulevard City."><span class="i18n-en">Add Review</span><span class="i18n-ar" lang="ar">إضافة تعليق</span></button>
+                                        <button type="button" class="md-primary-btn w-full mt-4" data-prototype-tab="add-review"><span class="i18n-en">Add Review</span><span class="i18n-ar" lang="ar">إضافة تعليق</span></button>
                                     </div>
                                 </div>
-                                <nav class="md-bottom-nav" aria-label="User app navigation"><button type="button" class="md-bottom-item" data-prototype-tab="home"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item" data-prototype-tab="search"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button><button type="button" class="md-bottom-item" data-prototype-tab="map"><i class="ph-duotone ph-map-trifold"></i><span class="i18n-en">Map</span><span class="i18n-ar" lang="ar">الخريطة</span></button><button type="button" class="md-bottom-item active" data-prototype-tab="reviews"><i class="ph-duotone ph-star"></i><span class="i18n-en">Reviews</span><span class="i18n-ar" lang="ar">المراجعات</span></button></nav>
-                            </div>                            <div class="md-screen" data-prototype-screen="events">
+                                <nav class="md-bottom-nav" aria-label="User app navigation"><button type="button" class="md-bottom-item" data-prototype-tab="home"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item" data-prototype-tab="search"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button><button type="button" class="md-bottom-item active" data-prototype-tab="reviews"><i class="ph-duotone ph-star"></i><span class="i18n-en">Reviews</span><span class="i18n-ar" lang="ar">المراجعات</span></button><button type="button" class="md-bottom-item" data-prototype-tab="user-settings"><i class="ph-duotone ph-gear-six"></i><span class="i18n-en">Settings</span><span class="i18n-ar" lang="ar">الإعدادات</span></button></nav>
+                            </div>
+
+                            <div class="md-screen" data-prototype-screen="add-review">
+                                <div class="md-form-screen">
+                                    <div class="md-form-pad">
+                                        <button type="button" class="md-secondary-btn px-4 mb-4" data-prototype-tab="reviews"><span class="i18n-en">Cancel</span><span class="i18n-ar" lang="ar">إلغاء</span></button>
+                                        <h3 class="md-h1 mb-4"><span class="i18n-en">Add Review</span><span class="i18n-ar" lang="ar">إضافة تعليق</span></h3>
+                                        <article class="md-event-card">
+                                            <p class="md-kicker"><span class="i18n-en">Place name</span><span class="i18n-ar" lang="ar">اسم المكان</span></p>
+                                            <h4 class="md-app-title mt-2">Boulevard City</h4>
+                                        </article>
+                                        <label class="md-form-field"><span><span class="i18n-en">Rating</span><span class="i18n-ar" lang="ar">التقييم</span></span><span class="md-star-select" data-review-stars><button type="button" class="md-star-button is-active" data-review-star="1">★</button><button type="button" class="md-star-button is-active" data-review-star="2">★</button><button type="button" class="md-star-button is-active" data-review-star="3">★</button><button type="button" class="md-star-button is-active" data-review-star="4">★</button><button type="button" class="md-star-button is-active" data-review-star="5">★</button></span></label>
+                                        <label class="md-form-field"><span><span class="i18n-en">Your review</span><span class="i18n-ar" lang="ar">تعليقك</span></span><textarea class="md-textarea-mock" data-review-text aria-label="Write your review" placeholder="Write your experience..."></textarea></label>
+                                        <button type="button" class="md-primary-btn w-full mt-5" data-review-submit><span class="i18n-en">Submit</span><span class="i18n-ar" lang="ar">إرسال</span></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="md-screen" data-prototype-screen="events">
                                 <div class="md-mobile-pad">
                                     <div class="md-mobile-head"><h3 class="md-h1"><span class="i18n-en">Your Events</span><span class="i18n-ar" lang="ar">فعالياتك</span></h3><span class="md-chip teal">VOX</span></div>
                                     <article class="md-event-card">
@@ -433,13 +447,13 @@
                             </div>
 
                             <div class="md-screen" data-prototype-screen="settings">
-                                <div class="md-mobile-pad"><div class="md-mobile-head"><h3 class="md-h1"><span class="i18n-en">Settings</span><span class="i18n-ar" lang="ar">الإعدادات</span></h3><span class="md-chip teal">VOX</span></div><article class="md-event-card"><p class="md-kicker"><span class="i18n-en">Profile</span><span class="i18n-ar" lang="ar">الملف</span></p><h4 class="md-app-title mt-2">VOX Cinemas</h4><p class="md-muted mt-2"><span class="i18n-en">Manage organization profile, accessibility services, language, support, and account settings.</span><span class="i18n-ar" lang="ar">إدارة ملف المنظمة وخدمات الوصول واللغة والدعم وإعدادات الحساب.</span></p></article><article class="md-event-card"><button type="button" class="md-settings-action" data-prototype-language="en"><span><i class="ph-duotone ph-translate"></i> English</span><span class="md-chip teal">EN</span></button><button type="button" class="md-settings-action" data-prototype-language="ar"><span><i class="ph-duotone ph-translate"></i> العربية</span><span class="md-chip">AR</span></button><button type="button" class="md-settings-action" data-prototype-theme="dark"><span><i class="ph-duotone ph-moon"></i> Dark</span><span class="md-chip teal">On</span></button><button type="button" class="md-settings-action" data-prototype-theme="light"><span><i class="ph-duotone ph-sun"></i> Light</span><span class="md-chip">Off</span></button><button type="button" class="md-settings-action" data-prototype-tab="favorites"><span><i class="ph-duotone ph-heart"></i> <span class="i18n-en">Favorites</span><span class="i18n-ar" lang="ar">المفضلة</span></span><i class="ph-duotone ph-caret-right"></i></button><button type="button" class="md-settings-action" data-prototype-tab="support"><span><i class="ph-duotone ph-headset"></i> Support</span><i class="ph-duotone ph-caret-right"></i></button></article></div>
+                                <div class="md-mobile-pad"><div class="md-mobile-head"><h3 class="md-h1"><span class="i18n-en">Settings</span><span class="i18n-ar" lang="ar">الإعدادات</span></h3><span class="md-chip teal">VOX</span></div><article class="md-event-card"><p class="md-kicker"><span class="i18n-en">Profile</span><span class="i18n-ar" lang="ar">الملف</span></p><h4 class="md-app-title mt-2">VOX Cinemas</h4><p class="md-muted mt-2"><span class="i18n-en">Manage organization profile, accessibility services, language, support, and account settings.</span><span class="i18n-ar" lang="ar">إدارة ملف المنظمة وخدمات الوصول واللغة والدعم وإعدادات الحساب.</span></p></article><article class="md-event-card" data-settings-controls></article></div>
                                 <nav class="md-bottom-nav" aria-label="Organization app navigation"><button type="button" class="md-bottom-item" data-prototype-tab="org-home"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item" data-prototype-tab="org-search"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button><button type="button" class="md-bottom-item" data-prototype-tab="events"><i class="ph-duotone ph-calendar-star"></i><span class="i18n-en">Events</span><span class="i18n-ar" lang="ar">الفعاليات</span></button><button type="button" class="md-bottom-item active" data-prototype-tab="settings"><i class="ph-duotone ph-gear-six"></i><span class="i18n-en">Settings</span><span class="i18n-ar" lang="ar">الإعدادات</span></button></nav>
                             </div>
 
                             <div class="md-screen" data-prototype-screen="user-settings">
-                                <div class="md-mobile-pad"><div class="md-mobile-head"><h3 class="md-h1"><span class="i18n-en">Settings</span><span class="i18n-ar" lang="ar">الإعدادات</span></h3><span class="md-chip teal">Waad</span></div><article class="md-event-card"><button type="button" class="md-settings-action" data-prototype-language="en"><span><i class="ph-duotone ph-translate"></i> English</span><span class="md-chip teal">EN</span></button><button type="button" class="md-settings-action" data-prototype-language="ar"><span><i class="ph-duotone ph-translate"></i> العربية</span><span class="md-chip">AR</span></button><button type="button" class="md-settings-action" data-prototype-theme="dark"><span><i class="ph-duotone ph-moon"></i> Dark</span><span class="md-chip teal">On</span></button><button type="button" class="md-settings-action" data-prototype-theme="light"><span><i class="ph-duotone ph-sun"></i> Light</span><span class="md-chip">Off</span></button><button type="button" class="md-settings-action" data-prototype-tab="favorites"><span><i class="ph-duotone ph-heart"></i> <span class="i18n-en">Favorites</span><span class="i18n-ar" lang="ar">المفضلة</span></span><i class="ph-duotone ph-caret-right"></i></button><button type="button" class="md-settings-action" data-prototype-tab="support"><span><i class="ph-duotone ph-headset"></i> Support</span><i class="ph-duotone ph-caret-right"></i></button></article></div>
-                                <nav class="md-bottom-nav" aria-label="User app navigation"><button type="button" class="md-bottom-item" data-prototype-tab="home"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item" data-prototype-tab="search"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button><button type="button" class="md-bottom-item" data-prototype-tab="map"><i class="ph-duotone ph-map-trifold"></i><span class="i18n-en">Map</span><span class="i18n-ar" lang="ar">الخريطة</span></button><button type="button" class="md-bottom-item" data-prototype-tab="reviews"><i class="ph-duotone ph-star"></i><span class="i18n-en">Reviews</span><span class="i18n-ar" lang="ar">المراجعات</span></button></nav>
+                                <div class="md-mobile-pad"><div class="md-mobile-head"><h3 class="md-h1"><span class="i18n-en">Settings</span><span class="i18n-ar" lang="ar">الإعدادات</span></h3><span class="md-chip teal">Waad</span></div><article class="md-event-card" data-settings-controls></article></div>
+                                <nav class="md-bottom-nav" aria-label="User app navigation"><button type="button" class="md-bottom-item" data-prototype-tab="home"><i class="ph-duotone ph-house"></i><span class="i18n-en">Home</span><span class="i18n-ar" lang="ar">الرئيسية</span></button><button type="button" class="md-bottom-item" data-prototype-tab="search"><i class="ph-duotone ph-magnifying-glass"></i><span class="i18n-en">Search</span><span class="i18n-ar" lang="ar">البحث</span></button><button type="button" class="md-bottom-item" data-prototype-tab="reviews"><i class="ph-duotone ph-star"></i><span class="i18n-en">Reviews</span><span class="i18n-ar" lang="ar">المراجعات</span></button><button type="button" class="md-bottom-item active" data-prototype-tab="user-settings"><i class="ph-duotone ph-gear-six"></i><span class="i18n-en">Settings</span><span class="i18n-ar" lang="ar">الإعدادات</span></button></nav>
                             </div>
 
                             <div class="md-screen" data-prototype-screen="support">
@@ -447,7 +461,7 @@
                             </div>
 
                             <div class="md-screen" data-prototype-screen="favorites">
-                                <div class="md-mobile-pad"><div class="md-mobile-head"><h3 class="md-h1"><span class="i18n-en">Favorites</span><span class="i18n-ar" lang="ar">المفضلة</span></h3><button type="button" class="md-chip teal md-filter-btn" data-prototype-back><span class="i18n-en">Back</span><span class="i18n-ar" lang="ar">رجوع</span></button></div><article class="md-place-card" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="Roshn Front" data-place-query="Roshn+Front+Riyadh" data-place-photo="roshn" data-place-rating="4.7" data-place-features="Wheelchair-accessible entrances|Elevator access|Accessible restrooms|Wide outdoor paths" data-place-review="Waad: I visited Roshn Front in the evening. The outdoor paths were wide, the entrances were clear, and I found the accessible restroom signs without needing to ask twice."><div class="md-place-photo roshn"></div><div class="md-place-body"><div class="md-place-title-row"><h5 class="md-app-title">Roshn Front</h5><span class="md-rating"><i class="ph-fill ph-heart"></i> Saved</span></div><p class="md-muted">Favorite place with wide paths, elevators, and accessible restrooms.</p></div></article><article class="md-place-card" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="Boulevard City" data-place-query="Boulevard+City+Riyadh" data-place-photo="boulevard" data-place-rating="4.8" data-place-features="Wheelchair ramps|Wide pathways|Accessible restrooms|Braille signage" data-place-review="Deema: The main walkways were lively but wide enough to move comfortably."><div class="md-place-photo boulevard"></div><div class="md-place-body"><div class="md-place-title-row"><h5 class="md-app-title">Boulevard City</h5><span class="md-rating"><i class="ph-fill ph-heart"></i> Saved</span></div><p class="md-muted">Saved after Waad visited and planned to add a review.</p></div></article></div>
+                                <div class="md-mobile-pad"><div class="md-mobile-head"><h3 class="md-h1"><span class="i18n-en">Favorites</span><span class="i18n-ar" lang="ar">المفضلة</span></h3><button type="button" class="md-chip teal md-filter-btn" data-prototype-back><span class="i18n-en">Back</span><span class="i18n-ar" lang="ar">رجوع</span></button></div><article class="md-place-card" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="Roshn Front" data-place-query="Roshn+Front+Riyadh" data-place-photo="roshn" data-place-rating="4.7" data-place-features="Wheelchair-accessible entrances|Elevator access|Accessible restrooms|Wide outdoor paths" data-place-review="Waad: I visited Roshn Front in the evening. The outdoor paths were wide, the entrances were clear, and I found the accessible restroom signs without needing to ask twice."><div class="md-place-photo roshn"></div><div class="md-place-body"><div class="md-place-title-row"><h5 class="md-app-title">Roshn Front</h5><span class="md-rating"><i class="ph-fill ph-heart"></i> Saved</span></div><p class="md-muted">Favorite place with wide paths, elevators, and accessible restrooms.</p></div></article><article class="md-place-card" role="button" tabindex="0" data-prototype-tab="place-detail" data-place-name="Boulevard City" data-place-query="Boulevard+City+Riyadh" data-place-photo="boulevard" data-place-rating="4.8" data-place-features="Wheelchair ramps|Wide pathways|Accessible restrooms|Braille signage" data-place-review="Deema: The main walkways were lively but wide enough to move comfortably."><div class="md-place-photo boulevard"></div><div class="md-place-body"><div class="md-place-title-row"><h5 class="md-app-title">Boulevard City</h5><span class="md-rating"><i class="ph-fill ph-heart"></i> Saved</span></div><p class="md-muted">Saved place for a future review.</p></div></article></div>
                             </div>
                         </div>
                     </div>
@@ -472,7 +486,7 @@
     <site-footer></site-footer>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const tabs = Array.from(document.querySelectorAll('[data-prototype-tab]'));
+            let tabs = Array.from(document.querySelectorAll('[data-prototype-tab]'));
             const screens = Array.from(document.querySelectorAll('[data-prototype-screen]'));
             const detailHero = document.querySelector('[data-prototype-screen="place-detail"] .md-detail-hero');
             const detailName = document.querySelector('[data-place-detail-name]');
@@ -499,8 +513,8 @@
                     logo: 'LV',
                     description: 'Modern shopping and cafe destination with indoor corridors, parking access, and calm seating areas.',
                     comments: [
-                        ['Waad', 'I visited before, and the nearby parking plus wide corridors made the visit comfortable.'],
-                        ['Haya', 'Staff were easy to find when we needed directions to the elevator.']
+                        ['Haya', 'The nearby parking plus wide corridors made the visit comfortable.'],
+                        ['Nouf', 'Staff were easy to find when we needed directions to the elevator.']
                     ]
                 },
                 'Boulevard City': {
@@ -508,7 +522,7 @@
                     description: 'Large entertainment district with restaurants, shows, outdoor streets, and busy visitor routes.',
                     comments: [
                         ['Deema', 'The main walkways were lively but wide enough to move comfortably.'],
-                        ['Waad', 'I visited Boulevard City and want to add more details about the ramps and restroom route.']
+                        ['Reem', 'The ramps were easy to spot, and the restroom route was clear from the main street.']
                     ]
                 },
                 'U Walk': {
@@ -532,9 +546,38 @@
                     description: 'Cinema venue with accessible seating, elevator access, restroom guidance, and event support.',
                     comments: [
                         ['Sara', 'The cinema team helped with accessible seating before the movie started, and the restroom route was clear from the hall.'],
-                        ['Waad', 'The venue information was useful before booking tickets.']
+                        ['Noura', 'The venue information was useful before booking tickets.']
                     ]
                 }
+            };
+
+            const renderSettingsControls = () => {
+                const controls = `
+                    <div class="md-setting-row">
+                        <span class="md-setting-label"><span class="i18n-en">Language</span><span class="i18n-ar" lang="ar">اللغة</span></span>
+                        <div class="md-segment" data-prototype-language-switch>
+                            <button type="button" class="is-active" data-prototype-language="en"><span class="i18n-en">English</span><span class="i18n-ar" lang="ar">English</span></button>
+                            <button type="button" data-prototype-language="ar"><span class="i18n-en">Arabic</span><span class="i18n-ar" lang="ar">العربية</span></button>
+                        </div>
+                    </div>
+                    <div class="md-setting-row">
+                        <span class="md-setting-label"><span class="i18n-en">Theme</span><span class="i18n-ar" lang="ar">المظهر</span></span>
+                        <div class="md-segment" data-prototype-theme-switch>
+                            <button type="button" class="is-active" data-prototype-theme="light"><span class="i18n-en">Light</span><span class="i18n-ar" lang="ar">فاتح</span></button>
+                            <button type="button" data-prototype-theme="dark"><span class="i18n-en">Dark</span><span class="i18n-ar" lang="ar">داكن</span></button>
+                        </div>
+                    </div>
+                    <button type="button" class="md-settings-action" data-prototype-tab="favorites"><span><i class="ph-duotone ph-heart"></i> <span class="i18n-en">Favorites</span><span class="i18n-ar" lang="ar">المفضلة</span></span><i class="ph-duotone ph-caret-right"></i></button>
+                    <button type="button" class="md-settings-action" data-prototype-tab="support"><span><i class="ph-duotone ph-headset"></i> <span class="i18n-en">Support</span><span class="i18n-ar" lang="ar">الدعم</span></span><i class="ph-duotone ph-caret-right"></i></button>
+                    <button type="button" class="md-settings-action md-danger-action" data-prototype-logout><span><i class="ph-duotone ph-sign-out"></i> <span class="i18n-en">Logout</span><span class="i18n-ar" lang="ar">تسجيل الخروج</span></span><i class="ph-duotone ph-caret-right"></i></button>
+                `;
+
+                ['settings', 'user-settings'].forEach((screenName) => {
+                    const screen = document.querySelector(`[data-prototype-screen="${screenName}"]`);
+                    const cards = screen ? Array.from(screen.querySelectorAll('.md-event-card')) : [];
+                    const target = screenName === 'settings' ? cards[cards.length - 1] : cards[0];
+                    if (target) target.innerHTML = controls;
+                });
             };
 
             const setPlaceLogos = () => {
@@ -584,6 +627,12 @@
                 }
             };
 
+            renderSettingsControls();
+            tabs = Array.from(document.querySelectorAll('[data-prototype-tab]'));
+            if (prototypeFrame && !prototypeFrame.dataset.prototypeLanguage) {
+                prototypeFrame.dataset.prototypeLanguage = 'en';
+            }
+
             tabs.forEach((tab) => {
                 const activatePrototypeScreen = () => {
                     const target = tab.dataset.prototypeTab;
@@ -612,33 +661,67 @@
 
             document.querySelectorAll('[data-prototype-language]').forEach((button) => {
                 button.addEventListener('click', () => {
-                    document.body.dataset.language = button.dataset.prototypeLanguage;
-                    document.documentElement.lang = button.dataset.prototypeLanguage;
+                    const language = button.dataset.prototypeLanguage;
+                    if (prototypeFrame) prototypeFrame.dataset.prototypeLanguage = language;
+                    document.querySelectorAll('[data-prototype-language]').forEach((item) => {
+                        item.classList.toggle('is-active', item.dataset.prototypeLanguage === language);
+                    });
                 });
             });
 
             document.querySelectorAll('[data-prototype-theme]').forEach((button) => {
                 button.addEventListener('click', () => {
-                    prototypeFrame?.classList.toggle('md-dark-mode', button.dataset.prototypeTheme === 'dark');
+                    const theme = button.dataset.prototypeTheme;
+                    prototypeFrame?.classList.toggle('md-dark-mode', theme === 'dark');
+                    document.querySelectorAll('[data-prototype-theme]').forEach((item) => {
+                        item.classList.toggle('is-active', item.dataset.prototypeTheme === theme);
+                    });
                 });
             });
 
+            document.querySelectorAll('[data-prototype-logout]').forEach((button) => {
+                button.addEventListener('click', () => activateScreen('login'));
+            });
+
+            let selectedReviewStars = 5;
+            const reviewStars = Array.from(document.querySelectorAll('[data-review-star]'));
+            const paintReviewStars = () => {
+                reviewStars.forEach((star) => {
+                    star.classList.toggle('is-active', Number(star.dataset.reviewStar) <= selectedReviewStars);
+                });
+            };
+            reviewStars.forEach((star) => {
+                star.addEventListener('click', () => {
+                    selectedReviewStars = Number(star.dataset.reviewStar) || 5;
+                    paintReviewStars();
+                });
+            });
+            document.querySelectorAll('[data-review-submit]').forEach((button) => {
+                button.addEventListener('click', () => activateScreen('reviews'));
+            });
+
             const filterButtons = Array.from(document.querySelectorAll('[data-filter]'));
+            const filterClearButtons = Array.from(document.querySelectorAll('[data-filter-clear]'));
             const searchCards = Array.from(document.querySelectorAll('[data-prototype-screen="search"] .md-place-card'));
-            const featureMatchesFilter = (features, filter) => {
-                const text = features.toLowerCase();
+            const featureMatchesFilter = (card, filter) => {
+                const text = `${card.dataset.placeName || ''} ${card.dataset.placeFeatures || ''} ${card.textContent || ''}`.toLowerCase();
                 if (filter === 'wheelchair') return text.includes('wheelchair') || text.includes('ramp') || text.includes('seating');
                 if (filter === 'elevator') return text.includes('elevator');
                 if (filter === 'restroom') return text.includes('restroom');
                 if (filter === 'wide') return text.includes('wide') || text.includes('path') || text.includes('corridor') || text.includes('walkway');
+                if (filter === 'parking') return text.includes('parking');
                 if (filter === 'staff') return text.includes('staff');
+                if (filter === 'entertainment') return text.includes('entertainment') || text.includes('boulevard') || text.includes('cinema') || text.includes('vox');
+                if (filter === 'food') return text.includes('restaurant') || text.includes('cafe') || text.includes('dining') || text.includes('u walk') || text.includes('zone');
+                if (filter === 'shopping') return text.includes('shopping') || text.includes('mall') || text.includes('boulevard') || text.includes('u walk');
+                if (filter === 'parks') return text.includes('outdoor') || text.includes('wide') || text.includes('zone');
                 return true;
             };
             const applyFilters = () => {
                 const activeFilters = filterButtons.filter((button) => button.getAttribute('aria-pressed') === 'true').map((button) => button.dataset.filter);
+                filterClearButtons.forEach((button) => button.classList.toggle('active', activeFilters.length === 0));
                 searchCards.forEach((card) => {
-                    const features = card.dataset.placeFeatures || '';
-                    const visible = activeFilters.length === 0 || activeFilters.every((filter) => featureMatchesFilter(features, filter));
+                    const visible = activeFilters.length === 0 || activeFilters.some((filter) => featureMatchesFilter(card, filter));
                     card.classList.toggle('is-hidden', !visible);
                 });
             };
@@ -647,11 +730,22 @@
                     const pressed = button.getAttribute('aria-pressed') === 'true';
                     button.setAttribute('aria-pressed', String(!pressed));
                     button.classList.toggle('teal', !pressed);
+                    button.classList.toggle('active', !pressed);
+                    applyFilters();
+                });
+            });
+            filterClearButtons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach((item) => {
+                        item.setAttribute('aria-pressed', 'false');
+                        item.classList.remove('teal', 'active');
+                    });
                     applyFilters();
                 });
             });
 
             setPlaceLogos();
+            paintReviewStars();
             applyFilters();
         });
     </script>
